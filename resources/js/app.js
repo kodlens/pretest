@@ -6,12 +6,12 @@
 
  window.Vue = require('vue').default;
  window.axios = require('axios');
- 
- 
+
+
  import Vue from 'vue';
  //import VueRouter from 'vue-router'
  import Buefy from 'buefy';
- 
+
 
 /**
  * The following block of code may be used to automatically register your
@@ -26,11 +26,25 @@
 
 Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 
+
+Vue.component('login-page', require('./components/LoginPagae.vue').default);
+
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
+
+Vue.use(Buefy);
+Vue.filter('formatTime', function(value) {
+    var timeString = value;
+    var H = +timeString.substr(0, 2);
+    var h = (H % 12) || 12;
+    var ampm = H < 12 ? " AM" : " PM";
+    timeString = h + timeString.substr(2, 3) + ampm;
+    return timeString;
+});
+
 
 const app = new Vue({
     el: '#app',
