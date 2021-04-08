@@ -1,0 +1,171 @@
+// Fonts
+//@import url('https://fonts.googleapis.com/css?family=Nunito');
+
+// Variables
+@import 'variables';
+
+// Bootstrap
+//@import '~bootstrap/scss/bootstrap';
+
+
+//font awesome
+@import '~font-awesome/css/font-awesome.css';
+//npm i font-awesomeS
+//https://fontawesome.com/v4.7.0/
+
+
+//material
+//@import '~@mdi/font/css/materialdesignicons.css';
+//npm i @mdi/font
+//references -->https://materialdesignicons.com/
+//pwede sad kani reference -->> https://cdn.materialdesignicons.com/5.4.55/
+
+
+@import "~animate.css/animate";
+//npm install animate
+
+
+
+.debug{
+    border: 1px solid red;
+}
+
+.button.btn-green{
+    background-color: #046004;
+    color: #ffffff;
+
+    transition: background-color 0.5s ease;
+}
+
+
+.button.btn-green:hover {
+    background-color: #0b9d0b;
+    color: #ffffff;
+}
+
+.is-invalid{
+    color: red;
+    font-size: 12px;
+}
+
+.panel-body{
+    margin: 10px;
+}
+
+
+
+@media only screen and (max-width: 768px) {
+    .button.btn-green{
+        width: 100%;
+    }
+}
+
+
+
+
+// Import Bulma's core
+@import "~bulma/sass/utilities/_all";
+// Set your colors
+$primary: hsl(136, 55%, 28%);
+$primary-light: findLightColor($primary);
+$primary-dark: findDarkColor($primary);
+$primary-invert: findColorInvert($primary);
+$twitter: #4099FF;
+$twitter-invert: findColorInvert($twitter);
+
+// Lists and maps
+$custom-colors: null !default;
+$custom-shades: null !default;
+
+// Setup $colors to use as bulma classes (e.g. 'is-twitter')
+$colors: mergeColorMaps(
+        (
+            "white": (
+                $white,
+                $black,
+            ),
+            "black": (
+                $black,
+                $white,
+            ),
+            "light": (
+                $light,
+                $light-invert,
+            ),
+            "dark": (
+                $dark,
+                $dark-invert,
+            ),
+            "primary": (
+                $primary,
+                $primary-invert,
+                $primary-light,
+                $primary-dark,
+            ),
+            "link": (
+                $link,
+                $link-invert,
+                $link-light,
+                $link-dark,
+            ),
+            "info": (
+                $info,
+                $info-invert,
+                $info-light,
+                $info-dark,
+            ),
+            "success": (
+                $success,
+                $success-invert,
+                $success-light,
+                $success-dark,
+            ),
+            "warning": (
+                $warning,
+                $warning-invert,
+                $warning-light,
+                $warning-dark,
+            ),
+            "danger": (
+                $danger,
+                $danger-invert,
+                $danger-light,
+                $danger-dark,
+            ),
+        ),
+        $custom-colors
+);
+
+// Links
+$link: $primary;
+$link-invert: $primary-invert;
+$link-focus-border: $primary;
+
+
+//navbar
+$navbar-height: 5rem;
+$navbar-item-img-max-height: 4rem;
+
+
+
+
+
+
+
+// Import Bulma and Buefy styles
+@import "~bulma";
+@import "~buefy/src/scss/buefy";
+
+// Import only what you need from Bulma
+@import "~bulma/sass/utilities/_all.sass";
+@import "~bulma/sass/base/_all.sass";
+@import "~bulma/sass/elements/button.sass";
+@import "~bulma/sass/elements/container.sass";
+@import "~bulma/sass/elements/title.sass";
+@import "~bulma/sass/form/_all.sass";
+@import "~bulma/sass/components/navbar.sass";
+@import "~bulma/sass/layout/hero.sass";
+@import "~bulma/sass/layout/section.sass";
+
+
+
