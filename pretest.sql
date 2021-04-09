@@ -1,6 +1,6 @@
 /*
 SQLyog Ultimate v12.14 (64 bit)
-MySQL - 10.4.17-MariaDB : Database - pretest
+MySQL - 10.4.13-MariaDB : Database - pretest
 *********************************************************************
 */
 
@@ -15,32 +15,6 @@ MySQL - 10.4.17-MariaDB : Database - pretest
 CREATE DATABASE /*!32312 IF NOT EXISTS*/`pretest` /*!40100 DEFAULT CHARACTER SET utf8mb4 */;
 
 USE `pretest`;
-
-/*Table structure for table `choices` */
-
-DROP TABLE IF EXISTS `choices`;
-
-CREATE TABLE `choices` (
-  `choice_id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
-  `question_id` bigint(20) unsigned NOT NULL,
-  `letter` varchar(10) DEFAULT NULL,
-  `content` text DEFAULT NULL,
-  `is_img` tinyint(1) DEFAULT 0,
-  `img_path` varchar(255) DEFAULT NULL,
-  `created_at` datetime DEFAULT NULL,
-  `updated_at` datetime DEFAULT NULL,
-  PRIMARY KEY (`choice_id`),
-  KEY `question_id` (`question_id`),
-  CONSTRAINT `choices_ibfk_1` FOREIGN KEY (`question_id`) REFERENCES `questions` (`question_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4;
-
-/*Data for the table `choices` */
-
-insert  into `choices`(`choice_id`,`question_id`,`letter`,`content`,`is_img`,`img_path`,`created_at`,`updated_at`) values 
-(1,1,'A','ETIENNE',0,NULL,NULL,NULL),
-(2,1,'B','JUNREY',0,NULL,NULL,NULL),
-(3,1,'C','VINCENT',0,NULL,NULL,NULL),
-(4,1,'D','JAY AR',0,NULL,NULL,NULL);
 
 /*Table structure for table `failed_jobs` */
 
@@ -78,6 +52,33 @@ insert  into `migrations`(`id`,`migration`,`batch`) values
 (2,'2014_10_12_100000_create_password_resets_table',1),
 (3,'2019_08_19_000000_create_failed_jobs_table',1);
 
+/*Table structure for table `options` */
+
+DROP TABLE IF EXISTS `options`;
+
+CREATE TABLE `options` (
+  `option_id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `question_id` bigint(20) unsigned NOT NULL,
+  `letter` varchar(10) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `content` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `is_img` tinyint(1) DEFAULT 0,
+  `img_path` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `is_answer` tinyint(1) DEFAULT 0,
+  `created_at` datetime DEFAULT NULL,
+  `updated_at` datetime DEFAULT NULL,
+  PRIMARY KEY (`option_id`),
+  KEY `question_id` (`question_id`),
+  CONSTRAINT `options_ibfk_1` FOREIGN KEY (`question_id`) REFERENCES `questions` (`question_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+/*Data for the table `options` */
+
+insert  into `options`(`option_id`,`question_id`,`letter`,`content`,`is_img`,`img_path`,`is_answer`,`created_at`,`updated_at`) values 
+(1,1,'A','ETIENNE',0,NULL,0,NULL,NULL),
+(2,1,'B','JUNREY',0,NULL,0,NULL,NULL),
+(3,1,'C','VINCENT',0,NULL,0,NULL,NULL),
+(4,1,'D','JAY AR',0,NULL,0,NULL,NULL);
+
 /*Table structure for table `password_resets` */
 
 DROP TABLE IF EXISTS `password_resets`;
@@ -97,18 +98,17 @@ DROP TABLE IF EXISTS `questions`;
 
 CREATE TABLE `questions` (
   `question_id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
-  `question` text DEFAULT NULL,
-  `ans` varchar(10) DEFAULT NULL,
+  `question` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `points` int(11) DEFAULT NULL,
   `createad_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL,
   PRIMARY KEY (`question_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 /*Data for the table `questions` */
 
-insert  into `questions`(`question_id`,`question`,`ans`,`points`,`createad_at`,`updated_at`) values 
-(1,'Who is your teacher','A',1,NULL,NULL);
+insert  into `questions`(`question_id`,`question`,`points`,`createad_at`,`updated_at`) values 
+(1,'Who is your teacher',1,NULL,NULL);
 
 /*Table structure for table `users` */
 
@@ -116,6 +116,7 @@ DROP TABLE IF EXISTS `users`;
 
 CREATE TABLE `users` (
   `user_id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `username` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
   `lname` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `fname` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `mname` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -128,9 +129,12 @@ CREATE TABLE `users` (
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`user_id`),
   UNIQUE KEY `users_email_unique` (`email`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 /*Data for the table `users` */
+
+insert  into `users`(`user_id`,`username`,`lname`,`fname`,`mname`,`sex`,`email`,`email_verified_at`,`password`,`remember_token`,`created_at`,`updated_at`) values 
+(1,'admin','AMPARADO','ETIENNE','','MALE','et@yahoo.com',NULL,'$2y$10$USnpuuBMihMYF9BTXXeV5uA.ZxVSC5bX/kBfiCri1N0aOXdr7IxVS',NULL,'2021-04-09 15:32:26',NULL);
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;

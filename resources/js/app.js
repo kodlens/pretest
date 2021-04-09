@@ -26,8 +26,19 @@
 
 Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 
+Vue.component('csrf', require('./components/Csrf.vue').default);
+Vue.component('student-login-page', require('./components/Student/StudentLoginPaga.vue').default);
 
-Vue.component('login-page', require('./components/LoginPagae.vue').default);
+
+//STUDENT
+Vue.component('student-navbar', require('./components/Student/StudentNavbar.vue').default);
+
+Vue.component('home-page', require('./components/Student/HomePage.vue').default);
+
+//ADMINISTRATOR
+Vue.component('panel-login', require('./components/Administrator/PanelLogin.vue').default);
+Vue.component('panel-home', require('./components/Administrator/PanelHome.vue').default);
+
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -36,6 +47,7 @@ Vue.component('login-page', require('./components/LoginPagae.vue').default);
  */
 
 Vue.use(Buefy);
+
 Vue.filter('formatTime', function(value) {
     var timeString = value;
     var H = +timeString.substr(0, 2);

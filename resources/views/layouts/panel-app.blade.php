@@ -13,16 +13,24 @@
     <script src="{{ asset('js/app.js') }}" defer></script>
 
     <!-- Fonts -->
-    {{-- <link rel="dns-prefetch" href="//fonts.gstatic.com"> --}}
-    {{-- <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet"> --}}
+{{-- <link rel="dns-prefetch" href="//fonts.gstatic.com"> --}}
+{{-- <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet"> --}}
 
-    <!-- Styles -->
+<!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 
 </head>
 <body>
-    <div id="app">
-        <student-login-page></student-login-page>
-    </div>
+<div id="app">
+
+    @guest
+        <admin-navbar is-auth="0"></admin-navbar>
+    @else
+        <admin-navbar is-auth="1"></admin-navbar>
+    @endguest
+
+    @yield('content')
+
+</div>
 </body>
 </html>
