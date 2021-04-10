@@ -1,6 +1,6 @@
 
 <template>
-    <b-navbar class="">
+    <b-navbar class="is-primary">
         <template #brand>
             <b-navbar-item>
                 <img
@@ -22,13 +22,18 @@
         </template>
 
         <template #end>
-            <b-navbar-item href="/home">
+            <b-navbar-item href="/panel/home">
                 Home
             </b-navbar-item>
 
+            <b-navbar-item href="/panel/question">
+                Questions
+            </b-navbar-item>
+
+
             <b-navbar-item tag="div">
                 <div class="buttons">
-                    <a v-if="isAuth == 1" class="button is-light" @click="logout">
+                    <a v-if="isAuth == 1" class="button is-danger" @click="logout">
                         <i class="fa fa-sign-out"></i>&nbsp;<strong>Logout</strong>
                     </a>
                     <a v-else class="button is-light" href="/login">

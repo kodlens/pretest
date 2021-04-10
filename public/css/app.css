@@ -30187,6 +30187,32 @@
   margin: 10px;
 }
 
+.welcome-navbar {
+  display: flex;
+  padding: 10px 10px;
+  justify-content: flex-end;
+}
+
+.question-panel {
+  padding: 20px;
+  border-top: 3px solid green;
+  background-color: #efefef;
+  margin-bottom: 20px;
+}
+
+.question-tool {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.q-tool {
+  margin-left: 5px;
+}
+
+.question-content {
+  margin: 10px;
+}
+
 @media only screen and (max-width: 768px) {
   .button.btn-green {
     width: 100%;

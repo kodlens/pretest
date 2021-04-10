@@ -62,10 +62,10 @@ export default{
         submit(){
             this.btnClass['is-loading'] = true;
 
-            axios.post('/student-login', this.fields).then(res=>{
+            axios.post('/student/login', this.fields).then(res=>{
                 this.fields = {};
                 this.btnClass['is-loading'] = false;
-                window.location = '/home';
+                window.location = '/student/home';
 
             }).catch(error=>{
                 this.btnClass['is-loading'] = false;

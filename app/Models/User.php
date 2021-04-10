@@ -18,10 +18,12 @@ class User extends Authenticatable
      * @var array
      */
 
+
     protected $connection = 'mysql';
+    protected $guard = 'admin';
 
     protected $table = 'users';
-    protected $primaryKey = 'id';
+    protected $primaryKey = 'user_id'; //the fuck.. nahurot akong adlaw nimo ..
 
     protected $fillable = [
         'name',

@@ -62,9 +62,10 @@ export default{
         submit(){
             this.btnClass['is-loading'] = true;
 
-            axios.post('/panel-login', this.fields).then(res=>{
+            axios.post('/panel/login', this.fields).then(res=>{
                 this.fields = {};
                 this.btnClass['is-loading'] = false;
+                window.location = '/panel/home';
 
             }).catch(error=>{
                 this.btnClass['is-loading'] = false;

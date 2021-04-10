@@ -38,6 +38,10 @@ Vue.component('home-page', require('./components/Student/HomePage.vue').default)
 //ADMINISTRATOR
 Vue.component('panel-login', require('./components/Administrator/PanelLogin.vue').default);
 Vue.component('panel-home', require('./components/Administrator/PanelHome.vue').default);
+Vue.component('admin-navbar', require('./components/Administrator/AdminNavbar.vue').default);
+
+Vue.component('panel-question', require('./components/Administrator/Question/PanelQuestion.vue').default);
+Vue.component('panel-question-create', require('./components/Administrator/Question/PanelQuestionCreate.vue').default);
 
 
 /**

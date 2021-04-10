@@ -11,6 +11,7 @@ class StudentLoginController extends Controller
 {
     //
     use AuthenticatesUsers;
+
     public function __construct()
     {
         $this->middleware('guest:student')->except('logout');
@@ -25,7 +26,7 @@ class StudentLoginController extends Controller
         return view('student.login');
     }
 
-    protected function guard()
+    public function guard()
     {
         return Auth::guard('student');
     }
@@ -36,7 +37,7 @@ class StudentLoginController extends Controller
     }
 
     public function redirectTo(){
-        return '/home';
+        return '/student/home';
     }
 
 //    public function authenticate(Request $request)

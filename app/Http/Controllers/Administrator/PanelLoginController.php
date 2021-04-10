@@ -4,10 +4,8 @@ namespace App\Http\Controllers\Administrator;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
-use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Validation\ValidationException;
 
 class PanelLoginController extends Controller
 {
@@ -28,18 +26,19 @@ class PanelLoginController extends Controller
         return view('panel.panel-login');
     }
 
-    protected function guard()
+    public function guard()
     {
         return Auth::guard('admin');
+    }
+
+    public function username(){
+        return 'username';
     }
 
     public function redirectTo(){
         return '/panel-home';
     }
 
-    public function username(){
-        return 'username';
-    }
 
 
 

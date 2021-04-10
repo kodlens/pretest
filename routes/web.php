@@ -45,9 +45,7 @@ Route::post('/panel/login', [App\Http\Controllers\Administrator\PanelLoginContro
 
 
 Route::get('/panel/home', [App\Http\Controllers\Administrator\PanelHomeController::class, 'index']);
-
-
-
+Route::resource('/panel/question', App\Http\Controllers\Administrator\QuestionController::class);
 
 
 
@@ -58,14 +56,11 @@ Route::get('/panel/home', [App\Http\Controllers\Administrator\PanelHomeControlle
 
 
 Route::get('/app/user', function(){
-
-
-
-        if(Auth::guard('student')){
+        if(Auth::guard('student')->check()){
             return 'student guard';
         }
 
-        if(Auth::guard('admin')){
+        if(Auth::guard('admin')->check()){
             return 'admin guard';
         }
 
@@ -77,7 +72,7 @@ Route::get('/app/user', function(){
 
 Route::get('/app/logout', function(){
     Auth::guard('student')->logout();
-    //Auth::logout();
+    Auth::logout();
 });
 
 Route::get('/app/logout/admin', function(){

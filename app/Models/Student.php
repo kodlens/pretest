@@ -11,6 +11,7 @@ class Student extends Authenticatable
     use HasFactory;
 
     protected $connection = 'registrar_gadtc';
+    protected $guard = 'student';
 
     protected $table = 'tblstudhinfo';
 
