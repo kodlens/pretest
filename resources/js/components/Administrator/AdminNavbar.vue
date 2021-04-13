@@ -26,9 +26,15 @@
                 Home
             </b-navbar-item>
 
+            <b-navbar-item href="/panel/section">
+                Sections
+            </b-navbar-item>
+
+
             <b-navbar-item href="/panel/question">
                 Questions
             </b-navbar-item>
+
 
 
             <b-navbar-item tag="div">

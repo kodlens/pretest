@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Administrator;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class QuestionController extends Controller
+class SectionController extends Controller
 {
     //
 
@@ -14,11 +14,11 @@ class QuestionController extends Controller
     }
 
     public function index(){
-        return view('panel.question.panel-question');
+        return view('panel.section.panel-section');
     }
 
     public function create(){
-        return view('panel.question.panel-question-create');
+        return view('panel.section.panel-section-create');
     }
 
     public function store(Request $req){

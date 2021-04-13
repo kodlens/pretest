@@ -49,6 +49,11 @@ Route::resource('/panel/question', App\Http\Controllers\Administrator\QuestionCo
 
 
 
+//SECTION
+Route::resource('/panel/section', App\Http\Controllers\Administrator\SectionController::class);
+Route::get('/ajax/section', [App\Http\Controllers\Administrator\SectionController::class, 'index_data']);
+
+
 
 
 

@@ -43,6 +43,8 @@ Vue.component('admin-navbar', require('./components/Administrator/AdminNavbar.vu
 Vue.component('panel-question', require('./components/Administrator/Question/PanelQuestion.vue').default);
 Vue.component('panel-question-create', require('./components/Administrator/Question/PanelQuestionCreate.vue').default);
 
+Vue.component('panel-section', require('./components/Administrator/Section/SectionPanel.vue').default);
+
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
