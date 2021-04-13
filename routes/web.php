@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,6 +17,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
+
 });
 
 Auth::routes([
@@ -60,17 +62,22 @@ Route::get('/ajax/section', [App\Http\Controllers\Administrator\SectionControlle
 
 
 
+
+
+
+
+
+
+
+//for debugging mode-----
+
 Route::get('/app/user', function(){
         if(Auth::guard('student')->check()){
             return 'student guard';
         }
-
         if(Auth::guard('admin')->check()){
             return 'admin guard';
         }
-
-
-
     return 'please login';
 
 });
@@ -91,4 +98,16 @@ Route::get('/app/account', function(){
 //       ->update([
 //           'password' => \Illuminate\Support\Facades\Hash::make('1234'),
 //       ]);
+
+    DB::table('users')->insert([
+        'username' => 'admin',
+        'lname' => 'ADMIN',
+        'fname' => 'ADMIN',
+        'mname' => 'ADMIN',
+        'sex' => 'FEMALE',
+        'email' => 'admin@system.org',
+        'password' => Hash::make('a'),
+        'role' => 'ADMINISTRATOR',
+    ]);
+
 });
