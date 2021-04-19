@@ -2150,15 +2150,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "PanelQuestion.vue",
   data: function data() {
@@ -2178,7 +2169,13 @@ __webpack_require__.r(__webpack_exports__);
         'is-success': true,
         'button': true,
         'is-loading': false
-      }
+      },
+      options: [{
+        content: '',
+        is_ans: 0,
+        is_img: 0,
+        img: null
+      }]
     };
   },
   methods: {
@@ -2229,7 +2226,9 @@ __webpack_require__.r(__webpack_exports__);
       this.isModalCreate = true;
       this.fields = {};
       this.errors = {};
-    }
+    },
+    add: function add() {},
+    remove: function remove(index) {}
   }
 });
 
@@ -22438,60 +22437,15 @@ var render = function() {
                   _c(
                     "div",
                     {},
-                    [
-                      _c(
-                        "b-field",
-                        {
-                          attrs: {
-                            label: "Category",
-                            type: this.errors.category ? "is-danger" : "",
-                            message: this.errors.category
-                              ? this.errors.category[0]
-                              : ""
-                          }
-                        },
-                        [
-                          _c("b-input", {
-                            attrs: { placeholder: "Category", required: "" },
-                            model: {
-                              value: _vm.fields.category,
-                              callback: function($$v) {
-                                _vm.$set(_vm.fields, "category", $$v)
-                              },
-                              expression: "fields.category"
-                            }
-                          })
-                        ],
-                        1
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "b-field",
-                        {
-                          attrs: {
-                            label: "Order No",
-                            type: this.errors.order_no ? "is-danger" : "",
-                            message: this.errors.order_no
-                              ? this.errors.order_no[0]
-                              : ""
-                          }
-                        },
-                        [
-                          _c("b-input", {
-                            attrs: { placeholder: "Order No", required: "" },
-                            model: {
-                              value: _vm.fields.order_no,
-                              callback: function($$v) {
-                                _vm.$set(_vm.fields, "order_no", $$v)
-                              },
-                              expression: "fields.order_no"
-                            }
-                          })
-                        ],
+                    _vm._l(this.options, function(option, i) {
+                      return _c(
+                        "div",
+                        { key: i },
+                        [_c("b-field", { attrs: { label: "" } })],
                         1
                       )
-                    ],
-                    1
+                    }),
+                    0
                   )
                 ]),
                 _vm._v(" "),

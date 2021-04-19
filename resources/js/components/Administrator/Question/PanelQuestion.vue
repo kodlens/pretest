@@ -77,21 +77,12 @@
                     </header>
                     <section class="modal-card-body">
                         <div class="">
-                            <b-field label="Category"
-                                        :type="this.errors.category ? 'is-danger':''"
-                                        :message="this.errors.category ? this.errors.category[0] : ''">
-                                <b-input v-model="fields.category"
-                                            placeholder="Category" required>
-                                </b-input>
-                            </b-field>
-                            <b-field label="Order No"
-                                        :type="this.errors.order_no ? 'is-danger':''"
-                                        :message="this.errors.order_no ? this.errors.order_no[0] : ''">
-                                <b-input v-model="fields.order_no"
-                                            placeholder="Order No" required>
-                                </b-input>
-                            </b-field>
-
+                            
+                            <div class="" v-for="(option, i) in this.options" :key="i">
+                                <b-field label="">
+                                    <b-input type="text" v-model="option.content" placeholder="option"/>
+                                </b-field>
+                            </div>
                         </div>
                     </section>
                     <footer class="modal-card-foot">
@@ -137,6 +128,15 @@ export default {
                 'button': true,
                 'is-loading':false,
             },
+
+         
+            options: [{
+                content: '',
+                is_ans: 0,
+                is_img: 0,
+                img:null,
+               
+            }],
 
         }
     },
@@ -196,8 +196,16 @@ export default {
             this.isModalCreate=true;
             this.fields = {};
             this.errors = {};
+        },
+
+
+        add(){
 
         },
+
+        remove(index){
+
+        }
 
         
     }
