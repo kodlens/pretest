@@ -45,7 +45,7 @@ export default{
         return{
             fields: {
                 username: 'admin',
-                password: 'a',
+                password: '1234',
             },
             errors: {},
 

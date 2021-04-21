@@ -3,7 +3,7 @@
         <div class="section">
             <div style="font-size: 20px; text-align: center; font-weight: bold;">LIST OF QUESTIONS</div>
             <div class="columns">
-                <div class="column is-8 is-offset-2">
+                <div class="column is-6 is-offset-3">
                     <b-field label="Page">
                         <b-select v-model="perPage" @input="setPerPage">
                             <option value="5">5 per page</option>
@@ -15,7 +15,7 @@
 
                     <div class="buttons mt-3">
                         <!-- <b-button tag="a" href="/cpanel-academicyear/create" class="is-primary">Create Account</b-button> -->
-                        <b-button @click="openModal" class="is-primary">Create Section</b-button>
+                        <b-button @click="openModal" class="is-primary">Create Question</b-button>
                     </div>
 
                     <b-table
@@ -52,8 +52,7 @@
                                 <b-button outlined class="button is-small is-danger mr-1" icon-pack="fa" icon-right="trash" @click="confirmDelete(props.row.category_id)">DELETE</b-button>
                             </div>
                         </b-table-column>
-
-                    </b-table>                    
+                    </b-table>
                 </div><!--close column-->
             </div>
         </div>
@@ -61,23 +60,26 @@
         <!--modal create-->
         <b-modal v-model="isModalCreate" has-modal-card
                     trap-focus
-                    :width="640"
+                    width="640"
                     aria-role="dialog"
-                    aria-label="Example Modal"
                     aria-modal>
 
             <form @submit.prevent="submit">
                 <div class="modal-card">
                     <header class="modal-card-head">
-                        <p class="modal-card-title">Category</p>
+                        <p class="modal-card-title">Question</p>
                         <button
                             type="button"
                             class="delete"
                             @click="isModalCreate = false"/>
                     </header>
                     <section class="modal-card-body">
-                        <div class="">
-                            
+                        <div class="question-panel">
+
+                            <b-field label="Question">
+                                <b-input type="text" required v-model="question" placeholder="Question" />
+                            </b-field>
+
                             <div class="" v-for="(option, i) in this.options" :key="i">
                                 <b-field label="">
                                     <b-input type="text" v-model="option.content" placeholder="option"/>
@@ -95,11 +97,8 @@
                             type="is-success">SAVE</button>
                     </footer>
                 </div>
-
             </form><!--close form-->
         </b-modal>
-
-
 
     </div>
 </template>
@@ -129,13 +128,12 @@ export default {
                 'is-loading':false,
             },
 
-         
             options: [{
                 content: '',
                 is_ans: 0,
                 is_img: 0,
                 img:null,
-               
+
             }],
 
         }
@@ -207,7 +205,7 @@ export default {
 
         }
 
-        
+
     }
 
 }
