@@ -76,16 +76,100 @@
                     <section class="modal-card-body">
                         <div class="question-panel">
 
-                            <b-field label="Question">
-                                <b-input type="text" required v-model="question" placeholder="Question" />
+                            <div class="columns">
+                                <div class="column">
+                                    <b-field label="Section" expanded>
+                                        <b-select v-model="section" expanded>
+                                            <option v-for="(item, i) in this.sections" :value="item.section_id">{{ item.section }}</option>
+                                        </b-select>
+                                    </b-field>
+                                </div>
+
+                                <div class="column">
+                                    <b-field label="Points" expanded>
+                                        <b-numberinput v-model="points" controls-position="compact" expanded min="0" max="100"></b-numberinput>
+                                    </b-field>
+                                </div>
+                            </div><!-- class columns-->
+
+                            <b-field v-if="this.radioInputOption === 'TEXT'" label="Question">
+                                <b-input type="text" v-model="question" placeholder="Question" />
                             </b-field>
 
-                            <div class="" v-for="(option, i) in this.options" :key="i">
-                                <b-field label="">
-                                    <b-input type="text" v-model="option.content" placeholder="option"/>
+                            <b-field v-if="this.radioInputOption === 'IMG'" label="Question">
+                                <b-field grouped class="file is-primary" :class="{'has-name': !!questionImg}">
+                                    <b-upload v-model="questionImg" class="file-label">
+                                        <span class="file-cta">
+                                            <b-icon class="file-icon" icon="upload"></b-icon>
+                                            <span class="file-label">Click to upload</span>
+                                        </span>
+                                        <span class="file-name" v-if="questionImg">
+                                            {{ questionImg.name }}
+                                        </span>
+                                    </b-upload>
                                 </b-field>
+                            </b-field>
+
+                            <b-field>
+                                <b-radio-button v-model="radioInputOption"
+                                                native-value="TEXT"
+                                                type="is-success is-light is-outlined">
+                                    <b-icon pack="fa" icon="file-text-o"></b-icon>
+                                    <span>TEXT</span>
+                                </b-radio-button>
+
+                                <b-radio-button v-model="radioInputOption"
+                                                native-value="IMG"
+                                                type="is-success is-light is-outlined">
+                                    <b-icon pack="fa" icon="picture-o"></b-icon>
+                                    <span>IMG</span>
+                                </b-radio-button>
+
+                            </b-field>
+
+                            <div class="option-panel" v-for="(option, k) in this.options" :key="k">
+                                <b-field :label="`Option ` + letters[k]">
+                                    <b-input v-if="option.is_img === 0" type="text" v-model="option.content" placeholder="Option here..."/>
+
+                                    <div v-if="option.is_img === 1">
+                                        <b-field grouped class="file is-primary" :class="{'has-name': !!option.img}">
+                                            <b-upload v-model="option.img" class="file-label">
+                                                <span class="file-cta">
+                                                    <b-icon class="file-icon" icon="upload"></b-icon>
+                                                    <span class="file-label">Click to upload</span>
+                                                </span>
+                                                <span class="file-name" v-if="option.img">
+                                                    {{ option.img.name }}
+                                                </span>
+                                            </b-upload>
+                                        </b-field>
+                                    </div>
+
+                                    <b-button class="qo-btn ml-1"
+                                            @click="remove(k)"
+                                            v-show="k || ( !k && options.length > 0)">
+                                        <i class="fa fa-trash-o fa-lg"></i>
+                                    </b-button>
+                                </b-field>
+
+                            </div><!--options loop -->
+
+                            <div style="margin-top: 20px;">
+                                <!--HOVER BUTTON SO THAT USER WILL SELECT IF OPTION IS IMAGE OR TEXT-->
+                                <b-dropdown position="is-top-right" v-show="this.options.length < 5" :triggers="['hover']" aria-role="list">
+                                    <template #trigger>
+                                        <b-button
+                                            label="Add Option"
+                                            type="is-info"
+                                            icon-right="menu-down" />
+                                    </template>
+
+                                    <b-dropdown-item @click="add('text')" aria-role="listitem"><i class="fa fa-plus"></i>&nbsp;Text</b-dropdown-item>
+                                    <b-dropdown-item @click="add('img')" aria-role="listitem"><i class="fa fa-picture-o"></i>&nbsp;Image</b-dropdown-item>
+                                </b-dropdown>
                             </div>
-                        </div>
+
+                        </div><!-- question panel -->
                     </section>
                     <footer class="modal-card-foot">
                         <b-button
@@ -119,7 +203,7 @@ export default {
 
             isModalCreate: false,
 
-            fields: {},
+
             errors : {},
 
             btnClass: {
@@ -128,14 +212,17 @@ export default {
                 'is-loading':false,
             },
 
-            options: [{
-                content: '',
-                is_ans: 0,
-                is_img: 0,
-                img:null,
+            radioInputOption: '',
+            sections: null,
 
-            }],
 
+            section: '',
+            question: '',
+            questionImg: null,
+            points: 0,
+
+            options: [],
+            letters: ['A', 'B', 'C', 'D', 'E'],
         }
     },
     methods: {
@@ -189,28 +276,72 @@ export default {
             this.loadAsyncData()
         },
 
-
         openModal(){
             this.isModalCreate=true;
             this.fields = {};
             this.errors = {};
         },
 
-
-        add(){
-
+        add(inputType){
+            //shorthand
+            this.options.push({
+                optionLetter: '',
+                content: '',
+                is_ans: 0,
+                is_img: inputType === 'text' ? 0 : 1,
+                img:null,
+            });
         },
 
         remove(index){
+            this.options.splice(index, 1);
+        },
 
+        getSections(){
+            axios.get('/ajax/question/sections').then(res=>{
+                this.sections = res.data;
+            })
+        },
+
+        submit(){
+            axios.post('/panel/question',{
+                question: this.question,
+                question_img: this.questionImg,
+                section: this.section,
+                points: this.points,
+                options: this.options,
+            }).then(res=>{
+
+            }).catch(error=>{
+
+            })
         }
 
 
+    },
+
+    mounted() {
+        this.getSections();
     }
 
 }
 </script>
 
 <style scoped>
+
+/*qo mean question options button remove*/
+.qo-btn{
+    border: none;
+    color: green;
+}
+
+.qo-btn > i:hover{
+    color:red;
+    text-decoration: underline;
+}
+
+.option-panel{
+    margin-left: 30px;
+}
 
 </style>

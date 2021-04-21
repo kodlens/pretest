@@ -12,7 +12,10 @@ class Section extends Model
     protected $connection = 'mysql';
 
     protected $table = 'sections';
+
     protected $primaryKey = 'section_id';
+
+    protected $fillable = ['section'];
 
 
 }

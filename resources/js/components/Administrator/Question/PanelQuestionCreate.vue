@@ -83,11 +83,9 @@
                                                     icon-right="menu-down" />
                                             </template>
 
-
                                             <b-dropdown-item @click="add(i, 'text')" aria-role="listitem"><i class="fa fa-plus"></i>&nbsp;Text</b-dropdown-item>
                                             <b-dropdown-item @click="add(i, 'img')" aria-role="listitem"><i class="fa fa-picture-o"></i>&nbsp;Image</b-dropdown-item>
                                         </b-dropdown>
-
                                     </div>
                                 </div>
                             </div>

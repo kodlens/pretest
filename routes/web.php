@@ -49,6 +49,7 @@ Route::post('/panel/login', [App\Http\Controllers\Administrator\PanelLoginContro
 Route::get('/panel/home', [App\Http\Controllers\Administrator\PanelHomeController::class, 'index']);
 Route::resource('/panel/question', App\Http\Controllers\Administrator\QuestionController::class);
 Route::get('/ajax/question', [App\Http\Controllers\Administrator\QuestionController::class, 'index_data']);
+Route::get('/ajax/question/sections', [App\Http\Controllers\Administrator\QuestionController::class, 'ajax_section']);
 
 
 
@@ -92,6 +93,19 @@ Route::get('/app/logout/admin', function(){
     Auth::guard('admin')->logout();
     Auth::logout();
 });
+
+Route::get('/app/sections', function(){
+    $sections = [
+        ['section' => 'ABSTRACT'],
+        ['section' => 'NUMERICAL'],
+        ['section' => 'LINGUISTICS'],
+        ['section' => 'VOCABULARY'],
+        ['section' => 'GENERAL KNOWLEDGE']
+    ];
+
+    \App\Models\Section::insert($sections);
+});
+
 
 
 Route::get('/app/account', function(){

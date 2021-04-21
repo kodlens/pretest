@@ -14,7 +14,7 @@ class Question extends Model
     protected $table = 'questions';
     protected $primaryKey = 'question_id';
 
-    protected $fillable = ['question', 'points'];
+    protected $fillable=['section_id', 'question', 'question_img_path', 'points'];
 
 
 }

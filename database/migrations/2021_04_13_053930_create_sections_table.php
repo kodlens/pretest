@@ -22,6 +22,16 @@ class CreateSectionsTable extends Migration
             $table->string('section', 255)->null();
             $table->timestamps();
         });
+
+        $sections = [
+            ['section' => 'ABSTRACT'],
+            ['section' => 'NUMERICAL'],
+            ['section' => 'LINGUISTICS'],
+            ['section' => 'VOCABULARY'],
+            ['section' => 'GENERAL KNOWLEDGE']
+        ];
+
+        \App\Models\Section::insert($sections);
     }
 
     /**

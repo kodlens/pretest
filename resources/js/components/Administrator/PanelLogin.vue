@@ -45,7 +45,7 @@ export default{
         return{
             fields: {
                 username: 'admin',
-                password: '1234',
+                password: 'a',
             },
             errors: {},
 
@@ -54,7 +54,6 @@ export default{
                 'is-primary': true,
                 'is-loading': false,
             }
-
         }
     },
 

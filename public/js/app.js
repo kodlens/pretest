@@ -2001,7 +2001,7 @@ __webpack_require__.r(__webpack_exports__);
     return {
       fields: {
         username: 'admin',
-        password: '1234'
+        password: 'a'
       },
       errors: {},
       btnClass: {
@@ -2149,6 +2149,90 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "PanelQuestion.vue",
   data: function data() {
@@ -2162,19 +2246,20 @@ __webpack_require__.r(__webpack_exports__);
       perPage: 5,
       defaultSortDirection: 'asc',
       isModalCreate: false,
-      fields: {},
       errors: {},
       btnClass: {
         'is-success': true,
         'button': true,
         'is-loading': false
       },
-      options: [{
-        content: '',
-        is_ans: 0,
-        is_img: 0,
-        img: null
-      }]
+      radioInputOption: '',
+      sections: null,
+      section: '',
+      question: '',
+      questionImg: null,
+      points: 0,
+      options: [],
+      letters: ['A', 'B', 'C', 'D', 'E']
     };
   },
   methods: {
@@ -2226,8 +2311,38 @@ __webpack_require__.r(__webpack_exports__);
       this.fields = {};
       this.errors = {};
     },
-    add: function add() {},
-    remove: function remove(index) {}
+    add: function add(inputType) {
+      //shorthand
+      this.options.push({
+        optionLetter: '',
+        content: '',
+        is_ans: 0,
+        is_img: inputType === 'text' ? 0 : 1,
+        img: null
+      });
+    },
+    remove: function remove(index) {
+      this.options.splice(index, 1);
+    },
+    getSections: function getSections() {
+      var _this2 = this;
+
+      axios.get('/ajax/question/sections').then(function (res) {
+        _this2.sections = res.data;
+      });
+    },
+    submit: function submit() {
+      axios.post('/panel/question', {
+        question: this.question,
+        question_img: this.questionImg,
+        section: this.section,
+        points: this.points,
+        options: this.options
+      }).then(function (res) {})["catch"](function (error) {});
+    }
+  },
+  mounted: function mounted() {
+    this.getSections();
   }
 });
 
@@ -2244,8 +2359,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-//
-//
 //
 //
 //
@@ -20584,7 +20697,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.brand-title-desktop[data-v-271ac982]{\n    font-weight: bold;\n    display: block;\n}\n.brand-subtitle-desktop[data-v-271ac982]{\n    font-size: 14px;\n    display: block;\n}\n.brand-title-mobile[data-v-271ac982]{\n    font-weight: bold;\n    display: none;\n}\n.brand-subtitle-mobile[data-v-271ac982]{\n    font-size: 14px;\n    display: none;\n}\n@media only screen and (max-width: 768px) {\n.brand-title-desktop[data-v-271ac982]{\n        font-weight: bold;\n        display: none;\n}\n.brand-subtitle-desktop[data-v-271ac982]{\n        font-size: 14px;\n        display: none;\n}\n.brand-title-mobile[data-v-271ac982]{\n        font-weight: bold;\n        display: block;\n}\n.brand-subtitle-mobile[data-v-271ac982]{\n        font-size: 14px;\n        display: block;\n}\n}\n\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.brand-title-desktop[data-v-271ac982]{\r\n    font-weight: bold;\r\n    display: block;\n}\n.brand-subtitle-desktop[data-v-271ac982]{\r\n    font-size: 14px;\r\n    display: block;\n}\n.brand-title-mobile[data-v-271ac982]{\r\n    font-weight: bold;\r\n    display: none;\n}\n.brand-subtitle-mobile[data-v-271ac982]{\r\n    font-size: 14px;\r\n    display: none;\n}\n@media only screen and (max-width: 768px) {\n.brand-title-desktop[data-v-271ac982]{\r\n        font-weight: bold;\r\n        display: none;\n}\n.brand-subtitle-desktop[data-v-271ac982]{\r\n        font-size: 14px;\r\n        display: none;\n}\n.brand-title-mobile[data-v-271ac982]{\r\n        font-weight: bold;\r\n        display: block;\n}\n.brand-subtitle-mobile[data-v-271ac982]{\r\n        font-size: 14px;\r\n        display: block;\n}\n}\r\n\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -20608,7 +20721,31 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.panel-body[data-v-623f975c]{\r\n    padding: 15px;\n}\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.panel-body[data-v-623f975c]{\n    padding: 15px;\n}\n", ""]);
+// Exports
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
+
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Administrator/Question/PanelQuestion.vue?vue&type=style&index=0&id=51e93ae4&scoped=true&lang=css&":
+/*!***************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Administrator/Question/PanelQuestion.vue?vue&type=style&index=0&id=51e93ae4&scoped=true&lang=css& ***!
+  \***************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ ((module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
+/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__);
+// Imports
+
+var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
+// Module
+___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/*qo mean question options button remove*/\n.qo-btn[data-v-51e93ae4]{\n    border: none;\n    color: green;\n}\n.qo-btn > i[data-v-51e93ae4]:hover{\n    color:red;\n    text-decoration: underline;\n}\n.option-panel[data-v-51e93ae4]{\n    margin-left: 30px;\n}\n\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -20632,7 +20769,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/*qo mean question options button remove*/\n.qo-btn[data-v-5fe09dac]{\n    border: none;\n    color: green;\n}\n.qo-btn > i[data-v-5fe09dac]:hover{\n    color:red;\n    text-decoration: underline;\n}\n\n\n\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\r\n/*qo mean question options button remove*/\n.qo-btn[data-v-5fe09dac]{\r\n    border: none;\r\n    color: green;\n}\n.qo-btn > i[data-v-5fe09dac]:hover{\r\n    color:red;\r\n    text-decoration: underline;\n}\r\n\r\n\r\n\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -20680,7 +20817,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.brand-title-desktop[data-v-60c7b05c]{\r\n    font-weight: bold;\r\n    display: block;\n}\n.brand-subtitle-desktop[data-v-60c7b05c]{\r\n    font-size: 14px;\r\n    display: block;\n}\n.brand-title-mobile[data-v-60c7b05c]{\r\n    font-weight: bold;\r\n    display: none;\n}\n.brand-subtitle-mobile[data-v-60c7b05c]{\r\n    font-size: 14px;\r\n    display: none;\n}\n@media only screen and (max-width: 768px) {\n.brand-title-desktop[data-v-60c7b05c]{\r\n        font-weight: bold;\r\n        display: none;\n}\n.brand-subtitle-desktop[data-v-60c7b05c]{\r\n        font-size: 14px;\r\n        display: none;\n}\n.brand-title-mobile[data-v-60c7b05c]{\r\n        font-weight: bold;\r\n        display: block;\n}\n.brand-subtitle-mobile[data-v-60c7b05c]{\r\n        font-size: 14px;\r\n        display: block;\n}\n}\r\n\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.brand-title-desktop[data-v-60c7b05c]{\n    font-weight: bold;\n    display: block;\n}\n.brand-subtitle-desktop[data-v-60c7b05c]{\n    font-size: 14px;\n    display: block;\n}\n.brand-title-mobile[data-v-60c7b05c]{\n    font-weight: bold;\n    display: none;\n}\n.brand-subtitle-mobile[data-v-60c7b05c]{\n    font-size: 14px;\n    display: none;\n}\n@media only screen and (max-width: 768px) {\n.brand-title-desktop[data-v-60c7b05c]{\n        font-weight: bold;\n        display: none;\n}\n.brand-subtitle-desktop[data-v-60c7b05c]{\n        font-size: 14px;\n        display: none;\n}\n.brand-title-mobile[data-v-60c7b05c]{\n        font-weight: bold;\n        display: block;\n}\n.brand-subtitle-mobile[data-v-60c7b05c]{\n        font-size: 14px;\n        display: block;\n}\n}\n\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -21104,15 +21241,17 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _PanelQuestion_vue_vue_type_template_id_51e93ae4_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./PanelQuestion.vue?vue&type=template&id=51e93ae4&scoped=true& */ "./resources/js/components/Administrator/Question/PanelQuestion.vue?vue&type=template&id=51e93ae4&scoped=true&");
 /* harmony import */ var _PanelQuestion_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./PanelQuestion.vue?vue&type=script&lang=js& */ "./resources/js/components/Administrator/Question/PanelQuestion.vue?vue&type=script&lang=js&");
-/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+/* harmony import */ var _PanelQuestion_vue_vue_type_style_index_0_id_51e93ae4_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./PanelQuestion.vue?vue&type=style&index=0&id=51e93ae4&scoped=true&lang=css& */ "./resources/js/components/Administrator/Question/PanelQuestion.vue?vue&type=style&index=0&id=51e93ae4&scoped=true&lang=css&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! !../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
 
+;
 
 
 /* normalize component */
-;
-var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__.default)(
+
+var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__.default)(
   _PanelQuestion_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__.default,
   _PanelQuestion_vue_vue_type_template_id_51e93ae4_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render,
   _PanelQuestion_vue_vue_type_template_id_51e93ae4_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
@@ -21806,6 +21945,23 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/components/Administrator/Question/PanelQuestion.vue?vue&type=style&index=0&id=51e93ae4&scoped=true&lang=css&":
+/*!***********************************************************************************************************************************!*\
+  !*** ./resources/js/components/Administrator/Question/PanelQuestion.vue?vue&type=style&index=0&id=51e93ae4&scoped=true&lang=css& ***!
+  \***********************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_style_loader_index_js_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_PanelQuestion_vue_vue_type_style_index_0_id_51e93ae4_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-style-loader/index.js!../../../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!../../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../../node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!../../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./PanelQuestion.vue?vue&type=style&index=0&id=51e93ae4&scoped=true&lang=css& */ "./node_modules/vue-style-loader/index.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Administrator/Question/PanelQuestion.vue?vue&type=style&index=0&id=51e93ae4&scoped=true&lang=css&");
+/* harmony import */ var _node_modules_vue_style_loader_index_js_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_PanelQuestion_vue_vue_type_style_index_0_id_51e93ae4_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_vue_style_loader_index_js_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_PanelQuestion_vue_vue_type_style_index_0_id_51e93ae4_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__);
+/* harmony reexport (unknown) */ var __WEBPACK_REEXPORT_OBJECT__ = {};
+/* harmony reexport (unknown) */ for(const __WEBPACK_IMPORT_KEY__ in _node_modules_vue_style_loader_index_js_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_PanelQuestion_vue_vue_type_style_index_0_id_51e93ae4_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== "default") __WEBPACK_REEXPORT_OBJECT__[__WEBPACK_IMPORT_KEY__] = () => _node_modules_vue_style_loader_index_js_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_PanelQuestion_vue_vue_type_style_index_0_id_51e93ae4_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__[__WEBPACK_IMPORT_KEY__]
+/* harmony reexport (unknown) */ __webpack_require__.d(__webpack_exports__, __WEBPACK_REEXPORT_OBJECT__);
+
+
+/***/ }),
+
 /***/ "./resources/js/components/Administrator/Question/PanelQuestionCreate.vue?vue&type=style&index=0&id=5fe09dac&scoped=true&lang=css&":
 /*!*****************************************************************************************************************************************!*\
   !*** ./resources/js/components/Administrator/Question/PanelQuestionCreate.vue?vue&type=style&index=0&id=5fe09dac&scoped=true&lang=css& ***!
@@ -22436,48 +22592,64 @@ var render = function() {
                     "div",
                     { staticClass: "question-panel" },
                     [
-                      _c(
-                        "b-field",
-                        { attrs: { label: "Question" } },
-                        [
-                          _c("b-input", {
-                            attrs: {
-                              type: "text",
-                              required: "",
-                              placeholder: "Question"
-                            },
-                            model: {
-                              value: _vm.question,
-                              callback: function($$v) {
-                                _vm.question = $$v
-                              },
-                              expression: "question"
-                            }
-                          })
-                        ],
-                        1
-                      ),
-                      _vm._v(" "),
-                      _vm._l(this.options, function(option, i) {
-                        return _c(
+                      _c("div", { staticClass: "columns" }, [
+                        _c(
                           "div",
-                          { key: i },
+                          { staticClass: "column" },
                           [
                             _c(
                               "b-field",
-                              { attrs: { label: "" } },
+                              { attrs: { label: "Section", expanded: "" } },
                               [
-                                _c("b-input", {
+                                _c(
+                                  "b-select",
+                                  {
+                                    attrs: { expanded: "" },
+                                    model: {
+                                      value: _vm.section,
+                                      callback: function($$v) {
+                                        _vm.section = $$v
+                                      },
+                                      expression: "section"
+                                    }
+                                  },
+                                  _vm._l(this.sections, function(item, i) {
+                                    return _c(
+                                      "option",
+                                      { domProps: { value: item.section_id } },
+                                      [_vm._v(_vm._s(item.section))]
+                                    )
+                                  }),
+                                  0
+                                )
+                              ],
+                              1
+                            )
+                          ],
+                          1
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "div",
+                          { staticClass: "column" },
+                          [
+                            _c(
+                              "b-field",
+                              { attrs: { label: "Points", expanded: "" } },
+                              [
+                                _c("b-numberinput", {
                                   attrs: {
-                                    type: "text",
-                                    placeholder: "option"
+                                    "controls-position": "compact",
+                                    expanded: "",
+                                    min: "0",
+                                    max: "100"
                                   },
                                   model: {
-                                    value: option.content,
+                                    value: _vm.points,
                                     callback: function($$v) {
-                                      _vm.$set(option, "content", $$v)
+                                      _vm.points = $$v
                                     },
-                                    expression: "option.content"
+                                    expression: "points"
                                   }
                                 })
                               ],
@@ -22486,7 +22658,367 @@ var render = function() {
                           ],
                           1
                         )
-                      })
+                      ]),
+                      _vm._v(" "),
+                      this.radioInputOption === "TEXT"
+                        ? _c(
+                            "b-field",
+                            { attrs: { label: "Question" } },
+                            [
+                              _c("b-input", {
+                                attrs: {
+                                  type: "text",
+                                  placeholder: "Question"
+                                },
+                                model: {
+                                  value: _vm.question,
+                                  callback: function($$v) {
+                                    _vm.question = $$v
+                                  },
+                                  expression: "question"
+                                }
+                              })
+                            ],
+                            1
+                          )
+                        : _vm._e(),
+                      _vm._v(" "),
+                      this.radioInputOption === "IMG"
+                        ? _c(
+                            "b-field",
+                            { attrs: { label: "Question" } },
+                            [
+                              _c(
+                                "b-field",
+                                {
+                                  staticClass: "file is-primary",
+                                  class: { "has-name": !!_vm.questionImg },
+                                  attrs: { grouped: "" }
+                                },
+                                [
+                                  _c(
+                                    "b-upload",
+                                    {
+                                      staticClass: "file-label",
+                                      model: {
+                                        value: _vm.questionImg,
+                                        callback: function($$v) {
+                                          _vm.questionImg = $$v
+                                        },
+                                        expression: "questionImg"
+                                      }
+                                    },
+                                    [
+                                      _c(
+                                        "span",
+                                        { staticClass: "file-cta" },
+                                        [
+                                          _c("b-icon", {
+                                            staticClass: "file-icon",
+                                            attrs: { icon: "upload" }
+                                          }),
+                                          _vm._v(" "),
+                                          _c(
+                                            "span",
+                                            { staticClass: "file-label" },
+                                            [_vm._v("Click to upload")]
+                                          )
+                                        ],
+                                        1
+                                      ),
+                                      _vm._v(" "),
+                                      _vm.questionImg
+                                        ? _c(
+                                            "span",
+                                            { staticClass: "file-name" },
+                                            [
+                                              _vm._v(
+                                                "\n                                        " +
+                                                  _vm._s(_vm.questionImg.name) +
+                                                  "\n                                    "
+                                              )
+                                            ]
+                                          )
+                                        : _vm._e()
+                                    ]
+                                  )
+                                ],
+                                1
+                              )
+                            ],
+                            1
+                          )
+                        : _vm._e(),
+                      _vm._v(" "),
+                      _c(
+                        "b-field",
+                        [
+                          _c(
+                            "b-radio-button",
+                            {
+                              attrs: {
+                                "native-value": "TEXT",
+                                type: "is-success is-light is-outlined"
+                              },
+                              model: {
+                                value: _vm.radioInputOption,
+                                callback: function($$v) {
+                                  _vm.radioInputOption = $$v
+                                },
+                                expression: "radioInputOption"
+                              }
+                            },
+                            [
+                              _c("b-icon", {
+                                attrs: { pack: "fa", icon: "file-text-o" }
+                              }),
+                              _vm._v(" "),
+                              _c("span", [_vm._v("TEXT")])
+                            ],
+                            1
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "b-radio-button",
+                            {
+                              attrs: {
+                                "native-value": "IMG",
+                                type: "is-success is-light is-outlined"
+                              },
+                              model: {
+                                value: _vm.radioInputOption,
+                                callback: function($$v) {
+                                  _vm.radioInputOption = $$v
+                                },
+                                expression: "radioInputOption"
+                              }
+                            },
+                            [
+                              _c("b-icon", {
+                                attrs: { pack: "fa", icon: "picture-o" }
+                              }),
+                              _vm._v(" "),
+                              _c("span", [_vm._v("IMG")])
+                            ],
+                            1
+                          )
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _vm._l(this.options, function(option, k) {
+                        return _c(
+                          "div",
+                          { key: k, staticClass: "option-panel" },
+                          [
+                            _c(
+                              "b-field",
+                              { attrs: { label: "Option " + _vm.letters[k] } },
+                              [
+                                option.is_img === 0
+                                  ? _c("b-input", {
+                                      attrs: {
+                                        type: "text",
+                                        placeholder: "Option here..."
+                                      },
+                                      model: {
+                                        value: option.content,
+                                        callback: function($$v) {
+                                          _vm.$set(option, "content", $$v)
+                                        },
+                                        expression: "option.content"
+                                      }
+                                    })
+                                  : _vm._e(),
+                                _vm._v(" "),
+                                option.is_img === 1
+                                  ? _c(
+                                      "div",
+                                      [
+                                        _c(
+                                          "b-field",
+                                          {
+                                            staticClass: "file is-primary",
+                                            class: { "has-name": !!option.img },
+                                            attrs: { grouped: "" }
+                                          },
+                                          [
+                                            _c(
+                                              "b-upload",
+                                              {
+                                                staticClass: "file-label",
+                                                model: {
+                                                  value: option.img,
+                                                  callback: function($$v) {
+                                                    _vm.$set(option, "img", $$v)
+                                                  },
+                                                  expression: "option.img"
+                                                }
+                                              },
+                                              [
+                                                _c(
+                                                  "span",
+                                                  { staticClass: "file-cta" },
+                                                  [
+                                                    _c("b-icon", {
+                                                      staticClass: "file-icon",
+                                                      attrs: { icon: "upload" }
+                                                    }),
+                                                    _vm._v(" "),
+                                                    _c(
+                                                      "span",
+                                                      {
+                                                        staticClass:
+                                                          "file-label"
+                                                      },
+                                                      [
+                                                        _vm._v(
+                                                          "Click to upload"
+                                                        )
+                                                      ]
+                                                    )
+                                                  ],
+                                                  1
+                                                ),
+                                                _vm._v(" "),
+                                                option.img
+                                                  ? _c(
+                                                      "span",
+                                                      {
+                                                        staticClass: "file-name"
+                                                      },
+                                                      [
+                                                        _vm._v(
+                                                          "\n                                                " +
+                                                            _vm._s(
+                                                              option.img.name
+                                                            ) +
+                                                            "\n                                            "
+                                                        )
+                                                      ]
+                                                    )
+                                                  : _vm._e()
+                                              ]
+                                            )
+                                          ],
+                                          1
+                                        )
+                                      ],
+                                      1
+                                    )
+                                  : _vm._e(),
+                                _vm._v(" "),
+                                _c(
+                                  "b-button",
+                                  {
+                                    directives: [
+                                      {
+                                        name: "show",
+                                        rawName: "v-show",
+                                        value:
+                                          k || (!k && _vm.options.length > 0),
+                                        expression:
+                                          "k || ( !k && options.length > 0)"
+                                      }
+                                    ],
+                                    staticClass: "qo-btn ml-1",
+                                    on: {
+                                      click: function($event) {
+                                        return _vm.remove(k)
+                                      }
+                                    }
+                                  },
+                                  [
+                                    _c("i", {
+                                      staticClass: "fa fa-trash-o fa-lg"
+                                    })
+                                  ]
+                                )
+                              ],
+                              1
+                            )
+                          ],
+                          1
+                        )
+                      }),
+                      _vm._v(" "),
+                      _c(
+                        "div",
+                        { staticStyle: { "margin-top": "20px" } },
+                        [
+                          _c(
+                            "b-dropdown",
+                            {
+                              directives: [
+                                {
+                                  name: "show",
+                                  rawName: "v-show",
+                                  value: this.options.length < 5,
+                                  expression: "this.options.length < 5"
+                                }
+                              ],
+                              attrs: {
+                                position: "is-top-right",
+                                triggers: ["hover"],
+                                "aria-role": "list"
+                              },
+                              scopedSlots: _vm._u([
+                                {
+                                  key: "trigger",
+                                  fn: function() {
+                                    return [
+                                      _c("b-button", {
+                                        attrs: {
+                                          label: "Add Option",
+                                          type: "is-info",
+                                          "icon-right": "menu-down"
+                                        }
+                                      })
+                                    ]
+                                  },
+                                  proxy: true
+                                }
+                              ])
+                            },
+                            [
+                              _vm._v(" "),
+                              _c(
+                                "b-dropdown-item",
+                                {
+                                  attrs: { "aria-role": "listitem" },
+                                  on: {
+                                    click: function($event) {
+                                      return _vm.add("text")
+                                    }
+                                  }
+                                },
+                                [
+                                  _c("i", { staticClass: "fa fa-plus" }),
+                                  _vm._v(" Text")
+                                ]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "b-dropdown-item",
+                                {
+                                  attrs: { "aria-role": "listitem" },
+                                  on: {
+                                    click: function($event) {
+                                      return _vm.add("img")
+                                    }
+                                  }
+                                },
+                                [
+                                  _c("i", { staticClass: "fa fa-picture-o" }),
+                                  _vm._v(" Image")
+                                ]
+                              )
+                            ],
+                            1
+                          )
+                        ],
+                        1
+                      )
                     ],
                     2
                   )
@@ -23812,6 +24344,27 @@ if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
 var add = __webpack_require__(/*! !../../../../node_modules/vue-style-loader/lib/addStylesClient.js */ "./node_modules/vue-style-loader/lib/addStylesClient.js").default
 var update = add("85937a96", content, false, {});
+// Hot Module Replacement
+if(false) {}
+
+/***/ }),
+
+/***/ "./node_modules/vue-style-loader/index.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Administrator/Question/PanelQuestion.vue?vue&type=style&index=0&id=51e93ae4&scoped=true&lang=css&":
+/*!********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-style-loader/index.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Administrator/Question/PanelQuestion.vue?vue&type=style&index=0&id=51e93ae4&scoped=true&lang=css& ***!
+  \********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(/*! !!../../../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!../../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../../node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!../../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./PanelQuestion.vue?vue&type=style&index=0&id=51e93ae4&scoped=true&lang=css& */ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Administrator/Question/PanelQuestion.vue?vue&type=style&index=0&id=51e93ae4&scoped=true&lang=css&");
+if(content.__esModule) content = content.default;
+if(typeof content === 'string') content = [[module.id, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var add = __webpack_require__(/*! !../../../../../node_modules/vue-style-loader/lib/addStylesClient.js */ "./node_modules/vue-style-loader/lib/addStylesClient.js").default
+var update = add("2ba4dcc6", content, false, {});
 // Hot Module Replacement
 if(false) {}
 

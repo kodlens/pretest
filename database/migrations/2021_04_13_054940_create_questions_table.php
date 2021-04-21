@@ -18,9 +18,12 @@ class CreateQuestionsTable extends Migration
             $table->unsignedBigInteger('section_id');
             $table->foreign('section_id')->references('section_id')->on('sections');
             $table->string('question');
+            $table->string('question_img_path')->nullable();
             $table->integer('points');
             $table->timestamps();
         });
+
+
     }
 
     /**

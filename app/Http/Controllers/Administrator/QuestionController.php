@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 use App\Models\Question;
+use App\Models\Section;
 
 class QuestionController extends Controller
 {
@@ -33,8 +34,18 @@ class QuestionController extends Controller
         return view('panel.question.panel-question-create');
     }
 
+    public function ajax_section(){
+        return Section::all();
+    }
+
     public function store(Request $req){
-        return $req;
+        Question::create([
+            'section_id' => $req->section,
+            'question' => $req->question,
+            'points' => $req->points
+        ]);
+
+        return $req->options;
     }
 
 
