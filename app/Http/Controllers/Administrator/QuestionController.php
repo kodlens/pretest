@@ -3,10 +3,12 @@
 namespace App\Http\Controllers\Administrator;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreQuestionRequest;
 use Illuminate\Http\Request;
 
 use App\Models\Question;
 use App\Models\Section;
+
 
 class QuestionController extends Controller
 {
@@ -38,7 +40,8 @@ class QuestionController extends Controller
         return Section::all();
     }
 
-    public function store(Request $req){
+    public function store(StoreQuestionRequest $req){
+
         Question::create([
             'section_id' => $req->section,
             'question' => $req->question,

@@ -2233,6 +2233,24 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "PanelQuestion.vue",
   data: function data() {
@@ -2259,7 +2277,8 @@ __webpack_require__.r(__webpack_exports__);
       questionImg: null,
       points: 0,
       options: [],
-      letters: ['A', 'B', 'C', 'D', 'E']
+      letters: ['A', 'B', 'C', 'D', 'E'] // activeColors: ['red'],
+
     };
   },
   methods: {
@@ -2318,7 +2337,8 @@ __webpack_require__.r(__webpack_exports__);
         content: '',
         is_ans: 0,
         is_img: inputType === 'text' ? 0 : 1,
-        img: null
+        img: null,
+        checkColor: 'red'
       });
     },
     remove: function remove(index) {
@@ -2331,14 +2351,38 @@ __webpack_require__.r(__webpack_exports__);
         _this2.sections = res.data;
       });
     },
+    toogleClickCheck: function toogleClickCheck(index) {
+      //
+      if (this.options[index].checkColor === 'red') {
+        this.options[index].is_ans = 1;
+        this.options[index].checkColor = 'green';
+      } else {
+        this.options[index].is_ans = 0;
+        this.options[index].checkColor = 'red';
+      }
+    },
+    radioClick: function radioClick() {
+      this.section = '';
+      this.question = '';
+      this.questionImg = null;
+      this.points = 0;
+    },
     submit: function submit() {
+      var _this3 = this;
+
       axios.post('/panel/question', {
         question: this.question,
         question_img: this.questionImg,
         section: this.section,
         points: this.points,
         options: this.options
-      }).then(function (res) {})["catch"](function (error) {});
+      }).then(function (res) {})["catch"](function (error) {
+        if (error.response) {
+          _this3.errors = error.response.data.errors; // console.log(error.response.data);
+          // console.log(error.response.status);
+          // console.log(error.response.headers);
+        }
+      });
     }
   },
   mounted: function mounted() {
@@ -20745,7 +20789,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/*qo mean question options button remove*/\n.qo-btn[data-v-51e93ae4]{\n    border: none;\n    color: green;\n}\n.qo-btn > i[data-v-51e93ae4]:hover{\n    color:red;\n    text-decoration: underline;\n}\n.option-panel[data-v-51e93ae4]{\n    margin-left: 30px;\n}\n\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/*qo mean question options button remove*/\n.qo-btn[data-v-51e93ae4]{\n    margin-left: 5px;\n    border: none;\n}\n.qo-btn > i[data-v-51e93ae4]:hover{\n    color:red;\n    text-decoration: underline;\n}\n.qo-btn-check[data-v-51e93ae4]{\n    border: none;\n    color: red;\n}\n.qo-btn-check-active[data-v-51e93ae4]{\n    border: none;\n    color: green;\n}\n.option-panel[data-v-51e93ae4]{\n    margin-left: 30px;\n}\n\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -22495,7 +22539,7 @@ var render = function() {
                                     on: {
                                       click: function($event) {
                                         return _vm.getData(
-                                          props.row.category_id
+                                          props.row.question_id
                                         )
                                       }
                                     }
@@ -22516,7 +22560,7 @@ var render = function() {
                                     on: {
                                       click: function($event) {
                                         return _vm.confirmDelete(
-                                          props.row.category_id
+                                          props.row.question_id
                                         )
                                       }
                                     }
@@ -22760,6 +22804,7 @@ var render = function() {
                                 "native-value": "TEXT",
                                 type: "is-success is-light is-outlined"
                               },
+                              on: { input: _vm.radioClick },
                               model: {
                                 value: _vm.radioInputOption,
                                 callback: function($$v) {
@@ -22785,6 +22830,7 @@ var render = function() {
                                 "native-value": "IMG",
                                 type: "is-success is-light is-outlined"
                               },
+                              on: { input: _vm.radioClick },
                               model: {
                                 value: _vm.radioInputOption,
                                 callback: function($$v) {
@@ -22805,6 +22851,8 @@ var render = function() {
                         ],
                         1
                       ),
+                      _vm._v(" "),
+                      _c("hr"),
                       _vm._v(" "),
                       _vm._l(this.options, function(option, k) {
                         return _c(
@@ -22922,6 +22970,7 @@ var render = function() {
                                       }
                                     ],
                                     staticClass: "qo-btn ml-1",
+                                    staticStyle: { color: "red" },
                                     on: {
                                       click: function($event) {
                                         return _vm.remove(k)
@@ -22932,6 +22981,38 @@ var render = function() {
                                     _c("i", {
                                       staticClass: "fa fa-trash-o fa-lg"
                                     })
+                                  ]
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "b-button",
+                                  {
+                                    directives: [
+                                      {
+                                        name: "show",
+                                        rawName: "v-show",
+                                        value:
+                                          k || (!k && _vm.options.length > 0),
+                                        expression:
+                                          "k || ( !k && options.length > 0)"
+                                      }
+                                    ],
+                                    staticClass: "qo-btn",
+                                    style: { color: option.checkColor },
+                                    on: {
+                                      click: function($event) {
+                                        return _vm.toogleClickCheck(k)
+                                      }
+                                    }
+                                  },
+                                  [
+                                    option.is_ans === 1
+                                      ? _c("i", {
+                                          staticClass: "fa fa-check fa-lg"
+                                        })
+                                      : _c("i", {
+                                          staticClass: "fa fa-times fa-lg"
+                                        })
                                   ]
                                 )
                               ],
@@ -23018,7 +23099,34 @@ var render = function() {
                           )
                         ],
                         1
-                      )
+                      ),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "mt-3" }, [
+                        _c(
+                          "ul",
+                          _vm._l(this.errors, function(err) {
+                            return _c("li", [
+                              _c(
+                                "span",
+                                {
+                                  staticStyle: {
+                                    color: "red",
+                                    "font-style": "italic"
+                                  }
+                                },
+                                [
+                                  _c("b-icon", {
+                                    attrs: { pack: "fa", icon: "exclamation" }
+                                  }),
+                                  _vm._v(_vm._s(err[0]))
+                                ],
+                                1
+                              )
+                            ])
+                          }),
+                          0
+                        )
+                      ])
                     ],
                     2
                   )

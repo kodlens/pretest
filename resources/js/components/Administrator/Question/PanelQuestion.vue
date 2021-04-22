@@ -48,8 +48,8 @@
 
                         <b-table-column field="ay_id" label="Action" v-slot="props">
                             <div class="is-flex">
-                                <b-button outlined class="button is-small is-warning mr-1" tag="a" icon-right="pencil" icon-pack="fa" @click="getData(props.row.category_id)">EDIT</b-button>
-                                <b-button outlined class="button is-small is-danger mr-1" icon-pack="fa" icon-right="trash" @click="confirmDelete(props.row.category_id)">DELETE</b-button>
+                                <b-button outlined class="button is-small is-warning mr-1" tag="a" icon-right="pencil" icon-pack="fa" @click="getData(props.row.question_id)">EDIT</b-button>
+                                <b-button outlined class="button is-small is-danger mr-1" icon-pack="fa" icon-right="trash" @click="confirmDelete(props.row.question_id)">DELETE</b-button>
                             </div>
                         </b-table-column>
                     </b-table>
@@ -113,6 +113,7 @@
                             <b-field>
                                 <b-radio-button v-model="radioInputOption"
                                                 native-value="TEXT"
+                                                @input="radioClick"
                                                 type="is-success is-light is-outlined">
                                     <b-icon pack="fa" icon="file-text-o"></b-icon>
                                     <span>TEXT</span>
@@ -120,12 +121,15 @@
 
                                 <b-radio-button v-model="radioInputOption"
                                                 native-value="IMG"
+                                                @input="radioClick"
                                                 type="is-success is-light is-outlined">
                                     <b-icon pack="fa" icon="picture-o"></b-icon>
                                     <span>IMG</span>
                                 </b-radio-button>
 
                             </b-field>
+
+                            <hr>
 
                             <div class="option-panel" v-for="(option, k) in this.options" :key="k">
                                 <b-field :label="`Option ` + letters[k]">
@@ -145,10 +149,16 @@
                                         </b-field>
                                     </div>
 
-                                    <b-button class="qo-btn ml-1"
+                                    <b-button class="qo-btn ml-1" style="color: red;"
                                             @click="remove(k)"
                                             v-show="k || ( !k && options.length > 0)">
                                         <i class="fa fa-trash-o fa-lg"></i>
+                                    </b-button>
+                                    <b-button class="qo-btn" :style="{ color: option.checkColor }"
+                                              @click="toogleClickCheck(k)"
+                                              v-show="k || ( !k && options.length > 0)">
+                                        <i v-if="option.is_ans === 1" class="fa fa-check fa-lg"></i>
+                                        <i v-else class="fa fa-times fa-lg"></i>
                                     </b-button>
                                 </b-field>
 
@@ -167,6 +177,14 @@
                                     <b-dropdown-item @click="add('text')" aria-role="listitem"><i class="fa fa-plus"></i>&nbsp;Text</b-dropdown-item>
                                     <b-dropdown-item @click="add('img')" aria-role="listitem"><i class="fa fa-picture-o"></i>&nbsp;Image</b-dropdown-item>
                                 </b-dropdown>
+                            </div>
+
+                            <div class="mt-3">
+                                <ul>
+                                    <li v-for="err in this.errors">
+                                        <span style="color: red; font-style: italic;"><b-icon pack="fa" icon="exclamation" />{{err[0]}}</span>
+                                    </li>
+                                </ul>
                             </div>
 
                         </div><!-- question panel -->
@@ -223,6 +241,8 @@ export default {
 
             options: [],
             letters: ['A', 'B', 'C', 'D', 'E'],
+
+           // activeColors: ['red'],
         }
     },
     methods: {
@@ -290,6 +310,7 @@ export default {
                 is_ans: 0,
                 is_img: inputType === 'text' ? 0 : 1,
                 img:null,
+                checkColor: 'red',
             });
         },
 
@@ -303,6 +324,26 @@ export default {
             })
         },
 
+        toogleClickCheck(index){
+            //
+            if(this.options[index].checkColor === 'red'){
+                this.options[index].is_ans = 1;
+                this.options[index].checkColor = 'green';
+            }else{
+                this.options[index].is_ans = 0;
+                this.options[index].checkColor = 'red';
+            }
+
+        },
+
+        radioClick(){
+            this.section = '';
+            this.question = '';
+            this.questionImg = null;
+            this.points = 0;
+
+        },
+
         submit(){
             axios.post('/panel/question',{
                 question: this.question,
@@ -313,6 +354,12 @@ export default {
             }).then(res=>{
 
             }).catch(error=>{
+                if (error.response) {
+                    this.errors = error.response.data.errors;
+                    // console.log(error.response.data);
+                    // console.log(error.response.status);
+                    // console.log(error.response.headers);
+                }
 
             })
         }
@@ -331,14 +378,25 @@ export default {
 
 /*qo mean question options button remove*/
 .qo-btn{
+    margin-left: 5px;
     border: none;
-    color: green;
 }
 
 .qo-btn > i:hover{
     color:red;
     text-decoration: underline;
 }
+
+.qo-btn-check{
+    border: none;
+    color: red;
+}
+
+.qo-btn-check-active{
+    border: none;
+    color: green;
+}
+
 
 .option-panel{
     margin-left: 30px;
