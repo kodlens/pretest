@@ -22660,7 +22660,10 @@ var render = function() {
                                   _vm._l(this.sections, function(item, i) {
                                     return _c(
                                       "option",
-                                      { domProps: { value: item.section_id } },
+                                      {
+                                        key: i,
+                                        domProps: { value: item.section_id }
+                                      },
                                       [_vm._v(_vm._s(item.section))]
                                     )
                                   }),
@@ -23104,8 +23107,8 @@ var render = function() {
                       _c("div", { staticClass: "mt-3" }, [
                         _c(
                           "ul",
-                          _vm._l(this.errors, function(err) {
-                            return _c("li", [
+                          _vm._l(this.errors, function(err, i) {
+                            return _c("li", { key: i }, [
                               _c(
                                 "span",
                                 {

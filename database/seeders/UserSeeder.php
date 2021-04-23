@@ -5,6 +5,8 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
 
+use App\Models\User;
+
 class UserSeeder extends Seeder
 {
     /**
@@ -15,18 +17,15 @@ class UserSeeder extends Seeder
     public function run()
     {
         //
-        DB::table('users')->insert([
+        User::create([
             'username' => 'admin',
-            'lname' => 'ADMIN',
-            'fname' => 'ADMIN',
-            'mname' => 'ADMIN',
-            'sex' => 'FEMALE',
-            'email' => 'admin@system.org',
+            'lname' => 'AMPARADO',
+            'fname' => 'ETIENNE',
+            'mname' => 'N',
+            'sex' => 'MALE',
+            'email' => 'admin@pretest.org',
             'password' => Hash::make('a'),
             'role' => 'ADMINISTRATOR',
         ]);
-
-        
-
     }
 }

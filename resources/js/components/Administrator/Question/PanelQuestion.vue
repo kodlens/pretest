@@ -181,7 +181,7 @@
 
                             <div class="mt-3">
                                 <ul>
-                                    <li v-for="err in this.errors">
+                                    <li v-for="(err,i) in this.errors" :key="i">
                                         <span style="color: red; font-style: italic;"><b-icon pack="fa" icon="exclamation" />{{err[0]}}</span>
                                     </li>
                                 </ul>

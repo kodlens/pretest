@@ -6,10 +6,7 @@ use Illuminate\Support\Facades\Schema;
 
 class CreateSectionsTable extends Migration
 {
-
     protected $connection = 'mysql';
-
-
     /**
      * Run the migrations.
      *
@@ -19,19 +16,11 @@ class CreateSectionsTable extends Migration
     {
         Schema::create('sections', function (Blueprint $table) {
             $table->id('section_id');
-            $table->string('section', 255)->null();
+            $table->string('section', 255)->unique();
             $table->timestamps();
         });
 
-        $sections = [
-            ['section' => 'ABSTRACT'],
-            ['section' => 'NUMERICAL'],
-            ['section' => 'LINGUISTICS'],
-            ['section' => 'VOCABULARY'],
-            ['section' => 'GENERAL KNOWLEDGE']
-        ];
-
-        \App\Models\Section::insert($sections);
+        
     }
 
     /**
