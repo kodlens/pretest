@@ -80,7 +80,7 @@
                                 <div class="column">
                                     <b-field label="Section" expanded>
                                         <b-select v-model="section" expanded>
-                                            <option v-for="(item, i) in this.sections" :value="item.section_id">{{ item.section }}</option>
+                                            <option v-for="(item, i) in this.sections" :value="item.section_id" :key="i">{{ item.section }}</option>
                                         </b-select>
                                     </b-field>
                                 </div>

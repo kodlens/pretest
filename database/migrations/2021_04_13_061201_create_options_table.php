@@ -17,6 +17,8 @@ class CreateOptionsTable extends Migration
             $table->id('option_id');
             $table->unsignedBigInteger('question_id');
             $table->foreign('question_id')->references('question_id')->on('questions');
+            //crate relationship
+            
             $table->string('letter', 10)->null();
             $table->text('content')->null();
             $table->boolean('is_img')->default(0);
