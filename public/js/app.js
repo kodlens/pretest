@@ -2251,6 +2251,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "PanelQuestion.vue",
   data: function data() {
@@ -2272,10 +2279,11 @@ __webpack_require__.r(__webpack_exports__);
       },
       radioInputOption: '',
       sections: null,
+      order_no: 0,
       section: '',
       question: '',
       questionImg: null,
-      points: 0,
+      score: 0,
       options: [],
       letters: ['A', 'B', 'C', 'D', 'E'] // activeColors: ['red'],
 
@@ -2332,8 +2340,9 @@ __webpack_require__.r(__webpack_exports__);
     },
     add: function add(inputType) {
       //shorthand
+      //console.log(this.letters[this.options.length]);
       this.options.push({
-        optionLetter: '',
+        optionLetter: this.letters[this.options.length],
         content: '',
         is_ans: 0,
         is_img: inputType === 'text' ? 0 : 1,
@@ -2342,13 +2351,19 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     remove: function remove(index) {
-      this.options.splice(index, 1);
-    },
-    getSections: function getSections() {
       var _this2 = this;
 
+      this.options.splice(index, 1); //this loop will re assign option letter to maintain in order
+
+      this.options.forEach(function (element, index) {
+        element.optionLetter = _this2.letters[index];
+      });
+    },
+    getSections: function getSections() {
+      var _this3 = this;
+
       axios.get('/ajax/question/sections').then(function (res) {
-        _this2.sections = res.data;
+        _this3.sections = res.data;
       });
     },
     toogleClickCheck: function toogleClickCheck(index) {
@@ -2362,27 +2377,33 @@ __webpack_require__.r(__webpack_exports__);
       }
     },
     radioClick: function radioClick() {
-      this.section = '';
+      //this.section = '';
       this.question = '';
-      this.questionImg = null;
-      this.points = 0;
+      this.questionImg = null; //this.score = 0;
     },
     submit: function submit() {
-      var _this3 = this;
+      var _this4 = this;
 
       axios.post('/panel/question', {
+        order_no: this.order_no,
         question: this.question,
         question_img: this.questionImg,
         section: this.section,
-        points: this.points,
+        score: this.score,
         options: this.options
       }).then(function (res) {})["catch"](function (error) {
         if (error.response) {
-          _this3.errors = error.response.data.errors; // console.log(error.response.data);
+          _this4.errors = error.response.data.errors; // console.log(error.response.data);
           // console.log(error.response.status);
           // console.log(error.response.headers);
         }
       });
+    },
+    assignLetter: function assignLetter(index) {
+      alert('new row added');
+      options.forEach(function (element) {
+        console.log('element' + element);
+      }); //this.options.optionLetter[k] = this.letters[k];
     }
   },
   mounted: function mounted() {
@@ -20789,7 +20810,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/*qo mean question options button remove*/\n.qo-btn[data-v-51e93ae4]{\n    margin-left: 5px;\n    border: none;\n}\n.qo-btn > i[data-v-51e93ae4]:hover{\n    color:red;\n    text-decoration: underline;\n}\n.qo-btn-check[data-v-51e93ae4]{\n    border: none;\n    color: red;\n}\n.qo-btn-check-active[data-v-51e93ae4]{\n    border: none;\n    color: green;\n}\n.option-panel[data-v-51e93ae4]{\n    margin-left: 30px;\n}\n\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/*qo mean question options button remove*/\n.qo-btn[data-v-51e93ae4]{\n    margin-left: 5px;\n    border: none;\n}\n.qo-btn > i[data-v-51e93ae4]:hover{\n    color:red;\n    text-decoration: underline;\n}\n.qo-btn-check[data-v-51e93ae4]{\n    border: none;\n    color: red;\n}\n.qo-btn-check-active[data-v-51e93ae4]{\n    border: none;\n    color: green;\n}\n.option-panel[data-v-51e93ae4]{\n    margin-left: 30px;\n}\n\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -22497,7 +22518,7 @@ var render = function() {
                   }),
                   _vm._v(" "),
                   _c("b-table-column", {
-                    attrs: { field: "points", label: "Points" },
+                    attrs: { field: "score", label: "Score" },
                     scopedSlots: _vm._u([
                       {
                         key: "default",
@@ -22505,7 +22526,7 @@ var render = function() {
                           return [
                             _vm._v(
                               "\n                        " +
-                                _vm._s(props.row.points) +
+                                _vm._s(props.row.score) +
                                 "\n                    "
                             )
                           ]
@@ -22643,6 +22664,36 @@ var render = function() {
                           [
                             _c(
                               "b-field",
+                              { attrs: { label: "Order No.", expanded: "" } },
+                              [
+                                _c("b-numberinput", {
+                                  attrs: {
+                                    "controls-position": "compact",
+                                    expanded: "",
+                                    min: "0",
+                                    max: "9999"
+                                  },
+                                  model: {
+                                    value: _vm.order_no,
+                                    callback: function($$v) {
+                                      _vm.order_no = $$v
+                                    },
+                                    expression: "order_no"
+                                  }
+                                })
+                              ],
+                              1
+                            )
+                          ],
+                          1
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "div",
+                          { staticClass: "column" },
+                          [
+                            _c(
+                              "b-field",
                               { attrs: { label: "Section", expanded: "" } },
                               [
                                 _c(
@@ -22682,7 +22733,7 @@ var render = function() {
                           [
                             _c(
                               "b-field",
-                              { attrs: { label: "Points", expanded: "" } },
+                              { attrs: { label: "Score", expanded: "" } },
                               [
                                 _c("b-numberinput", {
                                   attrs: {
@@ -22692,11 +22743,11 @@ var render = function() {
                                     max: "100"
                                   },
                                   model: {
-                                    value: _vm.points,
+                                    value: _vm.score,
                                     callback: function($$v) {
-                                      _vm.points = $$v
+                                      _vm.score = $$v
                                     },
-                                    expression: "points"
+                                    expression: "score"
                                   }
                                 })
                               ],

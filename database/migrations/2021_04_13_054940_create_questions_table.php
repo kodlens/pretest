@@ -21,7 +21,7 @@ class CreateQuestionsTable extends Migration
             
             $table->string('question');
             $table->string('question_img_path')->nullable();
-            $table->integer('points');
+            $table->integer('score');
             $table->timestamps();
         });
 

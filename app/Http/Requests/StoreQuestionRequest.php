@@ -25,10 +25,11 @@ class StoreQuestionRequest extends FormRequest
     {
         return [
             //
+            'order_no' => ['required', 'numeric'],
             'section' => ['required', 'numeric'],
-            'question' => ['required_without:question_img', 'string'],
-            'question_img' => ['required_without:question', 'string'],
-            'points' => ['required', 'numeric', 'min: 1']
+            'question' => ['required_without:question_img'],
+            'question_img' => ['required_without:question'],
+            'score' => ['required', 'numeric', 'min: 1']
         ];
     }
 }

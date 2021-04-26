@@ -42,8 +42,8 @@
                             {{ props.row.question }}
                         </b-table-column>
 
-                        <b-table-column field="points" label="Points" v-slot="props">
-                            {{ props.row.points }}
+                        <b-table-column field="score" label="Score" v-slot="props">
+                            {{ props.row.score }}
                         </b-table-column>
 
                         <b-table-column field="ay_id" label="Action" v-slot="props">
@@ -78,6 +78,12 @@
 
                             <div class="columns">
                                 <div class="column">
+                                    <b-field label="Order No." expanded>
+                                        <b-numberinput v-model="order_no" controls-position="compact" expanded min="0" max="9999"></b-numberinput>
+                                    </b-field>
+                                </div>
+
+                                <div class="column">
                                     <b-field label="Section" expanded>
                                         <b-select v-model="section" expanded>
                                             <option v-for="(item, i) in this.sections" :value="item.section_id" :key="i">{{ item.section }}</option>
@@ -86,8 +92,8 @@
                                 </div>
 
                                 <div class="column">
-                                    <b-field label="Points" expanded>
-                                        <b-numberinput v-model="points" controls-position="compact" expanded min="0" max="100"></b-numberinput>
+                                    <b-field label="Score" expanded>
+                                        <b-numberinput v-model="score" controls-position="compact" expanded min="0" max="100"></b-numberinput>
                                     </b-field>
                                 </div>
                             </div><!-- class columns-->
@@ -134,7 +140,8 @@
                             <div class="option-panel" v-for="(option, k) in this.options" :key="k">
                                 <b-field :label="`Option ` + letters[k]">
                                     <b-input v-if="option.is_img === 0" type="text" v-model="option.content" placeholder="Option here..."/>
-
+                                    
+                                 
                                     <div v-if="option.is_img === 1">
                                         <b-field grouped class="file is-primary" :class="{'has-name': !!option.img}">
                                             <b-upload v-model="option.img" class="file-label">
@@ -233,11 +240,11 @@ export default {
             radioInputOption: '',
             sections: null,
 
-
+            order_no: 0,
             section: '',
             question: '',
             questionImg: null,
-            points: 0,
+            score: 0,
 
             options: [],
             letters: ['A', 'B', 'C', 'D', 'E'],
@@ -245,6 +252,7 @@ export default {
            // activeColors: ['red'],
         }
     },
+
     methods: {
 
         loadAsyncData() {
@@ -304,8 +312,9 @@ export default {
 
         add(inputType){
             //shorthand
+            //console.log(this.letters[this.options.length]);
             this.options.push({
-                optionLetter: '',
+                optionLetter: this.letters[this.options.length],
                 content: '',
                 is_ans: 0,
                 is_img: inputType === 'text' ? 0 : 1,
@@ -316,6 +325,12 @@ export default {
 
         remove(index){
             this.options.splice(index, 1);
+
+            //this loop will re assign option letter to maintain in order
+            this.options.forEach((element, index) => {
+                element.optionLetter = this.letters[index];
+            });
+
         },
 
         getSections(){
@@ -337,19 +352,20 @@ export default {
         },
 
         radioClick(){
-            this.section = '';
+            //this.section = '';
             this.question = '';
             this.questionImg = null;
-            this.points = 0;
+            //this.score = 0;
 
         },
 
         submit(){
             axios.post('/panel/question',{
+                order_no: this.order_no,
                 question: this.question,
                 question_img: this.questionImg,
                 section: this.section,
-                points: this.points,
+                score: this.score,
                 options: this.options,
             }).then(res=>{
 
@@ -362,6 +378,15 @@ export default {
                 }
 
             })
+        },
+
+        
+        assignLetter(index){
+            alert('new row added');
+            options.forEach(element => {
+                console.log('element'+ element);
+            });
+            //this.options.optionLetter[k] = this.letters[k];
         }
 
 

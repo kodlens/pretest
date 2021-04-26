@@ -42,12 +42,15 @@ class QuestionController extends Controller
 
     public function store(StoreQuestionRequest $req){
 
-        Question::create([
+        $question = Question::create([
+            'order_no' => $req->order_no,
             'section_id' => $req->section,
             'question' => $req->question,
-            'points' => $req->points
+            'score' => $req->score
         ]);
 
+        $q_id = $question->question_id;
+        
         return $req->options;
     }
 
