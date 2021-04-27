@@ -15,11 +15,12 @@ class CreateQuestionsTable extends Migration
     {
         Schema::create('questions', function (Blueprint $table) {
             $table->id('question_id');
+            $table->integer('order_no')->nullable();
             $table->unsignedBigInteger('section_id');
             $table->foreign('section_id')->references('section_id')->on('sections');
             //create relationship
             
-            $table->string('question');
+            $table->text('question');
             $table->string('question_img_path')->nullable();
             $table->integer('score');
             $table->timestamps();

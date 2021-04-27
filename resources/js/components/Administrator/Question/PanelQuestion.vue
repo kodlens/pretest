@@ -1,22 +1,41 @@
 <template>
     <div>
         <div class="section">
-            <div style="font-size: 20px; text-align: center; font-weight: bold;">LIST OF QUESTIONS</div>
+            <div style="font-size: 20px; text-align: center; font-weight: bold; margin-bottom: 20px;">LIST OF QUESTIONS</div>
             <div class="columns">
-                <div class="column is-6 is-offset-3">
-                    <b-field label="Page">
-                        <b-select v-model="perPage" @input="setPerPage">
-                            <option value="5">5 per page</option>
-                            <option value="10">10 per page</option>
-                            <option value="15">15 per page</option>
-                            <option value="20">20 per page</option>
-                        </b-select>
-                    </b-field>
+                <div class="column is-10 is-offset-1">
 
-                    <div class="buttons mt-3">
-                        <!-- <b-button tag="a" href="/cpanel-academicyear/create" class="is-primary">Create Account</b-button> -->
-                        <b-button @click="openModal" class="is-primary">Create Question</b-button>
+                    <div class="level">
+                        <div class="level-left">
+
+                            <div class="level-item">
+                                <b-select v-model="perPage" @input="setPerPage">
+                                    <option value="5">5 per page</option>
+                                    <option value="10">10 per page</option>
+                                    <option value="15">15 per page</option>
+                                    <option value="20">20 per page</option>
+                                </b-select>
+                            </div>
+
+                            <div class="level-item">
+                                <div class="buttons">
+                                    <!-- <b-button tag="a" href="/cpanel-academicyear/create" class="is-primary">Create Account</b-button> -->
+                                    <b-button @click="openModal" class="is-primary">Create Question</b-button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="level-right">
+                            <div class="level-item">
+                                <b-field>
+                                    <b-input type="text" placeholder="Search Section..." 
+                                    v-model="search.section" @keyup.native.enter="loadAsyncData"/>
+                                </b-field>
+                            </div>
+                        </div>
                     </div>
+
+                    
 
                     <b-table
                         :data="data"
@@ -26,9 +45,12 @@
                         :total="total"
                         :per-page="perPage"
                         @page-change="onPageChange"
+                        detailed
+                        detail-transition = ""
                         aria-next-label="Next page"
                         aria-previous-label="Previous page"
                         aria-page-label="Page"
+                        :show-detail-icon=true
                         aria-current-label="Current page"
                         backend-sorting
                         :default-sort-direction="defaultSortDirection"
@@ -39,19 +61,55 @@
                         </b-table-column>
 
                         <b-table-column field="question" label="Question" v-slot="props">
-                            {{ props.row.question }}
+                            <template>
+                                {{ props.row.question }}
+                            </template>
+                        </b-table-column>
+
+                        <b-table-column field="section" label="Section" v-slot="props">
+                            {{ props.row.section.section }}
                         </b-table-column>
 
                         <b-table-column field="score" label="Score" v-slot="props">
                             {{ props.row.score }}
                         </b-table-column>
 
-                        <b-table-column field="ay_id" label="Action" v-slot="props">
+                        <b-table-column field="" label="Action" v-slot="props">
                             <div class="is-flex">
                                 <b-button outlined class="button is-small is-warning mr-1" tag="a" icon-right="pencil" icon-pack="fa" @click="getData(props.row.question_id)">EDIT</b-button>
                                 <b-button outlined class="button is-small is-danger mr-1" icon-pack="fa" icon-right="trash" @click="confirmDelete(props.row.question_id)">DELETE</b-button>
                             </div>
                         </b-table-column>
+
+                        <template slot="detail" slot-scope="props">
+                            <div class="title is-5">OPTIONS</div>
+                            <table>
+                                <thead>
+                                    <th>Letter</th>
+                                    <th>Content</th>
+                                    <th>Answer</th>
+                                </thead>
+                                <tbody>
+                                    <tr v-for="item in props.row.options" :key="item.option_id">
+                                        <td>{{ item.letter }}</td>
+                                        <td>{{ item.content }}</td>
+                                        <td>
+                                            <b-icon v-if="item.is_answer === 1"
+                                                    pack="fa"
+                                                    icon="check"
+                                                    size="is-small" type="is-success">
+                                            </b-icon>
+                                            <b-icon v-else
+                                                    pack="fa"
+                                                    icon="times"
+                                                    size="is-small" type="is-danger">
+                                            </b-icon>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                        </template>
                     </b-table>
                 </div><!--close column-->
             </div>
@@ -118,9 +176,9 @@
 
                             <b-field>
                                 <b-radio-button v-model="radioInputOption"
-                                                native-value="TEXT"
-                                                @input="radioClick"
-                                                type="is-success is-light is-outlined">
+                                        native-value="TEXT"
+                                        @input="radioClick"
+                                        type="is-success is-light is-outlined">
                                     <b-icon pack="fa" icon="file-text-o"></b-icon>
                                     <span>TEXT</span>
                                 </b-radio-button>
@@ -132,25 +190,25 @@
                                     <b-icon pack="fa" icon="picture-o"></b-icon>
                                     <span>IMG</span>
                                 </b-radio-button>
-
                             </b-field>
 
                             <hr>
 
+                            <!--LOOP -->
                             <div class="option-panel" v-for="(option, k) in this.options" :key="k">
                                 <b-field :label="`Option ` + letters[k]">
                                     <b-input v-if="option.is_img === 0" type="text" v-model="option.content" placeholder="Option here..."/>
-                                    
-                                 
+
+
                                     <div v-if="option.is_img === 1">
-                                        <b-field grouped class="file is-primary" :class="{'has-name': !!option.img}">
-                                            <b-upload v-model="option.img" class="file-label">
+                                        <b-field grouped class="file is-primary" :class="{'has-name': !!option.img_path}">
+                                            <b-upload v-model="option.img_path" class="file-label">
                                                 <span class="file-cta">
                                                     <b-icon class="file-icon" icon="upload"></b-icon>
                                                     <span class="file-label">Click to upload</span>
                                                 </span>
-                                                <span class="file-name" v-if="option.img">
-                                                    {{ option.img.name }}
+                                                <span class="file-name" v-if="option.img_path">
+                                                    {{ option.img_path.name }}
                                                 </span>
                                             </b-upload>
                                         </b-field>
@@ -161,11 +219,11 @@
                                             v-show="k || ( !k && options.length > 0)">
                                         <i class="fa fa-trash-o fa-lg"></i>
                                     </b-button>
-                                    <b-button class="qo-btn" :style="{ color: option.checkColor }"
+                                    <b-button class="qo-btn"
                                               @click="toogleClickCheck(k)"
                                               v-show="k || ( !k && options.length > 0)">
-                                        <i v-if="option.is_ans === 1" class="fa fa-check fa-lg"></i>
-                                        <i v-else class="fa fa-times fa-lg"></i>
+                                        <i v-if="option.is_answer === 1" class="fa fa-check fa-lg" style="color: green;"></i>
+                                        <i v-else class="fa fa-times fa-lg" style="color:red;"></i>
                                     </b-button>
                                 </b-field>
 
@@ -209,6 +267,7 @@
             </form><!--close form-->
         </b-modal>
 
+
     </div>
 </template>
 
@@ -220,13 +279,18 @@ export default {
             data: [],
             total: 0,
             loading: false,
-            sortField: 'section_id',
+            sortField: 'question_id',
             sortOrder: 'desc',
             page: 1,
-            perPage: 5,
+            perPage: 20,
             defaultSortDirection: 'asc',
 
+            //modal
             isModalCreate: false,
+            modalEditOption: false,
+
+            //for update or data insert
+            globalId: 0,
 
 
             errors : {},
@@ -249,6 +313,15 @@ export default {
             options: [],
             letters: ['A', 'B', 'C', 'D', 'E'],
 
+            search: {
+                section: '',
+            },
+
+
+
+            //optionsssss
+
+
            // activeColors: ['red'],
         }
     },
@@ -259,6 +332,7 @@ export default {
             const params = [
                 `sort_by=${this.sortField}.${this.sortOrder}`,
                 `perpage=${this.perPage}`,
+                `section=${this.search.section}`,
                 `page=${this.page}`
             ].join('&')
 
@@ -308,6 +382,17 @@ export default {
             this.isModalCreate=true;
             this.fields = {};
             this.errors = {};
+
+
+            this.order_no = 0;
+            this.section = '';
+            this.question = '';
+            this.questionImg = null;
+            this.score = 0;
+            this.options = [];
+
+            this.globalId = 0;
+
         },
 
         add(inputType){
@@ -316,9 +401,9 @@ export default {
             this.options.push({
                 optionLetter: this.letters[this.options.length],
                 content: '',
-                is_ans: 0,
+                is_answer: 0,
                 is_img: inputType === 'text' ? 0 : 1,
-                img:null,
+                img_path:null,
                 checkColor: 'red',
             });
         },
@@ -330,7 +415,6 @@ export default {
             this.options.forEach((element, index) => {
                 element.optionLetter = this.letters[index];
             });
-
         },
 
         getSections(){
@@ -341,14 +425,13 @@ export default {
 
         toogleClickCheck(index){
             //
-            if(this.options[index].checkColor === 'red'){
-                this.options[index].is_ans = 1;
-                this.options[index].checkColor = 'green';
+    
+            if(this.options[index].is_answer == 1){
+                this.options[index].is_answer = 0;
             }else{
-                this.options[index].is_ans = 0;
-                this.options[index].checkColor = 'red';
+                //this.options[index].is_answer = 0;
+                this.options[index].is_answer = 1;
             }
-
         },
 
         radioClick(){
@@ -360,6 +443,17 @@ export default {
         },
 
         submit(){
+            if(this.globalId > 0){
+                //update
+                this.updateData();
+            }else{
+                //insert
+                this.insertData();
+            }
+        },
+
+        insertData(){
+
             axios.post('/panel/question',{
                 order_no: this.order_no,
                 question: this.question,
@@ -368,7 +462,21 @@ export default {
                 score: this.score,
                 options: this.options,
             }).then(res=>{
+                console.log(res.data[0].status);
+                if(res.data[0].status === 'saved'){
+                    alert('Question saved.');
+                    //close the modal
+                    this.isModalCreate = false;
 
+                    //re initialize variables...
+                    this.order_no = 0;
+                    this.section = '';
+                    this.question = '';
+                    this.questionImg = null;
+                    this.score = 0;
+                    this.options = [];
+                    this.loadAsyncData();
+                }
             }).catch(error=>{
                 if (error.response) {
                     this.errors = error.response.data.errors;
@@ -380,19 +488,93 @@ export default {
             })
         },
 
-        
+        updateData(){
+            axios.put('/panel/question/'+this.globalId,{
+                order_no: this.order_no,
+                question: this.question,
+                question_img: this.questionImg,
+                section: this.section,
+                score: this.score,
+                options: this.options,
+            }).then(res=>{
+                console.log(res.data[0].status);
+                if(res.data[0].status === 'updated'){
+                    this.globalId = 0;
+                    alert('Question updated.');
+                    //close the modal
+                    this.isModalCreate = false;
+
+                    //re initialize variables...
+                    this.order_no = 0,
+                        this.section = '';
+                    this.question = '';
+                    this.questionImg = null;
+                    this.score = 0;
+                    this.options = [];
+                    this.loadAsyncData();
+                }
+            }).catch(error=>{
+                if (error.response) {
+                    this.errors = error.response.data.errors;
+                    // console.log(error.response.data);
+                    // console.log(error.response.status);
+                    // console.log(error.response.headers);
+                }
+            })
+        },
+
         assignLetter(index){
             alert('new row added');
             options.forEach(element => {
                 console.log('element'+ element);
             });
             //this.options.optionLetter[k] = this.letters[k];
-        }
+        },
 
+        confirmDelete(dataId){
+            this.$buefy.dialog.confirm({
+                title: 'DELETE',
+                type: 'is-danger',
+                message: 'Are you sure you want to delete this question permanently? It will also delete the options added in this question.',
+                cancelText: 'Cancel',
+                confirmText: 'Delete',
+                onConfirm: ()=> this.deleteSubmit(dataId)
+            });
+        },
+        deleteSubmit(dataId){
+            axios.delete('/panel/question/'+dataId).then(res=>{
+                this.loadAsyncData();
+            });
+        },
+
+
+        getData(dataId){
+            this.isModalCreate = true;
+            this.errors = {};
+
+
+            axios.get('/panel/question/'+ dataId).then(res=>{
+                //if axios response, it will set the global Id
+                this.globalId = dataId;
+
+                this.order_no = res.data.order_no;
+                this.section = res.data.section_id;
+
+                this.question = res.data.question;
+                this.questionImg = res.data.question_img_path;
+                res.data.question != '' || res.data.question != null ? this.radioInputOption = 'TEXT' : this.radioInputOption = 'IMG';
+
+                this.questionImg = res.data.questionImg;
+                this.score = res.data.score;
+
+                this.options = res.data.options;
+            });
+        },
 
     },
 
     mounted() {
+        this.loadAsyncData();
         this.getSections();
     }
 
@@ -421,7 +603,12 @@ export default {
     border: none;
     color: green;
 }
-
+.red-x{
+    color: red;
+}
+.green-check{
+    color: green;
+}
 
 .option-panel{
     margin-left: 30px;

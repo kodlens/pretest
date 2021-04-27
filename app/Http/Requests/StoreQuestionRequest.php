@@ -25,7 +25,7 @@ class StoreQuestionRequest extends FormRequest
     {
         return [
             //
-            'order_no' => ['required', 'numeric'],
+            //'order_no' => ['required', 'numeric', 'unique:questions'],
             'section' => ['required', 'numeric'],
             'question' => ['required_without:question_img'],
             'question_img' => ['required_without:question'],

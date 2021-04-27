@@ -2258,6 +2258,65 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "PanelQuestion.vue",
   data: function data() {
@@ -2265,12 +2324,16 @@ __webpack_require__.r(__webpack_exports__);
       data: [],
       total: 0,
       loading: false,
-      sortField: 'section_id',
+      sortField: 'question_id',
       sortOrder: 'desc',
       page: 1,
-      perPage: 5,
+      perPage: 20,
       defaultSortDirection: 'asc',
+      //modal
       isModalCreate: false,
+      modalEditOption: false,
+      //for update or data insert
+      globalId: 0,
       errors: {},
       btnClass: {
         'is-success': true,
@@ -2285,7 +2348,11 @@ __webpack_require__.r(__webpack_exports__);
       questionImg: null,
       score: 0,
       options: [],
-      letters: ['A', 'B', 'C', 'D', 'E'] // activeColors: ['red'],
+      letters: ['A', 'B', 'C', 'D', 'E'],
+      search: {
+        section: ''
+      } //optionsssss
+      // activeColors: ['red'],
 
     };
   },
@@ -2293,7 +2360,7 @@ __webpack_require__.r(__webpack_exports__);
     loadAsyncData: function loadAsyncData() {
       var _this = this;
 
-      var params = ["sort_by=".concat(this.sortField, ".").concat(this.sortOrder), "perpage=".concat(this.perPage), "page=".concat(this.page)].join('&');
+      var params = ["sort_by=".concat(this.sortField, ".").concat(this.sortOrder), "perpage=".concat(this.perPage), "section=".concat(this.search.section), "page=".concat(this.page)].join('&');
       this.loading = true;
       axios.get("/ajax/question?".concat(params)).then(function (_ref) {
         var data = _ref.data;
@@ -2337,6 +2404,13 @@ __webpack_require__.r(__webpack_exports__);
       this.isModalCreate = true;
       this.fields = {};
       this.errors = {};
+      this.order_no = 0;
+      this.section = '';
+      this.question = '';
+      this.questionImg = null;
+      this.score = 0;
+      this.options = [];
+      this.globalId = 0;
     },
     add: function add(inputType) {
       //shorthand
@@ -2344,9 +2418,9 @@ __webpack_require__.r(__webpack_exports__);
       this.options.push({
         optionLetter: this.letters[this.options.length],
         content: '',
-        is_ans: 0,
+        is_answer: 0,
         is_img: inputType === 'text' ? 0 : 1,
-        img: null,
+        img_path: null,
         checkColor: 'red'
       });
     },
@@ -2368,12 +2442,11 @@ __webpack_require__.r(__webpack_exports__);
     },
     toogleClickCheck: function toogleClickCheck(index) {
       //
-      if (this.options[index].checkColor === 'red') {
-        this.options[index].is_ans = 1;
-        this.options[index].checkColor = 'green';
+      if (this.options[index].is_answer == 1) {
+        this.options[index].is_answer = 0;
       } else {
-        this.options[index].is_ans = 0;
-        this.options[index].checkColor = 'red';
+        //this.options[index].is_answer = 0;
+        this.options[index].is_answer = 1;
       }
     },
     radioClick: function radioClick() {
@@ -2382,6 +2455,15 @@ __webpack_require__.r(__webpack_exports__);
       this.questionImg = null; //this.score = 0;
     },
     submit: function submit() {
+      if (this.globalId > 0) {
+        //update
+        this.updateData();
+      } else {
+        //insert
+        this.insertData();
+      }
+    },
+    insertData: function insertData() {
       var _this4 = this;
 
       axios.post('/panel/question', {
@@ -2391,9 +2473,61 @@ __webpack_require__.r(__webpack_exports__);
         section: this.section,
         score: this.score,
         options: this.options
-      }).then(function (res) {})["catch"](function (error) {
+      }).then(function (res) {
+        console.log(res.data[0].status);
+
+        if (res.data[0].status === 'saved') {
+          alert('Question saved.'); //close the modal
+
+          _this4.isModalCreate = false; //re initialize variables...
+
+          _this4.order_no = 0;
+          _this4.section = '';
+          _this4.question = '';
+          _this4.questionImg = null;
+          _this4.score = 0;
+          _this4.options = [];
+
+          _this4.loadAsyncData();
+        }
+      })["catch"](function (error) {
         if (error.response) {
           _this4.errors = error.response.data.errors; // console.log(error.response.data);
+          // console.log(error.response.status);
+          // console.log(error.response.headers);
+        }
+      });
+    },
+    updateData: function updateData() {
+      var _this5 = this;
+
+      axios.put('/panel/question/' + this.globalId, {
+        order_no: this.order_no,
+        question: this.question,
+        question_img: this.questionImg,
+        section: this.section,
+        score: this.score,
+        options: this.options
+      }).then(function (res) {
+        console.log(res.data[0].status);
+
+        if (res.data[0].status === 'updated') {
+          _this5.globalId = 0;
+          alert('Question updated.'); //close the modal
+
+          _this5.isModalCreate = false; //re initialize variables...
+
+          _this5.order_no = 0, _this5.section = '';
+          _this5.question = '';
+          _this5.questionImg = null;
+          _this5.score = 0;
+          _this5.options = [];
+
+          _this5.loadAsyncData();
+        }
+      })["catch"](function (error) {
+        if (error.response) {
+          _this5.errors = error.response.data.errors; // console.log(error.response.data);
           // console.log(error.response.status);
           // console.log(error.response.headers);
         }
@@ -2404,9 +2538,49 @@ __webpack_require__.r(__webpack_exports__);
       options.forEach(function (element) {
         console.log('element' + element);
       }); //this.options.optionLetter[k] = this.letters[k];
+    },
+    confirmDelete: function confirmDelete(dataId) {
+      var _this6 = this;
+
+      this.$buefy.dialog.confirm({
+        title: 'DELETE',
+        type: 'is-danger',
+        message: 'Are you sure you want to delete this question permanently? It will also delete the options added in this question.',
+        cancelText: 'Cancel',
+        confirmText: 'Delete',
+        onConfirm: function onConfirm() {
+          return _this6.deleteSubmit(dataId);
+        }
+      });
+    },
+    deleteSubmit: function deleteSubmit(dataId) {
+      var _this7 = this;
+
+      axios["delete"]('/panel/question/' + dataId).then(function (res) {
+        _this7.loadAsyncData();
+      });
+    },
+    getData: function getData(dataId) {
+      var _this8 = this;
+
+      this.isModalCreate = true;
+      this.errors = {};
+      axios.get('/panel/question/' + dataId).then(function (res) {
+        //if axios response, it will set the global Id
+        _this8.globalId = dataId;
+        _this8.order_no = res.data.order_no;
+        _this8.section = res.data.section_id;
+        _this8.question = res.data.question;
+        _this8.questionImg = res.data.question_img_path;
+        res.data.question != '' || res.data.question != null ? _this8.radioInputOption = 'TEXT' : _this8.radioInputOption = 'IMG';
+        _this8.questionImg = res.data.questionImg;
+        _this8.score = res.data.score;
+        _this8.options = res.data.options;
+      });
     }
   },
   mounted: function mounted() {
+    this.loadAsyncData();
     this.getSections();
   }
 });
@@ -20810,7 +20984,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/*qo mean question options button remove*/\n.qo-btn[data-v-51e93ae4]{\n    margin-left: 5px;\n    border: none;\n}\n.qo-btn > i[data-v-51e93ae4]:hover{\n    color:red;\n    text-decoration: underline;\n}\n.qo-btn-check[data-v-51e93ae4]{\n    border: none;\n    color: red;\n}\n.qo-btn-check-active[data-v-51e93ae4]{\n    border: none;\n    color: green;\n}\n.option-panel[data-v-51e93ae4]{\n    margin-left: 30px;\n}\n\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/*qo mean question options button remove*/\n.qo-btn[data-v-51e93ae4]{\n    margin-left: 5px;\n    border: none;\n}\n.qo-btn > i[data-v-51e93ae4]:hover{\n    color:red;\n    text-decoration: underline;\n}\n.qo-btn-check[data-v-51e93ae4]{\n    border: none;\n    color: red;\n}\n.qo-btn-check-active[data-v-51e93ae4]{\n    border: none;\n    color: green;\n}\n.red-x[data-v-51e93ae4]{\n    color: red;\n}\n.green-check[data-v-51e93ae4]{\n    color: green;\n}\n.option-panel[data-v-51e93ae4]{\n    margin-left: 30px;\n}\n\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -22399,7 +22573,8 @@ var render = function() {
             staticStyle: {
               "font-size": "20px",
               "text-align": "center",
-              "font-weight": "bold"
+              "font-weight": "bold",
+              "margin-bottom": "20px"
             }
           },
           [_vm._v("LIST OF QUESTIONS")]
@@ -22408,58 +22583,113 @@ var render = function() {
         _c("div", { staticClass: "columns" }, [
           _c(
             "div",
-            { staticClass: "column is-6 is-offset-3" },
+            { staticClass: "column is-10 is-offset-1" },
             [
-              _c(
-                "b-field",
-                { attrs: { label: "Page" } },
-                [
+              _c("div", { staticClass: "level" }, [
+                _c("div", { staticClass: "level-left" }, [
                   _c(
-                    "b-select",
-                    {
-                      on: { input: _vm.setPerPage },
-                      model: {
-                        value: _vm.perPage,
-                        callback: function($$v) {
-                          _vm.perPage = $$v
-                        },
-                        expression: "perPage"
-                      }
-                    },
+                    "div",
+                    { staticClass: "level-item" },
                     [
-                      _c("option", { attrs: { value: "5" } }, [
-                        _vm._v("5 per page")
-                      ]),
-                      _vm._v(" "),
-                      _c("option", { attrs: { value: "10" } }, [
-                        _vm._v("10 per page")
-                      ]),
-                      _vm._v(" "),
-                      _c("option", { attrs: { value: "15" } }, [
-                        _vm._v("15 per page")
-                      ]),
-                      _vm._v(" "),
-                      _c("option", { attrs: { value: "20" } }, [
-                        _vm._v("20 per page")
-                      ])
-                    ]
-                  )
-                ],
-                1
-              ),
-              _vm._v(" "),
-              _c(
-                "div",
-                { staticClass: "buttons mt-3" },
-                [
+                      _c(
+                        "b-select",
+                        {
+                          on: { input: _vm.setPerPage },
+                          model: {
+                            value: _vm.perPage,
+                            callback: function($$v) {
+                              _vm.perPage = $$v
+                            },
+                            expression: "perPage"
+                          }
+                        },
+                        [
+                          _c("option", { attrs: { value: "5" } }, [
+                            _vm._v("5 per page")
+                          ]),
+                          _vm._v(" "),
+                          _c("option", { attrs: { value: "10" } }, [
+                            _vm._v("10 per page")
+                          ]),
+                          _vm._v(" "),
+                          _c("option", { attrs: { value: "15" } }, [
+                            _vm._v("15 per page")
+                          ]),
+                          _vm._v(" "),
+                          _c("option", { attrs: { value: "20" } }, [
+                            _vm._v("20 per page")
+                          ])
+                        ]
+                      )
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "level-item" }, [
+                    _c(
+                      "div",
+                      { staticClass: "buttons" },
+                      [
+                        _c(
+                          "b-button",
+                          {
+                            staticClass: "is-primary",
+                            on: { click: _vm.openModal }
+                          },
+                          [_vm._v("Create Question")]
+                        )
+                      ],
+                      1
+                    )
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "level-right" }, [
                   _c(
-                    "b-button",
-                    { staticClass: "is-primary", on: { click: _vm.openModal } },
-                    [_vm._v("Create Question")]
+                    "div",
+                    { staticClass: "level-item" },
+                    [
+                      _c(
+                        "b-field",
+                        [
+                          _c("b-input", {
+                            attrs: {
+                              type: "text",
+                              placeholder: "Search Section..."
+                            },
+                            nativeOn: {
+                              keyup: function($event) {
+                                if (
+                                  !$event.type.indexOf("key") &&
+                                  _vm._k(
+                                    $event.keyCode,
+                                    "enter",
+                                    13,
+                                    $event.key,
+                                    "Enter"
+                                  )
+                                ) {
+                                  return null
+                                }
+                                return _vm.loadAsyncData($event)
+                              }
+                            },
+                            model: {
+                              value: _vm.search.section,
+                              callback: function($$v) {
+                                _vm.$set(_vm.search, "section", $$v)
+                              },
+                              expression: "search.section"
+                            }
+                          })
+                        ],
+                        1
+                      )
+                    ],
+                    1
                   )
-                ],
-                1
-              ),
+                ])
+              ]),
               _vm._v(" "),
               _c(
                 "b-table",
@@ -22471,14 +22701,75 @@ var render = function() {
                     "backend-pagination": "",
                     total: _vm.total,
                     "per-page": _vm.perPage,
+                    detailed: "",
+                    "detail-transition": "",
                     "aria-next-label": "Next page",
                     "aria-previous-label": "Previous page",
                     "aria-page-label": "Page",
+                    "show-detail-icon": true,
                     "aria-current-label": "Current page",
                     "backend-sorting": "",
                     "default-sort-direction": _vm.defaultSortDirection
                   },
-                  on: { "page-change": _vm.onPageChange, sort: _vm.onSort }
+                  on: { "page-change": _vm.onPageChange, sort: _vm.onSort },
+                  scopedSlots: _vm._u([
+                    {
+                      key: "detail",
+                      fn: function(props) {
+                        return [
+                          _c("div", { staticClass: "title is-5" }, [
+                            _vm._v("OPTIONS")
+                          ]),
+                          _vm._v(" "),
+                          _c("table", [
+                            _c("thead", [
+                              _c("th", [_vm._v("Letter")]),
+                              _vm._v(" "),
+                              _c("th", [_vm._v("Content")]),
+                              _vm._v(" "),
+                              _c("th", [_vm._v("Answer")])
+                            ]),
+                            _vm._v(" "),
+                            _c(
+                              "tbody",
+                              _vm._l(props.row.options, function(item) {
+                                return _c("tr", { key: item.option_id }, [
+                                  _c("td", [_vm._v(_vm._s(item.letter))]),
+                                  _vm._v(" "),
+                                  _c("td", [_vm._v(_vm._s(item.content))]),
+                                  _vm._v(" "),
+                                  _c(
+                                    "td",
+                                    [
+                                      item.is_answer === 1
+                                        ? _c("b-icon", {
+                                            attrs: {
+                                              pack: "fa",
+                                              icon: "check",
+                                              size: "is-small",
+                                              type: "is-success"
+                                            }
+                                          })
+                                        : _c("b-icon", {
+                                            attrs: {
+                                              pack: "fa",
+                                              icon: "times",
+                                              size: "is-small",
+                                              type: "is-danger"
+                                            }
+                                          })
+                                    ],
+                                    1
+                                  )
+                                ])
+                              }),
+                              0
+                            )
+                          ])
+                        ]
+                      }
+                    }
+                  ])
                 },
                 [
                   _c("b-table-column", {
@@ -22506,9 +22797,29 @@ var render = function() {
                         key: "default",
                         fn: function(props) {
                           return [
+                            [
+                              _vm._v(
+                                "\n                            " +
+                                  _vm._s(props.row.question) +
+                                  "\n                        "
+                              )
+                            ]
+                          ]
+                        }
+                      }
+                    ])
+                  }),
+                  _vm._v(" "),
+                  _c("b-table-column", {
+                    attrs: { field: "section", label: "Section" },
+                    scopedSlots: _vm._u([
+                      {
+                        key: "default",
+                        fn: function(props) {
+                          return [
                             _vm._v(
                               "\n                        " +
-                                _vm._s(props.row.question) +
+                                _vm._s(props.row.section.section) +
                                 "\n                    "
                             )
                           ]
@@ -22536,7 +22847,7 @@ var render = function() {
                   }),
                   _vm._v(" "),
                   _c("b-table-column", {
-                    attrs: { field: "ay_id", label: "Action" },
+                    attrs: { field: "", label: "Action" },
                     scopedSlots: _vm._u([
                       {
                         key: "default",
@@ -22941,7 +23252,9 @@ var render = function() {
                                           "b-field",
                                           {
                                             staticClass: "file is-primary",
-                                            class: { "has-name": !!option.img },
+                                            class: {
+                                              "has-name": !!option.img_path
+                                            },
                                             attrs: { grouped: "" }
                                           },
                                           [
@@ -22950,11 +23263,15 @@ var render = function() {
                                               {
                                                 staticClass: "file-label",
                                                 model: {
-                                                  value: option.img,
+                                                  value: option.img_path,
                                                   callback: function($$v) {
-                                                    _vm.$set(option, "img", $$v)
+                                                    _vm.$set(
+                                                      option,
+                                                      "img_path",
+                                                      $$v
+                                                    )
                                                   },
-                                                  expression: "option.img"
+                                                  expression: "option.img_path"
                                                 }
                                               },
                                               [
@@ -22983,7 +23300,7 @@ var render = function() {
                                                   1
                                                 ),
                                                 _vm._v(" "),
-                                                option.img
+                                                option.img_path
                                                   ? _c(
                                                       "span",
                                                       {
@@ -22993,7 +23310,8 @@ var render = function() {
                                                         _vm._v(
                                                           "\n                                                " +
                                                             _vm._s(
-                                                              option.img.name
+                                                              option.img_path
+                                                                .name
                                                             ) +
                                                             "\n                                            "
                                                         )
@@ -23052,7 +23370,6 @@ var render = function() {
                                       }
                                     ],
                                     staticClass: "qo-btn",
-                                    style: { color: option.checkColor },
                                     on: {
                                       click: function($event) {
                                         return _vm.toogleClickCheck(k)
@@ -23060,12 +23377,14 @@ var render = function() {
                                     }
                                   },
                                   [
-                                    option.is_ans === 1
+                                    option.is_answer === 1
                                       ? _c("i", {
-                                          staticClass: "fa fa-check fa-lg"
+                                          staticClass: "fa fa-check fa-lg",
+                                          staticStyle: { color: "green" }
                                         })
                                       : _c("i", {
-                                          staticClass: "fa fa-times fa-lg"
+                                          staticClass: "fa fa-times fa-lg",
+                                          staticStyle: { color: "red" }
                                         })
                                   ]
                                 )

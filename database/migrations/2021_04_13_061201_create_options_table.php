@@ -16,13 +16,15 @@ class CreateOptionsTable extends Migration
         Schema::create('options', function (Blueprint $table) {
             $table->id('option_id');
             $table->unsignedBigInteger('question_id');
-            $table->foreign('question_id')->references('question_id')->on('questions');
+            $table->foreign('question_id')->references('question_id')->on('questions')
+            ->onUpdate('cascade')
+            ->onDelete('cascade');
             //crate relationship
             
-            $table->string('letter', 10)->null();
-            $table->text('content')->null();
+            $table->string('letter', 10)->nullable();
+            $table->text('content')->nullable();
             $table->boolean('is_img')->default(0);
-            $table->string('img_path')->null();
+            $table->string('img_path')->nullable();
             $table->boolean('is_answer')->default(0);
             $table->timestamps();
         });

@@ -51,6 +51,11 @@ Route::resource('/panel/question', App\Http\Controllers\Administrator\QuestionCo
 Route::get('/ajax/question', [App\Http\Controllers\Administrator\QuestionController::class, 'index_data']);
 Route::get('/ajax/question/sections', [App\Http\Controllers\Administrator\QuestionController::class, 'ajax_section']);
 
+//options
+Route::get('/panel/question-option', [App\Http\Controllers\Administrator\PanelHomeController::class, 'index']);
+Route::resource('/panel/question-option', App\Http\Controllers\Administrator\OptionController::class);
+Route::get('/ajax/question-option', [App\Http\Controllers\Administrator\QuestionController::class, 'index_data']);
+
 
 
 //SECTION
@@ -94,35 +99,3 @@ Route::get('/app/logout/admin', function(){
     Auth::logout();
 });
 
-Route::get('/app/sections', function(){
-    $sections = [
-        ['section' => 'ABSTRACT'],
-        ['section' => 'NUMERICAL'],
-        ['section' => 'LINGUISTICS'],
-        ['section' => 'VOCABULARY'],
-        ['section' => 'GENERAL KNOWLEDGE']
-    ];
-
-    \App\Models\Section::insert($sections);
-});
-
-
-
-Route::get('/app/account', function(){
-//   \DB::table('users')->where('username', 'admin')
-//       ->update([
-//           'password' => \Illuminate\Support\Facades\Hash::make('1234'),
-//       ]);
-
-    DB::table('users')->insert([
-        'username' => 'admin',
-        'lname' => 'ADMIN',
-        'fname' => 'ADMIN',
-        'mname' => 'ADMIN',
-        'sex' => 'FEMALE',
-        'email' => 'admin@system.org',
-        'password' => Hash::make('a'),
-        'role' => 'ADMINISTRATOR',
-    ]);
-
-});
