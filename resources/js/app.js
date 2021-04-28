@@ -27,13 +27,7 @@
 Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 
 Vue.component('csrf', require('./components/Csrf.vue').default);
-Vue.component('student-login-page', require('./components/Student/StudentLoginPaga.vue').default);
 
-
-//STUDENT
-Vue.component('student-navbar', require('./components/Student/StudentNavbar.vue').default);
-
-Vue.component('home-page', require('./components/Student/HomePage.vue').default);
 
 //ADMINISTRATOR
 Vue.component('panel-login', require('./components/Administrator/PanelLogin.vue').default);
@@ -44,6 +38,33 @@ Vue.component('panel-question', require('./components/Administrator/Question/Pan
 Vue.component('panel-question-create', require('./components/Administrator/Question/PanelQuestionCreate.vue').default);
 
 Vue.component('panel-section', require('./components/Administrator/Section/SectionPanel.vue').default);
+
+
+//-----------------------------//
+//ADMINISTRATOR AREA
+
+
+
+
+
+
+
+
+//STUDENT AREA
+//-----------------------------//
+Vue.component('student-login-page', require('./components/Student/StudentLoginPaga.vue').default);
+
+//STUDENT
+Vue.component('student-navbar', require('./components/Student/StudentNavbar.vue').default);
+
+Vue.component('home-page', require('./components/Student/HomePage.vue').default);
+Vue.component('taking-exam', require('./components/Student/TakingExam.vue').default);
+
+
+//STUDENT AREA
+//-----------------------------//
+
+
 
 
 /**

@@ -26,13 +26,16 @@ Auth::routes([
 ]);
 
 
-Route::get('/student/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
-
-
 //STUDENT
 Route::get('/student/login', [App\Http\Controllers\Student\StudentLoginController::class, 'showLoginForm']);
 Route::post('/student/login', [App\Http\Controllers\Student\StudentLoginController::class, 'login'])->name('student-login');
+
+
+
+Route::get('/student/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::resource('/student/taking-exam', App\Http\Controllers\Student\TakingExamController::class);
+Route::get('/student/taking-exam-question', [App\Http\Controllers\Student\TakingExamController::class, 'examineeQuestion']);
+
 
 
 

@@ -157,7 +157,7 @@
                             </div><!-- class columns-->
 
                             <b-field v-if="this.radioInputOption === 'TEXT'" label="Question">
-                                <b-input type="text" v-model="question" placeholder="Question" />
+                                <b-input type="textarea" v-model="question" placeholder="Question" />
                             </b-field>
 
                             <b-field v-if="this.radioInputOption === 'IMG'" label="Question">

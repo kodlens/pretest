@@ -1,4 +1,3 @@
-
 <template>
     <b-navbar class="is-primary">
         <template #brand>
@@ -22,8 +21,12 @@
         </template>
 
         <template #end>
-            <b-navbar-item href="/home">
+            <b-navbar-item href="/student/home">
                 Home
+            </b-navbar-item>
+
+             <b-navbar-item href="/student/taking-exam">
+                Quiz
             </b-navbar-item>
 
             <b-navbar-item tag="div">

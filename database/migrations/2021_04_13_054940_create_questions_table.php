@@ -21,6 +21,7 @@ class CreateQuestionsTable extends Migration
             //create relationship
             
             $table->text('question');
+            $table->boolean('is_question_img')->default(0);
             $table->string('question_img_path')->nullable();
             $table->integer('score');
             $table->timestamps();

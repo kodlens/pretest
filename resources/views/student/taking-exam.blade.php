@@ -2,6 +2,5 @@
 
 @section('content')
 
-    {{-- <home-page></home-page> --}}
-
+        <taking-exam></taking-exam>
 @endsection

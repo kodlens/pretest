@@ -16,6 +16,8 @@ class Question extends Model
 
     protected $fillable=['order_no', 'section_id', 'question', 'question_img_path', 'score'];
 
+  
+
 
     public function options(){
         return $this->hasMany(Option::class, 'question_id', 'question_id');

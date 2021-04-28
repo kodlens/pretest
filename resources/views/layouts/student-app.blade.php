@@ -6,13 +6,22 @@
 
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>{{ config('app.name', 'Laravel') }}</title
+
+    <title>{{ config('app.name', 'Laravel') }}</title>
+
+    <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
+
+    <!-- Fonts -->
+{{-- <link rel="dns-prefetch" href="//fonts.gstatic.com"> --}}
+{{-- <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet"> --}}
+
+<!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 
 </head>
 <body>
-    <div id="app">
+<div id="app">
 
         @guest
             @if (Route::has('login'))
@@ -22,8 +31,13 @@
             <student-navbar is-auth="1"></student-navbar>
         @endguest
 
+        
+
         @yield('content')
 
-    </div>
+</div>
 </body>
 </html>
+
+
+
