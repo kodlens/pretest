@@ -3269,8 +3269,24 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  props: ['isAuth'],
+  props: ['isAuth', 'firstname'],
   data: function data() {
     return {};
   },
@@ -3356,7 +3372,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   data: function data() {
     return {
       questions: [],
-      answers: {}
+      answers: []
     };
   },
   methods: {
@@ -25642,33 +25658,83 @@ var render = function() {
             ]),
             _vm._v(" "),
             _c("b-navbar-item", { attrs: { tag: "div" } }, [
-              _c("div", { staticClass: "buttons" }, [
-                _vm.isAuth == 1
-                  ? _c(
-                      "a",
-                      {
-                        staticClass: "button is-light",
-                        on: { click: _vm.logout }
-                      },
-                      [
-                        _c("i", { staticClass: "fa fa-sign-out" }),
-                        _vm._v(" "),
-                        _c("strong", [_vm._v("Logout")])
-                      ]
-                    )
-                  : _c(
-                      "a",
-                      {
-                        staticClass: "button is-light",
-                        attrs: { href: "/login" }
-                      },
-                      [
-                        _c("i", { staticClass: "fa fa-sign-out" }),
-                        _vm._v(" "),
-                        _c("strong", [_vm._v("Login")])
-                      ]
-                    )
-              ])
+              _vm.isAuth == 1
+                ? _c(
+                    "div",
+                    { staticClass: "buttons" },
+                    [
+                      _c(
+                        "b-dropdown",
+                        {
+                          attrs: { "aria-role": "list" },
+                          scopedSlots: _vm._u(
+                            [
+                              {
+                                key: "trigger",
+                                fn: function(ref) {
+                                  var active = ref.active
+                                  return [
+                                    _c("b-button", {
+                                      attrs: {
+                                        label: _vm.firstname,
+                                        type: "is-primary",
+                                        "icon-right": active
+                                          ? "menu-up"
+                                          : "menu-down"
+                                      }
+                                    })
+                                  ]
+                                }
+                              }
+                            ],
+                            null,
+                            false,
+                            3104862243
+                          )
+                        },
+                        [
+                          _vm._v(" "),
+                          _c(
+                            "b-dropdown-item",
+                            {
+                              attrs: { "aria-role": "listitem" },
+                              on: { click: _vm.logout }
+                            },
+                            [
+                              _c("b-icon", {
+                                attrs: { pack: "fa", icon: "sign-out" }
+                              }),
+                              _vm._v(
+                                "\n                        Logout\n                    "
+                              )
+                            ],
+                            1
+                          )
+                        ],
+                        1
+                      )
+                    ],
+                    1
+                  )
+                : _c(
+                    "div",
+                    { staticClass: "buttons" },
+                    [
+                      _c(
+                        "b-button",
+                        {
+                          staticClass: "button is-light",
+                          attrs: { href: "/login" }
+                        },
+                        [
+                          _c("i", { staticClass: "fa fa-sign-out" }),
+                          _vm._v(" "),
+                          _c("strong", [_vm._v("Login")])
+                        ]
+                      )
+                    ],
+                    1
+                  )
             ])
           ]
         },
@@ -25734,6 +25800,9 @@ var render = function() {
                                     _c(
                                       "b-radio",
                                       {
+                                        attrs: {
+                                          "native-value": option.option_id
+                                        },
                                         model: {
                                           value: _vm.answers[i],
                                           callback: function($$v) {

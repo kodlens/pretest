@@ -28,7 +28,7 @@
                 <student-navbar is-auth="0"></student-navbar>
             @endif
         @else
-            <student-navbar is-auth="1"></student-navbar>
+            <student-navbar is-auth="1" firstname="{{ auth()->user()->StudFName }}"></student-navbar>
         @endguest
 
         

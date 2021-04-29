@@ -4,4 +4,8 @@
 
     {{-- <home-page></home-page> --}}
 
+    @isset($error)
+        {{ $error }}
+    @endisset
+
 @endsection

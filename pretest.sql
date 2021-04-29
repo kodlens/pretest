@@ -16,6 +16,41 @@ CREATE DATABASE /*!32312 IF NOT EXISTS*/`pretest` /*!40100 DEFAULT CHARACTER SET
 
 USE `pretest`;
 
+/*Table structure for table `answer_sheets` */
+
+DROP TABLE IF EXISTS `answer_sheets`;
+
+CREATE TABLE `answer_sheets` (
+  `answer_sheet_id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `student_id` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `is_taken` tinyint(1) NOT NULL DEFAULT 0,
+  `date_taken` datetime NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`answer_sheet_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+/*Data for the table `answer_sheets` */
+
+/*Table structure for table `answers` */
+
+DROP TABLE IF EXISTS `answers`;
+
+CREATE TABLE `answers` (
+  `answer_id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `answer_sheet_id` bigint(20) unsigned NOT NULL,
+  `option_id` bigint(20) unsigned NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`answer_id`),
+  KEY `answers_answer_sheet_id_foreign` (`answer_sheet_id`),
+  KEY `answers_option_id_foreign` (`option_id`),
+  CONSTRAINT `answers_answer_sheet_id_foreign` FOREIGN KEY (`answer_sheet_id`) REFERENCES `answer_sheets` (`answer_sheet_id`),
+  CONSTRAINT `answers_option_id_foreign` FOREIGN KEY (`option_id`) REFERENCES `options` (`option_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+/*Data for the table `answers` */
+
 /*Table structure for table `failed_jobs` */
 
 DROP TABLE IF EXISTS `failed_jobs`;
@@ -43,7 +78,7 @@ CREATE TABLE `migrations` (
   `migration` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `batch` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 /*Data for the table `migrations` */
 
@@ -53,7 +88,10 @@ insert  into `migrations`(`id`,`migration`,`batch`) values
 (27,'2019_08_19_000000_create_failed_jobs_table',1),
 (28,'2021_04_13_053930_create_sections_table',1),
 (29,'2021_04_13_054940_create_questions_table',1),
-(30,'2021_04_13_061201_create_options_table',1);
+(30,'2021_04_13_061201_create_options_table',1),
+(31,'2021_04_29_033333_create_answer_sheets_table',2),
+(33,'2021_04_29_071057_create_answers_table',2),
+(34,'2021_04_29_035026_create_test_schedules',3);
 
 /*Table structure for table `options` */
 
@@ -305,11 +343,31 @@ CREATE TABLE `sections` (
 /*Data for the table `sections` */
 
 insert  into `sections`(`section_id`,`section`,`created_at`,`updated_at`) values 
-(1,'ABSTRACT',NULL,NULL),
-(2,'NUMERICAL',NULL,NULL),
-(3,'LINGUISTICS',NULL,NULL),
-(4,'VOCABULARY',NULL,NULL),
+(1,'ABSTRACT REASONING',NULL,NULL),
+(2,'LOGICAL REASONING',NULL,NULL),
+(3,'ENGLISH PROFICIENCY',NULL,NULL),
+(4,'NUMERICAL REASONING',NULL,NULL),
 (5,'GENERAL KNOWLEDGE',NULL,NULL);
+
+/*Table structure for table `test_schedules` */
+
+DROP TABLE IF EXISTS `test_schedules`;
+
+CREATE TABLE `test_schedules` (
+  `test_schedule_id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `test_from` datetime NOT NULL,
+  `test_to` datetime NOT NULL,
+  `remark` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `active` tinyint(1) NOT NULL DEFAULT 0,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`test_schedule_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+/*Data for the table `test_schedules` */
+
+insert  into `test_schedules`(`test_schedule_id`,`test_from`,`test_to`,`remark`,`active`,`created_at`,`updated_at`) values 
+(1,'2021-04-29 15:50:10','2021-04-29 16:00:00','testing only',1,NULL,NULL);
 
 /*Table structure for table `users` */
 

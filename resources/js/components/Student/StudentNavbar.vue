@@ -30,13 +30,29 @@
             </b-navbar-item>
 
             <b-navbar-item tag="div">
-                <div class="buttons">
-                    <a v-if="isAuth == 1" class="button is-light" @click="logout">
-                        <i class="fa fa-sign-out"></i>&nbsp;<strong>Logout</strong>
-                    </a>
-                    <a v-else class="button is-light" href="/login">
+                <div v-if="isAuth == 1" class="buttons">
+                    <b-dropdown aria-role="list">
+                        <template #trigger="{ active }">
+                            <b-button
+                                :label="firstname"
+                                type="is-primary"
+                                :icon-right="active ? 'menu-up' : 'menu-down'" />
+                        </template>
+
+
+                        <b-dropdown-item aria-role="listitem" @click="logout">
+                            <b-icon pack="fa" icon="sign-out"></b-icon>
+                            Logout
+                        </b-dropdown-item>
+                        <!-- <b-dropdown-item aria-role="listitem">Another action</b-dropdown-item>
+                        <b-dropdown-item aria-role="listitem">Something else</b-dropdown-item> -->
+                    </b-dropdown>
+                </div>
+
+                <div v-else class="buttons">
+                    <b-button class="button is-light" href="/login">
                         <i class="fa fa-sign-out"></i>&nbsp;<strong>Login</strong>
-                    </a>
+                    </b-button>
                 </div>
             </b-navbar-item>
         </template>
@@ -47,7 +63,7 @@
 
 <script>
 export default {
-    props: ['isAuth'],
+    props: ['isAuth','firstname'],
     data(){
         return{
 

@@ -15,10 +15,10 @@ class SectionSeeder extends Seeder
     {
         //
         $sections = [
-            ['section' => 'ABSTRACT'],
-            ['section' => 'NUMERICAL'],
-            ['section' => 'LINGUISTICS'],
-            ['section' => 'VOCABULARY'],
+            ['section' => 'ABSTRACT REASONING'],
+            ['section' => 'LOGICAL REASONING'],
+            ['section' => 'ENGLISH PROFICIENCY'],
+            ['section' => 'NUMERICAL REASONING'],
             ['section' => 'GENERAL KNOWLEDGE']
         ];
 

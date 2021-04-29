@@ -21,16 +21,16 @@
                                  <div v-if="option.is_img == 0">
                                      <b-field>
                                         <b-radio
-                                            v-model="answers[i]">
+                                            v-model="answers[i]"
+                                           
+                                            :native-value="option.option_id">
                                             {{option.letter}} - {{ option.content }}
                                         </b-radio>
                                     </b-field>
                                  </div>
                                  
-                                
-                               
                                 <!--if question is img-->
-                                 <div v-else>
+                                <div v-else>
                                     IMG
                                 </div>
 
@@ -52,7 +52,8 @@ export default {
         return{
             questions: [],
             
-            answers: {},
+            answers:[],
+            
 
         }
     },
