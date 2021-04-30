@@ -44,33 +44,87 @@ class QuestionController extends Controller
         return Section::all();
     }
 
-    public function store(StoreQuestionRequest $req){
+    public function store(Request $req){
 
-        $question = Question::create([
-            'order_no' => $req->order_no,
-            'section_id' => $req->section,
-            'question' => trim($req->question),
-            'score' => $req->score
+        $validate = $req->validate([
+            'section' => ['required'],
+            'score' => ['required', 'numeric', 'min: 1']
         ]);
 
-        $q_id = $question->question_id;
+        try{
+            $file = $req->file('question_img');
 
-        $arr=[];
+            if($file){
+                //if question is file
+                \DB::transaction(function() use ($req, $file){
+                    $options = json_decode($req->options);
+                    //decode to json stringify JSON from javascript
 
-        foreach($req->options as $row){
-            array_push($arr, [
-                'question_id' => $q_id,
-                'letter' => $row['optionLetter'],
-                'content' => trim($row['content']),
-                'is_img' => $row['is_img'],
-                'img_path' => trim($row['img_path']),
-                'is_answer' => $row['is_answer'],
-            ]);
+                    $destinationPath = 'img/q/';
+                    //$fileName = time() . $file->getClientOriginalName();
+                    $fileName = md5(time()). '.' . $file->extension();
+
+                    $question = Question::create([
+                        'order_no' => $req->order_no,
+                        'section_id' => $req->section,
+                        'is_question_img' => 1,
+                        'question_img' => $destinationPath . $fileName,
+                        'question' => trim($req->question),
+                        'score' => $req->score
+                    ]);
+
+                    $q_id = $question->question_id;
+                    $arr=[];
+
+                    foreach($options as $row){
+                        array_push($arr, [
+                            'question_id' => $q_id,
+                            'letter' => $row->optionLetter,
+                            'content' => trim($row->content),
+                            'is_img' => $row->is_img,
+                            'img_path' => trim($row->img_path),
+                            'is_answer' => $row->is_answer,
+                        ]);
+                    }
+
+                    Option::insert($arr);
+
+                    //move the file to the folder
+                    $file->move($destinationPath , $fileName);
+
+                }); //end db transaction
+
+            }else{
+
+                //$options = json_decode($req->options);
+                //return $test;
+                \DB::transaction(function() use($req){
+                    $options = json_decode($req->options);
+                    $question = Question::create([
+                        'order_no' => $req->order_no,
+                        'section_id' => $req->section,
+                        'question' => trim($req->question),
+                        'score' => $req->score
+                    ]);
+                    $q_id = $question->question_id;
+                    $arr=[];
+                    foreach($options as $row){
+                        array_push($arr, [
+                            'question_id' => $q_id,
+                            'letter' => $row->optionLetter,
+                            'content' => trim($row->content),
+                            'is_img' => $row->is_img,
+                            'img_path' => trim($row->img_path),
+                            'is_answer' => $row->is_answer,
+                        ]);
+                    }
+                    Option::insert($arr);
+                }); //end db transaction
+            }
+           return ['status' => 'saved'];
+        }catch(\Exception $e){
+            return ['status' => 'error', 'msg' => $e->getMessage()];
         }
-
-        Option::insert($arr);
-
-        return [['status' => 'saved']];
     }
 
     public function show($id){
@@ -88,7 +142,7 @@ class QuestionController extends Controller
         ]);
 
         $question = Question::find($id);
-        
+
         $question->order_no = $req->order_no;
         $question->section_id = $req->section;
         $question->question = trim($req->question);
@@ -104,13 +158,10 @@ class QuestionController extends Controller
                     'is_img' => $row['is_img'],
                     'img_path' => trim($row['img_path']),
                     'is_answer' => $row['is_answer'],
-                    
+
                 ]);
 
         }
-
-     
-
 
         return [['status' => 'updated']];
        // return $req;

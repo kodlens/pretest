@@ -28,14 +28,14 @@
                         <div class="level-right">
                             <div class="level-item">
                                 <b-field>
-                                    <b-input type="text" placeholder="Search Section..." 
+                                    <b-input type="text" placeholder="Search Section..."
                                     v-model="search.section" @keyup.native.enter="loadAsyncData"/>
                                 </b-field>
                             </div>
                         </div>
                     </div>
 
-                    
+
 
                     <b-table
                         :data="data"
@@ -62,7 +62,8 @@
 
                         <b-table-column field="question" label="Question" v-slot="props">
                             <template>
-                                {{ props.row.question }}
+                                <span v-if="props.row.is_question_img == 0"> {{ props.row.question }}</span>
+                                <span v-else> {{ props.row.question_img }}</span>
                             </template>
                         </b-table-column>
 
@@ -122,7 +123,7 @@
                     aria-role="dialog"
                     aria-modal>
 
-            <form @submit.prevent="submit">
+
                 <div class="modal-card">
                     <header class="modal-card-head">
                         <p class="modal-card-title">Question</p>
@@ -161,14 +162,14 @@
                             </b-field>
 
                             <b-field v-if="this.radioInputOption === 'IMG'" label="Question">
-                                <b-field grouped class="file is-primary" :class="{'has-name': !!questionImg}">
-                                    <b-upload v-model="questionImg" class="file-label">
+                                <b-field grouped class="file is-primary" :class="{'has-name': !!question_img}">
+                                    <b-upload v-model="question_img" class="file-label">
                                         <span class="file-cta">
                                             <b-icon class="file-icon" icon="upload"></b-icon>
                                             <span class="file-label">Click to upload</span>
                                         </span>
-                                        <span class="file-name" v-if="questionImg">
-                                            {{ questionImg.name }}
+                                        <span class="file-name" v-if="question_img">
+                                            {{ question_img.name }}
                                         </span>
                                     </b-upload>
                                 </b-field>
@@ -261,10 +262,11 @@
                         <button
                             :class="btnClass"
                             label="Save"
+                            @click="submit"
                             type="is-success">SAVE</button>
                     </footer>
                 </div>
-            </form><!--close form-->
+
         </b-modal>
 
 
@@ -307,7 +309,7 @@ export default {
             order_no: 0,
             section: '',
             question: '',
-            questionImg: null,
+            question_img: null,
             score: 0,
 
             options: [],
@@ -387,7 +389,7 @@ export default {
             this.order_no = 0;
             this.section = '';
             this.question = '';
-            this.questionImg = null;
+            this.question_img = null;
             this.score = 0;
             this.options = [];
 
@@ -425,7 +427,7 @@ export default {
 
         toogleClickCheck(index){
             //
-    
+
             if(this.options[index].is_answer == 1){
                 this.options[index].is_answer = 0;
             }else{
@@ -437,12 +439,15 @@ export default {
         radioClick(){
             //this.section = '';
             this.question = '';
-            this.questionImg = null;
+            this.question_img = null;
             //this.score = 0;
 
         },
 
         submit(){
+
+            console.log(this.btnClass['is-loading']);
+
             if(this.globalId > 0){
                 //update
                 this.updateData();
@@ -450,32 +455,53 @@ export default {
                 //insert
                 this.insertData();
             }
+            this.btnClass['is-loading'] = false;
         },
 
         insertData(){
+            let formData = new FormData();
+            const config = {
+                headers:{
+                    'Content-Type':'multipart/form-data',
+                }
+            };
 
-            axios.post('/panel/question',{
-                order_no: this.order_no,
-                question: this.question,
-                question_img: this.questionImg,
-                section: this.section,
-                score: this.score,
-                options: this.options,
-            }).then(res=>{
-                console.log(res.data[0].status);
-                if(res.data[0].status === 'saved'){
-                    alert('Question saved.');
-                    //close the modal
+            formData.append('order_no', this.order_no);
+            formData.append('question', this.question);
+            formData.append('question_img', this.question_img);
+            formData.append('section', this.section);
+            formData.append('score', this.score);
+            //formData.append('options', this.options);
+            formData.append('options', JSON.stringify(this.options));
+
+            axios.post('/panel/question',formData, config).then(res=>{
+                console.log(res.data);
+                if(res.data.status === 'saved'){
                     this.isModalCreate = false;
+                    this.loadAsyncData();
+
+                    this.$buefy.dialog.alert({
+                        title: 'SAVED!',
+                        message: 'Successfully saved!',
+                        type: 'is-success',
+                        confirmText: 'OK'
+                    });
 
                     //re initialize variables...
                     this.order_no = 0;
                     this.section = '';
                     this.question = '';
-                    this.questionImg = null;
+                    this.question_img = null;
                     this.score = 0;
                     this.options = [];
-                    this.loadAsyncData();
+
+                }else{
+                    this.$buefy.dialog.alert({
+                        title: 'ERROR',
+                        message: 'An error occured during saving question.',
+                        confirmText: 'OK',
+                        type: 'is-danger'
+                    });
                 }
             }).catch(error=>{
                 if (error.response) {
@@ -492,7 +518,7 @@ export default {
             axios.put('/panel/question/'+this.globalId,{
                 order_no: this.order_no,
                 question: this.question,
-                question_img: this.questionImg,
+                question_img: this.question_img,
                 section: this.section,
                 score: this.score,
                 options: this.options,
@@ -508,7 +534,7 @@ export default {
                     this.order_no = 0,
                         this.section = '';
                     this.question = '';
-                    this.questionImg = null;
+                    this.question_img = null;
                     this.score = 0;
                     this.options = [];
                     this.loadAsyncData();
@@ -561,10 +587,10 @@ export default {
                 this.section = res.data.section_id;
 
                 this.question = res.data.question;
-                this.questionImg = res.data.question_img_path;
+                this.question_img = res.data.question_img_path;
                 res.data.question != '' || res.data.question != null ? this.radioInputOption = 'TEXT' : this.radioInputOption = 'IMG';
 
-                this.questionImg = res.data.questionImg;
+                this.question_img = res.data.question_img_path;
                 this.score = res.data.score;
 
                 this.options = res.data.options;

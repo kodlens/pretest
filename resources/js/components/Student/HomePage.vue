@@ -3,6 +3,8 @@
         <div class="section">
             Student Home Panel
         </div>
+
+
     </div>
 </template>
 

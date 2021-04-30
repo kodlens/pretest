@@ -16,6 +16,7 @@
 
             </b-navbar-item>
         </template>
+
         <template #start>
 
         </template>
@@ -29,32 +30,13 @@
                 Quiz
             </b-navbar-item>
 
-            <b-navbar-item tag="div">
-                <div v-if="isAuth == 1" class="buttons">
-                    <b-dropdown aria-role="list">
-                        <template #trigger="{ active }">
-                            <b-button
-                                :label="firstname"
-                                type="is-primary"
-                                :icon-right="active ? 'menu-up' : 'menu-down'" />
-                        </template>
+            <b-navbar-dropdown :label="firstname">
+                <b-navbar-item @click="logout">
+                    <b-icon pack="fa" icon="sign-out"></b-icon>
+                    &nbsp;LOGOUT
+                </b-navbar-item>
+            </b-navbar-dropdown>
 
-
-                        <b-dropdown-item aria-role="listitem" @click="logout">
-                            <b-icon pack="fa" icon="sign-out"></b-icon>
-                            Logout
-                        </b-dropdown-item>
-                        <!-- <b-dropdown-item aria-role="listitem">Another action</b-dropdown-item>
-                        <b-dropdown-item aria-role="listitem">Something else</b-dropdown-item> -->
-                    </b-dropdown>
-                </div>
-
-                <div v-else class="buttons">
-                    <b-button class="button is-light" href="/login">
-                        <i class="fa fa-sign-out"></i>&nbsp;<strong>Login</strong>
-                    </b-button>
-                </div>
-            </b-navbar-item>
         </template>
 
     </b-navbar>
@@ -71,11 +53,10 @@ export default {
     },
     methods: {
         logout(){
-
             axios.post('/logout').then(res=>{
                 window.location = '/';
             });
-    }
+        }
     },
 
 }

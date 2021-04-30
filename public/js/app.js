@@ -2328,6 +2328,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "PanelQuestion.vue",
   data: function data() {
@@ -2356,7 +2358,7 @@ __webpack_require__.r(__webpack_exports__);
       order_no: 0,
       section: '',
       question: '',
-      questionImg: null,
+      question_img: null,
       score: 0,
       options: [],
       letters: ['A', 'B', 'C', 'D', 'E'],
@@ -2418,7 +2420,7 @@ __webpack_require__.r(__webpack_exports__);
       this.order_no = 0;
       this.section = '';
       this.question = '';
-      this.questionImg = null;
+      this.question_img = null;
       this.score = 0;
       this.options = [];
       this.globalId = 0;
@@ -2463,9 +2465,11 @@ __webpack_require__.r(__webpack_exports__);
     radioClick: function radioClick() {
       //this.section = '';
       this.question = '';
-      this.questionImg = null; //this.score = 0;
+      this.question_img = null; //this.score = 0;
     },
     submit: function submit() {
+      console.log(this.btnClass['is-loading']);
+
       if (this.globalId > 0) {
         //update
         this.updateData();
@@ -2473,33 +2477,54 @@ __webpack_require__.r(__webpack_exports__);
         //insert
         this.insertData();
       }
+
+      this.btnClass['is-loading'] = false;
     },
     insertData: function insertData() {
       var _this4 = this;
 
-      axios.post('/panel/question', {
-        order_no: this.order_no,
-        question: this.question,
-        question_img: this.questionImg,
-        section: this.section,
-        score: this.score,
-        options: this.options
-      }).then(function (res) {
-        console.log(res.data[0].status);
+      var formData = new FormData();
+      var config = {
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        }
+      };
+      formData.append('order_no', this.order_no);
+      formData.append('question', this.question);
+      formData.append('question_img', this.question_img);
+      formData.append('section', this.section);
+      formData.append('score', this.score); //formData.append('options', this.options);
 
-        if (res.data[0].status === 'saved') {
-          alert('Question saved.'); //close the modal
+      formData.append('options', JSON.stringify(this.options));
+      axios.post('/panel/question', formData, config).then(function (res) {
+        console.log(res.data);
 
-          _this4.isModalCreate = false; //re initialize variables...
+        if (res.data.status === 'saved') {
+          _this4.isModalCreate = false;
+
+          _this4.loadAsyncData();
+
+          _this4.$buefy.dialog.alert({
+            title: 'SAVED!',
+            message: 'Successfully saved!',
+            type: 'is-success',
+            confirmText: 'OK'
+          }); //re initialize variables...
+
 
           _this4.order_no = 0;
           _this4.section = '';
           _this4.question = '';
-          _this4.questionImg = null;
+          _this4.question_img = null;
           _this4.score = 0;
           _this4.options = [];
-
-          _this4.loadAsyncData();
+        } else {
+          _this4.$buefy.dialog.alert({
+            title: 'ERROR',
+            message: 'An error occured during saving question.',
+            confirmText: 'OK',
+            type: 'is-danger'
+          });
         }
       })["catch"](function (error) {
         if (error.response) {
@@ -2515,7 +2540,7 @@ __webpack_require__.r(__webpack_exports__);
       axios.put('/panel/question/' + this.globalId, {
         order_no: this.order_no,
         question: this.question,
-        question_img: this.questionImg,
+        question_img: this.question_img,
         section: this.section,
         score: this.score,
         options: this.options
@@ -2530,7 +2555,7 @@ __webpack_require__.r(__webpack_exports__);
 
           _this5.order_no = 0, _this5.section = '';
           _this5.question = '';
-          _this5.questionImg = null;
+          _this5.question_img = null;
           _this5.score = 0;
           _this5.options = [];
 
@@ -2582,9 +2607,9 @@ __webpack_require__.r(__webpack_exports__);
         _this8.order_no = res.data.order_no;
         _this8.section = res.data.section_id;
         _this8.question = res.data.question;
-        _this8.questionImg = res.data.question_img_path;
+        _this8.question_img = res.data.question_img_path;
         res.data.question != '' || res.data.question != null ? _this8.radioInputOption = 'TEXT' : _this8.radioInputOption = 'IMG';
-        _this8.questionImg = res.data.questionImg;
+        _this8.question_img = res.data.question_img_path;
         _this8.score = res.data.score;
         _this8.options = res.data.options;
       });
@@ -3113,6 +3138,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {};
@@ -3222,24 +3249,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 //
 //
 //
@@ -21132,7 +21141,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/*qo mean question options button remove*/\n.qo-btn[data-v-51e93ae4]{\n    margin-left: 5px;\n    border: none;\n}\n.qo-btn > i[data-v-51e93ae4]:hover{\n    color:red;\n    text-decoration: underline;\n}\n.qo-btn-check[data-v-51e93ae4]{\n    border: none;\n    color: red;\n}\n.qo-btn-check-active[data-v-51e93ae4]{\n    border: none;\n    color: green;\n}\n.red-x[data-v-51e93ae4]{\n    color: red;\n}\n.green-check[data-v-51e93ae4]{\n    color: green;\n}\n.option-panel[data-v-51e93ae4]{\n    margin-left: 30px;\n}\n\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/*qo mean question options button remove*/\n.qo-btn[data-v-51e93ae4]{\n    margin-left: 5px;\n    border: none;\n}\n.qo-btn > i[data-v-51e93ae4]:hover{\n    color:red;\n    text-decoration: underline;\n}\n.qo-btn-check[data-v-51e93ae4]{\n    border: none;\n    color: red;\n}\n.qo-btn-check-active[data-v-51e93ae4]{\n    border: none;\n    color: green;\n}\n.red-x[data-v-51e93ae4]{\n    color: red;\n}\n.green-check[data-v-51e93ae4]{\n    color: green;\n}\n.option-panel[data-v-51e93ae4]{\n    margin-left: 30px;\n}\n\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -23819,11 +23828,13 @@ var render = function() {
                         fn: function(props) {
                           return [
                             [
-                              _vm._v(
-                                "\n                            " +
-                                  _vm._s(props.row.question) +
-                                  "\n                        "
-                              )
+                              props.row.is_question_img == 0
+                                ? _c("span", [
+                                    _vm._v(" " + _vm._s(props.row.question))
+                                  ])
+                                : _c("span", [
+                                    _vm._v(" " + _vm._s(props.row.question_img))
+                                  ])
                             ]
                           ]
                         }
@@ -23956,603 +23967,571 @@ var render = function() {
           }
         },
         [
-          _c(
-            "form",
-            {
-              on: {
-                submit: function($event) {
-                  $event.preventDefault()
-                  return _vm.submit($event)
+          _c("div", { staticClass: "modal-card" }, [
+            _c("header", { staticClass: "modal-card-head" }, [
+              _c("p", { staticClass: "modal-card-title" }, [
+                _vm._v("Question")
+              ]),
+              _vm._v(" "),
+              _c("button", {
+                staticClass: "delete",
+                attrs: { type: "button" },
+                on: {
+                  click: function($event) {
+                    _vm.isModalCreate = false
+                  }
                 }
-              }
-            },
-            [
-              _c("div", { staticClass: "modal-card" }, [
-                _c("header", { staticClass: "modal-card-head" }, [
-                  _c("p", { staticClass: "modal-card-title" }, [
-                    _vm._v("Question")
-                  ]),
-                  _vm._v(" "),
-                  _c("button", {
-                    staticClass: "delete",
-                    attrs: { type: "button" },
-                    on: {
-                      click: function($event) {
-                        _vm.isModalCreate = false
-                      }
-                    }
-                  })
-                ]),
-                _vm._v(" "),
-                _c("section", { staticClass: "modal-card-body" }, [
-                  _c(
-                    "div",
-                    { staticClass: "question-panel" },
-                    [
-                      _c("div", { staticClass: "columns" }, [
+              })
+            ]),
+            _vm._v(" "),
+            _c("section", { staticClass: "modal-card-body" }, [
+              _c(
+                "div",
+                { staticClass: "question-panel" },
+                [
+                  _c("div", { staticClass: "columns" }, [
+                    _c(
+                      "div",
+                      { staticClass: "column" },
+                      [
                         _c(
-                          "div",
-                          { staticClass: "column" },
+                          "b-field",
+                          { attrs: { label: "Order No.", expanded: "" } },
                           [
-                            _c(
-                              "b-field",
-                              { attrs: { label: "Order No.", expanded: "" } },
-                              [
-                                _c("b-numberinput", {
-                                  attrs: {
-                                    "controls-position": "compact",
-                                    expanded: "",
-                                    min: "0",
-                                    max: "9999"
-                                  },
-                                  model: {
-                                    value: _vm.order_no,
-                                    callback: function($$v) {
-                                      _vm.order_no = $$v
-                                    },
-                                    expression: "order_no"
-                                  }
-                                })
-                              ],
-                              1
-                            )
+                            _c("b-numberinput", {
+                              attrs: {
+                                "controls-position": "compact",
+                                expanded: "",
+                                min: "0",
+                                max: "9999"
+                              },
+                              model: {
+                                value: _vm.order_no,
+                                callback: function($$v) {
+                                  _vm.order_no = $$v
+                                },
+                                expression: "order_no"
+                              }
+                            })
                           ],
                           1
-                        ),
-                        _vm._v(" "),
+                        )
+                      ],
+                      1
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      { staticClass: "column" },
+                      [
                         _c(
-                          "div",
-                          { staticClass: "column" },
+                          "b-field",
+                          { attrs: { label: "Section", expanded: "" } },
                           [
                             _c(
-                              "b-field",
-                              { attrs: { label: "Section", expanded: "" } },
-                              [
-                                _c(
-                                  "b-select",
+                              "b-select",
+                              {
+                                attrs: { expanded: "" },
+                                model: {
+                                  value: _vm.section,
+                                  callback: function($$v) {
+                                    _vm.section = $$v
+                                  },
+                                  expression: "section"
+                                }
+                              },
+                              _vm._l(this.sections, function(item, i) {
+                                return _c(
+                                  "option",
                                   {
-                                    attrs: { expanded: "" },
-                                    model: {
-                                      value: _vm.section,
-                                      callback: function($$v) {
-                                        _vm.section = $$v
-                                      },
-                                      expression: "section"
-                                    }
+                                    key: i,
+                                    domProps: { value: item.section_id }
                                   },
-                                  _vm._l(this.sections, function(item, i) {
-                                    return _c(
-                                      "option",
-                                      {
-                                        key: i,
-                                        domProps: { value: item.section_id }
-                                      },
-                                      [_vm._v(_vm._s(item.section))]
-                                    )
-                                  }),
-                                  0
+                                  [_vm._v(_vm._s(item.section))]
                                 )
-                              ],
-                              1
-                            )
-                          ],
-                          1
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "div",
-                          { staticClass: "column" },
-                          [
-                            _c(
-                              "b-field",
-                              { attrs: { label: "Score", expanded: "" } },
-                              [
-                                _c("b-numberinput", {
-                                  attrs: {
-                                    "controls-position": "compact",
-                                    expanded: "",
-                                    min: "0",
-                                    max: "100"
-                                  },
-                                  model: {
-                                    value: _vm.score,
-                                    callback: function($$v) {
-                                      _vm.score = $$v
-                                    },
-                                    expression: "score"
-                                  }
-                                })
-                              ],
-                              1
+                              }),
+                              0
                             )
                           ],
                           1
                         )
-                      ]),
-                      _vm._v(" "),
-                      this.radioInputOption === "TEXT"
-                        ? _c(
-                            "b-field",
-                            { attrs: { label: "Question" } },
-                            [
-                              _c("b-input", {
-                                attrs: {
-                                  type: "textarea",
-                                  placeholder: "Question"
+                      ],
+                      1
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      { staticClass: "column" },
+                      [
+                        _c(
+                          "b-field",
+                          { attrs: { label: "Score", expanded: "" } },
+                          [
+                            _c("b-numberinput", {
+                              attrs: {
+                                "controls-position": "compact",
+                                expanded: "",
+                                min: "0",
+                                max: "100"
+                              },
+                              model: {
+                                value: _vm.score,
+                                callback: function($$v) {
+                                  _vm.score = $$v
                                 },
-                                model: {
-                                  value: _vm.question,
-                                  callback: function($$v) {
-                                    _vm.question = $$v
-                                  },
-                                  expression: "question"
-                                }
-                              })
-                            ],
-                            1
-                          )
-                        : _vm._e(),
-                      _vm._v(" "),
-                      this.radioInputOption === "IMG"
-                        ? _c(
+                                expression: "score"
+                              }
+                            })
+                          ],
+                          1
+                        )
+                      ],
+                      1
+                    )
+                  ]),
+                  _vm._v(" "),
+                  this.radioInputOption === "TEXT"
+                    ? _c(
+                        "b-field",
+                        { attrs: { label: "Question" } },
+                        [
+                          _c("b-input", {
+                            attrs: {
+                              type: "textarea",
+                              placeholder: "Question"
+                            },
+                            model: {
+                              value: _vm.question,
+                              callback: function($$v) {
+                                _vm.question = $$v
+                              },
+                              expression: "question"
+                            }
+                          })
+                        ],
+                        1
+                      )
+                    : _vm._e(),
+                  _vm._v(" "),
+                  this.radioInputOption === "IMG"
+                    ? _c(
+                        "b-field",
+                        { attrs: { label: "Question" } },
+                        [
+                          _c(
                             "b-field",
-                            { attrs: { label: "Question" } },
+                            {
+                              staticClass: "file is-primary",
+                              class: { "has-name": !!_vm.question_img },
+                              attrs: { grouped: "" }
+                            },
                             [
                               _c(
-                                "b-field",
+                                "b-upload",
                                 {
-                                  staticClass: "file is-primary",
-                                  class: { "has-name": !!_vm.questionImg },
-                                  attrs: { grouped: "" }
+                                  staticClass: "file-label",
+                                  model: {
+                                    value: _vm.question_img,
+                                    callback: function($$v) {
+                                      _vm.question_img = $$v
+                                    },
+                                    expression: "question_img"
+                                  }
                                 },
                                 [
                                   _c(
-                                    "b-upload",
-                                    {
-                                      staticClass: "file-label",
-                                      model: {
-                                        value: _vm.questionImg,
-                                        callback: function($$v) {
-                                          _vm.questionImg = $$v
-                                        },
-                                        expression: "questionImg"
-                                      }
-                                    },
+                                    "span",
+                                    { staticClass: "file-cta" },
                                     [
+                                      _c("b-icon", {
+                                        staticClass: "file-icon",
+                                        attrs: { icon: "upload" }
+                                      }),
+                                      _vm._v(" "),
                                       _c(
                                         "span",
-                                        { staticClass: "file-cta" },
-                                        [
-                                          _c("b-icon", {
-                                            staticClass: "file-icon",
-                                            attrs: { icon: "upload" }
-                                          }),
-                                          _vm._v(" "),
-                                          _c(
-                                            "span",
-                                            { staticClass: "file-label" },
-                                            [_vm._v("Click to upload")]
-                                          )
-                                        ],
-                                        1
-                                      ),
-                                      _vm._v(" "),
-                                      _vm.questionImg
-                                        ? _c(
-                                            "span",
-                                            { staticClass: "file-name" },
-                                            [
-                                              _vm._v(
-                                                "\n                                        " +
-                                                  _vm._s(_vm.questionImg.name) +
-                                                  "\n                                    "
-                                              )
-                                            ]
-                                          )
-                                        : _vm._e()
-                                    ]
-                                  )
-                                ],
-                                1
+                                        { staticClass: "file-label" },
+                                        [_vm._v("Click to upload")]
+                                      )
+                                    ],
+                                    1
+                                  ),
+                                  _vm._v(" "),
+                                  _vm.question_img
+                                    ? _c("span", { staticClass: "file-name" }, [
+                                        _vm._v(
+                                          "\n                                        " +
+                                            _vm._s(_vm.question_img.name) +
+                                            "\n                                    "
+                                        )
+                                      ])
+                                    : _vm._e()
+                                ]
                               )
-                            ],
-                            1
-                          )
-                        : _vm._e(),
-                      _vm._v(" "),
-                      _c(
-                        "b-field",
-                        [
-                          _c(
-                            "b-radio-button",
-                            {
-                              attrs: {
-                                "native-value": "TEXT",
-                                type: "is-success is-light is-outlined"
-                              },
-                              on: { input: _vm.radioClick },
-                              model: {
-                                value: _vm.radioInputOption,
-                                callback: function($$v) {
-                                  _vm.radioInputOption = $$v
-                                },
-                                expression: "radioInputOption"
-                              }
-                            },
-                            [
-                              _c("b-icon", {
-                                attrs: { pack: "fa", icon: "file-text-o" }
-                              }),
-                              _vm._v(" "),
-                              _c("span", [_vm._v("TEXT")])
-                            ],
-                            1
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "b-radio-button",
-                            {
-                              attrs: {
-                                "native-value": "IMG",
-                                type: "is-success is-light is-outlined"
-                              },
-                              on: { input: _vm.radioClick },
-                              model: {
-                                value: _vm.radioInputOption,
-                                callback: function($$v) {
-                                  _vm.radioInputOption = $$v
-                                },
-                                expression: "radioInputOption"
-                              }
-                            },
-                            [
-                              _c("b-icon", {
-                                attrs: { pack: "fa", icon: "picture-o" }
-                              }),
-                              _vm._v(" "),
-                              _c("span", [_vm._v("IMG")])
                             ],
                             1
                           )
                         ],
                         1
+                      )
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _c(
+                    "b-field",
+                    [
+                      _c(
+                        "b-radio-button",
+                        {
+                          attrs: {
+                            "native-value": "TEXT",
+                            type: "is-success is-light is-outlined"
+                          },
+                          on: { input: _vm.radioClick },
+                          model: {
+                            value: _vm.radioInputOption,
+                            callback: function($$v) {
+                              _vm.radioInputOption = $$v
+                            },
+                            expression: "radioInputOption"
+                          }
+                        },
+                        [
+                          _c("b-icon", {
+                            attrs: { pack: "fa", icon: "file-text-o" }
+                          }),
+                          _vm._v(" "),
+                          _c("span", [_vm._v("TEXT")])
+                        ],
+                        1
                       ),
                       _vm._v(" "),
-                      _c("hr"),
-                      _vm._v(" "),
-                      _vm._l(this.options, function(option, k) {
-                        return _c(
-                          "div",
-                          { key: k, staticClass: "option-panel" },
+                      _c(
+                        "b-radio-button",
+                        {
+                          attrs: {
+                            "native-value": "IMG",
+                            type: "is-success is-light is-outlined"
+                          },
+                          on: { input: _vm.radioClick },
+                          model: {
+                            value: _vm.radioInputOption,
+                            callback: function($$v) {
+                              _vm.radioInputOption = $$v
+                            },
+                            expression: "radioInputOption"
+                          }
+                        },
+                        [
+                          _c("b-icon", {
+                            attrs: { pack: "fa", icon: "picture-o" }
+                          }),
+                          _vm._v(" "),
+                          _c("span", [_vm._v("IMG")])
+                        ],
+                        1
+                      )
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c("hr"),
+                  _vm._v(" "),
+                  _vm._l(this.options, function(option, k) {
+                    return _c(
+                      "div",
+                      { key: k, staticClass: "option-panel" },
+                      [
+                        _c(
+                          "b-field",
+                          { attrs: { label: "Option " + _vm.letters[k] } },
                           [
-                            _c(
-                              "b-field",
-                              { attrs: { label: "Option " + _vm.letters[k] } },
-                              [
-                                option.is_img === 0
-                                  ? _c("b-input", {
-                                      attrs: {
-                                        type: "text",
-                                        placeholder: "Option here..."
-                                      },
-                                      model: {
-                                        value: option.content,
-                                        callback: function($$v) {
-                                          _vm.$set(option, "content", $$v)
+                            option.is_img === 0
+                              ? _c("b-input", {
+                                  attrs: {
+                                    type: "text",
+                                    placeholder: "Option here..."
+                                  },
+                                  model: {
+                                    value: option.content,
+                                    callback: function($$v) {
+                                      _vm.$set(option, "content", $$v)
+                                    },
+                                    expression: "option.content"
+                                  }
+                                })
+                              : _vm._e(),
+                            _vm._v(" "),
+                            option.is_img === 1
+                              ? _c(
+                                  "div",
+                                  [
+                                    _c(
+                                      "b-field",
+                                      {
+                                        staticClass: "file is-primary",
+                                        class: {
+                                          "has-name": !!option.img_path
                                         },
-                                        expression: "option.content"
-                                      }
-                                    })
-                                  : _vm._e(),
-                                _vm._v(" "),
-                                option.is_img === 1
-                                  ? _c(
-                                      "div",
+                                        attrs: { grouped: "" }
+                                      },
                                       [
                                         _c(
-                                          "b-field",
+                                          "b-upload",
                                           {
-                                            staticClass: "file is-primary",
-                                            class: {
-                                              "has-name": !!option.img_path
-                                            },
-                                            attrs: { grouped: "" }
+                                            staticClass: "file-label",
+                                            model: {
+                                              value: option.img_path,
+                                              callback: function($$v) {
+                                                _vm.$set(
+                                                  option,
+                                                  "img_path",
+                                                  $$v
+                                                )
+                                              },
+                                              expression: "option.img_path"
+                                            }
                                           },
                                           [
                                             _c(
-                                              "b-upload",
-                                              {
-                                                staticClass: "file-label",
-                                                model: {
-                                                  value: option.img_path,
-                                                  callback: function($$v) {
-                                                    _vm.$set(
-                                                      option,
-                                                      "img_path",
-                                                      $$v
-                                                    )
-                                                  },
-                                                  expression: "option.img_path"
-                                                }
-                                              },
+                                              "span",
+                                              { staticClass: "file-cta" },
                                               [
+                                                _c("b-icon", {
+                                                  staticClass: "file-icon",
+                                                  attrs: { icon: "upload" }
+                                                }),
+                                                _vm._v(" "),
                                                 _c(
                                                   "span",
-                                                  { staticClass: "file-cta" },
+                                                  { staticClass: "file-label" },
+                                                  [_vm._v("Click to upload")]
+                                                )
+                                              ],
+                                              1
+                                            ),
+                                            _vm._v(" "),
+                                            option.img_path
+                                              ? _c(
+                                                  "span",
+                                                  { staticClass: "file-name" },
                                                   [
-                                                    _c("b-icon", {
-                                                      staticClass: "file-icon",
-                                                      attrs: { icon: "upload" }
-                                                    }),
-                                                    _vm._v(" "),
-                                                    _c(
-                                                      "span",
-                                                      {
-                                                        staticClass:
-                                                          "file-label"
-                                                      },
-                                                      [
-                                                        _vm._v(
-                                                          "Click to upload"
-                                                        )
-                                                      ]
+                                                    _vm._v(
+                                                      "\n                                                " +
+                                                        _vm._s(
+                                                          option.img_path.name
+                                                        ) +
+                                                        "\n                                            "
                                                     )
-                                                  ],
-                                                  1
-                                                ),
-                                                _vm._v(" "),
-                                                option.img_path
-                                                  ? _c(
-                                                      "span",
-                                                      {
-                                                        staticClass: "file-name"
-                                                      },
-                                                      [
-                                                        _vm._v(
-                                                          "\n                                                " +
-                                                            _vm._s(
-                                                              option.img_path
-                                                                .name
-                                                            ) +
-                                                            "\n                                            "
-                                                        )
-                                                      ]
-                                                    )
-                                                  : _vm._e()
-                                              ]
-                                            )
-                                          ],
-                                          1
+                                                  ]
+                                                )
+                                              : _vm._e()
+                                          ]
                                         )
                                       ],
                                       1
                                     )
-                                  : _vm._e(),
-                                _vm._v(" "),
-                                _c(
-                                  "b-button",
-                                  {
-                                    directives: [
-                                      {
-                                        name: "show",
-                                        rawName: "v-show",
-                                        value:
-                                          k || (!k && _vm.options.length > 0),
-                                        expression:
-                                          "k || ( !k && options.length > 0)"
-                                      }
-                                    ],
-                                    staticClass: "qo-btn ml-1",
-                                    staticStyle: { color: "red" },
-                                    on: {
-                                      click: function($event) {
-                                        return _vm.remove(k)
-                                      }
-                                    }
-                                  },
-                                  [
-                                    _c("i", {
-                                      staticClass: "fa fa-trash-o fa-lg"
-                                    })
-                                  ]
-                                ),
-                                _vm._v(" "),
-                                _c(
-                                  "b-button",
-                                  {
-                                    directives: [
-                                      {
-                                        name: "show",
-                                        rawName: "v-show",
-                                        value:
-                                          k || (!k && _vm.options.length > 0),
-                                        expression:
-                                          "k || ( !k && options.length > 0)"
-                                      }
-                                    ],
-                                    staticClass: "qo-btn",
-                                    on: {
-                                      click: function($event) {
-                                        return _vm.toogleClickCheck(k)
-                                      }
-                                    }
-                                  },
-                                  [
-                                    option.is_answer === 1
-                                      ? _c("i", {
-                                          staticClass: "fa fa-check fa-lg",
-                                          staticStyle: { color: "green" }
-                                        })
-                                      : _c("i", {
-                                          staticClass: "fa fa-times fa-lg",
-                                          staticStyle: { color: "red" }
-                                        })
-                                  ]
+                                  ],
+                                  1
                                 )
-                              ],
-                              1
+                              : _vm._e(),
+                            _vm._v(" "),
+                            _c(
+                              "b-button",
+                              {
+                                directives: [
+                                  {
+                                    name: "show",
+                                    rawName: "v-show",
+                                    value: k || (!k && _vm.options.length > 0),
+                                    expression:
+                                      "k || ( !k && options.length > 0)"
+                                  }
+                                ],
+                                staticClass: "qo-btn ml-1",
+                                staticStyle: { color: "red" },
+                                on: {
+                                  click: function($event) {
+                                    return _vm.remove(k)
+                                  }
+                                }
+                              },
+                              [_c("i", { staticClass: "fa fa-trash-o fa-lg" })]
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "b-button",
+                              {
+                                directives: [
+                                  {
+                                    name: "show",
+                                    rawName: "v-show",
+                                    value: k || (!k && _vm.options.length > 0),
+                                    expression:
+                                      "k || ( !k && options.length > 0)"
+                                  }
+                                ],
+                                staticClass: "qo-btn",
+                                on: {
+                                  click: function($event) {
+                                    return _vm.toogleClickCheck(k)
+                                  }
+                                }
+                              },
+                              [
+                                option.is_answer === 1
+                                  ? _c("i", {
+                                      staticClass: "fa fa-check fa-lg",
+                                      staticStyle: { color: "green" }
+                                    })
+                                  : _c("i", {
+                                      staticClass: "fa fa-times fa-lg",
+                                      staticStyle: { color: "red" }
+                                    })
+                              ]
                             )
                           ],
                           1
                         )
-                      }),
-                      _vm._v(" "),
+                      ],
+                      1
+                    )
+                  }),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    { staticStyle: { "margin-top": "20px" } },
+                    [
                       _c(
-                        "div",
-                        { staticStyle: { "margin-top": "20px" } },
-                        [
-                          _c(
-                            "b-dropdown",
+                        "b-dropdown",
+                        {
+                          directives: [
                             {
-                              directives: [
-                                {
-                                  name: "show",
-                                  rawName: "v-show",
-                                  value: this.options.length < 5,
-                                  expression: "this.options.length < 5"
-                                }
-                              ],
-                              attrs: {
-                                position: "is-top-right",
-                                triggers: ["hover"],
-                                "aria-role": "list"
+                              name: "show",
+                              rawName: "v-show",
+                              value: this.options.length < 5,
+                              expression: "this.options.length < 5"
+                            }
+                          ],
+                          attrs: {
+                            position: "is-top-right",
+                            triggers: ["hover"],
+                            "aria-role": "list"
+                          },
+                          scopedSlots: _vm._u([
+                            {
+                              key: "trigger",
+                              fn: function() {
+                                return [
+                                  _c("b-button", {
+                                    attrs: {
+                                      label: "Add Option",
+                                      type: "is-info",
+                                      "icon-right": "menu-down"
+                                    }
+                                  })
+                                ]
                               },
-                              scopedSlots: _vm._u([
-                                {
-                                  key: "trigger",
-                                  fn: function() {
-                                    return [
-                                      _c("b-button", {
-                                        attrs: {
-                                          label: "Add Option",
-                                          type: "is-info",
-                                          "icon-right": "menu-down"
-                                        }
-                                      })
-                                    ]
-                                  },
-                                  proxy: true
+                              proxy: true
+                            }
+                          ])
+                        },
+                        [
+                          _vm._v(" "),
+                          _c(
+                            "b-dropdown-item",
+                            {
+                              attrs: { "aria-role": "listitem" },
+                              on: {
+                                click: function($event) {
+                                  return _vm.add("text")
                                 }
-                              ])
+                              }
                             },
                             [
-                              _vm._v(" "),
-                              _c(
-                                "b-dropdown-item",
-                                {
-                                  attrs: { "aria-role": "listitem" },
-                                  on: {
-                                    click: function($event) {
-                                      return _vm.add("text")
-                                    }
-                                  }
-                                },
-                                [
-                                  _c("i", { staticClass: "fa fa-plus" }),
-                                  _vm._v(" Text")
-                                ]
-                              ),
-                              _vm._v(" "),
-                              _c(
-                                "b-dropdown-item",
-                                {
-                                  attrs: { "aria-role": "listitem" },
-                                  on: {
-                                    click: function($event) {
-                                      return _vm.add("img")
-                                    }
-                                  }
-                                },
-                                [
-                                  _c("i", { staticClass: "fa fa-picture-o" }),
-                                  _vm._v(" Image")
-                                ]
-                              )
-                            ],
-                            1
+                              _c("i", { staticClass: "fa fa-plus" }),
+                              _vm._v(" Text")
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "b-dropdown-item",
+                            {
+                              attrs: { "aria-role": "listitem" },
+                              on: {
+                                click: function($event) {
+                                  return _vm.add("img")
+                                }
+                              }
+                            },
+                            [
+                              _c("i", { staticClass: "fa fa-picture-o" }),
+                              _vm._v(" Image")
+                            ]
                           )
                         ],
                         1
-                      ),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "mt-3" }, [
-                        _c(
-                          "ul",
-                          _vm._l(this.errors, function(err, i) {
-                            return _c("li", { key: i }, [
-                              _c(
-                                "span",
-                                {
-                                  staticStyle: {
-                                    color: "red",
-                                    "font-style": "italic"
-                                  }
-                                },
-                                [
-                                  _c("b-icon", {
-                                    attrs: { pack: "fa", icon: "exclamation" }
-                                  }),
-                                  _vm._v(_vm._s(err[0]))
-                                ],
-                                1
-                              )
-                            ])
-                          }),
-                          0
-                        )
-                      ])
+                      )
                     ],
-                    2
-                  )
-                ]),
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "mt-3" }, [
+                    _c(
+                      "ul",
+                      _vm._l(this.errors, function(err, i) {
+                        return _c("li", { key: i }, [
+                          _c(
+                            "span",
+                            {
+                              staticStyle: {
+                                color: "red",
+                                "font-style": "italic"
+                              }
+                            },
+                            [
+                              _c("b-icon", {
+                                attrs: { pack: "fa", icon: "exclamation" }
+                              }),
+                              _vm._v(_vm._s(err[0]))
+                            ],
+                            1
+                          )
+                        ])
+                      }),
+                      0
+                    )
+                  ])
+                ],
+                2
+              )
+            ]),
+            _vm._v(" "),
+            _c(
+              "footer",
+              { staticClass: "modal-card-foot" },
+              [
+                _c("b-button", {
+                  attrs: { label: "Close" },
+                  on: {
+                    click: function($event) {
+                      _vm.isModalCreate = false
+                    }
+                  }
+                }),
                 _vm._v(" "),
                 _c(
-                  "footer",
-                  { staticClass: "modal-card-foot" },
-                  [
-                    _c("b-button", {
-                      attrs: { label: "Close" },
-                      on: {
-                        click: function($event) {
-                          _vm.isModalCreate = false
-                        }
-                      }
-                    }),
-                    _vm._v(" "),
-                    _c(
-                      "button",
-                      {
-                        class: _vm.btnClass,
-                        attrs: { label: "Save", type: "is-success" }
-                      },
-                      [_vm._v("SAVE")]
-                    )
-                  ],
-                  1
+                  "button",
+                  {
+                    class: _vm.btnClass,
+                    attrs: { label: "Save", type: "is-success" },
+                    on: { click: _vm.submit }
+                  },
+                  [_vm._v("SAVE")]
                 )
-              ])
-            ]
-          )
+              ],
+              1
+            )
+          ])
         ]
       )
     ],
@@ -25657,85 +25636,22 @@ var render = function() {
               _vm._v("\n            Quiz\n        ")
             ]),
             _vm._v(" "),
-            _c("b-navbar-item", { attrs: { tag: "div" } }, [
-              _vm.isAuth == 1
-                ? _c(
-                    "div",
-                    { staticClass: "buttons" },
-                    [
-                      _c(
-                        "b-dropdown",
-                        {
-                          attrs: { "aria-role": "list" },
-                          scopedSlots: _vm._u(
-                            [
-                              {
-                                key: "trigger",
-                                fn: function(ref) {
-                                  var active = ref.active
-                                  return [
-                                    _c("b-button", {
-                                      attrs: {
-                                        label: _vm.firstname,
-                                        type: "is-primary",
-                                        "icon-right": active
-                                          ? "menu-up"
-                                          : "menu-down"
-                                      }
-                                    })
-                                  ]
-                                }
-                              }
-                            ],
-                            null,
-                            false,
-                            3104862243
-                          )
-                        },
-                        [
-                          _vm._v(" "),
-                          _c(
-                            "b-dropdown-item",
-                            {
-                              attrs: { "aria-role": "listitem" },
-                              on: { click: _vm.logout }
-                            },
-                            [
-                              _c("b-icon", {
-                                attrs: { pack: "fa", icon: "sign-out" }
-                              }),
-                              _vm._v(
-                                "\n                        Logout\n                    "
-                              )
-                            ],
-                            1
-                          )
-                        ],
-                        1
-                      )
-                    ],
-                    1
-                  )
-                : _c(
-                    "div",
-                    { staticClass: "buttons" },
-                    [
-                      _c(
-                        "b-button",
-                        {
-                          staticClass: "button is-light",
-                          attrs: { href: "/login" }
-                        },
-                        [
-                          _c("i", { staticClass: "fa fa-sign-out" }),
-                          _vm._v(" "),
-                          _c("strong", [_vm._v("Login")])
-                        ]
-                      )
-                    ],
-                    1
-                  )
-            ])
+            _c(
+              "b-navbar-dropdown",
+              { attrs: { label: _vm.firstname } },
+              [
+                _c(
+                  "b-navbar-item",
+                  { on: { click: _vm.logout } },
+                  [
+                    _c("b-icon", { attrs: { pack: "fa", icon: "sign-out" } }),
+                    _vm._v("\n                 LOGOUT\n            ")
+                  ],
+                  1
+                )
+              ],
+              1
+            )
           ]
         },
         proxy: true

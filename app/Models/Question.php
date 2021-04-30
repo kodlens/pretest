@@ -14,9 +14,9 @@ class Question extends Model
     protected $table = 'questions';
     protected $primaryKey = 'question_id';
 
-    protected $fillable=['order_no', 'section_id', 'question', 'question_img_path', 'score'];
+    protected $fillable=['order_no', 'section_id', 'question', 'is_question_img', 'question_img', 'score'];
 
-  
+
 
 
     public function options(){

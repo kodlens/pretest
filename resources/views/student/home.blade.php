@@ -2,10 +2,10 @@
 
 @section('content')
 
-    {{-- <home-page></home-page> --}}
+     <home-page></home-page>
 
-    @isset($error)
-        {{ $error }}
-    @endisset
+{{--    @isset($error)--}}
+{{--        {{ $error }}--}}
+{{--    @endisset--}}
 
 @endsection

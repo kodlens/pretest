@@ -19,10 +19,10 @@ class CreateQuestionsTable extends Migration
             $table->unsignedBigInteger('section_id');
             $table->foreign('section_id')->references('section_id')->on('sections');
             //create relationship
-            
+
             $table->text('question');
             $table->boolean('is_question_img')->default(0);
-            $table->string('question_img_path')->nullable();
+            $table->string('question_img')->nullable();
             $table->integer('score');
             $table->timestamps();
         });
