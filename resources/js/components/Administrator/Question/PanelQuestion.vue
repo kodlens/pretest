@@ -93,7 +93,8 @@
                                 <tbody>
                                     <tr v-for="item in props.row.options" :key="item.option_id">
                                         <td>{{ item.letter }}</td>
-                                        <td>{{ item.content }}</td>
+                                        <td v-if="item.content != ''">{{ item.content }}</td>
+                                        <td v-else>{{ item.img_path }}</td>
                                         <td>
                                             <b-icon v-if="item.is_answer === 1"
                                                     pack="fa"
@@ -134,7 +135,6 @@
                     </header>
                     <section class="modal-card-body">
                         <div class="question-panel">
-
                             <div class="columns">
                                 <div class="column">
                                     <b-field label="Order No." expanded>
@@ -405,7 +405,7 @@ export default {
                 content: '',
                 is_answer: 0,
                 is_img: inputType === 'text' ? 0 : 1,
-                img_path:null,
+                img_path:{},
                 checkColor: 'red',
             });
         },
@@ -471,7 +471,14 @@ export default {
             formData.append('question_img', this.question_img);
             formData.append('section', this.section);
             formData.append('score', this.score);
-            //formData.append('options', this.options);
+            for(var index = 0; index < this.options.length; index++){
+                formData.append('optionImg['+index+']', this.options[index].img_path);
+                //console.log(this.options[index].img_path);
+            }
+
+
+
+           // formData.append('options', this.options);
             formData.append('options', JSON.stringify(this.options));
 
             axios.post('/panel/question',formData, config).then(res=>{

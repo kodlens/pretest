@@ -4,9 +4,13 @@ namespace App\Http\Controllers\Administrator;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreQuestionRequest;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
+
+use Illuminate\Http\File;
+use Illuminate\Support\Facades\Storage;
 
 use App\Models\Question;
 use App\Models\Section;
@@ -52,75 +56,72 @@ class QuestionController extends Controller
         ]);
 
         try{
-            $file = $req->file('question_img');
+
+            $file = $req->file('question_img'); //check if null or has an image
+            $options = json_decode($req->options);  //decode to json stringify JSON from javascript
 
             if($file){
                 //if question is file
-                \DB::transaction(function() use ($req, $file){
-                    $options = json_decode($req->options);
-                    //decode to json stringify JSON from javascript
+                $pathQuestion = $file->store('public/q'); //get path of the file
+                $newPath = explode('/', $pathQuestion);
+                $pathQuestion = $newPath[2];
 
-                    $destinationPath = 'img/q/';
-                    //$fileName = time() . $file->getClientOriginalName();
-                    $fileName = md5(time()). '.' . $file->extension();
-
-                    $question = Question::create([
-                        'order_no' => $req->order_no,
-                        'section_id' => $req->section,
-                        'is_question_img' => 1,
-                        'question_img' => $destinationPath . $fileName,
-                        'question' => trim($req->question),
-                        'score' => $req->score
-                    ]);
-
-                    $q_id = $question->question_id;
-                    $arr=[];
-
-                    foreach($options as $row){
-                        array_push($arr, [
-                            'question_id' => $q_id,
-                            'letter' => $row->optionLetter,
-                            'content' => trim($row->content),
-                            'is_img' => $row->is_img,
-                            'img_path' => trim($row->img_path),
-                            'is_answer' => $row->is_answer,
-                        ]);
-                    }
-
-                    Option::insert($arr);
-
-                    //move the file to the folder
-                    $file->move($destinationPath , $fileName);
-
-                }); //end db transaction
-
+                $question = Question::create([
+                    'order_no' => $req->order_no,
+                    'section_id' => $req->section,
+                    'is_question_img' => 1,
+                    'question_img' => $pathQuestion,
+                    'question' => trim($req->question),
+                    'score' => $req->score
+                ]);
+                //$file->move($destinationPath , $fileName);   //move the file to the folder
             }else{
-
-                //$options = json_decode($req->options);
-                //return $test;
-                \DB::transaction(function() use($req){
-                    $options = json_decode($req->options);
-                    $question = Question::create([
-                        'order_no' => $req->order_no,
-                        'section_id' => $req->section,
-                        'question' => trim($req->question),
-                        'score' => $req->score
-                    ]);
-                    $q_id = $question->question_id;
-                    $arr=[];
-                    foreach($options as $row){
-                        array_push($arr, [
-                            'question_id' => $q_id,
-                            'letter' => $row->optionLetter,
-                            'content' => trim($row->content),
-                            'is_img' => $row->is_img,
-                            'img_path' => trim($row->img_path),
-                            'is_answer' => $row->is_answer,
-                        ]);
-                    }
-                    Option::insert($arr);
-                }); //end db transaction
+                //if question is plain text
+                $question = Question::create([
+                    'order_no' => $req->order_no,
+                    'section_id' => $req->section,
+                    'question' => trim($req->question),
+                    'score' => $req->score
+                ]);
             }
+
+            $q_id = $question->question_id; //get last insert id from question table
+            $arr=[]; //init array
+
+            $counter = 0;
+            $optionImg = $req->optionImg;
+
+            foreach($options as $row){
+                if($row->is_img > 0){
+                    //upload
+                    $fileOption = $optionImg[$counter];
+                    $pathOption = $fileOption->storeAs('public/q', md5($counter.time()). '.'.$fileOption->extension());
+                    $newPath = explode('/', $pathOption);
+                    $pathOption = $newPath[2];
+                    array_push($arr, [
+                        'question_id' => $q_id,
+                        'letter' => $row->optionLetter,
+                        'content' => trim($row->content),
+                        'is_img' => $row->is_img,
+                        'img_path' => trim($pathOption),
+                        'is_answer' => $row->is_answer,
+                    ]);
+
+                }else{
+                    //plain text
+                    array_push($arr, [
+                        'question_id' => $q_id,
+                        'letter' => $row->optionLetter,
+                        'content' => trim($row->content),
+                        'is_img' => $row->is_img,
+                        'img_path' => '',
+                        'is_answer' => $row->is_answer,
+                    ]);
+                }
+                $counter++;
+            }
+            Option::insert($arr);
+
            return ['status' => 'saved'];
         }catch(\Exception $e){
             return ['status' => 'error', 'msg' => $e->getMessage()];
@@ -169,11 +170,21 @@ class QuestionController extends Controller
 
 
 
-
-
-
     public function destroy($id){
-        Question::destroy($id);
+        $fileQuestion = Question::find($id);
+
+        if(Storage::exists('public/q/'. $fileQuestion->question_img)){
+            Storage::delete('public/q/'. $fileQuestion->question_img);
+        }
+
+       $fileOptions = Option::where('question_id', $id)->get();
+
+       foreach ($fileOptions as $path){
+           if(Storage::exists('public/q/' .$path->img_path)){
+            Storage::delete('public/q/' .$path->img_path);
+           }
+       }
+       Question::destroy($id);
         return [['status' => 'deleted']];
     }
 

@@ -6,12 +6,14 @@
                     <div class="column is-8 is-offset-2">
 
                         <div class="question-box" v-for="(item, i) in questions" :key="i">
-                            
+
                             <!--question content-->
-                            <div class="question-content">{{ i + 1 }}.) 
+                            <div class="question-content">{{ i + 1 }}.)
                                 <span v-if="item.is_question_img == 0">{{item.question}}</span>
 
-                                <div v-else>IMAGE QUESTION</div>
+                                <div v-else class="question-img">
+                                    <img :src="`/storage/q/`+item.question_img" alt="...">
+                                </div>
                             </div>
                             <!--question content-->
 
@@ -22,21 +24,27 @@
                                      <b-field>
                                         <b-radio
                                             v-model="answers[i]"
-                                           
                                             :native-value="option.option_id">
                                             {{option.letter}} - {{ option.content }}
                                         </b-radio>
                                     </b-field>
                                  </div>
-                                 
+
                                 <!--if question is img-->
                                 <div v-else>
-                                    IMG
+                                    <b-field>
+                                        <b-radio
+                                            v-model="answers[i]"
+                                            :native-value="option.option_id">
+                                            <div class="question-img">{{option.letter}}. </div>
+                                            <img :src="`/storage/q/`+option.img_path" alt="...">
+                                        </b-radio>
+                                    </b-field>
                                 </div>
 
                             </div>
                              <!--option content-->
-                            
+
                         </div><!--question-box-->
 
                     </div>
@@ -51,26 +59,24 @@ export default {
     data(){
         return{
             questions: [],
-            
+
             answers:[],
-            
+
 
         }
     },
     methods: {
         loadQuestion: async function(){
-            
+
             await axios.get('/student/taking-exam-question').then(res=>{
-                console.log(res.data);
+                //5pxconsole.log(res.data);
                 this.questions = res.data;
             });
         }
     },
-
     mounted(){
         this.loadQuestion();
     },
-
 }
 </script>
 
@@ -86,9 +92,14 @@ export default {
         font-weight: bold;
     }
 
+    .question-img{
+        padding: 10px;
+        display: flex;
+    }
+
     .option-content{
         margin-left: 30px;
         padding: 5px 5px;
-        
+
     }
 </style>

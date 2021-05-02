@@ -28,12 +28,10 @@ class TakingExamController extends Controller
     public function examineeQuestion()
     {
         # code...
-
-
         return Question::with(['options' => function($query){
                 $query->select('question_id', 'option_id', 'letter', 'content', 'is_img', 'img_path');
         }])
-            ->select('question_id','question', 'is_question_img', 'question_img_path')
+            ->select('question_id','question', 'is_question_img', 'question_img')
             ->get();
     }
 
