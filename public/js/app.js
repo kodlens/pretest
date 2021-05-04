@@ -3219,6 +3219,16 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {};
@@ -3445,6 +3455,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: ['isAuth', 'firstname'],
   data: function data() {
@@ -3480,6 +3491,11 @@ function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
+//
+//
+//
+//
+//
 //
 //
 //
@@ -3582,6 +3598,15 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
       return loadQuestion;
     }(),
+    myTimer: function myTimer() {
+      console.log('ticking'); //setTimeout(this.timerOutput(), 4000);
+
+      console.log(new Date().getMinutes() + 45); // setInterval(function(){
+      // });
+    },
+    timerOutput: function timerOutput() {
+      console.log('times up');
+    },
     submit: function submit() {
       var _this2 = this;
 
@@ -3627,6 +3652,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   },
   mounted: function mounted() {
     this.loadQuestion();
+    this.myTimer();
   }
 });
 
@@ -21473,7 +21499,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.question-box[data-v-a469d73c]{\n    border-radius: 5px;\n    background-color: rgb(238, 238, 238);\n    padding: 20px;\n    margin-bottom: 10px;\n}\n.question-content[data-v-a469d73c]{\n    font-weight: bold;\n}\n.question-img[data-v-a469d73c]{\n    padding: 10px;\n    display: flex;\n}\n.option-content[data-v-a469d73c]{\n    margin-left: 30px;\n    padding: 5px 5px;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.question-box[data-v-a469d73c]{\n    border-radius: 5px;\n    background-color: rgb(238, 238, 238);\n    padding: 20px;\n    margin-bottom: 10px;\n}\n.question-content[data-v-a469d73c]{\n    font-weight: bold;\n}\n.question-img[data-v-a469d73c]{\n    padding: 10px;\n    display: flex;\n}\n.option-content[data-v-a469d73c]{\n    margin-left: 30px;\n    padding: 5px 5px;\n}\n.timer-container[data-v-a469d73c]{\n    height: 60px;\n    background-color: rgb(20, 83, 31);\n    color: white;\n    position: fixed;\n    bottom: 50px;\n    right: 0;\n    width: 150px;\n    padding: 15px;\n    border-radius: 5px;\n    transition: all 0.5s ease;\n}\n@media screen and (max-width: 992px) {\n.timer-container[data-v-a469d73c] {\n        width: 100%;\n        bottom: 0;\n         border-radius: 0;\n}\n}\n\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -25824,20 +25850,36 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
-}
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", [
-      _c("div", { staticClass: "section" }, [
-        _vm._v("\n        Student Home Panel\n    ")
+  return _c("div", [
+    _c("div", { staticClass: "hero is-fullheight-with-navbar" }, [
+      _c("div", { staticClass: "hero-body" }, [
+        _c("div", { staticClass: "container" }, [
+          _c("div", { staticClass: "columns" }, [
+            _c("div", { staticClass: "column is-8 is-offset-2" }, [
+              _c("div", { staticClass: "buttons is-centered" }, [
+                _c(
+                  "a",
+                  {
+                    staticClass: "button is-primary is-outlined",
+                    attrs: { href: "/student/taking-exam" }
+                  },
+                  [
+                    _c("b-icon", {
+                      attrs: { pack: "fa", icon: "file-text-o" }
+                    }),
+                    _vm._v("   START TEST NOW\n                            ")
+                  ],
+                  1
+                )
+              ])
+            ])
+          ])
+        ])
       ])
     ])
-  }
-]
+  ])
+}
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -25869,7 +25911,7 @@ var render = function() {
               _c("div", { staticClass: "panel" }, [
                 _c("div", { staticClass: "panel-heading" }, [
                   _vm._v(
-                    "\n                                EXAM RESULT\n                            "
+                    "\n                                PRE TEST RESULT\n                            "
                   )
                 ]),
                 _vm._v(" "),
@@ -25880,7 +25922,7 @@ var render = function() {
                     _c(
                       "tbody",
                       _vm._l(this.results, function(item) {
-                        return _c("tr", [
+                        return _c("tr", { key: item.section_id }, [
                           _c("td", [_vm._v(_vm._s(item.section))]),
                           _vm._v(" "),
                           _c("td", [_vm._v(_vm._s(item.total_score))])
@@ -26120,21 +26162,35 @@ var render = function() {
         key: "end",
         fn: function() {
           return [
-            _c("b-navbar-item", { attrs: { href: "/student/home" } }, [
-              _vm._v("\n            Home\n        ")
-            ]),
+            _c(
+              "b-navbar-item",
+              { attrs: { href: "/student/home" } },
+              [
+                _c("b-icon", { attrs: { pack: "fa", icon: "home" } }),
+                _vm._v("  \n            Home\n        ")
+              ],
+              1
+            ),
             _vm._v(" "),
-            _c("b-navbar-item", { attrs: { href: "/student/taking-exam" } }, [
-              _vm._v("\n            Quiz\n        ")
-            ]),
-            _vm._v(" "),
-            _c("b-navbar-item", { attrs: { href: "/student/result-exam" } }, [
-              _vm._v("\n            Result\n        ")
-            ]),
+            _c(
+              "b-navbar-item",
+              { attrs: { href: "/student/result-exam" } },
+              [
+                _c("b-icon", { attrs: { pack: "fa", icon: "file-o" } }),
+                _vm._v("  \n            Result\n        ")
+              ],
+              1
+            ),
             _vm._v(" "),
             _c(
               "b-navbar-dropdown",
-              { attrs: { label: _vm.firstname } },
+              {
+                attrs: {
+                  label: _vm.firstname,
+                  "icon-pack": "fa",
+                  icon: "id-badge"
+                }
+              },
               [
                 _c(
                   "b-navbar-item",
@@ -26235,9 +26291,7 @@ var render = function() {
                                             "b-radio",
                                             {
                                               attrs: {
-                                                "native-value":
-                                                  option.option_id,
-                                                required: ""
+                                                "native-value": option.option_id
                                               },
                                               model: {
                                                 value: _vm.answers[i],
@@ -26274,9 +26328,7 @@ var render = function() {
                                             {
                                               attrs: {
                                                 required: "",
-                                                "native-value":
-                                                  option.option_id,
-                                                required: ""
+                                                "native-value": option.option_id
                                               },
                                               model: {
                                                 value: _vm.answers[i],
@@ -26333,6 +26385,10 @@ var render = function() {
           ]
         )
       ])
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "timer-container" }, [
+      _vm._v("\n        test\n    ")
     ])
   ])
 }

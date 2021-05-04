@@ -48,6 +48,7 @@ class TakingExamController extends Controller
                 $query->select('question_id', 'option_id', 'letter', 'content', 'is_img', 'img_path');
         }])
             ->select('question_id','question', 'is_question_img', 'question_img')
+            ->inRandomOrder()
             ->get();
     }
 

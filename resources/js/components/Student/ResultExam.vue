@@ -7,7 +7,7 @@
                         <div class="column is-6 is-offset-3">
                             <div class="panel">
                                 <div class="panel-heading">
-                                    EXAM RESULT
+                                    PRE TEST RESULT
                                 </div>
                                 <div class="panel-body">
                                     <table class="table is-fullwidth">
@@ -16,7 +16,7 @@
                                             <th>Score</th>
                                         </thead>
                                         <tbody>
-                                            <tr v-for="item in this.results">
+                                            <tr v-for="item in this.results" :key="item.section_id">
                                                 <td>{{ item.section}}</td>
                                                 <td>{{ item.total_score}}</td>
                                             </tr>

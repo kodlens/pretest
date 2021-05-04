@@ -73,9 +73,6 @@ Route::get('/ajax/section', [App\Http\Controllers\Administrator\SectionControlle
 
 
 
-
-
-
 //for debugging mode-----
 
 //Route::get('/app/user', function(){

@@ -23,18 +23,19 @@
 
         <template #end>
             <b-navbar-item href="/student/home">
+                <b-icon pack="fa" icon="home"></b-icon>&nbsp;&nbsp;
                 Home
             </b-navbar-item>
-
-             <b-navbar-item href="/student/taking-exam">
+             <!-- <b-navbar-item href="/student/taking-exam">
                 Quiz
-            </b-navbar-item>
+            </b-navbar-item> -->
             <b-navbar-item href="/student/result-exam">
+                <b-icon pack="fa" icon="file-o"></b-icon>&nbsp;&nbsp;
                 Result
             </b-navbar-item>
 
 
-            <b-navbar-dropdown :label="firstname">
+            <b-navbar-dropdown :label="firstname" icon-pack="fa" icon="id-badge">
                 <b-navbar-item @click="logout">
                     <b-icon pack="fa" icon="sign-out"></b-icon>
                     &nbsp;LOGOUT

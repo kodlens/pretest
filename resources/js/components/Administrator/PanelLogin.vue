@@ -44,7 +44,7 @@ export default{
     data(){
         return{
             fields: {
-                username: 'admin',
+               username: 'admin',
                 password: 'a',
             },
             errors: {},

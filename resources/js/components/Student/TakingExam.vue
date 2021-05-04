@@ -23,7 +23,7 @@
                                         <b-field>
                                             <b-radio
                                                 v-model="answers[i]"
-                                                :native-value="option.option_id" required>
+                                                :native-value="option.option_id">
                                                 {{option.letter}} - {{ option.content }}
                                             </b-radio>
                                         </b-field>
@@ -34,7 +34,7 @@
                                         <b-field>
                                             <b-radio
                                                 v-model="answers[i]" required
-                                                :native-value="option.option_id" required>
+                                                :native-value="option.option_id">
                                                 <div class="question-img">{{option.letter}}. </div>
                                                 <img :src="`/storage/q/`+option.img_path" alt="...">
                                             </b-radio>
@@ -53,8 +53,13 @@
                         </div>
                     </div> <!--columns-->
                 </form>
-            </div>
+            </div><!--container-->
+        </div><!--section-->
+
+        <div class="timer-container">
+            test
         </div>
+
     </div><!--root div-->
 </template>
 
@@ -85,6 +90,19 @@ export default {
                 //5pxconsole.log(res.data);
                 this.questions = res.data;
             });
+        },
+
+        myTimer(){
+            console.log('ticking');
+            //setTimeout(this.timerOutput(), 4000);
+            console.log(new Date().getMinutes() + 45);
+            // setInterval(function(){
+
+            // });
+        },
+
+        timerOutput(){
+            console.log('times up');
         },
 
         submit(){
@@ -127,6 +145,8 @@ export default {
     },
     mounted(){
         this.loadQuestion();
+
+        this.myTimer();
     },
 }
 </script>
@@ -153,4 +173,26 @@ export default {
         padding: 5px 5px;
 
     }
+
+    .timer-container{
+        height: 60px;
+        background-color: rgb(20, 83, 31);
+        color: white;
+        position: fixed;
+        bottom: 50px;
+        right: 0;
+        width: 150px;
+        padding: 15px;
+        border-radius: 5px;
+        transition: all 0.5s ease;
+    }
+
+    @media screen and (max-width: 992px) {
+        .timer-container {
+            width: 100%;
+            bottom: 0;
+             border-radius: 0;
+        }
+    }
+
 </style>
