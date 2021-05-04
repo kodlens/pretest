@@ -1,11 +1,13 @@
 <?php
 
+//use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Route;
 
 use Carbon\Carbon;
 use App\Models\TestSchedule;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -37,7 +39,8 @@ Route::post('/student/login', [App\Http\Controllers\Student\StudentLoginControll
 Route::get('/student/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::resource('/student/taking-exam', App\Http\Controllers\Student\TakingExamController::class);
 Route::get('/student/taking-exam-question', [App\Http\Controllers\Student\TakingExamController::class, 'examineeQuestion']);
-
+Route::get('/student/result-exam', [App\Http\Controllers\Student\ResultExamController::class, 'index']);
+Route::get('/student/ajax-result-exam', [App\Http\Controllers\Student\ResultExamController::class, 'resultExam']);
 
 
 
@@ -73,26 +76,22 @@ Route::get('/ajax/section', [App\Http\Controllers\Administrator\SectionControlle
 
 
 
-
-
-
-
-
-
-
-
 //for debugging mode-----
 
-Route::get('/app/user', function(){
-        if(Auth::guard('student')->check()){
-            return 'student guard';
-        }
-        if(Auth::guard('admin')->check()){
-            return 'admin guard';
-        }
-    return 'please login';
-
-});
+//Route::get('/app/user', function(){
+//
+//    User::create([
+//        'username' => 'guidance',
+//        'lname' => 'SUMALINOG',
+//        'fname' => 'BERNICE',
+//        'mname' => '',
+//        'sex' => 'FEMALE',
+//        'email' => 'guidance@gadtest',
+//        'password' => Hash::make('gu1dance$$'),
+//        'role' => 'ADMINISTRATOR',
+//    ]);
+//
+//});
 
 Route::get('/app/logout', function(){
     Auth::guard('student')->logout();

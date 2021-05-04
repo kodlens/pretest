@@ -15,9 +15,11 @@ class CreateAnswersTable extends Migration
     {
         Schema::create('answers', function (Blueprint $table) {
             $table->id('answer_id');
-            
+
             $table->unsignedBigInteger('answer_sheet_id');
-            $table->foreign('answer_sheet_id')->references('answer_sheet_id')->on('answer_sheets');
+            $table->foreign('answer_sheet_id')->references('answer_sheet_id')->on('answer_sheets')
+                ->onUpdate('cascade')
+                ->onDelete('cascade');;
 
             $table->unsignedBigInteger('option_id');
             $table->foreign('option_id')->references('option_id')->on('options');

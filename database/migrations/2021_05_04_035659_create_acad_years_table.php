@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateAnswerSheetsTable extends Migration
+class CreateAcadYearsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,11 @@ class CreateAnswerSheetsTable extends Migration
      */
     public function up()
     {
-        Schema::create('answer_sheets', function (Blueprint $table) {
-            $table->id('answer_sheet_id');
-            $table->string('code');
-            $table->string('student_id');
-            $table->boolean('is_taken')->default(0);
-            $table->dateTime('date_taken');
+        Schema::create('acad_years', function (Blueprint $table) {
+            $table->id('acad_year_id');
+            $table->string('code')->unique();
+            $table->string('description')->nullable();
+            $table->boolean('active')->default(0);
             $table->timestamps();
         });
     }
@@ -30,6 +29,6 @@ class CreateAnswerSheetsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('answers');
+        Schema::dropIfExists('acad_years');
     }
 }

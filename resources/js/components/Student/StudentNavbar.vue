@@ -29,6 +29,10 @@
              <b-navbar-item href="/student/taking-exam">
                 Quiz
             </b-navbar-item>
+            <b-navbar-item href="/student/result-exam">
+                Result
+            </b-navbar-item>
+
 
             <b-navbar-dropdown :label="firstname">
                 <b-navbar-item @click="logout">

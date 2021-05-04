@@ -63,7 +63,7 @@
                         <b-table-column field="question" label="Question" v-slot="props">
                             <template>
                                 <span v-if="props.row.is_question_img == 0"> {{ props.row.question }}</span>
-                                <span v-else> {{ props.row.question_img }}</span>
+                                <a v-else @click="showImg(props.row.question_img)">{{ props.row.question_img }}</a>
                             </template>
                         </b-table-column>
 
@@ -94,7 +94,7 @@
                                     <tr v-for="item in props.row.options" :key="item.option_id">
                                         <td>{{ item.letter }}</td>
                                         <td v-if="item.content != ''">{{ item.content }}</td>
-                                        <td v-else>{{ item.img_path }}</td>
+                                        <td v-else><a @click="showImg(item.img_path)">{{ item.img_path }}</a></td>
                                         <td>
                                             <b-icon v-if="item.is_answer === 1"
                                                     pack="fa"
@@ -117,7 +117,11 @@
             </div>
         </div>
 
-        <!--modal create-->
+
+
+
+        <!-- MODAL HERE -->
+        <!--modal create/update-->
         <b-modal v-model="isModalCreate" has-modal-card
                     trap-focus
                     width="640"
@@ -136,11 +140,11 @@
                     <section class="modal-card-body">
                         <div class="question-panel">
                             <div class="columns">
-                                <div class="column">
+                                <!-- <div class="column">
                                     <b-field label="Order No." expanded>
                                         <b-numberinput v-model="order_no" controls-position="compact" expanded min="0" max="9999"></b-numberinput>
                                     </b-field>
-                                </div>
+                                </div> -->
 
                                 <div class="column">
                                     <b-field label="Section" expanded>
@@ -157,11 +161,13 @@
                                 </div>
                             </div><!-- class columns-->
 
+
+
                             <b-field v-if="this.radioInputOption === 'TEXT'" label="Question">
-                                <b-input type="textarea" v-model="question" placeholder="Question" />
+                                <b-input type="textarea" v-model="question" expanded placeholder="Question" />
                             </b-field>
 
-                            <b-field v-if="this.radioInputOption === 'IMG'" label="Question">
+                            <b-field v-if="this.radioInputOption === 'IMG' && this.globalId == 0" label="Question">
                                 <b-field grouped class="file is-primary" :class="{'has-name': !!question_img}">
                                     <b-upload v-model="question_img" class="file-label">
                                         <span class="file-cta">
@@ -174,6 +180,11 @@
                                     </b-upload>
                                 </b-field>
                             </b-field>
+                            <div v-if="this.radioInputOption === 'IMG' && this.globalId > 0">
+                                <p>{{ this.question_img }}</p>
+                                <p style="color:red; font-size: 14px; font-style: italic;">Restricted from editing. If you want to edit this question, you may delete this and create new one.</p>
+                            </div>
+
 
                             <b-field>
                                 <b-radio-button v-model="radioInputOption"
@@ -200,8 +211,7 @@
                                 <b-field :label="`Option ` + letters[k]">
                                     <b-input v-if="option.is_img === 0" type="text" v-model="option.content" placeholder="Option here..."/>
 
-
-                                    <div v-if="option.is_img === 1">
+                                    <div v-if="option.is_img === 1 && globalId == 0">
                                         <b-field grouped class="file is-primary" :class="{'has-name': !!option.img_path}">
                                             <b-upload v-model="option.img_path" class="file-label">
                                                 <span class="file-cta">
@@ -215,7 +225,11 @@
                                         </b-field>
                                     </div>
 
-                                    <b-button class="qo-btn ml-1" style="color: red;"
+                                    <div v-if="option.is_img === 1 && globalId > 0">
+                                        <div>{{ option.img_path }}</div>
+                                    </div>
+
+                                    <b-button class="qo-btn ml-1" style="color: red;" v-if="option.is_img === 1 && globalId == 0"
                                             @click="remove(k)"
                                             v-show="k || ( !k && options.length > 0)">
                                         <i class="fa fa-trash-o fa-lg"></i>
@@ -232,7 +246,7 @@
 
                             <div style="margin-top: 20px;">
                                 <!--HOVER BUTTON SO THAT USER WILL SELECT IF OPTION IS IMAGE OR TEXT-->
-                                <b-dropdown position="is-top-right" v-show="this.options.length < 5" :triggers="['hover']" aria-role="list">
+                                <b-dropdown position="is-top-right" v-show="this.options.length < 5" :triggers="['click']" aria-role="list">
                                     <template #trigger>
                                         <b-button
                                             label="Add Option"
@@ -270,6 +284,51 @@
         </b-modal>
 
 
+
+
+
+
+
+
+        <!--modal show image-->
+        <!--MODAL FOR IMAGE, CONTAINER-->
+        <b-modal v-model="modalImage" has-modal-card
+                 trap-focus
+                 width="640"
+                 aria-role="dialog"
+                 aria-modal>
+
+
+            <div class="modal-card">
+                <header class="modal-card-head">
+                    <p class="modal-card-title">Image</p>
+                    <button
+                        type="button"
+                        class="delete"
+                        @click="modalImage = false"/>
+                </header>
+                <section class="modal-card-body">
+                    <div>
+                        <img :src="path" alt="...">
+                    </div>
+                </section>
+                <footer class="modal-card-foot">
+                    <b-button
+                        label="Close"
+                        @click="modalImage=false"/>
+<!--                    <button-->
+<!--                        :class="btnClass"-->
+<!--                        label="Save"-->
+<!--                        @click="submit"-->
+<!--                        type="is-success">SAVE</button>-->
+                </footer>
+            </div>
+
+        </b-modal>
+
+
+
+
     </div>
 </template>
 
@@ -289,7 +348,8 @@ export default {
 
             //modal
             isModalCreate: false,
-            modalEditOption: false,
+            modalImage: false,
+
 
             //for update or data insert
             globalId: 0,
@@ -309,6 +369,7 @@ export default {
             order_no: 0,
             section: '',
             question: '',
+            is_question_img: 0,
             question_img: null,
             score: 0,
 
@@ -319,6 +380,7 @@ export default {
                 section: '',
             },
 
+            path:'', //path if image retirieve using modal
 
 
             //optionsssss
@@ -397,6 +459,11 @@ export default {
 
         },
 
+        showImg(path){
+            this.modalImage = true;
+            this.path = '/storage/q/'+path;
+        },
+
         add(inputType){
             //shorthand
             //console.log(this.letters[this.options.length]);
@@ -466,7 +533,6 @@ export default {
                 }
             };
 
-            formData.append('order_no', this.order_no);
             formData.append('question', this.question);
             formData.append('question_img', this.question_img);
             formData.append('section', this.section);
@@ -475,7 +541,6 @@ export default {
                 formData.append('optionImg['+index+']', this.options[index].img_path);
                 //console.log(this.options[index].img_path);
             }
-
 
 
            // formData.append('options', this.options);
@@ -523,23 +588,29 @@ export default {
 
         updateData(){
             axios.put('/panel/question/'+this.globalId,{
-                order_no: this.order_no,
                 question: this.question,
                 question_img: this.question_img,
                 section: this.section,
                 score: this.score,
                 options: this.options,
             }).then(res=>{
-                console.log(res.data[0].status);
-                if(res.data[0].status === 'updated'){
+
+                if(res.data.status === 'updated'){
                     this.globalId = 0;
-                    alert('Question updated.');
+
+                    this.$buefy.dialog.alert({
+                        title: 'UPDATED!',
+                        message: 'Successfully updated!',
+                        type: 'is-success',
+                        confirmText: 'OK'
+                    });
+
                     //close the modal
                     this.isModalCreate = false;
 
                     //re initialize variables...
-                    this.order_no = 0,
-                        this.section = '';
+                    this.order_no = 0;
+                    this.section = '';
                     this.question = '';
                     this.question_img = null;
                     this.score = 0;
@@ -594,8 +665,10 @@ export default {
                 this.section = res.data.section_id;
 
                 this.question = res.data.question;
-                this.question_img = res.data.question_img_path;
-                res.data.question != '' || res.data.question != null ? this.radioInputOption = 'TEXT' : this.radioInputOption = 'IMG';
+                this.question_img = res.data.question_img;
+                this.is_question_img = res.data.is_question_img;
+                res.data.is_question_img == 0 ? this.radioInputOption = 'TEXT' : this.radioInputOption = 'IMG';
+
 
                 this.question_img = res.data.question_img_path;
                 this.score = res.data.score;

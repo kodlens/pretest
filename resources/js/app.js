@@ -59,6 +59,7 @@ Vue.component('student-navbar', require('./components/Student/StudentNavbar.vue'
 
 Vue.component('home-page', require('./components/Student/HomePage.vue').default);
 Vue.component('taking-exam', require('./components/Student/TakingExam.vue').default);
+Vue.component('result-exam', require('./components/Student/ResultExam.vue').default);
 
 
 //STUDENT AREA

@@ -67,7 +67,6 @@ class QuestionController extends Controller
                 $pathQuestion = $newPath[2];
 
                 $question = Question::create([
-                    'order_no' => $req->order_no,
                     'section_id' => $req->section,
                     'is_question_img' => 1,
                     'question_img' => $pathQuestion,
@@ -78,7 +77,6 @@ class QuestionController extends Controller
             }else{
                 //if question is plain text
                 $question = Question::create([
-                    'order_no' => $req->order_no,
                     'section_id' => $req->section,
                     'question' => trim($req->question),
                     'score' => $req->score
@@ -137,35 +135,51 @@ class QuestionController extends Controller
         $validate = $req->validate([
             //'order_no' => ['required', 'numeric', Rule::unique('questions')->ignore($id, 'question_id')],
             'section' => ['required', 'numeric'],
-            'question' => ['required_without:question_img'],
-            'question_img' => ['required_without:question'],
             'score' => ['required', 'numeric', 'min: 1']
         ]);
 
-        $question = Question::find($id);
+        try{
 
-        $question->order_no = $req->order_no;
-        $question->section_id = $req->section;
-        $question->question = trim($req->question);
-        $question->score = $req->score;
-        $question->save();
+            $question = $req->file('question'); //check if question is empty of null
+            //$options = json_decode($req->options);  //decode to json stringify JSON from javascript
 
-        foreach($req->options as $row){
-            Option::where('option_id', $row['option_id'])
-                ->update([
-                    'question_id' => $id,
-                    'letter' => $row['letter'],
-                    'content' => trim($row['content']),
-                    'is_img' => $row['is_img'],
-                    'img_path' => trim($row['img_path']),
-                    'is_answer' => $row['is_answer'],
+            if($question != null || $question != ''){ //if text
+                $question = Question::find($id);
 
-                ]);
+                $question->section_id = $req->section;
+                $question->question = trim($req->question);
+                $question->score = $req->score;
+                $question->save();
+            }
 
+
+            foreach($req->options as $row){
+                if($row['is_img'] > 0){
+                    Option::where('option_id', $row['option_id'])
+                        ->update([
+                            'is_answer' => $row['is_answer'],
+
+                        ]);
+                }else{
+                    Option::where('option_id', $row['option_id'])
+                        ->update([
+                            'question_id' => $id,
+                            'letter' => $row['letter'],
+                            'content' => trim($row['content']),
+                            'is_img' => $row['is_img'],
+                            'img_path' => trim($row['img_path']),
+                            'is_answer' => $row['is_answer'],
+
+                        ]);
+                }
+
+            }
+
+            return ['status' => 'updated'];
+        }catch(\Exception $e){
+            return ['status' => 'error', 'msg' => $e->getMessage()];
         }
 
-        return [['status' => 'updated']];
-       // return $req;
     }
 
 
@@ -173,17 +187,23 @@ class QuestionController extends Controller
     public function destroy($id){
         $fileQuestion = Question::find($id);
 
-        if(Storage::exists('public/q/'. $fileQuestion->question_img)){
-            Storage::delete('public/q/'. $fileQuestion->question_img);
+        if($fileQuestion != '' || $fileQuestion != null){
+            if(Storage::exists('public/q/'. $fileQuestion->question_img)){
+                Storage::delete('public/q/'. $fileQuestion->question_img);
+            }
         }
+
 
        $fileOptions = Option::where('question_id', $id)->get();
 
        foreach ($fileOptions as $path){
-           if(Storage::exists('public/q/' .$path->img_path)){
-            Storage::delete('public/q/' .$path->img_path);
+           if($path->img_path != '' || $path->img_path != null){
+                if(Storage::exists('public/q/' .$path->img_path)){
+                    Storage::delete('public/q/' .$path->img_path);
+                }
            }
        }
+
        Question::destroy($id);
         return [['status' => 'deleted']];
     }
