@@ -27,7 +27,6 @@
                         </div><!--col-->
                     </div><!--columns-->
                 </div><!--container-->
-
             </div>
         </div>
     </div>

@@ -3283,7 +3283,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
@@ -3556,6 +3555,12 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
@@ -3566,7 +3571,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         'button': true,
         'is-success': true,
         'is-loading': false
-      }
+      },
+      nTime: ''
     };
   },
   methods: {
@@ -3598,24 +3604,37 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
       return loadQuestion;
     }(),
-    myTimer: function myTimer() {
-      console.log('ticking'); //setTimeout(this.timerOutput(), 4000);
+    startTimer: function startTimer(duration) {
+      var _this2 = this;
 
-      console.log(new Date().getMinutes() + 45); // setInterval(function(){
-      // });
-    },
-    timerOutput: function timerOutput() {
-      console.log('times up');
+      duration = duration * 60;
+      var timer = duration,
+          minutes,
+          seconds;
+      setInterval(function () {
+        //use arrow function so this keyword will refer to window.variable
+        minutes = parseInt(timer / 60, 10);
+        seconds = parseInt(timer % 60, 10);
+        minutes = minutes < 10 ? "0" + minutes : minutes;
+        seconds = seconds < 10 ? "0" + seconds : seconds;
+        _this2.nTime = minutes + ':' + seconds;
+
+        if (--timer < 0) {
+          timer = duration; //alert('done');
+
+          _this2.submit();
+        }
+      }, 1000);
     },
     submit: function submit() {
-      var _this2 = this;
+      var _this3 = this;
 
       this.btnClass["is-loading"] = true;
       axios.post('/student/taking-exam', this.answers).then(function (res) {
-        _this2.btnClass["is-loading"] = false;
+        _this3.btnClass["is-loading"] = false;
 
         if (res.data.status === 'saved') {
-          _this2.$buefy.dialog.alert({
+          _this3.$buefy.dialog.alert({
             title: 'SAVED.',
             message: 'Your test successfully saved.',
             confirmText: 'OK'
@@ -3623,7 +3642,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         }
 
         if (res.data.status === 'exist') {
-          _this2.$buefy.dialog.alert({
+          _this3.$buefy.dialog.alert({
             title: 'NOT ALLOWED!',
             type: 'is-danger',
             message: 'You already took the exam. Thank you.',
@@ -3634,13 +3653,13 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           });
         }
       })["catch"](function (err) {
-        _this2.btnClass["is-loading"] = false;
+        _this3.btnClass["is-loading"] = false;
 
         if (err.response.status === 422) {
-          _this2.errors = err.response.data.errors;
-          console.log(_this2.errors[0]);
+          _this3.errors = err.response.data.errors;
+          console.log(_this3.errors[0]);
         } else {
-          _this2.$buefy.dialog.alert({
+          _this3.$buefy.dialog.alert({
             title: 'ERROR!',
             type: 'is-danger',
             message: 'An error occured during submitting your answer. Please check internet connectivity. \n ' + err.response.data.errors[0],
@@ -3651,8 +3670,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     }
   },
   mounted: function mounted() {
-    this.loadQuestion();
-    this.myTimer();
+    var _this4 = this;
+
+    this.loadQuestion().then(function () {
+      _this4.startTimer(1);
+    });
   }
 });
 
@@ -21379,7 +21401,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/*qo mean question options button remove*/\n.qo-btn[data-v-51e93ae4]{\n    margin-left: 5px;\n    border: none;\n}\n.qo-btn > i[data-v-51e93ae4]:hover{\n    color:red;\n    text-decoration: underline;\n}\n.qo-btn-check[data-v-51e93ae4]{\n    border: none;\n    color: red;\n}\n.qo-btn-check-active[data-v-51e93ae4]{\n    border: none;\n    color: green;\n}\n.red-x[data-v-51e93ae4]{\n    color: red;\n}\n.green-check[data-v-51e93ae4]{\n    color: green;\n}\n.option-panel[data-v-51e93ae4]{\n    margin-left: 30px;\n}\n\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/*qo mean question options button remove*/\n.qo-btn[data-v-51e93ae4]{\n    margin-left: 5px;\n    border: none;\n}\n.qo-btn > i[data-v-51e93ae4]:hover{\n    color:red;\n    text-decoration: underline;\n}\n.qo-btn-check[data-v-51e93ae4]{\n    border: none;\n    color: red;\n}\n.qo-btn-check-active[data-v-51e93ae4]{\n    border: none;\n    color: green;\n}\n.red-x[data-v-51e93ae4]{\n    color: red;\n}\n.green-check[data-v-51e93ae4]{\n    color: green;\n}\n.option-panel[data-v-51e93ae4]{\n    margin-left: 30px;\n}\n\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -21499,7 +21521,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.question-box[data-v-a469d73c]{\n    border-radius: 5px;\n    background-color: rgb(238, 238, 238);\n    padding: 20px;\n    margin-bottom: 10px;\n}\n.question-content[data-v-a469d73c]{\n    font-weight: bold;\n}\n.question-img[data-v-a469d73c]{\n    padding: 10px;\n    display: flex;\n}\n.option-content[data-v-a469d73c]{\n    margin-left: 30px;\n    padding: 5px 5px;\n}\n.timer-container[data-v-a469d73c]{\n    height: 60px;\n    background-color: rgb(20, 83, 31);\n    color: white;\n    position: fixed;\n    bottom: 50px;\n    right: 0;\n    width: 150px;\n    padding: 15px;\n    border-radius: 5px;\n    transition: all 0.5s ease;\n}\n@media screen and (max-width: 992px) {\n.timer-container[data-v-a469d73c] {\n        width: 100%;\n        bottom: 0;\n         border-radius: 0;\n}\n}\n\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.instruction-container[data-v-a469d73c]{\n    background-color: #c1fad1;\n    padding: 15px;\n    margin-bottom: 5px;\n}\n.question-box[data-v-a469d73c]{\n    border-radius: 5px;\n    background-color: rgb(238, 238, 238);\n    padding: 20px;\n    margin-bottom: 10px;\n}\n.question-content[data-v-a469d73c]{\n    font-weight: bold;\n}\n.question-img[data-v-a469d73c]{\n    padding: 10px;\n    display: flex;\n}\n.option-content[data-v-a469d73c]{\n    margin-left: 30px;\n    padding: 5px 5px;\n}\n.timer-container[data-v-a469d73c]{\n    height: 55px;\n    background-color: rgb(20, 83, 31);\n    color: white;\n    position: fixed;\n    bottom: 50px;\n    right: 0;\n    width: 150px;\n    padding: 15px;\n    border-radius: 5px;\n    transition: all 0.5s ease;\n    display: flex;\n    justify-content: center;\n    font-size: 20px;\n    align-items: center;\n}\n@media screen and (max-width: 992px) {\n.timer-container[data-v-a469d73c] {\n        width: 100%;\n        bottom: 0;\n        border-radius: 0;\n        display: flex;\n        justify-content: center;\n}\n}\n\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -26253,6 +26275,8 @@ var render = function() {
                 "div",
                 { staticClass: "column is-8 is-offset-2" },
                 [
+                  _vm._m(0),
+                  _vm._v(" "),
                   _vm._l(_vm.questions, function(item, i) {
                     return _c(
                       "div",
@@ -26373,7 +26397,7 @@ var render = function() {
                     )
                   }),
                   _vm._v(" "),
-                  _c("div", { staticClass: "buttons is-right" }, [
+                  _c("div", { staticClass: "buttons is-right mb-5" }, [
                     _c("button", { class: _vm.btnClass }, [
                       _vm._v("SUBMIT ANSWER")
                     ])
@@ -26387,12 +26411,28 @@ var render = function() {
       ])
     ]),
     _vm._v(" "),
-    _c("div", { staticClass: "timer-container" }, [
-      _vm._v("\n        test\n    ")
-    ])
+    _c(
+      "div",
+      { staticClass: "timer-container" },
+      [
+        _c("b-icon", { attrs: { pack: "fa", icon: "clock-o" } }),
+        _vm._v("  \n        "),
+        _c("div", [_vm._v(_vm._s(_vm.nTime))])
+      ],
+      1
+    )
   ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "instruction-container" }, [
+      _c("div", [_vm._v("Instruction:")])
+    ])
+  }
+]
 render._withStripped = true
 
 

@@ -138,20 +138,19 @@ class QuestionController extends Controller
             'score' => ['required', 'numeric', 'min: 1']
         ]);
 
+
         try{
 
-            $question = $req->file('question'); //check if question is empty of null
+            $questionFile = $req->file('question'); //check if question is empty of null
             //$options = json_decode($req->options);  //decode to json stringify JSON from javascript
 
-            if($question != null || $question != ''){ //if text
+            if($questionFile == null || $questionFile == ''){ //if text
                 $question = Question::find($id);
-
                 $question->section_id = $req->section;
                 $question->question = trim($req->question);
                 $question->score = $req->score;
                 $question->save();
             }
-
 
             foreach($req->options as $row){
                 if($row['is_img'] > 0){

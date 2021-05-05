@@ -382,9 +382,7 @@ export default {
 
             path:'', //path if image retirieve using modal
 
-
             //optionsssss
-
 
            // activeColors: ['red'],
         }

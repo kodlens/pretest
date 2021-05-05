@@ -101,13 +101,13 @@ Route::get('/app/logout/admin', function(){
 });
 
 
-Route::get('/app/test', function(){
-
-    $sampleTime = '2021-04-29 15:50:00';
-
-    $test = TestSchedule::where('test_from', '<=',$sampleTime)
-        ->where('test_to', '>=', $sampleTime)->exists();
-   // $date = Carbon::now()->toDateTimeString();
-    return $test;
-});
+//Route::get('/app/test', function(){
+//
+//    $sampleTime = '2021-04-29 15:50:00';
+//
+//    $test = TestSchedule::where('test_from', '<=',$sampleTime)
+//        ->where('test_to', '>=', $sampleTime)->exists();
+//   // $date = Carbon::now()->toDateTimeString();
+//    return $test;
+//});
 

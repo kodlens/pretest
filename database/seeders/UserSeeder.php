@@ -17,15 +17,29 @@ class UserSeeder extends Seeder
     public function run()
     {
         //
-        User::create([
-            'username' => 'admin',
-            'lname' => 'AMPARADO',
-            'fname' => 'ETIENNE',
-            'mname' => 'N',
-            'sex' => 'MALE',
-            'email' => 'admin@pretest.org',
-            'password' => Hash::make('a'),
-            'role' => 'ADMINISTRATOR',
-        ]);
+        $users = [
+            [
+                'username' => 'admin',
+                'lname' => 'AMPARADO',
+                'fname' => 'ETIENNE',
+                'mname' => 'N',
+                'sex' => 'MALE',
+                'email' => 'admin@pretest.org',
+                'password' => Hash::make('a112233'),
+                'role' => 'ADMINISTRATOR',
+            ],
+            [
+                'username' => 'guidance',
+                'lname' => 'SUMALINOG',
+                'fname' => 'BERNICE',
+                'mname' => 'N',
+                'sex' => 'MALE',
+                'email' => 'admin@pretest.org',
+                'password' => Hash::make('gu1dance$$'),
+                'role' => 'ADMINISTRATOR',
+            ]
+        ];
+
+        User::insertOrIgnore($users);
     }
 }

@@ -22,8 +22,8 @@ class SectionSeeder extends Seeder
             ['section' => 'GENERAL KNOWLEDGE']
         ];
 
-        \App\Models\Section::insert($sections);
+        \App\Models\Section::insertOrIgnore($sections);
 
-        
+
     }
 }
