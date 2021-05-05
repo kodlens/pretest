@@ -26465,6 +26465,7 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("b-navbar", {
     staticClass: "is-primary",
+    attrs: { "fixed-top": "" },
     scopedSlots: _vm._u([
       {
         key: "brand",

@@ -89,10 +89,12 @@ class TakingExamController extends Controller
 
                 $arr=[];
                 foreach($req->all() as $row){
-                    array_push($arr,[
-                        'answer_sheet_id' => $ansSheet->answer_sheet_id,
-                        'option_id' => $row
-                    ]);
+                    if($row != null){
+                        array_push($arr,[
+                            'answer_sheet_id' => $ansSheet->answer_sheet_id,
+                            'option_id' => $row
+                        ]);
+                    }
                 }
 
                 Answer::insert($arr);
