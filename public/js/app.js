@@ -3707,7 +3707,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     var _this4 = this;
 
     this.loadQuestion().then(function () {
-      _this4.startTimer(1);
+      _this4.startTimer(45);
     });
   }
 });
@@ -26207,7 +26207,7 @@ var staticRenderFns = [
     return _c("div", { staticClass: "instruction" }, [
       _c("p", [
         _vm._v(
-          "Good day our dear freshmen! You are about to take the GADTC Admission Test (GADTest) which was postponed because of the pandemic.\n                                This is a 90 item test that you should take for only 40 minutes.\n                                A timer is found at the bottom for your reference.\n                                Rest assured all information that you will input in the test will be kept confidential.\n                                If you are ready, click the button below.\n                            "
+          "Good day our dear freshmen! You are about to take the GADTC Admission Test (GADTest) which was postponed because of the pandemic.\n                                This is a 90 item test that you should take for only 45 minutes.\n                                A timer is found at the bottom for your reference.\n                                Rest assured all information that you will input in the test will be kept confidential.\n                                If you are ready, click the button below.\n                            "
         )
       ])
     ])

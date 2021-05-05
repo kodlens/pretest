@@ -161,7 +161,7 @@ export default {
     },
     mounted(){
         this.loadQuestion().then(()=>{
-            this.startTimer(1);
+            this.startTimer(45);
         });
 
     },
