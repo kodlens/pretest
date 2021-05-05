@@ -7,7 +7,9 @@
                         <div class="column is-8 is-offset-2">
 
                             <div class="instruction-container">
-                                <div>Instruction:</div>
+                                <div>
+                                    Instruction: Click the letter of your answer.
+                                </div>
                             </div>
 
                             <div class="question-box" v-for="(item, i) in questions" :key="i">
@@ -128,6 +130,7 @@ export default {
                         title: 'SAVED.',
                         message: 'Your test successfully saved.',
                         confirmText: 'OK',
+                        onConfirm: ()=> window.location = '/student/result-exam'
                     });
                 }
                 if(res.data.status === 'exist'){

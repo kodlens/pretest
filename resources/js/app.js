@@ -28,6 +28,9 @@ Vue.component('example-component', require('./components/ExampleComponent.vue').
 
 Vue.component('csrf', require('./components/Csrf.vue').default);
 
+//WELCOME PAGE
+Vue.component('welcome-page', require('./components/WelcomePage.vue').default);
+
 
 //ADMINISTRATOR
 Vue.component('panel-login', require('./components/Administrator/PanelLogin.vue').default);

@@ -30,10 +30,15 @@ class TakingExamController extends Controller
 
     public function index(){
         $student_id = auth()->user()->StudID;
-        $isExist = AnswerSheet::where('student_id', $student_id)->exists();
+        $ay = AcadYear::where('active', 1)->first();
+
+        $isExist = AnswerSheet::where('student_id', $student_id)
+            ->where('code', $ay->code)
+                ->exists();
 
         if($isExist){
-            return redirect('/student/home');
+            return redirect('/student/home')
+                ->with('isTaken', 1);
         }
 
         return view('student.taking-exam');

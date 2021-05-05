@@ -23,18 +23,18 @@
 <body>
 <div id="app">
 
-        @guest
-            @if (Route::has('login'))
-                <student-navbar is-auth="0"></student-navbar>
-            @endif
-        @else
-            <student-navbar is-auth="1" firstname="{{ auth()->user()->StudFName }}"></student-navbar>
-        @endguest
+{{--    @guest--}}
+{{--        @if (Route::has('login'))--}}
+{{--            <student-navbar is-auth="0"></student-navbar>--}}
+{{--        @endif--}}
+{{--    @else--}}
+{{--        <student-navbar is-auth="1" firstname="{{ auth()->user()->StudFName }}"></student-navbar>--}}
+{{--    @endguest--}}
 
-        @yield('content')
+    @yield('content')
 
 </div>
-    @yield('extrascript')
+@yield('extrascript')
 </body>
 </html>
 
