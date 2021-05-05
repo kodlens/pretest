@@ -2013,10 +2013,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
-      fields: {
-        username: 'admin',
-        password: 'a'
-      },
+      fields: {},
       errors: {},
       btnClass: {
         'button': true,
@@ -3360,10 +3357,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
-      fields: {
-        StudID: '179186',
-        password: 'JanMark22'
-      },
+      fields: {},
       errors: {},
       btnClass: {
         'button': true,
