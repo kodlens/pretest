@@ -26,12 +26,18 @@ class AnswerSheetController extends Controller
         //return Question::all();
         $sortkey = explode(".",$req->sort_by);
 
-        return AnswerSheet::with(['answers'])
+        return AnswerSheet::with(['student','answers'])
             // ->whereHas('student', function ($query) use ($req){ //(Builder $query)
             //     $query->where('student', 'like', $req->idno .'%');
             // })
+            ->where('student_id', 'like', $req->idno .'%')
             ->orderBy($sortkey[0], $sortkey[1])
             ->paginate($req->perpage);
+    }
+
+    public function destroy($id){
+        AnswerSheet::destroy($id);
+        return ['status'=>'deleted'];
     }
 
 

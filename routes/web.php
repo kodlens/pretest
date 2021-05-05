@@ -61,7 +61,7 @@ Route::get('/ajax/question/sections', [App\Http\Controllers\Administrator\Questi
 
 
 //Answer
-Route::get('/panel/answer', [App\Http\Controllers\Administrator\AnswerSheetController::class, 'index']);
+Route::resource('/panel/answer', App\Http\Controllers\Administrator\AnswerSheetController::class);
 Route::get('/panel/ajax-answer', [App\Http\Controllers\Administrator\AnswerSheetController::class, 'index_data']);
 
 

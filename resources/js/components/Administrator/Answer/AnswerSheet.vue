@@ -29,7 +29,7 @@
                             <div class="level-item">
                                 <b-field>
                                     <b-input type="text" placeholder="Search Student ID..."
-                                    v-model="search.stduent_id" @keyup.native.enter="loadAsyncData"/>
+                                    v-model="search.student_id" @keyup.native.enter="loadAsyncData"/>
                                 </b-field>
                             </div>
                         </div>
@@ -59,6 +59,10 @@
                             {{ props.row.answer_sheet_id }}
                         </b-table-column>
 
+                         <b-table-column field="student_id" label="Student No" v-slot="props">
+                            {{ props.row.student_id }}
+                        </b-table-column>
+
                         <b-table-column field="student_name" label="Student Name" v-slot="props">
                             {{ props.row.student.StudLName }}, {{ props.row.student.StudFName }} {{ props.row.student.StudMName }}
                         </b-table-column>
@@ -69,7 +73,7 @@
 
                         <b-table-column field="" label="Action" v-slot="props">
                             <div class="is-flex">
-                                <b-button outlined class="button is-small is-danger mr-1" icon-pack="fa" icon-right="tras<h" @click="confirmDelete(props.row.question_id)">DELETE</b-button>
+                                <b-button outlined class="button is-small is-danger mr-1" icon-pack="fa" icon-right="trash" @click="confirmDelete(props.row.answer_sheet_id)">DELETE</b-button>
                             </div>
                         </b-table-column>
 
@@ -88,8 +92,12 @@
                                         <td>{{ item.letter }}</td>
                                         <td style="width: 300px;" v-if="item.content != ''">{{ item.content }}</td>
                                         <td v-else><a @click="showImg(item.img_path)">{{ item.img_path }}</a></td>
-                                        <td>
+                                        <td v-if="item.is_question_img == 0">
                                             {{ item.question }}
+                                        </td>
+                                        <td v-else>
+                                            
+                                            <a @click="showImg(item.question_img)">{{ item.question_img }}</a>
                                         </td>
                                     </tr>
                                 </tbody>
@@ -246,14 +254,14 @@ export default {
             this.$buefy.dialog.confirm({
                 title: 'DELETE',
                 type: 'is-danger',
-                message: 'Are you sure you want to delete this question permanently? It will also delete the options added in this question.',
+                message: 'Are you sure you want to delete this answer of the student permanently? It will also delete his/her answers.',
                 cancelText: 'Cancel',
                 confirmText: 'Delete',
                 onConfirm: ()=> this.deleteSubmit(dataId)
             });
         },
         deleteSubmit(dataId){
-            axios.delete('/panel/question/'+dataId).then(res=>{
+            axios.delete('/panel/answer/'+dataId).then(res=>{
                 this.loadAsyncData();
             });
         },
