@@ -43,9 +43,7 @@
 export default{
     data(){
         return{
-            fields: {
-
-            },
+            fields: {},
             errors: {},
 
             btnClass: {

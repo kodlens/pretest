@@ -13,4 +13,20 @@ class AnswerSheet extends Model
     protected $primaryKey = 'answer_sheet_id';
 
     protected $fillable = ['code', 'student_id', 'is_taken', 'date_taken'];
+
+    public function student(){
+        return $this->hasOne(Student::class, 'StudID', 'student_id');
+    }
+
+    public function answers(){
+        return $this->hasMany(Answer::class, 'answer_sheet_id', 'answer_sheet_id')
+        ->join('options', 'answers.option_id', 'options.option_id')
+        ->join('questions', 'questions.question_id', 'options.question_id')
+        ->select('answer_id', 'answer_sheet_id', 'answers.option_id', 'letter', 'content', 'img_path', 'is_answer',
+            'question', 'is_question_img', 'question_img');
+    }
+
+    
+
+
 }

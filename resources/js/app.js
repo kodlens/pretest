@@ -32,6 +32,10 @@ Vue.component('csrf', require('./components/Csrf.vue').default);
 Vue.component('welcome-page', require('./components/WelcomePage.vue').default);
 
 
+
+//-----------------------------//
+//ADMINISTRATOR AREA
+
 //ADMINISTRATOR
 Vue.component('panel-login', require('./components/Administrator/PanelLogin.vue').default);
 Vue.component('panel-home', require('./components/Administrator/PanelHome.vue').default);
@@ -42,9 +46,10 @@ Vue.component('panel-question-create', require('./components/Administrator/Quest
 
 Vue.component('panel-section', require('./components/Administrator/Section/SectionPanel.vue').default);
 
+Vue.component('answer-sheet', require('./components/Administrator/Answer/AnswerSheet.vue').default);
 
-//-----------------------------//
-//ADMINISTRATOR AREA
+
+
 
 
 

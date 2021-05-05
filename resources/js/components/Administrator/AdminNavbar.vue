@@ -30,8 +30,8 @@
                 Sections
             </b-navbar-item>
 
-            <b-navbar-item href="/panel/section">
-                Results
+            <b-navbar-item href="/panel/answer">
+                Answer
             </b-navbar-item>
 
             <b-navbar-item href="/panel/question">
