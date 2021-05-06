@@ -177,6 +177,7 @@ export default {
         padding: 15px;
         margin-bottom: 5px;
     }
+
     .question-box{
         border-radius: 5px;
         background-color: rgb(238, 238, 238);
@@ -196,7 +197,6 @@ export default {
     .option-content{
         margin-left: 30px;
         padding: 5px 5px;
-
     }
 
     .timer-container{
