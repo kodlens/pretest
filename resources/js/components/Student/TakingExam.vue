@@ -9,6 +9,8 @@
                             <div class="instruction-container">
                                 <div>
                                     Instruction: Click the letter of your answer.
+                                    <br>
+                                    <strong><span style="color:red;">Reminder: Please refrain taking screenshots and posting any of the questions of the test.</span></strong>
                                 </div>
                             </div>
 

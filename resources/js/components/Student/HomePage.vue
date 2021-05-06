@@ -22,6 +22,7 @@
                                     This is a 90 item test that you should take for only 45 minutes.
                                     A timer is found at the bottom for your reference.
                                     Rest assured all information that you will input in the test will be kept confidential.
+                                    Please refrain taking screenshots and posting any of the questions of the test.
                                     If you are ready, click the button below.
                                 </p>
 

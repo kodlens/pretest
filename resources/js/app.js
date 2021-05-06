@@ -54,10 +54,6 @@ Vue.component('answer-sheet', require('./components/Administrator/Answer/AnswerS
 
 
 
-
-
-
-
 //STUDENT AREA
 //-----------------------------//
 Vue.component('student-login-page', require('./components/Student/StudentLoginPaga.vue').default);

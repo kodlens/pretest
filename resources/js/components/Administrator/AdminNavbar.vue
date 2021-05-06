@@ -38,6 +38,10 @@
                 Questions
             </b-navbar-item>
 
+             <b-navbar-item href="/panel/report-result">
+                Report
+            </b-navbar-item>
+
 
 
             <b-navbar-item tag="div">

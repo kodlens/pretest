@@ -77,6 +77,9 @@ Route::resource('/panel/section', App\Http\Controllers\Administrator\SectionCont
 Route::get('/ajax/section', [App\Http\Controllers\Administrator\SectionController::class, 'index_data']);
 
 
+//REPORT
+Route::resource('/panel/report-result', App\Http\Controllers\Administrator\ReportResultController::class);
+
 
 
 //for debugging mode-----

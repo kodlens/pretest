@@ -44,7 +44,6 @@
                         :total="total"
                         :per-page="perPage"
                         @page-change="onPageChange"
-                        detailed
                         detail-transition = ""
                         aria-next-label="Next page"
                         aria-previous-label="Previous page"
@@ -77,79 +76,13 @@
                             </div>
                         </b-table-column>
 
-                        <template slot="detail" slot-scope="props">
-                            <div class="title is-5">ANSWERS</div>
-                            <table class="table">
-                                <thead>
-                                    <tr>
-                                        <th>Letter</th>
-                                        <th>Answer</th>
-                                        <th>Question</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr v-for="item in props.row.answers" :key="item.answer_id">
-                                        <td>{{ item.letter }}</td>
-                                        <td style="width: 300px;" v-if="item.content != ''">{{ item.content }}</td>
-                                        <td v-else><a @click="showImg(item.img_path)">{{ item.img_path }}</a></td>
-                                        <td v-if="item.is_question_img == 0">
-                                            {{ item.question }}
-                                        </td>
-                                        <td v-else>
-                                            
-                                            <a @click="showImg(item.question_img)">{{ item.question_img }}</a>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-
-                        </template>
+                        
                     </b-table>
                 </div><!--close column-->
             </div>
-        </div>
+        </div><!--section-->
 
-
-        <!--modal show image-->
-        <!--MODAL FOR IMAGE, CONTAINER-->
-        <b-modal v-model="modalImage" has-modal-card
-                 trap-focus
-                 width="640"
-                 aria-role="dialog"
-                 aria-modal>
-
-
-            <div class="modal-card">
-                <header class="modal-card-head">
-                    <p class="modal-card-title">Image</p>
-                    <button
-                        type="button"
-                        class="delete"
-                        @click="modalImage = false"/>
-                </header>
-                <section class="modal-card-body">
-                    <div>
-                        <img :src="path" alt="...">
-                    </div>
-                </section>
-                <footer class="modal-card-foot">
-                    <b-button
-                        label="Close"
-                        @click="modalImage=false"/>
-<!--                    <button-->
-<!--                        :class="btnClass"-->
-<!--                        label="Save"-->
-<!--                        @click="submit"-->
-<!--                        type="is-success">SAVE</button>-->
-                </footer>
-            </div>
-
-        </b-modal>
-
-
-
-
-    </div>
+    </div><!--root div-->
 </template>
 
 <script>
@@ -181,7 +114,9 @@ export default {
             },
 
             path:'', //path if image retirieve using modal
+
             //optionsssss
+
            // activeColors: ['red'],
         }
     },
@@ -192,7 +127,6 @@ export default {
             const params = [
                 `sort_by=${this.sortField}.${this.sortOrder}`,
                 `perpage=${this.perPage}`,
-                `idno=${this.search.student_id}`,
                 `page=${this.page}`
             ].join('&')
 
@@ -237,76 +171,6 @@ export default {
         setPerPage(){
             this.loadAsyncData()
         },
-
-        
-
-        showImg(path){
-            this.modalImage = true;
-            this.path = '/storage/q/'+path;
-        },
-
-        
-
-        confirmDelete(dataId){
-            this.$buefy.dialog.confirm({
-                title: 'DELETE',
-                type: 'is-danger',
-                message: 'Are you sure you want to delete this answer of the student permanently? It will also delete his/her answers.',
-                cancelText: 'Cancel',
-                confirmText: 'Delete',
-                onConfirm: ()=> this.deleteSubmit(dataId)
-            });
-        },
-        deleteSubmit(dataId){
-            axios.delete('/panel/answer/'+dataId).then(res=>{
-                this.loadAsyncData();
-            });
-        },
-
-
-        
-
-    },
-
-    mounted() {
-        this.loadAsyncData();
-        
     }
-
 }
 </script>
-
-<style scoped>
-
-/*qo mean question options button remove*/
-.qo-btn{
-    margin-left: 5px;
-    border: none;
-}
-
-.qo-btn > i:hover{
-    color:red;
-    text-decoration: underline;
-}
-
-.qo-btn-check{
-    border: none;
-    color: red;
-}
-
-.qo-btn-check-active{
-    border: none;
-    color: green;
-}
-.red-x{
-    color: red;
-}
-.green-check{
-    color: green;
-}
-
-.option-panel{
-    margin-left: 30px;
-}
-
-</style>
