@@ -27143,45 +27143,6 @@ var render = function() {
                       }
                     }
                   ])
-                }),
-                _vm._v(" "),
-                _c("b-table-column", {
-                  attrs: { field: "", label: "Action" },
-                  scopedSlots: _vm._u([
-                    {
-                      key: "default",
-                      fn: function(props) {
-                        return [
-                          _c(
-                            "div",
-                            { staticClass: "is-flex" },
-                            [
-                              _c(
-                                "b-button",
-                                {
-                                  staticClass: "button is-small is-danger mr-1",
-                                  attrs: {
-                                    outlined: "",
-                                    "icon-pack": "fa",
-                                    "icon-right": "trash"
-                                  },
-                                  on: {
-                                    click: function($event) {
-                                      return _vm.confirmDelete(
-                                        props.row.answer_sheet_id
-                                      )
-                                    }
-                                  }
-                                },
-                                [_vm._v("DELETE")]
-                              )
-                            ],
-                            1
-                          )
-                        ]
-                      }
-                    }
-                  ])
                 })
               ],
               1
