@@ -1,35 +1,18 @@
 <template>
     <div>
         <div class="section">
-            <div style="font-size: 20px; text-align: center; font-weight: bold; margin-bottom: 20px;">LIST OF STUDENT ANSWERS</div>
+            <div style="font-size: 20px; text-align: center; font-weight: bold; margin-bottom: 20px;">LIST OF STUDENT AND RESULT</div>
             <div class="columns">
-                <div class="column is-10 is-offset-1">
+                <div class="column is-12">
 
                     <div class="level">
-                        <div class="level-left">
-
-                            <div class="level-item">
-                                <b-select v-model="perPage" @input="setPerPage">
-                                    <option value="5">5 per page</option>
-                                    <option value="10">10 per page</option>
-                                    <option value="15">15 per page</option>
-                                    <option value="20">20 per page</option>
-                                </b-select>
-                            </div>
-
-                            <div class="level-item">
-                                <div class="buttons">
-                                    <!-- <b-button tag="a" href="/cpanel-academicyear/create" class="is-primary">Create Account</b-button> -->
-                                    <!-- <b-button @click="openModal" class="is-primary"></b-button> -->
-                                </div>
-                            </div>
-                        </div>
+                        
 
                         <div class="level-right">
                             <div class="level-item">
                                 <b-field>
-                                    <b-input type="text" placeholder="Search Student ID..."
-                                    v-model="search.student_id" @keyup.native.enter="loadAsyncData"/>
+                                    <b-input type="text" placeholder="Search"
+                                    v-model="search" @keyup.native.enter="loadAsyncData"/>
                                 </b-field>
                             </div>
                         </div>
@@ -39,7 +22,7 @@
                     <b-table
                         :data="data"
                         :loading="loading"
-                        paginated
+                        
                         backend-pagination
                         :total="total"
                         :per-page="perPage"
@@ -54,20 +37,37 @@
                         :default-sort-direction="defaultSortDirection"
                         @sort="onSort">
 
-                        <b-table-column field="answer_sheet_id" label="ID" v-slot="props">
-                            {{ props.row.answer_sheet_id }}
-                        </b-table-column>
 
-                         <b-table-column field="student_id" label="Student No" v-slot="props">
+                        <b-table-column field="student_id" label="Student No" v-slot="props">
                             {{ props.row.student_id }}
                         </b-table-column>
 
-                        <b-table-column field="student_name" label="Student Name" v-slot="props">
-                            {{ props.row.student.StudLName }}, {{ props.row.student.StudFName }} {{ props.row.student.StudMName }}
+                        <b-table-column field="StudLName" label="Lastname" v-slot="props">
+                            {{ props.row.StudLName }}, {{ props.row.StudFName }} {{ props.row.StudMName }}
                         </b-table-column>
 
-                        <b-table-column field="code" label="A.Y. Code" v-slot="props">
-                            {{ props.row.code }}
+                        <b-table-column field="EnrCourse" label="Program/Year" v-slot="props">
+                            {{ props.row.EnrCourse }}/ {{ props.row.EnrYear }}
+                        </b-table-column>
+
+                        <b-table-column field="abstraction" label="ABSTRACTION" v-slot="props">
+                            {{ props.row.abstraction }}
+                        </b-table-column>
+
+                        <b-table-column field="abstraction" label="LOGICAL" v-slot="props">
+                            {{ props.row.logical }}
+                        </b-table-column>
+
+                        <b-table-column field="english" label="ENGLISH" v-slot="props">
+                            {{ props.row.english }}
+                        </b-table-column>
+
+                        <b-table-column field="numerical" label="NUMERICAL" v-slot="props">
+                            {{ props.row.numerical }}
+                        </b-table-column>
+
+                        <b-table-column field="general" label="GENERAL" v-slot="props">
+                            {{ props.row.general }}
                         </b-table-column>
 
                         <b-table-column field="" label="Action" v-slot="props">
@@ -92,7 +92,7 @@ export default {
             data: [],
             total: 0,
             loading: false,
-            sortField: 'answer_sheet_id',
+            sortField: 'student_id',
             sortOrder: 'desc',
             page: 1,
             perPage: 20,
@@ -109,9 +109,7 @@ export default {
                 'is-loading':false,
             },
 
-            search: {
-                student_id: '',
-            },
+            search:'',
 
             path:'', //path if image retirieve using modal
 
@@ -127,11 +125,12 @@ export default {
             const params = [
                 `sort_by=${this.sortField}.${this.sortOrder}`,
                 `perpage=${this.perPage}`,
+                `searchkey=${this.search}`,
                 `page=${this.page}`
             ].join('&')
 
             this.loading = true
-            axios.get(`/panel/ajax-answer?${params}`)
+            axios.get(`/panel/ajax-studentlist-result?${params}`)
                 .then(({ data }) => {
                     this.data = []
                     let currentTotal = data.total
@@ -140,7 +139,7 @@ export default {
                     }
 
                     this.total = currentTotal
-                    data.data.forEach((item) => {
+                    data.forEach((item) => {
                         //item.release_date = item.release_date ? item.release_date.replace(/-/g, '/') : null
                         this.data.push(item)
                     })
@@ -171,6 +170,12 @@ export default {
         setPerPage(){
             this.loadAsyncData()
         },
+    },
+
+    mounted(){
+        this.loadAsyncData();
     }
+        
+
 }
 </script>

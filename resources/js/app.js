@@ -50,6 +50,11 @@ Vue.component('answer-sheet', require('./components/Administrator/Answer/AnswerS
 
 
 
+//ADMIN REPORT
+Vue.component('report-result', require('./components/Administrator/Report/ReportResult.vue').default);
+
+
+
 
 
 

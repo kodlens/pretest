@@ -79,6 +79,7 @@ Route::get('/ajax/section', [App\Http\Controllers\Administrator\SectionControlle
 
 //REPORT
 Route::resource('/panel/report-result', App\Http\Controllers\Administrator\ReportResultController::class);
+Route::get('/panel/ajax-studentlist-result', [App\Http\Controllers\Administrator\ReportResultController::class, 'index_data']);
 
 
 
