@@ -50,24 +50,29 @@
                             {{ props.row.EnrCourse }}/ {{ props.row.EnrYear }}
                         </b-table-column>
 
-                        <b-table-column field="abstraction" label="ABSTRACTION" v-slot="props">
+                        <b-table-column field="abstraction" label="ABSTRACTION" centered numeric v-slot="props">
                             {{ props.row.abstraction }}
                         </b-table-column>
 
-                        <b-table-column field="abstraction" label="LOGICAL" v-slot="props">
+                        <b-table-column field="abstraction" label="LOGICAL" centered numeric v-slot="props">
                             {{ props.row.logical }}
                         </b-table-column>
 
-                        <b-table-column field="english" label="ENGLISH" v-slot="props">
+                        <b-table-column field="english" label="ENGLISH" centered numeric v-slot="props">
                             {{ props.row.english }}
                         </b-table-column>
 
-                        <b-table-column field="numerical" label="NUMERICAL" v-slot="props">
+                        <b-table-column field="numerical" label="NUMERICAL" centered numeric v-slot="props">
                             {{ props.row.numerical }}
                         </b-table-column>
 
-                        <b-table-column field="general" label="GENERAL" v-slot="props">
+                        <b-table-column field="general" label="GENERAL" centered numeric v-slot="props">
                             {{ props.row.general }}
+                        </b-table-column>
+
+                        <b-table-column field="total" label="TOTAL" centered numeric v-slot="props">
+                            {{ Number(props.row.general) + Number(props.row.numerical) + Number(props.row.english)
+                            + Number(props.row.logical) + Number(props.row.abstraction) }}
                         </b-table-column>
 
                         <!-- <b-table-column field="" label="Action" v-slot="props">
