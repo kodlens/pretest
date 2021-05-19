@@ -30,6 +30,21 @@ Auth::routes([
 ]);
 
 
+//ADDRESS CONTROLLER HERE
+
+Route::get('/provinces', [App\Http\Controllers\AddressController::class, 'provinces']);
+Route::get('/cities', [App\Http\Controllers\AddressController::class, 'cities']);
+Route::get('/barangays', [App\Http\Controllers\AddressController::class, 'barangays']);
+
+
+
+
+//////////////////ADDRESS///////////////////
+
+//registration of account
+Route::resource('/registration', App\Http\Controllers\Student\RegistrationController::class);
+
+
 //STUDENT
 Route::get('/student/login', [App\Http\Controllers\Student\StudentLoginController::class, 'showLoginForm']);
 Route::post('/student/login', [App\Http\Controllers\Student\StudentLoginController::class, 'login'])->name('student-login');

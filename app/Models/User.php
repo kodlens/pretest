@@ -19,14 +19,20 @@ class User extends Authenticatable
      */
 
 
-    protected $connection = 'mysql';
+   // protected $connection = 'mysql';
     protected $guard = 'admin';
 
     protected $table = 'users';
     protected $primaryKey = 'user_id'; //the fuck.. nahurot akong adlaw nimo ..
 
     protected $fillable = [
-        'username', 'lname', 'fname', 'mname', 'sex', 'email', 'password', 'role'
+        'username', 'lname', 'fname', 'mname', 'sex',
+        'bdate',
+        'birthplace', 'contact_no',
+        'email',
+        'last-school_attended',
+        'province', 'city', 'barangay', 'barangay_id', 'street',
+        'password', 'role'
     ];
 
     /**

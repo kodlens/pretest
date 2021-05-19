@@ -22,14 +22,24 @@ class CreateUsersTable extends Migration
             $table->string('fname');
             $table->string('mname')->null();
             $table->string('sex', 10)->null();
+            $table->date('bdate');
+            $table->string('birthplace');
+            $table->string('contact_no');
             $table->string('email')->unique();
+            $table->string('last_school_attended')->nullable();
+            $table->string('province');
+            $table->string('city');
+            $table->string('barangay');
+            $table->integer('barangay_id');
+            $table->string('street')->nullable();
+
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->string('role',20)->null();
             $table->rememberToken();
             $table->timestamps();
         });
- 
+
     }
 
     /**

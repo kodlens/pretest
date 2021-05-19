@@ -28,6 +28,11 @@ Vue.component('example-component', require('./components/ExampleComponent.vue').
 
 Vue.component('csrf', require('./components/Csrf.vue').default);
 
+
+//REGISTRATION
+Vue.component('registration', require('./components/Registration.vue').default);
+
+
 //WELCOME PAGE
 Vue.component('welcome-page', require('./components/WelcomePage.vue').default);
 

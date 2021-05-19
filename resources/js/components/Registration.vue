@@ -1,0 +1,253 @@
+<template>
+    <div>
+        <div class="section">
+            <div class="container">
+                <div class="columns">
+                    <div class="column is-10 is-offset-1">
+                        <form @submit.prevent="submit">
+                            <div class="box">
+                                <div class="title is-5">
+                                    REGISTRATION FORM
+                                </div>
+
+                                <div>
+
+                                    <h2><span>PERSONAL INFORMATION</span></h2>
+
+                                    <div class="columns">
+                                        <div class="column">
+                                            <b-field label="Username" label-position="on-border"
+                                                :type="this.errors.username ? 'is-danger' : ''"
+                                                :message="this.errors.username ? this.errors.username : ''">
+                                                <b-input type="text" placeholder="Username" v-model="fields.username"  />
+                                            </b-field>
+                                        </div>
+                                    </div>
+                                    <div class="columns">
+                                        <div class="column">
+                                            <b-field label="Lastname" label-position="on-border"
+                                                     :type="this.errors.lname ? 'is-danger' : ''"
+                                                     :message="this.errors.lname ? this.errors.lname : ''">
+                                                <b-input type="text" placeholder="Lastname" v-model="fields.lname" required/>
+                                            </b-field>
+                                        </div>
+                                        <div class="column">
+                                            <b-field label="Firstname" label-position="on-border"
+                                                     :type="this.errors.fname ? 'is-danger' : ''"
+                                                     :message="this.errors.fname ? this.errors.fname : ''">
+                                                <b-input type="text" placeholder="Firstname" v-model="fields.fname" required />
+                                            </b-field>
+                                        </div>
+                                    </div>
+
+                                    <div class="columns">
+                                        <div class="column">
+                                            <b-field label="Middlename" label-position="on-border">
+                                                <b-input type="text" v-model="fields.mname" placeholder="Middlename" />
+                                            </b-field>
+                                        </div>
+
+                                        <div class="column">
+                                            <b-field label="Sex" label-position="on-border" expanded
+                                                     :type="this.errors.sex ? 'is-danger' : ''"
+                                                     :message="this.errors.sex ? this.errors.sex : ''">
+                                                <b-select placeholder="Sex" v-model="fields.sex" expanded required>
+                                                    <option value="MALE">MALE</option>
+                                                    <option value="FEMALE">FEMALE</option>
+                                                </b-select>
+                                            </b-field>
+                                        </div>
+                                    </div>
+
+                                    <div class="columns">
+                                        <div class="column">
+                                            <b-field label="Birthdate" label-position="on-border"
+                                                     :type="this.errors.bdate ? 'is-danger' : ''"
+                                                     :message="this.errors.bdate ? this.errors.bdate : ''">
+                                                <b-datepicker placeholder="Birthdate" v-model="bdate"
+                                                              @input="formattedDate" required trap-focus/>
+                                            </b-field>
+                                        </div>
+                                        <div class="column">
+                                            <b-field label="Birthplace" label-position="on-border">
+                                                <b-input type="text" placeholder="Birthplace" v-model="fields.birthplace" required />
+                                            </b-field>
+                                        </div>
+                                    </div>
+
+                                    <h2><span>CONTACT INFORMATION</span></h2>
+
+                                    <div class="columns">
+                                        <div class="column">
+                                            <b-field label="Contact No." label-position="on-border">
+                                                <b-input type="text" placeholder="Contact No." v-model="fields.contact_no" required />
+                                            </b-field>
+                                        </div>
+                                        <div class="column">
+                                            <b-field label="Email" label-position="on-border">
+                                                <b-input type="email" placeholder="Email" v-model="fields.email" required />
+                                            </b-field>
+                                        </div>
+                                    </div>
+
+                                    <h2><span>LAST SCHOOL INFORMATION</span></h2>
+
+                                    <div class="columns">
+                                        <div class="column">
+                                            <b-field label="Last School Attended" label-position="on-border"
+                                                     :type="this.errors.last_school_attended ? 'is-danger' : ''"
+                                                     :message="this.errors.last_school_attended ? this.errors.last_school_attended : ''">
+                                                <b-input type="text" placeholder="Last School Attended" v-model="fields.last_school_attended" required />
+                                            </b-field>
+                                        </div>
+                                    </div>
+
+                                    <h2><span>ADDRESS INFORMATION</span></h2>
+
+                                    <div class="columns">
+                                        <div class="column">
+                                            <b-field label="Province" label-position="on-border" expanded
+                                                     :type="this.errors.last_school_attended ? 'is-danger' : ''"
+                                                     :message="this.errors.last_school_attended ? this.errors.last_school_attended : ''">
+                                                <b-select placeholder="PROVINCE" v-model="fields.province"
+                                                          @input="loadCities"
+                                                          expanded required>
+                                                    <option v-for="(prov, index) in this.provinces" :key="index" :value="prov.Prov_Name">{{ prov.Prov_Name }}</option>
+                                                </b-select>
+                                            </b-field>
+                                        </div>
+                                        <div class="column">
+                                            <b-field label="City/Municipality" label-position="on-border" expanded>
+                                                <b-select placeholder="CITY/MUNICIPALITY" v-model="fields.city"
+                                                          @input="loadBarangays" expanded required>
+                                                    <option v-for="(city, index) in this.cities" :key="index" :value="city.City_Name">{{ city.City_Name }}</option>
+                                                </b-select>
+                                            </b-field>
+                                        </div>
+                                    </div>
+
+                                    <div class="columns">
+                                        <div class="column">
+                                            <b-field label="Barangay" label-position="on-border" expanded>
+                                                <b-select placeholder="BARANGAY" v-model="fields.barangay" expanded required>
+                                                    <option v-for="(brgy, index) in this.barangays" :key="index" :value="{barangay_id: brgy.Brgy_ID, barangay: brgy.Bgry_Name}">{{ brgy.Bgry_Name }}</option>
+                                                </b-select>
+                                            </b-field>
+                                        </div>
+                                        <div class="column">
+                                            <b-field label="Purok/Street" label-position="on-border" expanded>
+                                                <b-input type="text" placeholder="PUROK/STREET" v-model="fields.street" />
+                                            </b-field>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="buttons is-right">
+                                        <button :class="btnClass"><b-icon pack="fa" icon="arrow-right"></b-icon>
+                                            &nbsp;&nbsp;REGISTER NOW
+                                        </button>
+                                    </div>
+                                </div>
+                            </div><!--close box-->
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+</template>
+
+<script>
+export default {
+
+    data(){
+        return{
+            fields:{},
+            errors: {},
+            bdate: null,
+
+            btnClass:{
+                'button': true,
+                'is-loading': false,
+                'is-primary': true,
+                'is-outlined': true,
+            },
+
+            provinces: [],
+            cities: [],
+            barangays: [],
+
+
+        }
+    },
+    methods:{
+
+        loadProvinces: function(){
+            axios.get('/provinces').then(res=>{
+                this.provinces = res.data;
+
+                this.loadCities()
+            });
+        },
+
+        loadCities: function(){
+            axios.get('/cities?province='+this.fields.province).then(res=>{
+                this.cities = res.data;
+            });
+        },
+
+        loadBarangays: function(){
+            axios.get('/barangays?province='+this.fields.province+'&city='+this.fields.city).then(res=>{
+                this.barangays = res.data;
+            });
+        },
+
+        formattedDate(){
+            let mydate = new Date(Date.parse(this.bdate));
+            let realDate = mydate.getFullYear() + "-" + ("0" + (mydate.getMonth() + 1)).slice(-2) + "-"+ ("0" + (mydate.getDate())).slice(-2);
+            this.fields.bdate = realDate;
+            // let dateoptions = {year:'numeric', month:'short', day:'numeric'};
+            // return dt.toLocaleDateString('en-GB', dateoptions);
+        },
+
+        submit: function(){
+            axios.post('/registration', this.fields).then(res=>{
+                console.log(res);
+            }).catch(err=>{
+                this.errors = err.response.data.errors;
+                //console.log(err.response.data)
+            })
+        }
+
+
+
+    },
+
+    mounted() {
+        this.loadProvinces();
+    }
+}
+
+</script>
+
+<style scoped>
+    .box{
+        border-top: 5px solid green;
+    }
+
+    h2 {
+        width: 100%;
+        text-align: center;
+        border-bottom: 1px solid #000;
+        line-height: 0.1em;
+        margin: 10px 0 20px;
+    }
+
+    h2 span {
+        background:#fff;
+        padding:0 10px;
+    }
+
+</style>

@@ -229,7 +229,7 @@
                                         <div>{{ option.img_path }}</div>
                                     </div>
 
-                                    <b-button class="qo-btn ml-1" style="color: red;" v-if="option.is_img === 1 && globalId == 0"
+                                    <b-button class="qo-btn ml-1" style="color: red;" v-if="globalId == 0"
                                             @click="remove(k)"
                                             v-show="k || ( !k && options.length > 0)">
                                         <i class="fa fa-trash-o fa-lg"></i>
