@@ -280,7 +280,6 @@
                             type="is-success">SAVE</button>
                     </footer>
                 </div>
-
         </b-modal>
 
 
