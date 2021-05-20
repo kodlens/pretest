@@ -22,14 +22,14 @@
         </template>
 
         <template #end>
-            <b-navbar-item href="/student/home">
+            <b-navbar-item href="/home">
                 <b-icon pack="fa" icon="home"></b-icon>&nbsp;&nbsp;
                 Home
             </b-navbar-item>
              <!-- <b-navbar-item href="/student/taking-exam">
                 Quiz
             </b-navbar-item> -->
-            <b-navbar-item href="/student/result-exam">
+            <b-navbar-item href="/result-exam">
                 <b-icon pack="fa" icon="file-o"></b-icon>&nbsp;&nbsp;
                 Result
             </b-navbar-item>

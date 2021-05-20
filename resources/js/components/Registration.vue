@@ -11,9 +11,7 @@
                                 </div>
 
                                 <div>
-
-                                    <h2><span>PERSONAL INFORMATION</span></h2>
-
+                                    <h2><span>ACCOUNT INFORMATION</span></h2>
                                     <div class="columns">
                                         <div class="column">
                                             <b-field label="Username" label-position="on-border"
@@ -23,6 +21,26 @@
                                             </b-field>
                                         </div>
                                     </div>
+                                    
+                                    <div class="columns">
+                                        <div class="column">
+                                            <b-field label="Password" label-position="on-border"
+                                                :type="this.errors.password ? 'is-danger' : ''"
+                                                :message="this.errors.password ? this.errors.password : ''">
+                                                <b-input type="password" password-reveal placeholder="Password" v-model="fields.password"  />
+                                            </b-field>
+                                        </div>
+                                         <div class="column">
+                                            <b-field label="Re-type Password" label-position="on-border"
+                                                :type="this.errors.password ? 'is-danger' : ''"
+                                                :message="this.errors.password ? this.errors.password : ''">
+                                                <b-input type="password" password-reveal placeholder="Re-type Password" v-model="fields.password_confirmation"  />
+                                            </b-field>
+                                        </div>
+                                    </div>
+
+                                    <h2><span>PERSONAL INFORMATION</span></h2>
+                                   
                                     <div class="columns">
                                         <div class="column">
                                             <b-field label="Lastname" label-position="on-border"
@@ -187,7 +205,6 @@ export default {
         loadProvinces: function(){
             axios.get('/provinces').then(res=>{
                 this.provinces = res.data;
-
                 this.loadCities()
             });
         },
@@ -213,15 +230,26 @@ export default {
         },
 
         submit: function(){
+            this.btnClass['is-loading'] = true;
+
             axios.post('/registration', this.fields).then(res=>{
                 console.log(res);
+                if(res.data.status === 'saved'){
+                    this.$buefy.dialog.alert({
+                        title: 'REGISTERED!',
+                        message: 'Account successfully registered. You can login now.',
+                        type: 'is-success',
+                        onConfirm: ()=> window.location = '/'
+                    });
+                    this.btnClass['is-loading'] = false;
+                }
+                this.btnClass['is-loading'] = false;
             }).catch(err=>{
                 this.errors = err.response.data.errors;
                 //console.log(err.response.data)
+                this.btnClass['is-loading'] = false;
             })
         }
-
-
 
     },
 

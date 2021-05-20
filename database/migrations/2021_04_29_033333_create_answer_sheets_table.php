@@ -30,6 +30,6 @@ class CreateAnswerSheetsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('answers');
+        Schema::dropIfExists('answer_sheets');
     }
 }

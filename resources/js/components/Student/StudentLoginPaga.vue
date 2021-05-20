@@ -11,16 +11,16 @@
                                 </div>
                                 <form @submit.prevent="submit">
                                     <div class="panel-body">
-                                        <b-field label="Student ID">
-                                            <b-input type="text" v-model="fields.StudID" placeholder="Student ID" required></b-input>
+                                        <b-field label="Username">
+                                            <b-input type="text" v-model="fields.username" placeholder="Username" required></b-input>
                                         </b-field>
 
                                         <b-field label="Password">
                                             <b-input type="password" v-model="fields.password" password-reveal placeholder="Password" required></b-input>
                                         </b-field>
 
-                                        <div v-if="this.errors.StudID" style="margin-bottom: 10px;">
-                                            <span style="color:red; font-weight: bold;">{{this.errors.StudID[0]}}</span>
+                                        <div v-if="this.errors.username" style="margin-bottom: 10px;">
+                                            <span style="color:red; font-weight: bold;">{{this.errors.username[0]}}</span>
                                         </div>
 
 
@@ -53,7 +53,6 @@ export default{
                 'is-primary': true,
                 'is-loading': false,
             }
-
         }
     },
 
@@ -61,10 +60,10 @@ export default{
         submit(){
             this.btnClass['is-loading'] = true;
 
-            axios.post('/student/login', this.fields).then(res=>{
+            axios.post('/login', this.fields).then(res=>{
                 this.fields = {};
                 this.btnClass['is-loading'] = false;
-                window.location = '/student/home';
+                window.location = '/login';
 
             }).catch(error=>{
                 this.btnClass['is-loading'] = false;

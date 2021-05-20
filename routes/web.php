@@ -26,7 +26,7 @@ Route::get('/', function () {
 
 Auth::routes([
     'register' => false,
-    'login' => false,
+    'login' => true,
 ]);
 
 
@@ -46,12 +46,13 @@ Route::resource('/registration', App\Http\Controllers\Student\RegistrationContro
 
 
 //STUDENT
-Route::get('/student/login', [App\Http\Controllers\Student\StudentLoginController::class, 'showLoginForm']);
-Route::post('/student/login', [App\Http\Controllers\Student\StudentLoginController::class, 'login'])->name('student-login');
+//Route::get('/student/login', [App\Http\Controllers\Student\StudentLoginController::class, 'showLoginForm']);
+//Route::post('/student/login', [App\Http\Controllers\Student\StudentLoginController::class, 'login'])->name('student-login');
+Route::resource('/section', App\Http\Controllers\Student\SectionPageController::class);
 
 
 
-Route::get('/student/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::resource('/student/taking-exam', App\Http\Controllers\Student\TakingExamController::class);
 Route::get('/student/taking-exam-question', [App\Http\Controllers\Student\TakingExamController::class, 'examineeQuestion']);
 Route::get('/student/result-exam', [App\Http\Controllers\Student\ResultExamController::class, 'index']);

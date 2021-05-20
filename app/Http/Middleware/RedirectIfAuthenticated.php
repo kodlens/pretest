@@ -23,13 +23,21 @@ class RedirectIfAuthenticated
 
         foreach ($guards as $guard) {
             if (Auth::guard($guard)->check()) {
-                if($guard == 'admin'){
+                // if($guard == 'admin'){
+                //     return redirect('/panel/home');
+                // }
+                // if($guard == 'student'){
+                //     return redirect('/student/home');
+                // }
+                //return redirect(RouteServiceProvider::HOME);
+                $role = Auth::user()->role;
+                if(strtolower($role) == 'administrator'){
                     return redirect('/panel/home');
                 }
-                if($guard == 'student'){
-                    return redirect('/student/home');
+
+                if(strtolower($role) == 'student'){
+                    return redirect('/home');
                 }
-               // return redirect(RouteServiceProvider::HOME);
             }
 
 //            if (Auth::guard('student')->check()) {

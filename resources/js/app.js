@@ -72,6 +72,8 @@ Vue.component('student-login-page', require('./components/Student/StudentLoginPa
 Vue.component('student-navbar', require('./components/Student/StudentNavbar.vue').default);
 
 Vue.component('home-page', require('./components/Student/HomePage.vue').default);
+Vue.component('section-page', require('./components/Student/SectionPage.vue').default)
+
 Vue.component('taking-exam', require('./components/Student/TakingExam.vue').default);
 Vue.component('result-exam', require('./components/Student/ResultExam.vue').default);
 

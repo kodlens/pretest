@@ -36,7 +36,7 @@
                     </div>
 
                     <div class="buttons is-centered">
-                        <a class="button is-outlined is-primary" href="/student/login">
+                        <a class="button is-outlined is-primary" href="/login">
                             <b-icon pack="fa" icon="arrow-right"></b-icon>
                             &nbsp; &nbsp;LOGIN NOW
                         </a>&nbsp; OR &nbsp;

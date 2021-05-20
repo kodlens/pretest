@@ -26,14 +26,14 @@ class StudentLoginController extends Controller
         return view('student.login');
     }
 
-    public function guard()
-    {
-        return Auth::guard('student');
-    }
+    // public function guard()
+    // {
+    //     return Auth::guard('student');
+    // }
 
     public function username()
     {
-        return 'StudID';
+        return 'username';
     }
 
     public function redirectTo(){

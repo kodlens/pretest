@@ -3819,6 +3819,24 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
@@ -3869,10 +3887,28 @@ __webpack_require__.r(__webpack_exports__);
     submit: function submit() {
       var _this4 = this;
 
+      this.btnClass['is-loading'] = true;
       axios.post('/registration', this.fields).then(function (res) {
         console.log(res);
+
+        if (res.data.status === 'saved') {
+          _this4.$buefy.dialog.alert({
+            title: 'REGISTERED!',
+            message: 'Account successfully registered. You can login now.',
+            type: 'is-success',
+            onConfirm: function onConfirm() {
+              return window.location = '/';
+            }
+          });
+
+          _this4.btnClass['is-loading'] = false;
+        }
+
+        _this4.btnClass['is-loading'] = false;
       })["catch"](function (err) {
         _this4.errors = err.response.data.errors; //console.log(err.response.data)
+
+        _this4.btnClass['is-loading'] = false;
       });
     }
   },
@@ -3894,7 +3930,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-//
 //
 //
 //
@@ -4026,6 +4061,50 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Student/SectionPage.vue?vue&type=script&lang=js&":
+/*!**************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Student/SectionPage.vue?vue&type=script&lang=js& ***!
+  \**************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Student/StudentLoginPaga.vue?vue&type=script&lang=js&":
 /*!*******************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Student/StudentLoginPaga.vue?vue&type=script&lang=js& ***!
@@ -4095,10 +4174,10 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       this.btnClass['is-loading'] = true;
-      axios.post('/student/login', this.fields).then(function (res) {
+      axios.post('/login', this.fields).then(function (res) {
         _this.fields = {};
         _this.btnClass['is-loading'] = false;
-        window.location = '/student/home';
+        window.location = '/login';
       })["catch"](function (error) {
         _this.btnClass['is-loading'] = false;
 
@@ -4525,6 +4604,7 @@ vue__WEBPACK_IMPORTED_MODULE_0__.default.component('student-login-page', __webpa
 
 vue__WEBPACK_IMPORTED_MODULE_0__.default.component('student-navbar', __webpack_require__(/*! ./components/Student/StudentNavbar.vue */ "./resources/js/components/Student/StudentNavbar.vue").default);
 vue__WEBPACK_IMPORTED_MODULE_0__.default.component('home-page', __webpack_require__(/*! ./components/Student/HomePage.vue */ "./resources/js/components/Student/HomePage.vue").default);
+vue__WEBPACK_IMPORTED_MODULE_0__.default.component('section-page', __webpack_require__(/*! ./components/Student/SectionPage.vue */ "./resources/js/components/Student/SectionPage.vue").default);
 vue__WEBPACK_IMPORTED_MODULE_0__.default.component('taking-exam', __webpack_require__(/*! ./components/Student/TakingExam.vue */ "./resources/js/components/Student/TakingExam.vue").default);
 vue__WEBPACK_IMPORTED_MODULE_0__.default.component('result-exam', __webpack_require__(/*! ./components/Student/ResultExam.vue */ "./resources/js/components/Student/ResultExam.vue").default); //STUDENT AREA
 //-----------------------------//
@@ -22326,6 +22406,30 @@ ___CSS_LOADER_EXPORT___.push([module.id, "\n.panel-body[data-v-7b47e7fb]{\n    p
 
 /***/ }),
 
+/***/ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Student/SectionPage.vue?vue&type=style&index=0&id=50012f05&scoped=true&lang=css&":
+/*!**********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Student/SectionPage.vue?vue&type=style&index=0&id=50012f05&scoped=true&lang=css& ***!
+  \**********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ ((module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
+/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__);
+// Imports
+
+var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
+// Module
+___CSS_LOADER_EXPORT___.push([module.id, "\n.section-wrapper[data-v-50012f05]{\n    margin: 20px;\n    display: flex;\n    justify-content: space-evenly;\n}\n.img-wrapper[data-v-50012f05]{\n    /* border: 1px solid red; */\n    margin: 15px;\n    padding: 15px;\n}\n.img-size[data-v-50012f05]{\n    height: 150px;\n}\n\n/* @media screen and (max-width: 992px) {\n    .section-wrapper{\n       \n        justify-content:center;\n        flex-direction: column;\n        align-items: center;\n       \n    }\n    \n} */\n", ""]);
+// Exports
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
+
+
+/***/ }),
+
 /***/ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Student/StudentLoginPaga.vue?vue&type=style&index=0&id=13f67bf8&scoped=true&lang=css&":
 /*!***************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Student/StudentLoginPaga.vue?vue&type=style&index=0&id=13f67bf8&scoped=true&lang=css& ***!
@@ -23986,6 +24090,47 @@ component.options.__file = "resources/js/components/Student/ResultExam.vue"
 
 /***/ }),
 
+/***/ "./resources/js/components/Student/SectionPage.vue":
+/*!*********************************************************!*\
+  !*** ./resources/js/components/Student/SectionPage.vue ***!
+  \*********************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _SectionPage_vue_vue_type_template_id_50012f05_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./SectionPage.vue?vue&type=template&id=50012f05&scoped=true& */ "./resources/js/components/Student/SectionPage.vue?vue&type=template&id=50012f05&scoped=true&");
+/* harmony import */ var _SectionPage_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./SectionPage.vue?vue&type=script&lang=js& */ "./resources/js/components/Student/SectionPage.vue?vue&type=script&lang=js&");
+/* harmony import */ var _SectionPage_vue_vue_type_style_index_0_id_50012f05_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./SectionPage.vue?vue&type=style&index=0&id=50012f05&scoped=true&lang=css& */ "./resources/js/components/Student/SectionPage.vue?vue&type=style&index=0&id=50012f05&scoped=true&lang=css&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! !../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+;
+
+
+/* normalize component */
+
+var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__.default)(
+  _SectionPage_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__.default,
+  _SectionPage_vue_vue_type_template_id_50012f05_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render,
+  _SectionPage_vue_vue_type_template_id_50012f05_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
+  false,
+  null,
+  "50012f05",
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/Student/SectionPage.vue"
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
+
+/***/ }),
+
 /***/ "./resources/js/components/Student/StudentLoginPaga.vue":
 /*!**************************************************************!*\
   !*** ./resources/js/components/Student/StudentLoginPaga.vue ***!
@@ -24361,6 +24506,22 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/components/Student/SectionPage.vue?vue&type=script&lang=js&":
+/*!**********************************************************************************!*\
+  !*** ./resources/js/components/Student/SectionPage.vue?vue&type=script&lang=js& ***!
+  \**********************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_SectionPage_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./SectionPage.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Student/SectionPage.vue?vue&type=script&lang=js&");
+ /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_SectionPage_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__.default); 
+
+/***/ }),
+
 /***/ "./resources/js/components/Student/StudentLoginPaga.vue?vue&type=script&lang=js&":
 /*!***************************************************************************************!*\
   !*** ./resources/js/components/Student/StudentLoginPaga.vue?vue&type=script&lang=js& ***!
@@ -24650,6 +24811,23 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/components/Student/SectionPage.vue?vue&type=template&id=50012f05&scoped=true&":
+/*!****************************************************************************************************!*\
+  !*** ./resources/js/components/Student/SectionPage.vue?vue&type=template&id=50012f05&scoped=true& ***!
+  \****************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_SectionPage_vue_vue_type_template_id_50012f05_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render),
+/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_SectionPage_vue_vue_type_template_id_50012f05_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
+/* harmony export */ });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_SectionPage_vue_vue_type_template_id_50012f05_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./SectionPage.vue?vue&type=template&id=50012f05&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Student/SectionPage.vue?vue&type=template&id=50012f05&scoped=true&");
+
+
+/***/ }),
+
 /***/ "./resources/js/components/Student/StudentLoginPaga.vue?vue&type=template&id=13f67bf8&scoped=true&":
 /*!*********************************************************************************************************!*\
   !*** ./resources/js/components/Student/StudentLoginPaga.vue?vue&type=template&id=13f67bf8&scoped=true& ***!
@@ -24849,6 +25027,23 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _node_modules_vue_style_loader_index_js_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ResultExam_vue_vue_type_style_index_0_id_7b47e7fb_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_vue_style_loader_index_js_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ResultExam_vue_vue_type_style_index_0_id_7b47e7fb_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__);
 /* harmony reexport (unknown) */ var __WEBPACK_REEXPORT_OBJECT__ = {};
 /* harmony reexport (unknown) */ for(const __WEBPACK_IMPORT_KEY__ in _node_modules_vue_style_loader_index_js_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ResultExam_vue_vue_type_style_index_0_id_7b47e7fb_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== "default") __WEBPACK_REEXPORT_OBJECT__[__WEBPACK_IMPORT_KEY__] = () => _node_modules_vue_style_loader_index_js_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ResultExam_vue_vue_type_style_index_0_id_7b47e7fb_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__[__WEBPACK_IMPORT_KEY__]
+/* harmony reexport (unknown) */ __webpack_require__.d(__webpack_exports__, __WEBPACK_REEXPORT_OBJECT__);
+
+
+/***/ }),
+
+/***/ "./resources/js/components/Student/SectionPage.vue?vue&type=style&index=0&id=50012f05&scoped=true&lang=css&":
+/*!******************************************************************************************************************!*\
+  !*** ./resources/js/components/Student/SectionPage.vue?vue&type=style&index=0&id=50012f05&scoped=true&lang=css& ***!
+  \******************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_style_loader_index_js_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_SectionPage_vue_vue_type_style_index_0_id_50012f05_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-style-loader/index.js!../../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./SectionPage.vue?vue&type=style&index=0&id=50012f05&scoped=true&lang=css& */ "./node_modules/vue-style-loader/index.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Student/SectionPage.vue?vue&type=style&index=0&id=50012f05&scoped=true&lang=css&");
+/* harmony import */ var _node_modules_vue_style_loader_index_js_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_SectionPage_vue_vue_type_style_index_0_id_50012f05_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_vue_style_loader_index_js_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_SectionPage_vue_vue_type_style_index_0_id_50012f05_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__);
+/* harmony reexport (unknown) */ var __WEBPACK_REEXPORT_OBJECT__ = {};
+/* harmony reexport (unknown) */ for(const __WEBPACK_IMPORT_KEY__ in _node_modules_vue_style_loader_index_js_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_SectionPage_vue_vue_type_style_index_0_id_50012f05_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== "default") __WEBPACK_REEXPORT_OBJECT__[__WEBPACK_IMPORT_KEY__] = () => _node_modules_vue_style_loader_index_js_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_SectionPage_vue_vue_type_style_index_0_id_50012f05_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__[__WEBPACK_IMPORT_KEY__]
 /* harmony reexport (unknown) */ __webpack_require__.d(__webpack_exports__, __WEBPACK_REEXPORT_OBJECT__);
 
 
@@ -27968,6 +28163,90 @@ var render = function() {
                             "b-field",
                             {
                               attrs: {
+                                label: "Password",
+                                "label-position": "on-border",
+                                type: this.errors.password ? "is-danger" : "",
+                                message: this.errors.password
+                                  ? this.errors.password
+                                  : ""
+                              }
+                            },
+                            [
+                              _c("b-input", {
+                                attrs: {
+                                  type: "password",
+                                  "password-reveal": "",
+                                  placeholder: "Password"
+                                },
+                                model: {
+                                  value: _vm.fields.password,
+                                  callback: function($$v) {
+                                    _vm.$set(_vm.fields, "password", $$v)
+                                  },
+                                  expression: "fields.password"
+                                }
+                              })
+                            ],
+                            1
+                          )
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "div",
+                        { staticClass: "column" },
+                        [
+                          _c(
+                            "b-field",
+                            {
+                              attrs: {
+                                label: "Re-type Password",
+                                "label-position": "on-border",
+                                type: this.errors.password ? "is-danger" : "",
+                                message: this.errors.password
+                                  ? this.errors.password
+                                  : ""
+                              }
+                            },
+                            [
+                              _c("b-input", {
+                                attrs: {
+                                  type: "password",
+                                  "password-reveal": "",
+                                  placeholder: "Re-type Password"
+                                },
+                                model: {
+                                  value: _vm.fields.password_confirmation,
+                                  callback: function($$v) {
+                                    _vm.$set(
+                                      _vm.fields,
+                                      "password_confirmation",
+                                      $$v
+                                    )
+                                  },
+                                  expression: "fields.password_confirmation"
+                                }
+                              })
+                            ],
+                            1
+                          )
+                        ],
+                        1
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _vm._m(1),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "columns" }, [
+                      _c(
+                        "div",
+                        { staticClass: "column" },
+                        [
+                          _c(
+                            "b-field",
+                            {
+                              attrs: {
                                 label: "Lastname",
                                 "label-position": "on-border",
                                 type: this.errors.lname ? "is-danger" : "",
@@ -28196,7 +28475,7 @@ var render = function() {
                       )
                     ]),
                     _vm._v(" "),
-                    _vm._m(1),
+                    _vm._m(2),
                     _vm._v(" "),
                     _c("div", { staticClass: "columns" }, [
                       _c(
@@ -28268,7 +28547,7 @@ var render = function() {
                       )
                     ]),
                     _vm._v(" "),
-                    _vm._m(2),
+                    _vm._m(3),
                     _vm._v(" "),
                     _c("div", { staticClass: "columns" }, [
                       _c(
@@ -28316,7 +28595,7 @@ var render = function() {
                       )
                     ]),
                     _vm._v(" "),
-                    _vm._m(3),
+                    _vm._m(4),
                     _vm._v(" "),
                     _c("div", { staticClass: "columns" }, [
                       _c(
@@ -28546,6 +28825,12 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
+    return _c("h2", [_c("span", [_vm._v("ACCOUNT INFORMATION")])])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
     return _c("h2", [_c("span", [_vm._v("PERSONAL INFORMATION")])])
   },
   function() {
@@ -28625,13 +28910,13 @@ var render = function() {
                     "a",
                     {
                       staticClass: "button is-primary is-outlined",
-                      attrs: { href: "/student/taking-exam" }
+                      attrs: { href: "/section" }
                     },
                     [
                       _c("b-icon", {
-                        attrs: { pack: "fa", icon: "file-text-o" }
+                        attrs: { pack: "fa", icon: "arrow-right" }
                       }),
-                      _vm._v("   START TEST NOW\n                            ")
+                      _vm._v("   NEXT\n                            ")
                     ],
                     1
                   )
@@ -28661,7 +28946,7 @@ var staticRenderFns = [
     return _c("div", { staticClass: "instruction" }, [
       _c("p", [
         _vm._v(
-          "Good day our dear freshmen! You are about to take the GADTC Admission Test (GADTest) which was postponed because of the pandemic.\n                                This is a 90 item test that you should take for only 45 minutes.\n                                A timer is found at the bottom for your reference.\n                                Rest assured all information that you will input in the test will be kept confidential.\n                                Please refrain taking screenshots and posting any of the questions of the test.\n                                If you are ready, click the button below.\n                            "
+          "Good day our dear freshmen! You are about to take the GADTC Admission Test (GADTest).\n                                This is a 90 item test that you should take for only 45 minutes.\n                                A timer is found at the bottom for your reference.\n                                Rest assured all information that you will input in the test will be kept confidential.\n                                If you are ready, click the button below.\n                            "
         )
       ])
     ])
@@ -28761,6 +29046,77 @@ render._withStripped = true
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Student/SectionPage.vue?vue&type=template&id=50012f05&scoped=true&":
+/*!*******************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Student/SectionPage.vue?vue&type=template&id=50012f05&scoped=true& ***!
+  \*******************************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* binding */ render),
+/* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
+/* harmony export */ });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _vm._m(0)
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", [
+      _c("div", { staticClass: "section" }, [
+        _c("div", { staticClass: "section-wrapper" }, [
+          _c("div", { staticClass: "img-wrapper" }, [
+            _c("img", {
+              staticClass: "img-size",
+              attrs: { src: "img/abstraction.svg", alt: "..." }
+            })
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "img-wrapper" }, [
+            _c("img", {
+              staticClass: "img-size",
+              attrs: { src: "img/logical.svg", alt: "..." }
+            })
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "img-wrapper" }, [
+            _c("img", {
+              staticClass: "img-size",
+              attrs: { src: "img/english.svg", alt: "..." }
+            })
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "img-wrapper" }, [
+            _c("img", {
+              staticClass: "img-size",
+              attrs: { src: "img/numerical.svg", alt: "..." }
+            })
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "img-wrapper" }, [
+            _c("img", {
+              staticClass: "img-size",
+              attrs: { src: "img/general.svg", alt: "..." }
+            })
+          ])
+        ])
+      ])
+    ])
+  }
+]
+render._withStripped = true
+
+
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Student/StudentLoginPaga.vue?vue&type=template&id=13f67bf8&scoped=true&":
 /*!************************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Student/StudentLoginPaga.vue?vue&type=template&id=13f67bf8&scoped=true& ***!
@@ -28813,20 +29169,20 @@ var render = function() {
                         [
                           _c(
                             "b-field",
-                            { attrs: { label: "Student ID" } },
+                            { attrs: { label: "Username" } },
                             [
                               _c("b-input", {
                                 attrs: {
                                   type: "text",
-                                  placeholder: "Student ID",
+                                  placeholder: "Username",
                                   required: ""
                                 },
                                 model: {
-                                  value: _vm.fields.StudID,
+                                  value: _vm.fields.username,
                                   callback: function($$v) {
-                                    _vm.$set(_vm.fields, "StudID", $$v)
+                                    _vm.$set(_vm.fields, "username", $$v)
                                   },
-                                  expression: "fields.StudID"
+                                  expression: "fields.username"
                                 }
                               })
                             ],
@@ -28856,7 +29212,7 @@ var render = function() {
                             1
                           ),
                           _vm._v(" "),
-                          this.errors.StudID
+                          this.errors.username
                             ? _c(
                                 "div",
                                 { staticStyle: { "margin-bottom": "10px" } },
@@ -28869,7 +29225,7 @@ var render = function() {
                                         "font-weight": "bold"
                                       }
                                     },
-                                    [_vm._v(_vm._s(this.errors.StudID[0]))]
+                                    [_vm._v(_vm._s(this.errors.username[0]))]
                                   )
                                 ]
                               )
@@ -28968,7 +29324,7 @@ var render = function() {
           return [
             _c(
               "b-navbar-item",
-              { attrs: { href: "/student/home" } },
+              { attrs: { href: "/home" } },
               [
                 _c("b-icon", { attrs: { pack: "fa", icon: "home" } }),
                 _vm._v("  \n            Home\n        ")
@@ -28978,7 +29334,7 @@ var render = function() {
             _vm._v(" "),
             _c(
               "b-navbar-item",
-              { attrs: { href: "/student/result-exam" } },
+              { attrs: { href: "/result-exam" } },
               [
                 _c("b-icon", { attrs: { pack: "fa", icon: "file-o" } }),
                 _vm._v("  \n            Result\n        ")
@@ -29317,7 +29673,7 @@ var render = function() {
                 "a",
                 {
                   staticClass: "button is-outlined is-primary",
-                  attrs: { href: "/student/login" }
+                  attrs: { href: "/login" }
                 },
                 [
                   _c("b-icon", { attrs: { pack: "fa", icon: "arrow-right" } }),
@@ -29661,6 +30017,27 @@ if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
 var add = __webpack_require__(/*! !../../../../node_modules/vue-style-loader/lib/addStylesClient.js */ "./node_modules/vue-style-loader/lib/addStylesClient.js").default
 var update = add("3650f5d8", content, false, {});
+// Hot Module Replacement
+if(false) {}
+
+/***/ }),
+
+/***/ "./node_modules/vue-style-loader/index.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Student/SectionPage.vue?vue&type=style&index=0&id=50012f05&scoped=true&lang=css&":
+/*!***************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-style-loader/index.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Student/SectionPage.vue?vue&type=style&index=0&id=50012f05&scoped=true&lang=css& ***!
+  \***************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(/*! !!../../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./SectionPage.vue?vue&type=style&index=0&id=50012f05&scoped=true&lang=css& */ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Student/SectionPage.vue?vue&type=style&index=0&id=50012f05&scoped=true&lang=css&");
+if(content.__esModule) content = content.default;
+if(typeof content === 'string') content = [[module.id, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var add = __webpack_require__(/*! !../../../../node_modules/vue-style-loader/lib/addStylesClient.js */ "./node_modules/vue-style-loader/lib/addStylesClient.js").default
+var update = add("01bb792e", content, false, {});
 // Hot Module Replacement
 if(false) {}
 
