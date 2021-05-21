@@ -2661,8 +2661,26 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "PanelQuestion.vue",
+  props: ['dataLevels', 'dataSections'],
   data: function data() {
     return {
       data: [],
@@ -2686,8 +2704,10 @@ __webpack_require__.r(__webpack_exports__);
       },
       radioInputOption: '',
       sections: null,
+      levels: null,
       order_no: 0,
       section: '',
+      level: '',
       question: '',
       is_question_img: 0,
       question_img: null,
@@ -2753,6 +2773,7 @@ __webpack_require__.r(__webpack_exports__);
       this.errors = {};
       this.order_no = 0;
       this.section = '';
+      this.level = '';
       this.question = '';
       this.question_img = null;
       this.score = 0;
@@ -2784,13 +2805,6 @@ __webpack_require__.r(__webpack_exports__);
         element.optionLetter = _this2.letters[index];
       });
     },
-    getSections: function getSections() {
-      var _this3 = this;
-
-      axios.get('/ajax/question/sections').then(function (res) {
-        _this3.sections = res.data;
-      });
-    },
     toogleClickCheck: function toogleClickCheck(index) {
       //
       if (this.options[index].is_answer == 1) {
@@ -2806,8 +2820,7 @@ __webpack_require__.r(__webpack_exports__);
       this.question_img = null; //this.score = 0;
     },
     submit: function submit() {
-      console.log(this.btnClass['is-loading']);
-
+      //console.log(this.btnClass['is-loading']);
       if (this.globalId > 0) {
         //update
         this.updateData();
@@ -2819,7 +2832,7 @@ __webpack_require__.r(__webpack_exports__);
       this.btnClass['is-loading'] = false;
     },
     insertData: function insertData() {
-      var _this4 = this;
+      var _this3 = this;
 
       var formData = new FormData();
       var config = {
@@ -2830,6 +2843,7 @@ __webpack_require__.r(__webpack_exports__);
       formData.append('question', this.question);
       formData.append('question_img', this.question_img);
       formData.append('section', this.section);
+      formData.append('level', this.level);
       formData.append('score', this.score);
 
       for (var index = 0; index < this.options.length; index++) {
@@ -2842,11 +2856,11 @@ __webpack_require__.r(__webpack_exports__);
         console.log(res.data);
 
         if (res.data.status === 'saved') {
-          _this4.isModalCreate = false;
+          _this3.isModalCreate = false;
 
-          _this4.loadAsyncData();
+          _this3.loadAsyncData();
 
-          _this4.$buefy.dialog.alert({
+          _this3.$buefy.dialog.alert({
             title: 'SAVED!',
             message: 'Successfully saved!',
             type: 'is-success',
@@ -2854,14 +2868,14 @@ __webpack_require__.r(__webpack_exports__);
           }); //re initialize variables...
 
 
-          _this4.order_no = 0;
-          _this4.section = '';
-          _this4.question = '';
-          _this4.question_img = null;
-          _this4.score = 0;
-          _this4.options = [];
+          _this3.order_no = 0;
+          _this3.section = '';
+          _this3.question = '';
+          _this3.question_img = null;
+          _this3.score = 0;
+          _this3.options = [];
         } else {
-          _this4.$buefy.dialog.alert({
+          _this3.$buefy.dialog.alert({
             title: 'ERROR',
             message: 'An error occured during saving question.',
             confirmText: 'OK',
@@ -2870,26 +2884,27 @@ __webpack_require__.r(__webpack_exports__);
         }
       })["catch"](function (error) {
         if (error.response) {
-          _this4.errors = error.response.data.errors; // console.log(error.response.data);
+          _this3.errors = error.response.data.errors; // console.log(error.response.data);
           // console.log(error.response.status);
           // console.log(error.response.headers);
         }
       });
     },
     updateData: function updateData() {
-      var _this5 = this;
+      var _this4 = this;
 
       axios.put('/panel/question/' + this.globalId, {
         question: this.question,
         question_img: this.question_img,
+        level: this.level,
         section: this.section,
         score: this.score,
         options: this.options
       }).then(function (res) {
         if (res.data.status === 'updated') {
-          _this5.globalId = 0;
+          _this4.globalId = 0;
 
-          _this5.$buefy.dialog.alert({
+          _this4.$buefy.dialog.alert({
             title: 'UPDATED!',
             message: 'Successfully updated!',
             type: 'is-success',
@@ -2897,20 +2912,21 @@ __webpack_require__.r(__webpack_exports__);
           }); //close the modal
 
 
-          _this5.isModalCreate = false; //re initialize variables...
+          _this4.isModalCreate = false; //re initialize variables...
 
-          _this5.order_no = 0;
-          _this5.section = '';
-          _this5.question = '';
-          _this5.question_img = null;
-          _this5.score = 0;
-          _this5.options = [];
+          _this4.order_no = 0;
+          _this4.section = '';
+          _this4.level = '';
+          _this4.question = '';
+          _this4.question_img = null;
+          _this4.score = 0;
+          _this4.options = [];
 
-          _this5.loadAsyncData();
+          _this4.loadAsyncData();
         }
       })["catch"](function (error) {
         if (error.response) {
-          _this5.errors = error.response.data.errors; // console.log(error.response.data);
+          _this4.errors = error.response.data.errors; // console.log(error.response.data);
           // console.log(error.response.status);
           // console.log(error.response.headers);
         }
@@ -2923,7 +2939,7 @@ __webpack_require__.r(__webpack_exports__);
       }); //this.options.optionLetter[k] = this.letters[k];
     },
     confirmDelete: function confirmDelete(dataId) {
-      var _this6 = this;
+      var _this5 = this;
 
       this.$buefy.dialog.confirm({
         title: 'DELETE',
@@ -2932,40 +2948,46 @@ __webpack_require__.r(__webpack_exports__);
         cancelText: 'Cancel',
         confirmText: 'Delete',
         onConfirm: function onConfirm() {
-          return _this6.deleteSubmit(dataId);
+          return _this5.deleteSubmit(dataId);
         }
       });
     },
     deleteSubmit: function deleteSubmit(dataId) {
-      var _this7 = this;
+      var _this6 = this;
 
       axios["delete"]('/panel/question/' + dataId).then(function (res) {
-        _this7.loadAsyncData();
+        _this6.loadAsyncData();
       });
     },
     getData: function getData(dataId) {
-      var _this8 = this;
+      var _this7 = this;
 
       this.isModalCreate = true;
       this.errors = {};
       axios.get('/panel/question/' + dataId).then(function (res) {
         //if axios response, it will set the global Id
-        _this8.globalId = dataId;
-        _this8.order_no = res.data.order_no;
-        _this8.section = res.data.section_id;
-        _this8.question = res.data.question;
-        _this8.question_img = res.data.question_img;
-        _this8.is_question_img = res.data.is_question_img;
-        res.data.is_question_img == 0 ? _this8.radioInputOption = 'TEXT' : _this8.radioInputOption = 'IMG';
-        _this8.question_img = res.data.question_img_path;
-        _this8.score = res.data.score;
-        _this8.options = res.data.options;
+        console.log(res.data);
+        _this7.globalId = dataId;
+        _this7.order_no = res.data.order_no;
+        _this7.section = res.data.section_id;
+        _this7.level = res.data.level_id;
+        _this7.question = res.data.question;
+        _this7.question_img = res.data.question_img;
+        _this7.is_question_img = res.data.is_question_img;
+        res.data.is_question_img == 0 ? _this7.radioInputOption = 'TEXT' : _this7.radioInputOption = 'IMG';
+        _this7.question_img = res.data.question_img_path;
+        _this7.score = res.data.score;
+        _this7.options = res.data.options;
       });
+    },
+    getSectionAndLevels: function getSectionAndLevels() {
+      this.levels = JSON.parse(this.dataLevels);
+      this.sections = JSON.parse(this.dataSections);
     }
   },
   mounted: function mounted() {
     this.loadAsyncData();
-    this.getSections();
+    this.getSectionAndLevels();
   }
 });
 
@@ -22303,7 +22325,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\r\n\r\n/*qo mean question options button remove*/\n.qo-btn[data-v-51e93ae4]{\r\n    margin-left: 5px;\r\n    border: none;\n}\n.qo-btn > i[data-v-51e93ae4]:hover{\r\n    color:red;\r\n    text-decoration: underline;\n}\n.qo-btn-check[data-v-51e93ae4]{\r\n    border: none;\r\n    color: red;\n}\n.qo-btn-check-active[data-v-51e93ae4]{\r\n    border: none;\r\n    color: green;\n}\n.red-x[data-v-51e93ae4]{\r\n    color: red;\n}\n.green-check[data-v-51e93ae4]{\r\n    color: green;\n}\n.option-panel[data-v-51e93ae4]{\r\n    margin-left: 30px;\n}\r\n\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/*qo mean question options button remove*/\n.qo-btn[data-v-51e93ae4]{\n    margin-left: 5px;\n    border: none;\n}\n.qo-btn > i[data-v-51e93ae4]:hover{\n    color:red;\n    text-decoration: underline;\n}\n.qo-btn-check[data-v-51e93ae4]{\n    border: none;\n    color: red;\n}\n.qo-btn-check-active[data-v-51e93ae4]{\n    border: none;\n    color: green;\n}\n.red-x[data-v-51e93ae4]{\n    color: red;\n}\n.green-check[data-v-51e93ae4]{\n    color: green;\n}\n.option-panel[data-v-51e93ae4]{\n    margin-left: 30px;\n}\n\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -26021,7 +26043,7 @@ var render = function() {
                       key: "detail",
                       fn: function(props) {
                         return [
-                          _c("div", { staticClass: "title is-5" }, [
+                          _c("div", { staticClass: "title is-6" }, [
                             _vm._v("OPTIONS")
                           ]),
                           _vm._v(" "),
@@ -26152,6 +26174,24 @@ var render = function() {
                             _vm._v(
                               "\n                            " +
                                 _vm._s(props.row.section.section) +
+                                "\n                        "
+                            )
+                          ]
+                        }
+                      }
+                    ])
+                  }),
+                  _vm._v(" "),
+                  _c("b-table-column", {
+                    attrs: { field: "level", label: "Level" },
+                    scopedSlots: _vm._u([
+                      {
+                        key: "default",
+                        fn: function(props) {
+                          return [
+                            _vm._v(
+                              "\n                            " +
+                                _vm._s(props.row.level.level) +
                                 "\n                        "
                             )
                           ]
@@ -26335,6 +26375,47 @@ var render = function() {
                       [
                         _c(
                           "b-field",
+                          { attrs: { label: "Level", expanded: "" } },
+                          [
+                            _c(
+                              "b-select",
+                              {
+                                attrs: { expanded: "" },
+                                model: {
+                                  value: _vm.level,
+                                  callback: function($$v) {
+                                    _vm.level = $$v
+                                  },
+                                  expression: "level"
+                                }
+                              },
+                              _vm._l(this.levels, function(item, i) {
+                                return _c(
+                                  "option",
+                                  {
+                                    key: i,
+                                    domProps: { value: item.level_id }
+                                  },
+                                  [_vm._v(_vm._s(item.level))]
+                                )
+                              }),
+                              0
+                            )
+                          ],
+                          1
+                        )
+                      ],
+                      1
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "columns" }, [
+                    _c(
+                      "div",
+                      { staticClass: "column" },
+                      [
+                        _c(
+                          "b-field",
                           { attrs: { label: "Score", expanded: "" } },
                           [
                             _c("b-numberinput", {
@@ -26431,9 +26512,9 @@ var render = function() {
                                   _vm.question_img
                                     ? _c("span", { staticClass: "file-name" }, [
                                         _vm._v(
-                                          "\n                                            " +
+                                          "\n                                        " +
                                             _vm._s(_vm.question_img.name) +
-                                            "\n                                        "
+                                            "\n                                    "
                                         )
                                       ])
                                     : _vm._e()
@@ -26469,63 +26550,65 @@ var render = function() {
                       ])
                     : _vm._e(),
                   _vm._v(" "),
-                  _c(
-                    "b-field",
-                    [
-                      _c(
-                        "b-radio-button",
-                        {
-                          attrs: {
-                            "native-value": "TEXT",
-                            type: "is-success is-light is-outlined"
-                          },
-                          on: { input: _vm.radioClick },
-                          model: {
-                            value: _vm.radioInputOption,
-                            callback: function($$v) {
-                              _vm.radioInputOption = $$v
-                            },
-                            expression: "radioInputOption"
-                          }
-                        },
+                  this.globalId < 1
+                    ? _c(
+                        "b-field",
                         [
-                          _c("b-icon", {
-                            attrs: { pack: "fa", icon: "file-text-o" }
-                          }),
-                          _vm._v(" "),
-                          _c("span", [_vm._v("TEXT")])
-                        ],
-                        1
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "b-radio-button",
-                        {
-                          attrs: {
-                            "native-value": "IMG",
-                            type: "is-success is-light is-outlined"
-                          },
-                          on: { input: _vm.radioClick },
-                          model: {
-                            value: _vm.radioInputOption,
-                            callback: function($$v) {
-                              _vm.radioInputOption = $$v
+                          _c(
+                            "b-radio-button",
+                            {
+                              attrs: {
+                                "native-value": "TEXT",
+                                type: "is-success is-light is-outlined"
+                              },
+                              on: { input: _vm.radioClick },
+                              model: {
+                                value: _vm.radioInputOption,
+                                callback: function($$v) {
+                                  _vm.radioInputOption = $$v
+                                },
+                                expression: "radioInputOption"
+                              }
                             },
-                            expression: "radioInputOption"
-                          }
-                        },
-                        [
-                          _c("b-icon", {
-                            attrs: { pack: "fa", icon: "picture-o" }
-                          }),
+                            [
+                              _c("b-icon", {
+                                attrs: { pack: "fa", icon: "file-text-o" }
+                              }),
+                              _vm._v(" "),
+                              _c("span", [_vm._v("TEXT")])
+                            ],
+                            1
+                          ),
                           _vm._v(" "),
-                          _c("span", [_vm._v("IMG")])
+                          _c(
+                            "b-radio-button",
+                            {
+                              attrs: {
+                                "native-value": "IMG",
+                                type: "is-success is-light is-outlined"
+                              },
+                              on: { input: _vm.radioClick },
+                              model: {
+                                value: _vm.radioInputOption,
+                                callback: function($$v) {
+                                  _vm.radioInputOption = $$v
+                                },
+                                expression: "radioInputOption"
+                              }
+                            },
+                            [
+                              _c("b-icon", {
+                                attrs: { pack: "fa", icon: "picture-o" }
+                              }),
+                              _vm._v(" "),
+                              _c("span", [_vm._v("IMG")])
+                            ],
+                            1
+                          )
                         ],
                         1
                       )
-                    ],
-                    1
-                  ),
+                    : _vm._e(),
                   _vm._v(" "),
                   _c("hr"),
                   _vm._v(" "),

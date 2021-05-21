@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Administrator;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreQuestionRequest;
 
+use App\Models\Level;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
@@ -16,6 +17,7 @@ use App\Models\Question;
 use App\Models\Section;
 use App\Models\Option;
 
+
 class QuestionController extends Controller
 {
     //
@@ -25,14 +27,18 @@ class QuestionController extends Controller
     }
 
     public function index(){
-        return view('panel.question.panel-question');
+        $levels = Level::select('level_id', 'level')->get();
+        $sections = Section::all();
+        return view('panel.question.panel-question')
+            ->with('levels', $levels)
+            ->with('sections', $sections);
     }
 
     public function index_data(Request $req){
         //return Question::all();
         $sortkey = explode(".",$req->sort_by);
 
-        return Question::with(['options', 'section'])
+        return Question::with(['options', 'section', 'level'])
             ->whereHas('section', function ($query) use ($req){ //(Builder $query)
                 $query->where('section', 'like', $req->section .'%');
             })
@@ -44,14 +50,15 @@ class QuestionController extends Controller
         return view('panel.question.panel-question-create');
     }
 
-    public function ajax_section(){
-        return Section::all();
-    }
+//    public function ajax_section(){
+//        return Section::all();
+//    }
 
     public function store(Request $req){
 
         $validate = $req->validate([
             'section' => ['required'],
+            'level' => ['required'],
             'score' => ['required', 'numeric', 'min: 1']
         ]);
 
@@ -68,6 +75,7 @@ class QuestionController extends Controller
 
                 $question = Question::create([
                     'section_id' => $req->section,
+                    'level_id' => $req->level,
                     'is_question_img' => 1,
                     'question_img' => $pathQuestion,
                     'question' => trim($req->question),
@@ -78,6 +86,7 @@ class QuestionController extends Controller
                 //if question is plain text
                 $question = Question::create([
                     'section_id' => $req->section,
+                    'level_id' => $req->level,
                     'question' => trim($req->question),
                     'score' => $req->score
                 ]);
@@ -132,9 +141,11 @@ class QuestionController extends Controller
     }
 
     public function update(Request $req, $id){
+
         $validate = $req->validate([
             //'order_no' => ['required', 'numeric', Rule::unique('questions')->ignore($id, 'question_id')],
             'section' => ['required', 'numeric'],
+            'level' => ['required', 'numeric'],
             'score' => ['required', 'numeric', 'min: 1']
         ]);
 
@@ -147,6 +158,7 @@ class QuestionController extends Controller
             if($questionFile == null || $questionFile == ''){ //if text
                 $question = Question::find($id);
                 $question->section_id = $req->section;
+                $question->level_id = $req->level;
                 $question->question = trim($req->question);
                 $question->score = $req->score;
                 $question->save();
@@ -168,7 +180,6 @@ class QuestionController extends Controller
                             'is_img' => $row['is_img'],
                             'img_path' => trim($row['img_path']),
                             'is_answer' => $row['is_answer'],
-
                         ]);
                 }
 

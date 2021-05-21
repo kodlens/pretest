@@ -14,7 +14,7 @@ class Question extends Model
     protected $table = 'questions';
     protected $primaryKey = 'question_id';
 
-    protected $fillable=['order_no', 'section_id', 'question', 'is_question_img', 'question_img', 'score'];
+    protected $fillable=['order_no', 'section_id', 'level_id', 'question', 'is_question_img', 'question_img', 'score'];
 
 
 
@@ -25,6 +25,10 @@ class Question extends Model
 
     public function section(){
         return $this->hasOne(Section::class, 'section_id', 'section_id');
+    }
+
+    public function level(){
+        return $this->hasOne(Level::class, 'level_id', 'level_id');
     }
 
 

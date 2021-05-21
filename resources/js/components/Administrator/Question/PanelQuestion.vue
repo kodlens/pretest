@@ -71,6 +71,10 @@
                             {{ props.row.section.section }}
                         </b-table-column>
 
+                        <b-table-column field="level" label="Level" v-slot="props">
+                            {{ props.row.level.level }}
+                        </b-table-column>
+
                         <b-table-column field="score" label="Score" v-slot="props">
                             {{ props.row.score }}
                         </b-table-column>
@@ -83,7 +87,7 @@
                         </b-table-column>
 
                         <template slot="detail" slot-scope="props">
-                            <div class="title is-5">OPTIONS</div>
+                            <div class="title is-6">OPTIONS</div>
                             <table>
                                 <thead>
                                     <th>Letter</th>
@@ -155,11 +159,22 @@
                                 </div>
 
                                 <div class="column">
+                                    <b-field label="Level" expanded>
+                                        <b-select v-model="level" expanded>
+                                            <option v-for="(item, i) in this.levels" :value="item.level_id" :key="i">{{ item.level }}</option>
+                                        </b-select>
+                                    </b-field>
+                                </div>
+
+                            </div><!-- class columns-->
+
+                            <div class="columns">
+                                <div class="column">
                                     <b-field label="Score" expanded>
                                         <b-numberinput v-model="score" controls-position="compact" expanded min="0" max="100"></b-numberinput>
                                     </b-field>
                                 </div>
-                            </div><!-- class columns-->
+                            </div>
 
 
 
@@ -170,23 +185,25 @@
                             <b-field v-if="this.radioInputOption === 'IMG' && this.globalId == 0" label="Question">
                                 <b-field grouped class="file is-primary" :class="{'has-name': !!question_img}">
                                     <b-upload v-model="question_img" class="file-label">
-                                        <span class="file-cta">
-                                            <b-icon class="file-icon" icon="upload"></b-icon>
-                                            <span class="file-label">Click to upload</span>
-                                        </span>
+                                    <span class="file-cta">
+                                        <b-icon class="file-icon" icon="upload"></b-icon>
+                                        <span class="file-label">Click to upload</span>
+                                    </span>
                                         <span class="file-name" v-if="question_img">
-                                            {{ question_img.name }}
-                                        </span>
+                                        {{ question_img.name }}
+                                    </span>
                                     </b-upload>
                                 </b-field>
                             </b-field>
+
+
                             <div v-if="this.radioInputOption === 'IMG' && this.globalId > 0">
                                 <p>{{ this.question_img }}</p>
                                 <p style="color:red; font-size: 14px; font-style: italic;">Restricted from editing. If you want to edit this question, you may delete this and create new one.</p>
                             </div>
 
 
-                            <b-field>
+                            <b-field v-if="this.globalId < 1">
                                 <b-radio-button v-model="radioInputOption"
                                         native-value="TEXT"
                                         @input="radioClick"
@@ -334,6 +351,7 @@
 <script>
 export default {
     name: "PanelQuestion.vue",
+    props: ['dataLevels', 'dataSections'],
     data(){
         return{
             data: [],
@@ -364,9 +382,11 @@ export default {
 
             radioInputOption: '',
             sections: null,
+            levels: null,
 
             order_no: 0,
             section: '',
+            level: '',
             question: '',
             is_question_img: 0,
             question_img: null,
@@ -447,6 +467,7 @@ export default {
 
             this.order_no = 0;
             this.section = '';
+            this.level = '';
             this.question = '';
             this.question_img = null;
             this.score = 0;
@@ -483,12 +504,6 @@ export default {
             });
         },
 
-        getSections(){
-            axios.get('/ajax/question/sections').then(res=>{
-                this.sections = res.data;
-            })
-        },
-
         toogleClickCheck(index){
             //
 
@@ -509,9 +524,7 @@ export default {
         },
 
         submit(){
-
-            console.log(this.btnClass['is-loading']);
-
+            //console.log(this.btnClass['is-loading']);
             if(this.globalId > 0){
                 //update
                 this.updateData();
@@ -533,6 +546,7 @@ export default {
             formData.append('question', this.question);
             formData.append('question_img', this.question_img);
             formData.append('section', this.section);
+            formData.append('level', this.level);
             formData.append('score', this.score);
             for(var index = 0; index < this.options.length; index++){
                 formData.append('optionImg['+index+']', this.options[index].img_path);
@@ -584,9 +598,11 @@ export default {
         },
 
         updateData(){
-            axios.put('/panel/question/'+this.globalId,{
+
+            axios.put('/panel/question/'+ this.globalId,{
                 question: this.question,
                 question_img: this.question_img,
+                level: this.level,
                 section: this.section,
                 score: this.score,
                 options: this.options,
@@ -608,6 +624,7 @@ export default {
                     //re initialize variables...
                     this.order_no = 0;
                     this.section = '';
+                    this.level = '';
                     this.question = '';
                     this.question_img = null;
                     this.score = 0;
@@ -656,11 +673,12 @@ export default {
 
             axios.get('/panel/question/'+ dataId).then(res=>{
                 //if axios response, it will set the global Id
+                console.log(res.data);
                 this.globalId = dataId;
 
                 this.order_no = res.data.order_no;
                 this.section = res.data.section_id;
-
+                this.level = res.data.level_id;
                 this.question = res.data.question;
                 this.question_img = res.data.question_img;
                 this.is_question_img = res.data.is_question_img;
@@ -674,11 +692,17 @@ export default {
             });
         },
 
+        getSectionAndLevels(){
+            this.levels = JSON.parse(this.dataLevels);
+            this.sections = JSON.parse(this.dataSections);
+        },
+
+
     },
 
     mounted() {
         this.loadAsyncData();
-        this.getSections();
+        this.getSectionAndLevels();
     }
 
 }

@@ -19,6 +19,9 @@ class CreateQuestionsTable extends Migration
             $table->foreign('section_id')->references('section_id')->on('sections');
             //create relationship
 
+            $table->unsignedBigInteger('level_id');
+            $table->foreign('level_id')->references('level_id')->on('levels');
+
             $table->text('question');
             $table->boolean('is_question_img')->default(0);
             $table->string('question_img')->nullable();
