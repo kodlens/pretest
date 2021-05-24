@@ -16,6 +16,7 @@ class ResultExamController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
+        $this->middleware('student');
         //$this->middleware('allow_exam');
     }
 
@@ -24,7 +25,7 @@ class ResultExamController extends Controller
     }
 
     public function resultExam(){
-        $student_id = auth()->user()->StudID;
+        $student_id = auth()->user();
         $ay = AcadYear::where('active', 1)->first();
 
         return DB::select('call proc_student_result(?, ?)',array($student_id, $ay->code));

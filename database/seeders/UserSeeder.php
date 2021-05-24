@@ -33,11 +33,21 @@ class UserSeeder extends Seeder
                 'lname' => 'SUMALINOG',
                 'fname' => 'BERNICE',
                 'mname' => 'N',
-                'sex' => 'MALE',
+                'sex' => 'FEMALE',
                 'email' => 'admin@pretest.org',
                 'password' => Hash::make('gu1dance$$'),
                 'role' => 'ADMINISTRATOR',
-            ]
+            ],
+            [
+                'username' => 'student',
+                'lname' => 'SUMALINOG',
+                'fname' => 'BERNICE',
+                'mname' => 'N',
+                'sex' => 'FEMALE',
+                'email' => 'student@pretest.org',
+                'password' => Hash::make('a'),
+                'role' => 'STUDENT',
+            ],
         ];
 
         User::insertOrIgnore($users);

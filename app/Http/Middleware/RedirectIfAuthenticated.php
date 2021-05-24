@@ -5,7 +5,7 @@ namespace App\Http\Middleware;
 use App\Providers\RouteServiceProvider;
 use Closure;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
+use Auth;
 
 class RedirectIfAuthenticated
 {
@@ -31,11 +31,11 @@ class RedirectIfAuthenticated
                 // }
                 //return redirect(RouteServiceProvider::HOME);
                 $role = Auth::user()->role;
-                if(strtolower($role) == 'administrator'){
+                if(strtolower($role) === 'administrator'){
                     return redirect('/panel/home');
                 }
 
-                if(strtolower($role) == 'student'){
+                if(strtolower($role) === 'student'){
                     return redirect('/home');
                 }
             }

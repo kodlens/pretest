@@ -23,7 +23,8 @@ class QuestionController extends Controller
     //
 
     public function __construct(){
-        $this->middleware('auth:admin');
+        $this->middleware('auth');
+        $this->middleware('admin');
     }
 
     public function index(){
@@ -197,6 +198,7 @@ class QuestionController extends Controller
     public function destroy($id){
         $fileQuestion = Question::find($id);
 
+
         if($fileQuestion != '' || $fileQuestion != null){
             if(Storage::exists('public/q/'. $fileQuestion->question_img)){
                 Storage::delete('public/q/'. $fileQuestion->question_img);
@@ -215,6 +217,7 @@ class QuestionController extends Controller
        }
 
        Question::destroy($id);
+
         return [['status' => 'deleted']];
     }
 

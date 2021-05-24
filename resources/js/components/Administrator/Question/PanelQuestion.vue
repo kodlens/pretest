@@ -561,13 +561,13 @@ export default {
                 console.log(res.data);
                 if(res.data.status === 'saved'){
                     this.isModalCreate = false;
-                    this.loadAsyncData();
+
 
                     this.$buefy.dialog.alert({
                         title: 'SAVED!',
                         message: 'Successfully saved!',
                         type: 'is-success',
-                        confirmText: 'OK'
+                        onConfirm: ()=> this.loadAsyncData()
                     });
 
                     //re initialize variables...
@@ -615,7 +615,7 @@ export default {
                         title: 'UPDATED!',
                         message: 'Successfully updated!',
                         type: 'is-success',
-                        confirmText: 'OK'
+                        onConfirm: ()=> this.loadAsyncData()
                     });
 
                     //close the modal
@@ -629,7 +629,7 @@ export default {
                     this.question_img = null;
                     this.score = 0;
                     this.options = [];
-                    this.loadAsyncData();
+
                 }
             }).catch(error=>{
                 if (error.response) {

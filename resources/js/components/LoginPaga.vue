@@ -20,14 +20,12 @@
                                         </b-field>
 
                                         <div v-if="this.errors.username" style="margin-bottom: 10px;">
-                                            <span style="color:red; font-weight: bold;">{{this.errors.username[0]}}</span>
+                                            <span style="color:red; font-weight: bold;">{{ this.errors.username[0] }}</span>
                                         </div>
-
 
                                         <div :class="btnClass">
                                             <button class="button is-primary">LOGIN</button>
                                         </div>
-
                                     </div>
                                 </form>
                             </div>
@@ -64,7 +62,6 @@ export default{
                 this.fields = {};
                 this.btnClass['is-loading'] = false;
                 window.location = '/login';
-
             }).catch(error=>{
                 this.btnClass['is-loading'] = false;
                 if(error.response.status === 422){

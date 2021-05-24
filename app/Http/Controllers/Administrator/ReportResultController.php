@@ -11,7 +11,8 @@ class ReportResultController extends Controller
 {
     //
     public function __construct(){
-        $this->middleware('auth:admin');
+        $this->middleware('auth');
+        $this->middleware('admin');
     }
 
     public function index(){
@@ -29,10 +30,10 @@ class ReportResultController extends Controller
 
         return DB::select('call proc_studentlist_result(?)', array($searchkey));
             //->paginate($req->perpage);
-       
+
     }
 
 
-   
-    
+
+
 }

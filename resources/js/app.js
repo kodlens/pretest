@@ -66,7 +66,7 @@ Vue.component('report-result', require('./components/Administrator/Report/Report
 
 //STUDENT AREA
 //-----------------------------//
-Vue.component('student-login-page', require('./components/Student/StudentLoginPaga.vue').default);
+Vue.component('login-page', require('./components/LoginPaga.vue').default);
 
 //STUDENT
 Vue.component('student-navbar', require('./components/Student/StudentNavbar.vue').default);
