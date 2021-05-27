@@ -27,7 +27,7 @@ class TakingExamController extends Controller
     }
 
 
-    public function index(){
+    public function index(Request $req){
         $student_id = auth()->user()->StudID;
         $ay = AcadYear::where('active', 1)->first();
 
@@ -39,22 +39,29 @@ class TakingExamController extends Controller
             return redirect('/student/home')
                 ->with('isTaken', 1);
         }
+        //tiwasonon
 
         return view('student.taking-exam');
     }
 
 
-    public function examineeQuestion()
+    public function examineeQuestion(Request $req)
     {
         # code...
 
-        return Question::with(['options' => function($query){
-                $query->select('question_id', 'option_id', 'letter', 'content', 'is_img', 'img_path');
-        }])
-            ->select('question_id','question', 'is_question_img', 'question_img')
-            ->where('active', 1)
-            ->inRandomOrder()
+//        return Question::with(['options' => function($query){
+//                $query->select('question_id', 'option_id', 'letter', 'content', 'is_img', 'img_path');
+//        }])
+//            ->select('question_id','question', 'is_question_img', 'question_img')
+//            ->where('active', 1)
+//            ->inRandomOrder()
+//            ->get();
+        $ay = AcadYear::where('active', 1)->first();
+        $questions = Question::with(['options'])
+            ->where('acad_year_id', $ay->acad_year_id)
+            ->where('section_id', $req->section)
             ->get();
+
     }
 
     public function examineeResult(){

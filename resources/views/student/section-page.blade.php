@@ -2,6 +2,6 @@
 
 @section('content')
 
-    <section-page></section-page>
+    <section-page sections='@json($sections)'></section-page>
 
 @endsection

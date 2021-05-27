@@ -4192,22 +4192,22 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({});
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  props: ['sections'],
+  data: function data() {
+    return {
+      sectionsJSON: null
+    };
+  },
+  methods: {
+    initializeData: function initializeData() {
+      this.sectionsJSON = JSON.parse(this.sections);
+    }
+  },
+  mounted: function mounted() {
+    this.initializeData();
+  }
+});
 
 /***/ }),
 
@@ -22467,7 +22467,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.section-wrapper[data-v-50012f05]{\n    margin: 20px;\n    display: flex;\n    justify-content: space-evenly;\n}\n.img-wrapper[data-v-50012f05]{\n    /* border: 1px solid red; */\n    margin: 15px;\n    padding: 15px;\n}\n.img-size[data-v-50012f05]{\n    height: 150px;\n}\n\n/* @media screen and (max-width: 992px) {\n    .section-wrapper{\n       \n        justify-content:center;\n        flex-direction: column;\n        align-items: center;\n       \n    }\n    \n} */\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.section-wrapper[data-v-50012f05]{\n    margin: auto;\n    display: flex;\n    flex-direction: column;\n    justify-content: space-evenly;\n    max-width: 500px;\n}\n.img-wrapper[data-v-50012f05]{\n    /* border: 1px solid red; */\n    margin: 15px;\n    padding: 15px;\n    border-radius: 10px;\n    border: 1px solid #c7c7c7;\n    transition: all 0.2s ease;\n}\n.img-wrapper[data-v-50012f05]:hover{\n\n    box-shadow: 1px 1px 25px green;\n}\n.img-size[data-v-50012f05]{\n    height: 150px;\n}\n\n/* @media screen and (max-width: 992px) {\n    .section-wrapper{\n\n        justify-content:center;\n        flex-direction: column;\n        align-items: center;\n\n    }\n\n} */\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -29283,55 +29283,37 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
-}
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", [
-      _c("div", { staticClass: "section" }, [
-        _c("div", { staticClass: "section-wrapper" }, [
-          _c("div", { staticClass: "img-wrapper" }, [
-            _c("img", {
-              staticClass: "img-size",
-              attrs: { src: "img/abstraction.svg", alt: "..." }
-            })
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "img-wrapper" }, [
-            _c("img", {
-              staticClass: "img-size",
-              attrs: { src: "img/logical.svg", alt: "..." }
-            })
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "img-wrapper" }, [
-            _c("img", {
-              staticClass: "img-size",
-              attrs: { src: "img/english.svg", alt: "..." }
-            })
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "img-wrapper" }, [
-            _c("img", {
-              staticClass: "img-size",
-              attrs: { src: "img/numerical.svg", alt: "..." }
-            })
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "img-wrapper" }, [
-            _c("img", {
-              staticClass: "img-size",
-              attrs: { src: "img/general.svg", alt: "..." }
-            })
-          ])
-        ])
-      ])
+  return _c("div", [
+    _c("div", { staticClass: "section" }, [
+      _c(
+        "div",
+        { staticClass: "section-wrapper" },
+        _vm._l(_vm.sectionsJSON, function(item, index) {
+          return _c(
+            "a",
+            {
+              key: index,
+              staticClass: "img-wrapper",
+              attrs: { href: "/section-question?section=" + item.section_id }
+            },
+            [
+              _c("img", {
+                staticClass: "img-size",
+                attrs: { src: "/img/" + item.img_filename, alt: "..." }
+              }),
+              _vm._v(" "),
+              _c("p", [_vm._v("SECTION: " + _vm._s(item.section))]),
+              _vm._v(" "),
+              _c("p", [_vm._v("TIME: " + _vm._s(item.set_time) + " minutes")])
+            ]
+          )
+        }),
+        0
+      )
     ])
-  }
-]
+  ])
+}
+var staticRenderFns = []
 render._withStripped = true
 
 

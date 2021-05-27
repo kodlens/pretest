@@ -50,6 +50,7 @@ Route::resource('/registration', App\Http\Controllers\Student\RegistrationContro
 //Route::post('/student/login', [App\Http\Controllers\Student\StudentLoginController::class, 'login'])->name('student-login');
 Route::resource('/section', App\Http\Controllers\Student\SectionPageController::class);
 
+Route::resource('/section-question', App\Http\Controllers\Student\SectionQuestionController::class);
 
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

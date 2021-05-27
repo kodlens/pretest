@@ -17,10 +17,12 @@ class CreateSectionsTable extends Migration
         Schema::create('sections', function (Blueprint $table) {
             $table->id('section_id');
             $table->string('section', 255)->unique();
+            $table->string('img_filename', 255)->unique();
+            $table->integer('set_time')->default(10);
             $table->timestamps();
         });
 
-        
+
     }
 
     /**

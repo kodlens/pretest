@@ -15,6 +15,11 @@ class CreateQuestionsTable extends Migration
     {
         Schema::create('questions', function (Blueprint $table) {
             $table->id('question_id');
+
+            $table->unsignedBigInteger('acad_year_id');
+            $table->foreign('acad_year_id')->references('acad_year_id')->on('acad_years');
+
+
             $table->unsignedBigInteger('section_id');
             $table->foreign('section_id')->references('section_id')->on('sections');
             //create relationship
