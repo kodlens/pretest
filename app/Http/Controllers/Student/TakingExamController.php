@@ -28,40 +28,55 @@ class TakingExamController extends Controller
 
 
     public function index(Request $req){
-        $student_id = auth()->user()->StudID;
+        $user_id = auth()->user()->user_id;
         $ay = AcadYear::where('active', 1)->first();
 
-        $isExist = AnswerSheet::where('student_id', $student_id)
+        $isExist = AnswerSheet::where('user_id', $user_id)
             ->where('code', $ay->code)
                 ->exists();
 
         if($isExist){
-            return redirect('/student/home')
+            return redirect('/section')
                 ->with('isTaken', 1);
         }
         //tiwasonon
 
-        return view('student.taking-exam');
+        return view('student.taking-exam')
+            ->with('id', $req->section);
     }
 
 
     public function examineeQuestion(Request $req)
     {
         # code...
-
-//        return Question::with(['options' => function($query){
-//                $query->select('question_id', 'option_id', 'letter', 'content', 'is_img', 'img_path');
-//        }])
-//            ->select('question_id','question', 'is_question_img', 'question_img')
-//            ->where('active', 1)
-//            ->inRandomOrder()
-//            ->get();
+        $section_id = $req->section;
         $ay = AcadYear::where('active', 1)->first();
-        $questions = Question::with(['options'])
+        $easy_question = Question::with(['options'])
+            ->join('levels', 'questions.level_id', 'levels.level_id')
             ->where('acad_year_id', $ay->acad_year_id)
-            ->where('section_id', $req->section)
-            ->get();
+            ->where('level', 'EASY')
+            ->where('section_id', $section_id)
+            ->inRandomOrder()->take(6)->get();
 
+        $average_question = Question::with(['options'])
+            ->join('levels', 'questions.level_id', 'levels.level_id')
+            ->where('acad_year_id', $ay->acad_year_id)
+            ->where('level', 'AVERAGE')
+            ->where('section_id', $section_id)
+            ->inRandomOrder()->take(6)->get();
+
+        $diff_question = Question::with(['options'])
+            ->join('levels', 'questions.level_id', 'levels.level_id')
+            ->where('acad_year_id', $ay->acad_year_id)
+            ->where('level', 'DIFFICULT')
+            ->where('section_id', $section_id)
+            ->inRandomOrder()->take(6)->get();
+
+        $data = array_merge($easy_question->toArray(),
+            $average_question->toArray(),
+            $diff_question->toArray());
+
+        return $data;
     }
 
     public function examineeResult(){

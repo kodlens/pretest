@@ -16,7 +16,8 @@ class CreateAnswerSheetsTable extends Migration
         Schema::create('answer_sheets', function (Blueprint $table) {
             $table->id('answer_sheet_id');
             $table->string('code');
-            $table->string('student_id');
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')->references('user_id')->on('users');
             $table->boolean('is_taken')->default(0);
             $table->dateTime('date_taken');
             $table->timestamps();

@@ -8,13 +8,13 @@
 
                             <div class="instruction-container">
                                 <div>
-                                    Instruction: Click the letter of your answer.
+                                    Instruction: Choose the letter of your answer.
                                     <br>
-                                    <strong><span style="color:red;">Reminder: Please refrain taking screenshots and posting any of the questions of the test.</span></strong>
+                                    <!-- <strong><span style="color:red;">Reminder: Please refrain taking screenshots and posting any of the questions of the test.</span></strong> -->
                                 </div>
                             </div>
 
-                            <div class="question-box" v-for="(item, i) in questions" :key="i">
+                            <div class="question-box" v-show="isShow" v-for="(item, i) in questions" :key="i">
                                 <!--question content-->
                                 <div class="question-content">{{ i + 1 }}.)
                                     <span v-if="item.is_question_img == 0">{{item.question}}</span>
@@ -86,14 +86,20 @@ export default {
                 'is-loading': false
             },
 
+            isShow: true,
+
             nTime: '',
         }
     },
     methods: {
         loadQuestion: async function(){
-            await axios.get('/section-question?section='+this.sectionId).then(res=>{
+            await axios.get('/student/taking-exam-question?section='+this.sectionId).then(res=>{
                 //5pxconsole.log(res.data);
                 this.questions = res.data;
+
+
+
+
             });
         },
 
@@ -102,7 +108,7 @@ export default {
             duration = duration * 60;
             var timer = duration, minutes, seconds;
 
-            setInterval( ()=> {
+            var s = setInterval( ()=> {
                 //use arrow function so this keyword will refer to window.variable
                 minutes = parseInt(timer / 60, 10);
                 seconds = parseInt(timer % 60, 10);
@@ -115,7 +121,10 @@ export default {
                 if (--timer < 0) {
                     timer = duration;
                     //alert('done');
-                    this.submit();
+                    clearInterval(s)
+                    console.log('stop');
+                    this.isShow = false;
+                    //this.submit();
                 }
             }, 1000);
 
@@ -162,7 +171,7 @@ export default {
     },
     mounted(){
         this.loadQuestion().then(()=>{
-            this.startTimer(45);
+            this.startTimer(.03);
         });
 
     },

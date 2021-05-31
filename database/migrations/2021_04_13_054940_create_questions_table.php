@@ -30,6 +30,7 @@ class CreateQuestionsTable extends Migration
             $table->text('question');
             $table->boolean('is_question_img')->default(0);
             $table->string('question_img')->nullable();
+            $table->integer('set_time')->default(10);
             $table->integer('score');
             $table->timestamps();
         });

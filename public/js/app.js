@@ -4393,6 +4393,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         'is-success': true,
         'is-loading': false
       },
+      isShow: true,
       nTime: ''
     };
   },
@@ -4406,7 +4407,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             switch (_context.prev = _context.next) {
               case 0:
                 _context.next = 2;
-                return axios.get('/section-question?section=' + this.sectionId).then(function (res) {
+                return axios.get('/student/taking-exam-question?section=' + this.sectionId).then(function (res) {
                   //5pxconsole.log(res.data);
                   _this.questions = res.data;
                 });
@@ -4432,7 +4433,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       var timer = duration,
           minutes,
           seconds;
-      setInterval(function () {
+      var s = setInterval(function () {
         //use arrow function so this keyword will refer to window.variable
         minutes = parseInt(timer / 60, 10);
         seconds = parseInt(timer % 60, 10);
@@ -4443,7 +4444,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         if (--timer < 0) {
           timer = duration; //alert('done');
 
-          _this2.submit();
+          clearInterval(s);
+          console.log('stop');
+          _this2.isShow = false; //this.submit();
         }
       }, 1000);
     },
@@ -4497,7 +4500,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     var _this4 = this;
 
     this.loadQuestion().then(function () {
-      _this4.startTimer(45);
+      _this4.startTimer(.03);
     });
   }
 });
@@ -29294,7 +29297,7 @@ var render = function() {
             {
               key: index,
               staticClass: "img-wrapper",
-              attrs: { href: "/section-question?section=" + item.section_id }
+              attrs: { href: "/taking-exam?section=" + item.section_id }
             },
             [
               _c("img", {
@@ -29481,7 +29484,18 @@ var render = function() {
                   _vm._l(_vm.questions, function(item, i) {
                     return _c(
                       "div",
-                      { key: i, staticClass: "question-box" },
+                      {
+                        directives: [
+                          {
+                            name: "show",
+                            rawName: "v-show",
+                            value: _vm.isShow,
+                            expression: "isShow"
+                          }
+                        ],
+                        key: i,
+                        staticClass: "question-box"
+                      },
                       [
                         _c("div", { staticClass: "question-content" }, [
                           _vm._v(
@@ -29632,17 +29646,9 @@ var staticRenderFns = [
     return _c("div", { staticClass: "instruction-container" }, [
       _c("div", [
         _vm._v(
-          "\n                                Instruction: Click the letter of your answer.\n                                "
+          "\n                                Instruction: Choose the letter of your answer.\n                                "
         ),
-        _c("br"),
-        _vm._v(" "),
-        _c("strong", [
-          _c("span", { staticStyle: { color: "red" } }, [
-            _vm._v(
-              "Reminder: Please refrain taking screenshots and posting any of the questions of the test."
-            )
-          ])
-        ])
+        _c("br")
       ])
     ])
   }

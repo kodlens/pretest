@@ -31,13 +31,13 @@ class AllowExam
             if($is_allow){
                 return $next($request);
             }else{
-                return redirect('/student/home')
+                return redirect('/section')
                 ->with('error', 'PRETEST EXAM IS CLOSED.');
             }
         }else{
             return redirect('/');
         }
-        
-        
+
+
     }
 }

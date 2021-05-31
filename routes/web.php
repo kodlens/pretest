@@ -54,7 +54,7 @@ Route::resource('/section-question', App\Http\Controllers\Student\SectionQuestio
 
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::resource('/student/taking-exam', App\Http\Controllers\Student\TakingExamController::class);
+Route::resource('/taking-exam', App\Http\Controllers\Student\TakingExamController::class);
 Route::get('/student/taking-exam-question', [App\Http\Controllers\Student\TakingExamController::class, 'examineeQuestion']);
 Route::get('/student/result-exam', [App\Http\Controllers\Student\ResultExamController::class, 'index']);
 Route::get('/student/ajax-result-exam', [App\Http\Controllers\Student\ResultExamController::class, 'resultExam']);
