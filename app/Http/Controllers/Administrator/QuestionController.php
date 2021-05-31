@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Administrator;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreQuestionRequest;
 
+use App\Models\AcadYear;
 use App\Models\Level;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -57,6 +58,7 @@ class QuestionController extends Controller
 
     public function store(Request $req){
 
+        $ay = AcadYear::where('active', 1)->first();
         $validate = $req->validate([
             'section' => ['required'],
             'level' => ['required'],
@@ -75,6 +77,7 @@ class QuestionController extends Controller
                 $pathQuestion = $newPath[2];
 
                 $question = Question::create([
+                    'acad_year_id' => $ay->acad_year_id,
                     'section_id' => $req->section,
                     'level_id' => $req->level,
                     'is_question_img' => 1,
@@ -86,6 +89,7 @@ class QuestionController extends Controller
             }else{
                 //if question is plain text
                 $question = Question::create([
+                    'acad_year_id' => $ay->acad_year_id,
                     'section_id' => $req->section,
                     'level_id' => $req->level,
                     'question' => trim($req->question),
@@ -155,9 +159,10 @@ class QuestionController extends Controller
 
             $questionFile = $req->file('question'); //check if question is empty of null
             //$options = json_decode($req->options);  //decode to json stringify JSON from javascript
-
+            $ay = AcadYear::where('active', 1)->first();
             if($questionFile == null || $questionFile == ''){ //if text
                 $question = Question::find($id);
+                $question->acad_year_id = $ay->acad_year_id;
                 $question->section_id = $req->section;
                 $question->level_id = $req->level;
                 $question->question = trim($req->question);

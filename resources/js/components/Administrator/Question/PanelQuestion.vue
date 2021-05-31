@@ -553,7 +553,6 @@ export default {
                 //console.log(this.options[index].img_path);
             }
 
-
            // formData.append('options', this.options);
             formData.append('options', JSON.stringify(this.options));
 
