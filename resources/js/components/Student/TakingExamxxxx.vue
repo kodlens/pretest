@@ -49,6 +49,7 @@
                                             </b-radio>
                                         </b-field>
                                     </div>
+
                                 </div>
                                 <!--option content-->
 

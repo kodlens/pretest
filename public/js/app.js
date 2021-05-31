@@ -4381,8 +4381,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
-//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  props: ['sectionId'],
   data: function data() {
     return {
       questions: [],
@@ -4406,7 +4406,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             switch (_context.prev = _context.next) {
               case 0:
                 _context.next = 2;
-                return axios.get('/student/taking-exam-question').then(function (res) {
+                return axios.get('/section-question?section=' + this.sectionId).then(function (res) {
                   //5pxconsole.log(res.data);
                   _this.questions = res.data;
                 });
@@ -4416,7 +4416,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 return _context.stop();
             }
           }
-        }, _callee);
+        }, _callee, this);
       }));
 
       function loadQuestion() {

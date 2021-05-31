@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Student;
 
 use App\Http\Controllers\Controller;
 use App\Models\AcadYear;
+use App\Models\Level;
 use App\Models\Question;
 use Illuminate\Http\Request;
 
@@ -19,11 +20,33 @@ class SectionQuestionController extends Controller
 
     public function index(Request $req){
         $ay = AcadYear::where('active', 1)->first();
-        $questions = Question::with(['options'])
+        $easy_question = Question::with(['options'])
+            ->join('levels', 'questions.level_id', 'levels.level_id')
             ->where('acad_year_id', $ay->acad_year_id)
+            ->where('level', 'EASY')
             ->where('section_id', $req->section)
-            ->get();
-        return $questions;
+            ->inRandomOrder()->take(6)->get();
+
+        $average_question = Question::with(['options'])
+            ->join('levels', 'questions.level_id', 'levels.level_id')
+            ->where('acad_year_id', $ay->acad_year_id)
+            ->where('level', 'AVERAGE')
+            ->where('section_id', $req->section)
+            ->inRandomOrder()->take(6)->get();
+
+        $diff_question = Question::with(['options'])
+            ->join('levels', 'questions.level_id', 'levels.level_id')
+            ->where('acad_year_id', $ay->acad_year_id)
+            ->where('level', 'DIFFICULT')
+            ->where('section_id', $req->section)
+            ->inRandomOrder()->take(6)->get();
+
+        $data = array_merge($easy_question->toArray(), 
+            $average_question->toArray(), 
+            $diff_question->toArray());
+
+        return view('student.taking-exam')
+            ->with('data', $data);
     }
 
 
