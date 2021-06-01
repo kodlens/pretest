@@ -1914,10 +1914,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: ['isAuth'],
   data: function data() {
@@ -25227,10 +25223,6 @@ var render = function() {
             _vm._v(" "),
             _c("b-navbar-item", { attrs: { href: "/panel/section" } }, [
               _vm._v("\n            Sections\n        ")
-            ]),
-            _vm._v(" "),
-            _c("b-navbar-item", { attrs: { href: "/panel/answer" } }, [
-              _vm._v("\n            Answer\n        ")
             ]),
             _vm._v(" "),
             _c("b-navbar-item", { attrs: { href: "/panel/question" } }, [
