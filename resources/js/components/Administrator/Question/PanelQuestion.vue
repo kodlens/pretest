@@ -16,18 +16,11 @@
                                     <option value="20">20 per page</option>
                                 </b-select>
                             </div>
-
-                            <div class="level-item">
-                                <div class="buttons">
-                                    <!-- <b-button tag="a" href="/cpanel-academicyear/create" class="is-primary">Create Account</b-button> -->
-                                    <b-button @click="openModal" class="is-primary">Create Question</b-button>
-                                </div>
-                            </div>
                         </div>
 
                         <div class="level-right">
                             <div class="level-item">
-                                <b-field>
+                                <b-field label="Section" label-position="on-border">
                                     <b-input type="text" placeholder="Search Section..."
                                     v-model="search.section" @keyup.native.enter="loadAsyncData"/>
                                 </b-field>
@@ -35,7 +28,27 @@
                         </div>
                     </div>
 
+                    <div class="level">
+                        <div class="item-left">
+                            <div class="level-item">
+                                <b-field label="Question" label-position="on-border">
+                                    <b-input type="text" placeholder="Search Question..."
+                                    v-model="search.question" @keyup.native.enter="loadAsyncData"/>
+                                </b-field>
+                            </div>
+                        </div>
+                    </div>
 
+                    <div class="level">
+                        <div class="item-left">
+                            <div class="level-item">
+                                <div class="buttons">
+                                    <!-- <b-button tag="a" href="/cpanel-academicyear/create" class="is-primary">Create Account</b-button> -->
+                                    <b-button @click="openModal" class="is-primary" icon-pack="fa" icon-right="plus">New</b-button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
                     <b-table
                         :data="data"
@@ -81,8 +94,8 @@
 
                         <b-table-column field="" label="Action" v-slot="props">
                             <div class="is-flex">
-                                <b-button outlined class="button is-small is-warning mr-1" tag="a" icon-right="pencil" icon-pack="fa" @click="getData(props.row.question_id)">EDIT</b-button>
-                                <b-button outlined class="button is-small is-danger mr-1" icon-pack="fa" icon-right="trash" @click="confirmDelete(props.row.question_id)">DELETE</b-button>
+                                <b-button outlined class="button is-small is-warning mr-1" tag="a" icon-right="pencil" icon-pack="fa" @click="getData(props.row.question_id)"></b-button>
+                                <b-button outlined class="button is-small is-danger mr-1" icon-pack="fa" icon-right="trash" @click="confirmDelete(props.row.question_id)"></b-button>
                             </div>
                         </b-table-column>
 
@@ -170,8 +183,8 @@
 
                             <div class="columns">
                                 <div class="column">
-                                    <b-field label="Score" expanded>
-                                        <b-numberinput v-model="score" controls-position="compact" expanded min="0" max="100"></b-numberinput>
+                                    <b-field label="Score" >
+                                        <b-numberinput v-model="score" controls-position="compact" min="0" max="100"></b-numberinput>
                                     </b-field>
                                 </div>
                             </div>
@@ -185,13 +198,13 @@
                             <b-field v-if="this.radioInputOption === 'IMG' && this.globalId == 0" label="Question">
                                 <b-field grouped class="file is-primary" :class="{'has-name': !!question_img}">
                                     <b-upload v-model="question_img" class="file-label">
-                                    <span class="file-cta">
-                                        <b-icon class="file-icon" icon="upload"></b-icon>
-                                        <span class="file-label">Click to upload</span>
-                                    </span>
-                                        <span class="file-name" v-if="question_img">
-                                        {{ question_img.name }}
-                                    </span>
+                                        <span class="file-cta">
+                                            <b-icon class="file-icon" icon="upload"></b-icon>
+                                            <span class="file-label">Click to upload</span>
+                                        </span>
+                                            <span class="file-name" v-if="question_img">
+                                            {{ question_img.name }}
+                                        </span>
                                     </b-upload>
                                 </b-field>
                             </b-field>
@@ -213,9 +226,9 @@
                                 </b-radio-button>
 
                                 <b-radio-button v-model="radioInputOption"
-                                                native-value="IMG"
-                                                @input="radioClick"
-                                                type="is-success is-light is-outlined">
+                                        native-value="IMG"
+                                        @input="radioClick"
+                                        type="is-success is-light is-outlined">
                                     <b-icon pack="fa" icon="picture-o"></b-icon>
                                     <span>IMG</span>
                                 </b-radio-button>
@@ -226,9 +239,11 @@
                             <!--LOOP -->
                             <div class="option-panel" v-for="(option, k) in this.options" :key="k">
                                 <b-field :label="`Option ` + letters[k]">
+                                    <input type="hidden" v-model='option.option_id' />
                                     <b-input v-if="option.is_img === 0" type="text" v-model="option.content" placeholder="Option here..."/>
 
                                     <div v-if="option.is_img === 1 && globalId == 0">
+                                        <!-- insert -->
                                         <b-field grouped class="file is-primary" :class="{'has-name': !!option.img_path}">
                                             <b-upload v-model="option.img_path" class="file-label">
                                                 <span class="file-cta">
@@ -397,6 +412,7 @@ export default {
 
             search: {
                 section: '',
+                question: '',
             },
 
             path:'', //path if image retirieve using modal
@@ -414,6 +430,7 @@ export default {
                 `sort_by=${this.sortField}.${this.sortOrder}`,
                 `perpage=${this.perPage}`,
                 `section=${this.search.section}`,
+                `question=${this.search.question}`,
                 `page=${this.page}`
             ].join('&')
 
@@ -486,6 +503,7 @@ export default {
             //shorthand
             //console.log(this.letters[this.options.length]);
             this.options.push({
+                option_id: null,
                 optionLetter: this.letters[this.options.length],
                 content: '',
                 is_answer: 0,

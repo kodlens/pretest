@@ -22,7 +22,6 @@ use App\Models\Option;
 class QuestionController extends Controller
 {
     //
-
     public function __construct(){
         $this->middleware('auth');
         $this->middleware('admin');
@@ -44,6 +43,7 @@ class QuestionController extends Controller
             ->whereHas('section', function ($query) use ($req){ //(Builder $query)
                 $query->where('section', 'like', $req->section .'%');
             })
+            ->where('question', 'like', $req->question . '%')
             ->orderBy($sortkey[0], $sortkey[1])
             ->paginate($req->perpage);
     }
@@ -102,6 +102,7 @@ class QuestionController extends Controller
 
             $counter = 0;
             $optionImg = $req->optionImg;
+            
 
             foreach($options as $row){
                 if($row->is_img > 0){
@@ -146,6 +147,8 @@ class QuestionController extends Controller
     }
 
     public function update(Request $req, $id){
+        
+        
 
         $validate = $req->validate([
             //'order_no' => ['required', 'numeric', Rule::unique('questions')->ignore($id, 'question_id')],
@@ -173,20 +176,32 @@ class QuestionController extends Controller
             foreach($req->options as $row){
                 if($row['is_img'] > 0){
                     Option::where('option_id', $row['option_id'])
+                        //update image here...
                         ->update([
                             'is_answer' => $row['is_answer'],
-
                         ]);
                 }else{
-                    Option::where('option_id', $row['option_id'])
+                    //update text option here ...
+                    if($row['option_id']){
+                        Option::where('option_id', $row['option_id'])
                         ->update([
                             'question_id' => $id,
                             'letter' => $row['letter'],
                             'content' => trim($row['content']),
                             'is_img' => $row['is_img'],
-                            'img_path' => trim($row['img_path']),
+                            'img_path' => null,
                             'is_answer' => $row['is_answer'],
                         ]);
+                    }else{
+                        Option::create([
+                            'question_id' => $id,
+                            'letter' => $row['optionLetter'],
+                            'content' => trim($row['content']),
+                            'is_img' => $row['is_img'],
+                            'img_path' => null,
+                            'is_answer' => $row['is_answer'],
+                        ]);
+                    }
                 }
 
             }

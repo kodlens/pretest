@@ -2678,6 +2678,21 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "PanelQuestion.vue",
   props: ['dataLevels', 'dataSections'],
@@ -2715,7 +2730,8 @@ __webpack_require__.r(__webpack_exports__);
       options: [],
       letters: ['A', 'B', 'C', 'D', 'E'],
       search: {
-        section: ''
+        section: '',
+        question: ''
       },
       path: '' //path if image retirieve using modal
       //optionsssss
@@ -2727,7 +2743,7 @@ __webpack_require__.r(__webpack_exports__);
     loadAsyncData: function loadAsyncData() {
       var _this = this;
 
-      var params = ["sort_by=".concat(this.sortField, ".").concat(this.sortOrder), "perpage=".concat(this.perPage), "section=".concat(this.search.section), "page=".concat(this.page)].join('&');
+      var params = ["sort_by=".concat(this.sortField, ".").concat(this.sortOrder), "perpage=".concat(this.perPage), "section=".concat(this.search.section), "question=".concat(this.search.question), "page=".concat(this.page)].join('&');
       this.loading = true;
       axios.get("/ajax/question?".concat(params)).then(function (_ref) {
         var data = _ref.data;
@@ -2788,6 +2804,7 @@ __webpack_require__.r(__webpack_exports__);
       //shorthand
       //console.log(this.letters[this.options.length]);
       this.options.push({
+        option_id: null,
         optionLetter: this.letters[this.options.length],
         content: '',
         is_answer: 0,
@@ -4500,7 +4517,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     var _this4 = this;
 
     this.loadQuestion().then(function () {
-      _this4.startTimer(.03);
+      _this4.startTimer(10);
     });
   }
 });
@@ -22326,7 +22343,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/*qo mean question options button remove*/\n.qo-btn[data-v-51e93ae4]{\n    margin-left: 5px;\n    border: none;\n}\n.qo-btn > i[data-v-51e93ae4]:hover{\n    color:red;\n    text-decoration: underline;\n}\n.qo-btn-check[data-v-51e93ae4]{\n    border: none;\n    color: red;\n}\n.qo-btn-check-active[data-v-51e93ae4]{\n    border: none;\n    color: green;\n}\n.red-x[data-v-51e93ae4]{\n    color: red;\n}\n.green-check[data-v-51e93ae4]{\n    color: green;\n}\n.option-panel[data-v-51e93ae4]{\n    margin-left: 30px;\n}\n\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/*qo mean question options button remove*/\n.qo-btn[data-v-51e93ae4]{\n    margin-left: 5px;\n    border: none;\n}\n.qo-btn > i[data-v-51e93ae4]:hover{\n    color:red;\n    text-decoration: underline;\n}\n.qo-btn-check[data-v-51e93ae4]{\n    border: none;\n    color: red;\n}\n.qo-btn-check-active[data-v-51e93ae4]{\n    border: none;\n    color: green;\n}\n.red-x[data-v-51e93ae4]{\n    color: red;\n}\n.green-check[data-v-51e93ae4]{\n    color: green;\n}\n.option-panel[data-v-51e93ae4]{\n    margin-left: 30px;\n}\n\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -25950,25 +25967,7 @@ var render = function() {
                       )
                     ],
                     1
-                  ),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "level-item" }, [
-                    _c(
-                      "div",
-                      { staticClass: "buttons" },
-                      [
-                        _c(
-                          "b-button",
-                          {
-                            staticClass: "is-primary",
-                            on: { click: _vm.openModal }
-                          },
-                          [_vm._v("Create Question")]
-                        )
-                      ],
-                      1
-                    )
-                  ])
+                  )
                 ]),
                 _vm._v(" "),
                 _c("div", { staticClass: "level-right" }, [
@@ -25978,6 +25977,12 @@ var render = function() {
                     [
                       _c(
                         "b-field",
+                        {
+                          attrs: {
+                            label: "Section",
+                            "label-position": "on-border"
+                          }
+                        },
                         [
                           _c("b-input", {
                             attrs: {
@@ -26015,6 +26020,83 @@ var render = function() {
                     ],
                     1
                   )
+                ])
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "level" }, [
+                _c("div", { staticClass: "item-left" }, [
+                  _c(
+                    "div",
+                    { staticClass: "level-item" },
+                    [
+                      _c(
+                        "b-field",
+                        {
+                          attrs: {
+                            label: "Question",
+                            "label-position": "on-border"
+                          }
+                        },
+                        [
+                          _c("b-input", {
+                            attrs: {
+                              type: "text",
+                              placeholder: "Search Question..."
+                            },
+                            nativeOn: {
+                              keyup: function($event) {
+                                if (
+                                  !$event.type.indexOf("key") &&
+                                  _vm._k(
+                                    $event.keyCode,
+                                    "enter",
+                                    13,
+                                    $event.key,
+                                    "Enter"
+                                  )
+                                ) {
+                                  return null
+                                }
+                                return _vm.loadAsyncData($event)
+                              }
+                            },
+                            model: {
+                              value: _vm.search.question,
+                              callback: function($$v) {
+                                _vm.$set(_vm.search, "question", $$v)
+                              },
+                              expression: "search.question"
+                            }
+                          })
+                        ],
+                        1
+                      )
+                    ],
+                    1
+                  )
+                ])
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "level" }, [
+                _c("div", { staticClass: "item-left" }, [
+                  _c("div", { staticClass: "level-item" }, [
+                    _c(
+                      "div",
+                      { staticClass: "buttons" },
+                      [
+                        _c(
+                          "b-button",
+                          {
+                            staticClass: "is-primary",
+                            attrs: { "icon-pack": "fa", "icon-right": "plus" },
+                            on: { click: _vm.openModal }
+                          },
+                          [_vm._v("New")]
+                        )
+                      ],
+                      1
+                    )
+                  ])
                 ])
               ]),
               _vm._v(" "),
@@ -26230,48 +26312,37 @@ var render = function() {
                               "div",
                               { staticClass: "is-flex" },
                               [
-                                _c(
-                                  "b-button",
-                                  {
-                                    staticClass:
-                                      "button is-small is-warning mr-1",
-                                    attrs: {
-                                      outlined: "",
-                                      tag: "a",
-                                      "icon-right": "pencil",
-                                      "icon-pack": "fa"
-                                    },
-                                    on: {
-                                      click: function($event) {
-                                        return _vm.getData(
-                                          props.row.question_id
-                                        )
-                                      }
-                                    }
+                                _c("b-button", {
+                                  staticClass:
+                                    "button is-small is-warning mr-1",
+                                  attrs: {
+                                    outlined: "",
+                                    tag: "a",
+                                    "icon-right": "pencil",
+                                    "icon-pack": "fa"
                                   },
-                                  [_vm._v("EDIT")]
-                                ),
+                                  on: {
+                                    click: function($event) {
+                                      return _vm.getData(props.row.question_id)
+                                    }
+                                  }
+                                }),
                                 _vm._v(" "),
-                                _c(
-                                  "b-button",
-                                  {
-                                    staticClass:
-                                      "button is-small is-danger mr-1",
-                                    attrs: {
-                                      outlined: "",
-                                      "icon-pack": "fa",
-                                      "icon-right": "trash"
-                                    },
-                                    on: {
-                                      click: function($event) {
-                                        return _vm.confirmDelete(
-                                          props.row.question_id
-                                        )
-                                      }
-                                    }
+                                _c("b-button", {
+                                  staticClass: "button is-small is-danger mr-1",
+                                  attrs: {
+                                    outlined: "",
+                                    "icon-pack": "fa",
+                                    "icon-right": "trash"
                                   },
-                                  [_vm._v("DELETE")]
-                                )
+                                  on: {
+                                    click: function($event) {
+                                      return _vm.confirmDelete(
+                                        props.row.question_id
+                                      )
+                                    }
+                                  }
+                                })
                               ],
                               1
                             )
@@ -26417,12 +26488,11 @@ var render = function() {
                       [
                         _c(
                           "b-field",
-                          { attrs: { label: "Score", expanded: "" } },
+                          { attrs: { label: "Score" } },
                           [
                             _c("b-numberinput", {
                               attrs: {
                                 "controls-position": "compact",
-                                expanded: "",
                                 min: "0",
                                 max: "100"
                               },
@@ -26513,9 +26583,9 @@ var render = function() {
                                   _vm.question_img
                                     ? _c("span", { staticClass: "file-name" }, [
                                         _vm._v(
-                                          "\n                                        " +
+                                          "\n                                            " +
                                             _vm._s(_vm.question_img.name) +
-                                            "\n                                    "
+                                            "\n                                        "
                                         )
                                       ])
                                     : _vm._e()
@@ -26622,6 +26692,31 @@ var render = function() {
                           "b-field",
                           { attrs: { label: "Option " + _vm.letters[k] } },
                           [
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: option.option_id,
+                                  expression: "option.option_id"
+                                }
+                              ],
+                              attrs: { type: "hidden" },
+                              domProps: { value: option.option_id },
+                              on: {
+                                input: function($event) {
+                                  if ($event.target.composing) {
+                                    return
+                                  }
+                                  _vm.$set(
+                                    option,
+                                    "option_id",
+                                    $event.target.value
+                                  )
+                                }
+                              }
+                            }),
+                            _vm._v(" "),
                             option.is_img === 0
                               ? _c("b-input", {
                                   attrs: {

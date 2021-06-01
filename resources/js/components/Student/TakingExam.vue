@@ -96,10 +96,6 @@ export default {
             await axios.get('/student/taking-exam-question?section='+this.sectionId).then(res=>{
                 //5pxconsole.log(res.data);
                 this.questions = res.data;
-
-
-
-
             });
         },
 
@@ -127,8 +123,6 @@ export default {
                     //this.submit();
                 }
             }, 1000);
-
-
         },
 
         submit(){
@@ -171,7 +165,7 @@ export default {
     },
     mounted(){
         this.loadQuestion().then(()=>{
-            this.startTimer(.03);
+            this.startTimer(10);
         });
 
     },
