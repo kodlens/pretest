@@ -134,6 +134,10 @@ Route::get('/app/logout/admin', function(){
 });
 
 
+Route::get('/check-redis', function(){
+    print_r(app()->make('redis'));
+});
+
 //Route::get('/app/test', function(){
 //
 //    $sampleTime = '2021-04-29 15:50:00';
