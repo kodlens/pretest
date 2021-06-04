@@ -4,7 +4,7 @@
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Route;
-
+use Illuminate\Support\Facades\Request;
 use Carbon\Carbon;
 use App\Models\TestSchedule;
 
@@ -97,6 +97,12 @@ Route::get('/ajax/section', [App\Http\Controllers\Administrator\SectionControlle
 //REPORT
 Route::resource('/panel/report-result', App\Http\Controllers\Administrator\ReportResultController::class);
 Route::get('/panel/ajax-studentlist-result', [App\Http\Controllers\Administrator\ReportResultController::class, 'index_data']);
+
+
+Route::get('/session-test', function(Request $req){
+    return session()->all();
+});
+
 
 
 
