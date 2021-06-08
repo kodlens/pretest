@@ -53,6 +53,10 @@ Vue.component('panel-section', require('./components/Administrator/Section/Secti
 
 Vue.component('answer-sheet', require('./components/Administrator/Answer/AnswerSheet.vue').default);
 
+//USER
+Vue.component('user-page', require('./components/Administrator/User/UserPage.vue').default);
+Vue.component('user-page-create', require('./components/Administrator/User/UserPageCreate.vue').default);
+Vue.component('user-page-edit', require('./components/Administrator/User/UserPageEdit.vue').default);
 
 
 //ADMIN REPORT

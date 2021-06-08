@@ -1914,6 +1914,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: ['isAuth'],
   data: function data() {
@@ -3620,6 +3624,630 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Administrator/User/UserPage.vue?vue&type=script&lang=js&":
+/*!**********************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Administrator/User/UserPage.vue?vue&type=script&lang=js& ***!
+  \**********************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  data: function data() {
+    return {
+      data: [],
+      total: 0,
+      loading: false,
+      sortField: 'user_id',
+      sortOrder: 'desc',
+      page: 1,
+      perPage: 5,
+      defaultSortDirection: 'asc',
+      isModalCreate: false,
+      dataId: 0,
+      fields: {},
+      errors: {},
+      btnClass: {
+        'is-success': true,
+        'button': true,
+        'is-loading': false
+      }
+    };
+  },
+  methods: {
+    loadAsyncData: function loadAsyncData() {
+      var _this = this;
+
+      var params = ["sort_by=".concat(this.sortField, ".").concat(this.sortOrder), "perpage=".concat(this.perPage), "page=".concat(this.page)].join('&');
+      this.loading = true;
+      axios.get("/axios-users?".concat(params)).then(function (_ref) {
+        var data = _ref.data;
+        _this.data = [];
+        var currentTotal = data.total;
+
+        if (data.total / _this.perPage > 1000) {
+          currentTotal = _this.perPage * 1000;
+        }
+
+        _this.total = currentTotal;
+        data.data.forEach(function (item) {
+          //item.release_date = item.release_date ? item.release_date.replace(/-/g, '/') : null
+          _this.data.push(item);
+        });
+        _this.loading = false;
+      })["catch"](function (error) {
+        _this.data = [];
+        _this.total = 0;
+        _this.loading = false;
+        throw error;
+      });
+    },
+
+    /*
+    * Handle page-change event
+    */
+    onPageChange: function onPageChange(page) {
+      this.page = page;
+      this.loadAsyncData();
+    },
+    onSort: function onSort(field, order) {
+      this.sortField = field;
+      this.sortOrder = order;
+      this.loadAsyncData();
+    },
+    setPerPage: function setPerPage() {
+      this.loadAsyncData();
+    },
+    //actions here below
+    deleteSubmit: function deleteSubmit(delete_id) {
+      var _this2 = this;
+
+      axios["delete"]('/panel/user/' + delete_id).then(function (res) {
+        _this2.loadAsyncData();
+      })["catch"](function (err) {
+        console.log(err);
+      });
+    },
+    //alert
+    confirmDelete: function confirmDelete(delete_id) {
+      var _this3 = this;
+
+      this.$buefy.dialog.confirm({
+        title: 'DELETE!',
+        type: 'is-danger',
+        message: 'Are you sure you want to delete this data?',
+        cancelText: 'Cancel',
+        confirmText: 'Delete',
+        onConfirm: function onConfirm() {
+          return _this3.deleteSubmit(delete_id);
+        }
+      });
+    }
+  },
+  mounted: function mounted() {
+    this.loadAsyncData();
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Administrator/User/UserPageCreate.vue?vue&type=script&lang=js&":
+/*!****************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Administrator/User/UserPageCreate.vue?vue&type=script&lang=js& ***!
+  \****************************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  data: function data() {
+    return {
+      fields: {},
+      bdate: null,
+      errors: {}
+    };
+  },
+  methods: {
+    submit: function submit() {
+      var _this = this;
+
+      axios.post('/panel/user', this.fields).then(function (res) {
+        if (res.data.status === 'saved') {
+          _this.$buefy.dialog.alert({
+            title: 'SAVED!',
+            message: 'User added successfully.',
+            type: 'is-success',
+            onConfirm: function onConfirm() {
+              return window.location = '/panel/user';
+            }
+          });
+        }
+      })["catch"](function (err) {
+        if (err.response.status === 422) {
+          _this.errors = err.response.data.errors;
+          console.log(err.response.data.errors);
+        }
+      });
+    },
+    formatDate: function formatDate() {
+      var mydate = new Date(Date.parse(this.bdate));
+      var realDate = mydate.getFullYear() + "-" + ("0" + (mydate.getMonth() + 1)).slice(-2) + "-" + ("0" + mydate.getDate()).slice(-2);
+      this.fields.bdate = realDate;
+    }
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Administrator/User/UserPageEdit.vue?vue&type=script&lang=js&":
+/*!**************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Administrator/User/UserPageEdit.vue?vue&type=script&lang=js& ***!
+  \**************************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  props: {
+    edit: {
+      type: String,
+      "default": ''
+    }
+  },
+  data: function data() {
+    return {
+      fields: {},
+      bdate: null,
+      errors: {},
+      dataJSON: {}
+    };
+  },
+  methods: {
+    submit: function submit() {
+      var _this = this;
+
+      axios.post('/panel/user', this.fields).then(function (res) {
+        if (res.data.status === 'saved') {
+          _this.$buefy.dialog.alert({
+            title: 'SAVED!',
+            message: 'User added successfully.',
+            type: 'is-success',
+            onConfirm: function onConfirm() {
+              return window.location = '/panel/user';
+            }
+          });
+        }
+      })["catch"](function (err) {
+        if (err.response.status === 422) {
+          _this.errors = err.response.data.errors;
+          console.log(err.response.data.errors);
+        }
+      });
+    },
+    formatDate: function formatDate() {
+      var mydate = new Date(Date.parse(this.bdate));
+      var realDate = mydate.getFullYear() + "-" + ("0" + (mydate.getMonth() + 1)).slice(-2) + "-" + ("0" + mydate.getDate()).slice(-2);
+      this.fields.bdate = realDate;
+    },
+    initData: function initData() {
+      this.dataJSON = JSON.parse(this.edit);
+      this.fields = this.dataJSON;
+    }
+  },
+  mounted: function mounted() {
+    this.initData();
+  }
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Csrf.vue?vue&type=script&lang=js&":
 /*!***********************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Csrf.vue?vue&type=script&lang=js& ***!
@@ -4631,7 +5259,11 @@ vue__WEBPACK_IMPORTED_MODULE_0__.default.component('admin-navbar', __webpack_req
 vue__WEBPACK_IMPORTED_MODULE_0__.default.component('panel-question', __webpack_require__(/*! ./components/Administrator/Question/PanelQuestion.vue */ "./resources/js/components/Administrator/Question/PanelQuestion.vue").default);
 vue__WEBPACK_IMPORTED_MODULE_0__.default.component('panel-question-create', __webpack_require__(/*! ./components/Administrator/Question/PanelQuestionCreate.vue */ "./resources/js/components/Administrator/Question/PanelQuestionCreate.vue").default);
 vue__WEBPACK_IMPORTED_MODULE_0__.default.component('panel-section', __webpack_require__(/*! ./components/Administrator/Section/SectionPanel.vue */ "./resources/js/components/Administrator/Section/SectionPanel.vue").default);
-vue__WEBPACK_IMPORTED_MODULE_0__.default.component('answer-sheet', __webpack_require__(/*! ./components/Administrator/Answer/AnswerSheet.vue */ "./resources/js/components/Administrator/Answer/AnswerSheet.vue").default); //ADMIN REPORT
+vue__WEBPACK_IMPORTED_MODULE_0__.default.component('answer-sheet', __webpack_require__(/*! ./components/Administrator/Answer/AnswerSheet.vue */ "./resources/js/components/Administrator/Answer/AnswerSheet.vue").default); //USER
+
+vue__WEBPACK_IMPORTED_MODULE_0__.default.component('user-page', __webpack_require__(/*! ./components/Administrator/User/UserPage.vue */ "./resources/js/components/Administrator/User/UserPage.vue").default);
+vue__WEBPACK_IMPORTED_MODULE_0__.default.component('user-page-create', __webpack_require__(/*! ./components/Administrator/User/UserPageCreate.vue */ "./resources/js/components/Administrator/User/UserPageCreate.vue").default);
+vue__WEBPACK_IMPORTED_MODULE_0__.default.component('user-page-edit', __webpack_require__(/*! ./components/Administrator/User/UserPageEdit.vue */ "./resources/js/components/Administrator/User/UserPageEdit.vue").default); //ADMIN REPORT
 
 vue__WEBPACK_IMPORTED_MODULE_0__.default.component('report-result', __webpack_require__(/*! ./components/Administrator/Report/ReportResult.vue */ "./resources/js/components/Administrator/Report/ReportResult.vue").default); //STUDENT AREA
 //-----------------------------//
@@ -22339,7 +22971,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/*qo mean question options button remove*/\n.qo-btn[data-v-51e93ae4]{\n    margin-left: 5px;\n    border: none;\n}\n.qo-btn > i[data-v-51e93ae4]:hover{\n    color:red;\n    text-decoration: underline;\n}\n.qo-btn-check[data-v-51e93ae4]{\n    border: none;\n    color: red;\n}\n.qo-btn-check-active[data-v-51e93ae4]{\n    border: none;\n    color: green;\n}\n.red-x[data-v-51e93ae4]{\n    color: red;\n}\n.green-check[data-v-51e93ae4]{\n    color: green;\n}\n.option-panel[data-v-51e93ae4]{\n    margin-left: 30px;\n}\n\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\r\n\r\n/*qo mean question options button remove*/\n.qo-btn[data-v-51e93ae4]{\r\n    margin-left: 5px;\r\n    border: none;\n}\n.qo-btn > i[data-v-51e93ae4]:hover{\r\n    color:red;\r\n    text-decoration: underline;\n}\n.qo-btn-check[data-v-51e93ae4]{\r\n    border: none;\r\n    color: red;\n}\n.qo-btn-check-active[data-v-51e93ae4]{\r\n    border: none;\r\n    color: green;\n}\n.red-x[data-v-51e93ae4]{\r\n    color: red;\n}\n.green-check[data-v-51e93ae4]{\r\n    color: green;\n}\n.option-panel[data-v-51e93ae4]{\r\n    margin-left: 30px;\n}\r\n\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -23925,6 +24557,123 @@ component.options.__file = "resources/js/components/Administrator/Section/Sectio
 
 /***/ }),
 
+/***/ "./resources/js/components/Administrator/User/UserPage.vue":
+/*!*****************************************************************!*\
+  !*** ./resources/js/components/Administrator/User/UserPage.vue ***!
+  \*****************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _UserPage_vue_vue_type_template_id_705f41e1_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./UserPage.vue?vue&type=template&id=705f41e1&scoped=true& */ "./resources/js/components/Administrator/User/UserPage.vue?vue&type=template&id=705f41e1&scoped=true&");
+/* harmony import */ var _UserPage_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./UserPage.vue?vue&type=script&lang=js& */ "./resources/js/components/Administrator/User/UserPage.vue?vue&type=script&lang=js&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+;
+var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__.default)(
+  _UserPage_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__.default,
+  _UserPage_vue_vue_type_template_id_705f41e1_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render,
+  _UserPage_vue_vue_type_template_id_705f41e1_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
+  false,
+  null,
+  "705f41e1",
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/Administrator/User/UserPage.vue"
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/Administrator/User/UserPageCreate.vue":
+/*!***********************************************************************!*\
+  !*** ./resources/js/components/Administrator/User/UserPageCreate.vue ***!
+  \***********************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _UserPageCreate_vue_vue_type_template_id_d934f386___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./UserPageCreate.vue?vue&type=template&id=d934f386& */ "./resources/js/components/Administrator/User/UserPageCreate.vue?vue&type=template&id=d934f386&");
+/* harmony import */ var _UserPageCreate_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./UserPageCreate.vue?vue&type=script&lang=js& */ "./resources/js/components/Administrator/User/UserPageCreate.vue?vue&type=script&lang=js&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+;
+var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__.default)(
+  _UserPageCreate_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__.default,
+  _UserPageCreate_vue_vue_type_template_id_d934f386___WEBPACK_IMPORTED_MODULE_0__.render,
+  _UserPageCreate_vue_vue_type_template_id_d934f386___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/Administrator/User/UserPageCreate.vue"
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/Administrator/User/UserPageEdit.vue":
+/*!*********************************************************************!*\
+  !*** ./resources/js/components/Administrator/User/UserPageEdit.vue ***!
+  \*********************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _UserPageEdit_vue_vue_type_template_id_52b4328b___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./UserPageEdit.vue?vue&type=template&id=52b4328b& */ "./resources/js/components/Administrator/User/UserPageEdit.vue?vue&type=template&id=52b4328b&");
+/* harmony import */ var _UserPageEdit_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./UserPageEdit.vue?vue&type=script&lang=js& */ "./resources/js/components/Administrator/User/UserPageEdit.vue?vue&type=script&lang=js&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+;
+var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__.default)(
+  _UserPageEdit_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__.default,
+  _UserPageEdit_vue_vue_type_template_id_52b4328b___WEBPACK_IMPORTED_MODULE_0__.render,
+  _UserPageEdit_vue_vue_type_template_id_52b4328b___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/Administrator/User/UserPageEdit.vue"
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
+
+/***/ }),
+
 /***/ "./resources/js/components/Csrf.vue":
 /*!******************************************!*\
   !*** ./resources/js/components/Csrf.vue ***!
@@ -24462,6 +25211,54 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/components/Administrator/User/UserPage.vue?vue&type=script&lang=js&":
+/*!******************************************************************************************!*\
+  !*** ./resources/js/components/Administrator/User/UserPage.vue?vue&type=script&lang=js& ***!
+  \******************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_UserPage_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./UserPage.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Administrator/User/UserPage.vue?vue&type=script&lang=js&");
+ /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_UserPage_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__.default); 
+
+/***/ }),
+
+/***/ "./resources/js/components/Administrator/User/UserPageCreate.vue?vue&type=script&lang=js&":
+/*!************************************************************************************************!*\
+  !*** ./resources/js/components/Administrator/User/UserPageCreate.vue?vue&type=script&lang=js& ***!
+  \************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_UserPageCreate_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./UserPageCreate.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Administrator/User/UserPageCreate.vue?vue&type=script&lang=js&");
+ /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_UserPageCreate_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__.default); 
+
+/***/ }),
+
+/***/ "./resources/js/components/Administrator/User/UserPageEdit.vue?vue&type=script&lang=js&":
+/*!**********************************************************************************************!*\
+  !*** ./resources/js/components/Administrator/User/UserPageEdit.vue?vue&type=script&lang=js& ***!
+  \**********************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_UserPageEdit_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./UserPageEdit.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Administrator/User/UserPageEdit.vue?vue&type=script&lang=js&");
+ /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_UserPageEdit_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__.default); 
+
+/***/ }),
+
 /***/ "./resources/js/components/Csrf.vue?vue&type=script&lang=js&":
 /*!*******************************************************************!*\
   !*** ./resources/js/components/Csrf.vue?vue&type=script&lang=js& ***!
@@ -24758,6 +25555,57 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_SectionPanel_vue_vue_type_template_id_5c1d7d14_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
 /* harmony export */ });
 /* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_SectionPanel_vue_vue_type_template_id_5c1d7d14_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./SectionPanel.vue?vue&type=template&id=5c1d7d14&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Administrator/Section/SectionPanel.vue?vue&type=template&id=5c1d7d14&scoped=true&");
+
+
+/***/ }),
+
+/***/ "./resources/js/components/Administrator/User/UserPage.vue?vue&type=template&id=705f41e1&scoped=true&":
+/*!************************************************************************************************************!*\
+  !*** ./resources/js/components/Administrator/User/UserPage.vue?vue&type=template&id=705f41e1&scoped=true& ***!
+  \************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_UserPage_vue_vue_type_template_id_705f41e1_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render),
+/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_UserPage_vue_vue_type_template_id_705f41e1_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
+/* harmony export */ });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_UserPage_vue_vue_type_template_id_705f41e1_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./UserPage.vue?vue&type=template&id=705f41e1&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Administrator/User/UserPage.vue?vue&type=template&id=705f41e1&scoped=true&");
+
+
+/***/ }),
+
+/***/ "./resources/js/components/Administrator/User/UserPageCreate.vue?vue&type=template&id=d934f386&":
+/*!******************************************************************************************************!*\
+  !*** ./resources/js/components/Administrator/User/UserPageCreate.vue?vue&type=template&id=d934f386& ***!
+  \******************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_UserPageCreate_vue_vue_type_template_id_d934f386___WEBPACK_IMPORTED_MODULE_0__.render),
+/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_UserPageCreate_vue_vue_type_template_id_d934f386___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
+/* harmony export */ });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_UserPageCreate_vue_vue_type_template_id_d934f386___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./UserPageCreate.vue?vue&type=template&id=d934f386& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Administrator/User/UserPageCreate.vue?vue&type=template&id=d934f386&");
+
+
+/***/ }),
+
+/***/ "./resources/js/components/Administrator/User/UserPageEdit.vue?vue&type=template&id=52b4328b&":
+/*!****************************************************************************************************!*\
+  !*** ./resources/js/components/Administrator/User/UserPageEdit.vue?vue&type=template&id=52b4328b& ***!
+  \****************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_UserPageEdit_vue_vue_type_template_id_52b4328b___WEBPACK_IMPORTED_MODULE_0__.render),
+/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_UserPageEdit_vue_vue_type_template_id_52b4328b___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
+/* harmony export */ });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_UserPageEdit_vue_vue_type_template_id_52b4328b___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./UserPageEdit.vue?vue&type=template&id=52b4328b& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Administrator/User/UserPageEdit.vue?vue&type=template&id=52b4328b&");
 
 
 /***/ }),
@@ -25227,6 +26075,10 @@ var render = function() {
             _vm._v(" "),
             _c("b-navbar-item", { attrs: { href: "/panel/question" } }, [
               _vm._v("\n            Questions\n        ")
+            ]),
+            _vm._v(" "),
+            _c("b-navbar-item", { attrs: { href: "/panel/user" } }, [
+              _vm._v("\n            User\n        ")
             ]),
             _vm._v(" "),
             _c("b-navbar-item", { attrs: { href: "/panel/report-result" } }, [
@@ -28160,6 +29012,1661 @@ var render = function() {
   ])
 }
 var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Administrator/User/UserPage.vue?vue&type=template&id=705f41e1&scoped=true&":
+/*!***************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Administrator/User/UserPage.vue?vue&type=template&id=705f41e1&scoped=true& ***!
+  \***************************************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* binding */ render),
+/* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
+/* harmony export */ });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", [
+    _c("section", { staticClass: "section" }, [
+      _c(
+        "div",
+        {
+          staticStyle: {
+            "font-size": "20px",
+            "text-align": "center",
+            "font-weight": "bold"
+          }
+        },
+        [_vm._v("LIST OF SECTION")]
+      ),
+      _vm._v(" "),
+      _c("div", { staticClass: "columns" }, [
+        _c(
+          "div",
+          { staticClass: "column is-8 is-offset-2" },
+          [
+            _c(
+              "b-field",
+              { attrs: { label: "Page" } },
+              [
+                _c(
+                  "b-select",
+                  {
+                    on: { input: _vm.setPerPage },
+                    model: {
+                      value: _vm.perPage,
+                      callback: function($$v) {
+                        _vm.perPage = $$v
+                      },
+                      expression: "perPage"
+                    }
+                  },
+                  [
+                    _c("option", { attrs: { value: "5" } }, [
+                      _vm._v("5 per page")
+                    ]),
+                    _vm._v(" "),
+                    _c("option", { attrs: { value: "10" } }, [
+                      _vm._v("10 per page")
+                    ]),
+                    _vm._v(" "),
+                    _c("option", { attrs: { value: "15" } }, [
+                      _vm._v("15 per page")
+                    ]),
+                    _vm._v(" "),
+                    _c("option", { attrs: { value: "20" } }, [
+                      _vm._v("20 per page")
+                    ])
+                  ]
+                )
+              ],
+              1
+            ),
+            _vm._v(" "),
+            _c(
+              "b-table",
+              {
+                attrs: {
+                  data: _vm.data,
+                  loading: _vm.loading,
+                  paginated: "",
+                  "backend-pagination": "",
+                  total: _vm.total,
+                  "per-page": _vm.perPage,
+                  "aria-next-label": "Next page",
+                  "aria-previous-label": "Previous page",
+                  "aria-page-label": "Page",
+                  "aria-current-label": "Current page",
+                  "backend-sorting": "",
+                  "default-sort-direction": _vm.defaultSortDirection
+                },
+                on: { "page-change": _vm.onPageChange, sort: _vm.onSort }
+              },
+              [
+                _c("b-table-column", {
+                  attrs: { field: "user_id", label: "ID" },
+                  scopedSlots: _vm._u([
+                    {
+                      key: "default",
+                      fn: function(props) {
+                        return [
+                          _vm._v(
+                            "\n                    " +
+                              _vm._s(props.row.user_id) +
+                              "\n                "
+                          )
+                        ]
+                      }
+                    }
+                  ])
+                }),
+                _vm._v(" "),
+                _c("b-table-column", {
+                  attrs: { field: "username", label: "Lastname" },
+                  scopedSlots: _vm._u([
+                    {
+                      key: "default",
+                      fn: function(props) {
+                        return [
+                          _vm._v(
+                            "\n                    " +
+                              _vm._s(props.row.username) +
+                              "\n                "
+                          )
+                        ]
+                      }
+                    }
+                  ])
+                }),
+                _vm._v(" "),
+                _c("b-table-column", {
+                  attrs: { field: "lname", label: "Lastname" },
+                  scopedSlots: _vm._u([
+                    {
+                      key: "default",
+                      fn: function(props) {
+                        return [
+                          _vm._v(
+                            "\n                    " +
+                              _vm._s(props.row.lname) +
+                              "\n                "
+                          )
+                        ]
+                      }
+                    }
+                  ])
+                }),
+                _vm._v(" "),
+                _c("b-table-column", {
+                  attrs: { field: "fname", label: "Firstname" },
+                  scopedSlots: _vm._u([
+                    {
+                      key: "default",
+                      fn: function(props) {
+                        return [
+                          _vm._v(
+                            "\n                    " +
+                              _vm._s(props.row.fname) +
+                              "\n                "
+                          )
+                        ]
+                      }
+                    }
+                  ])
+                }),
+                _vm._v(" "),
+                _c("b-table-column", {
+                  attrs: { field: "mname", label: "Middlename" },
+                  scopedSlots: _vm._u([
+                    {
+                      key: "default",
+                      fn: function(props) {
+                        return [
+                          _vm._v(
+                            "\n                    " +
+                              _vm._s(props.row.mname) +
+                              "\n                "
+                          )
+                        ]
+                      }
+                    }
+                  ])
+                }),
+                _vm._v(" "),
+                _c("b-table-column", {
+                  attrs: { field: "ay_id", label: "Action" },
+                  scopedSlots: _vm._u([
+                    {
+                      key: "default",
+                      fn: function(props) {
+                        return [
+                          _c(
+                            "div",
+                            { staticClass: "is-flex" },
+                            [
+                              _c("b-button", {
+                                staticClass: "button is-small is-warning mr-1",
+                                attrs: {
+                                  tag: "a",
+                                  "icon-right": "pencil",
+                                  "icon-pack": "fa",
+                                  href:
+                                    "/panel/user/" + props.row.user_id + "/edit"
+                                }
+                              }),
+                              _vm._v(" "),
+                              _c("b-button", {
+                                staticClass: "button is-small is-danger mr-1",
+                                attrs: {
+                                  "icon-pack": "fa",
+                                  "icon-right": "trash"
+                                },
+                                on: {
+                                  click: function($event) {
+                                    return _vm.confirmDelete(props.row.user_id)
+                                  }
+                                }
+                              })
+                            ],
+                            1
+                          )
+                        ]
+                      }
+                    }
+                  ])
+                })
+              ],
+              1
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              { staticClass: "buttons mt-3" },
+              [
+                _c(
+                  "b-button",
+                  {
+                    staticClass: "is-primary",
+                    attrs: {
+                      "icon-pack": "fa",
+                      "icon-left": "plus",
+                      tag: "a",
+                      href: "/panel/user/create"
+                    }
+                  },
+                  [_vm._v("New User")]
+                )
+              ],
+              1
+            )
+          ],
+          1
+        )
+      ])
+    ])
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Administrator/User/UserPageCreate.vue?vue&type=template&id=d934f386&":
+/*!*********************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Administrator/User/UserPageCreate.vue?vue&type=template&id=d934f386& ***!
+  \*********************************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* binding */ render),
+/* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
+/* harmony export */ });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", [
+    _c("div", { staticClass: "section" }, [
+      _c("div", { staticClass: "container" }, [
+        _c("div", { staticClass: "columns" }, [
+          _c("div", { staticClass: "column is-8 is-offset-2" }, [
+            _c("div", { staticClass: "box" }, [
+              _c("h1", { staticClass: "title is-5" }, [
+                _vm._v("ADD/MODIFY USER")
+              ]),
+              _vm._v(" "),
+              _c(
+                "form",
+                {
+                  on: {
+                    submit: function($event) {
+                      $event.preventDefault()
+                      return _vm.submit($event)
+                    }
+                  }
+                },
+                [
+                  _c("div", { staticClass: "columns" }, [
+                    _c(
+                      "div",
+                      { staticClass: "column" },
+                      [
+                        _c(
+                          "b-field",
+                          {
+                            attrs: {
+                              label: "Username",
+                              type: this.errors.username ? "is-danger" : "",
+                              message: this.errors.username
+                                ? this.errors.username[0]
+                                : "",
+                              "label-position": "on-border"
+                            }
+                          },
+                          [
+                            _c("b-input", {
+                              attrs: {
+                                type: "text",
+                                placeholder: "Username",
+                                required: ""
+                              },
+                              model: {
+                                value: _vm.fields.username,
+                                callback: function($$v) {
+                                  _vm.$set(_vm.fields, "username", $$v)
+                                },
+                                expression: "fields.username"
+                              }
+                            })
+                          ],
+                          1
+                        )
+                      ],
+                      1
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "columns" }, [
+                    _c(
+                      "div",
+                      { staticClass: "column" },
+                      [
+                        _c(
+                          "b-field",
+                          {
+                            attrs: {
+                              label: "Password",
+                              type: this.errors.password ? "is-danger" : "",
+                              message: this.errors.password
+                                ? this.errors.password[0]
+                                : "",
+                              "label-position": "on-border"
+                            }
+                          },
+                          [
+                            _c("b-input", {
+                              attrs: {
+                                type: "password",
+                                "password-reveal": "",
+                                placeholder: "Password",
+                                required: ""
+                              },
+                              model: {
+                                value: _vm.fields.password,
+                                callback: function($$v) {
+                                  _vm.$set(_vm.fields, "password", $$v)
+                                },
+                                expression: "fields.password"
+                              }
+                            })
+                          ],
+                          1
+                        )
+                      ],
+                      1
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      { staticClass: "column" },
+                      [
+                        _c(
+                          "b-field",
+                          {
+                            attrs: {
+                              label: "Confirm Password",
+                              "label-position": "on-border"
+                            }
+                          },
+                          [
+                            _c("b-input", {
+                              attrs: {
+                                type: "password",
+                                "password-reveal": "",
+                                placeholder: "Confirm Password",
+                                required: ""
+                              },
+                              model: {
+                                value: _vm.fields.password_confirmation,
+                                callback: function($$v) {
+                                  _vm.$set(
+                                    _vm.fields,
+                                    "password_confirmation",
+                                    $$v
+                                  )
+                                },
+                                expression: "fields.password_confirmation"
+                              }
+                            })
+                          ],
+                          1
+                        )
+                      ],
+                      1
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "columns" }, [
+                    _c(
+                      "div",
+                      { staticClass: "column" },
+                      [
+                        _c(
+                          "b-field",
+                          {
+                            attrs: {
+                              label: "Lastname",
+                              type: this.errors.lname ? "is-danger" : "",
+                              message: this.errors.lname
+                                ? this.errors.lname[0]
+                                : "",
+                              "label-position": "on-border"
+                            }
+                          },
+                          [
+                            _c("b-input", {
+                              attrs: {
+                                type: "text",
+                                placeholder: "Lastname",
+                                required: ""
+                              },
+                              model: {
+                                value: _vm.fields.lname,
+                                callback: function($$v) {
+                                  _vm.$set(_vm.fields, "lname", $$v)
+                                },
+                                expression: "fields.lname"
+                              }
+                            })
+                          ],
+                          1
+                        )
+                      ],
+                      1
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      { staticClass: "column" },
+                      [
+                        _c(
+                          "b-field",
+                          {
+                            attrs: {
+                              label: "Firstname",
+                              type: this.errors.fname ? "is-danger" : "",
+                              message: this.errors.fname
+                                ? this.errors.fname[0]
+                                : "",
+                              "label-position": "on-border"
+                            }
+                          },
+                          [
+                            _c("b-input", {
+                              attrs: {
+                                type: "text",
+                                placeholder: "Firstname",
+                                required: ""
+                              },
+                              model: {
+                                value: _vm.fields.fname,
+                                callback: function($$v) {
+                                  _vm.$set(_vm.fields, "fname", $$v)
+                                },
+                                expression: "fields.fname"
+                              }
+                            })
+                          ],
+                          1
+                        )
+                      ],
+                      1
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      { staticClass: "column" },
+                      [
+                        _c(
+                          "b-field",
+                          {
+                            attrs: {
+                              label: "Middlename",
+                              "label-position": "on-border"
+                            }
+                          },
+                          [
+                            _c("b-input", {
+                              attrs: {
+                                type: "text",
+                                placeholder: "Middlename"
+                              },
+                              model: {
+                                value: _vm.fields.mname,
+                                callback: function($$v) {
+                                  _vm.$set(_vm.fields, "mname", $$v)
+                                },
+                                expression: "fields.mname"
+                              }
+                            })
+                          ],
+                          1
+                        )
+                      ],
+                      1
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "columns" }, [
+                    _c(
+                      "div",
+                      { staticClass: "column" },
+                      [
+                        _c(
+                          "b-field",
+                          {
+                            attrs: {
+                              "label-position": "on-border",
+                              label: "Sex",
+                              expanded: ""
+                            }
+                          },
+                          [
+                            _c(
+                              "b-select",
+                              {
+                                attrs: { expanded: "" },
+                                model: {
+                                  value: _vm.fields.sex,
+                                  callback: function($$v) {
+                                    _vm.$set(_vm.fields, "sex", $$v)
+                                  },
+                                  expression: "fields.sex"
+                                }
+                              },
+                              [
+                                _c("option", { attrs: { value: "MALE" } }, [
+                                  _vm._v("MALE")
+                                ]),
+                                _vm._v(" "),
+                                _c("option", { attrs: { value: "FEMALE" } }, [
+                                  _vm._v("FEMALE")
+                                ])
+                              ]
+                            )
+                          ],
+                          1
+                        )
+                      ],
+                      1
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      { staticClass: "column" },
+                      [
+                        _c(
+                          "b-field",
+                          {
+                            attrs: {
+                              "label-position": "on-border",
+                              label: "Birthdate"
+                            }
+                          },
+                          [
+                            _c("b-datepicker", {
+                              on: { input: _vm.formatDate },
+                              model: {
+                                value: _vm.bdate,
+                                callback: function($$v) {
+                                  _vm.bdate = $$v
+                                },
+                                expression: "bdate"
+                              }
+                            })
+                          ],
+                          1
+                        )
+                      ],
+                      1
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      { staticClass: "column" },
+                      [
+                        _c(
+                          "b-field",
+                          {
+                            attrs: {
+                              "label-position": "on-border",
+                              label: "Role",
+                              expanded: ""
+                            }
+                          },
+                          [
+                            _c(
+                              "b-select",
+                              {
+                                attrs: { expanded: "" },
+                                model: {
+                                  value: _vm.fields.role,
+                                  callback: function($$v) {
+                                    _vm.$set(_vm.fields, "role", $$v)
+                                  },
+                                  expression: "fields.role"
+                                }
+                              },
+                              [
+                                _c(
+                                  "option",
+                                  { attrs: { value: "ADMINISTRATOR" } },
+                                  [_vm._v("ADMINISTRATOR")]
+                                ),
+                                _vm._v(" "),
+                                _c("option", { attrs: { value: "STUDENT" } }, [
+                                  _vm._v("STUDENT")
+                                ])
+                              ]
+                            )
+                          ],
+                          1
+                        )
+                      ],
+                      1
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "columns" }, [
+                    _c(
+                      "div",
+                      { staticClass: "column" },
+                      [
+                        _c(
+                          "b-field",
+                          {
+                            attrs: {
+                              "label-position": "on-border",
+                              label: "Birthplace"
+                            }
+                          },
+                          [
+                            _c("b-input", {
+                              attrs: { type: "text" },
+                              model: {
+                                value: _vm.fields.birthplace,
+                                callback: function($$v) {
+                                  _vm.$set(_vm.fields, "birthplace", $$v)
+                                },
+                                expression: "fields.birthplace"
+                              }
+                            })
+                          ],
+                          1
+                        )
+                      ],
+                      1
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "columns" }, [
+                    _c(
+                      "div",
+                      { staticClass: "column" },
+                      [
+                        _c(
+                          "b-field",
+                          {
+                            attrs: {
+                              "label-position": "on-border",
+                              label: "Contact No."
+                            }
+                          },
+                          [
+                            _c("b-input", {
+                              attrs: {
+                                type: "text",
+                                required: "",
+                                placeholder: "Contact No."
+                              },
+                              model: {
+                                value: _vm.fields.contact_no,
+                                callback: function($$v) {
+                                  _vm.$set(_vm.fields, "contact_no", $$v)
+                                },
+                                expression: "fields.contact_no"
+                              }
+                            })
+                          ],
+                          1
+                        )
+                      ],
+                      1
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      { staticClass: "column" },
+                      [
+                        _c(
+                          "b-field",
+                          {
+                            attrs: {
+                              "label-position": "on-border",
+                              label: "Contact No."
+                            }
+                          },
+                          [
+                            _c("b-input", {
+                              attrs: {
+                                type: "email",
+                                required: "",
+                                placeholder: "Email"
+                              },
+                              model: {
+                                value: _vm.fields.email,
+                                callback: function($$v) {
+                                  _vm.$set(_vm.fields, "email", $$v)
+                                },
+                                expression: "fields.email"
+                              }
+                            })
+                          ],
+                          1
+                        )
+                      ],
+                      1
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "columns" }, [
+                    _c(
+                      "div",
+                      { staticClass: "column" },
+                      [
+                        _c(
+                          "b-field",
+                          {
+                            attrs: {
+                              "label-position": "on-border",
+                              label: "Last School Attended"
+                            }
+                          },
+                          [
+                            _c("b-input", {
+                              attrs: {
+                                type: "text",
+                                required: "",
+                                placeholder: "Last School Attended"
+                              },
+                              model: {
+                                value: _vm.fields.last_school_attended,
+                                callback: function($$v) {
+                                  _vm.$set(
+                                    _vm.fields,
+                                    "last_school_attended",
+                                    $$v
+                                  )
+                                },
+                                expression: "fields.last_school_attended"
+                              }
+                            })
+                          ],
+                          1
+                        )
+                      ],
+                      1
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "columns" }, [
+                    _c(
+                      "div",
+                      { staticClass: "column" },
+                      [
+                        _c(
+                          "b-field",
+                          {
+                            attrs: {
+                              "label-position": "on-border",
+                              label: "Province"
+                            }
+                          },
+                          [
+                            _c("b-input", {
+                              attrs: {
+                                type: "text",
+                                required: "",
+                                placeholder: "Province"
+                              },
+                              model: {
+                                value: _vm.fields.province,
+                                callback: function($$v) {
+                                  _vm.$set(_vm.fields, "province", $$v)
+                                },
+                                expression: "fields.province"
+                              }
+                            })
+                          ],
+                          1
+                        )
+                      ],
+                      1
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      { staticClass: "column" },
+                      [
+                        _c(
+                          "b-field",
+                          {
+                            attrs: {
+                              "label-position": "on-border",
+                              label: "City/Municipality"
+                            }
+                          },
+                          [
+                            _c("b-input", {
+                              attrs: {
+                                type: "text",
+                                required: "",
+                                placeholder: "City/Municipality"
+                              },
+                              model: {
+                                value: _vm.fields.city,
+                                callback: function($$v) {
+                                  _vm.$set(_vm.fields, "city", $$v)
+                                },
+                                expression: "fields.city"
+                              }
+                            })
+                          ],
+                          1
+                        )
+                      ],
+                      1
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "columns" }, [
+                    _c(
+                      "div",
+                      { staticClass: "column" },
+                      [
+                        _c(
+                          "b-field",
+                          {
+                            attrs: {
+                              "label-position": "on-border",
+                              label: "Barangay"
+                            }
+                          },
+                          [
+                            _c("b-input", {
+                              attrs: {
+                                type: "text",
+                                required: "",
+                                placeholder: "Barangay"
+                              },
+                              model: {
+                                value: _vm.fields.barangay,
+                                callback: function($$v) {
+                                  _vm.$set(_vm.fields, "barangay", $$v)
+                                },
+                                expression: "fields.barangay"
+                              }
+                            })
+                          ],
+                          1
+                        )
+                      ],
+                      1
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      { staticClass: "column" },
+                      [
+                        _c(
+                          "b-field",
+                          {
+                            attrs: {
+                              "label-position": "on-border",
+                              label: "Street"
+                            }
+                          },
+                          [
+                            _c("b-input", {
+                              attrs: {
+                                type: "text",
+                                required: "",
+                                placeholder: "Street"
+                              },
+                              model: {
+                                value: _vm.fields.street,
+                                callback: function($$v) {
+                                  _vm.$set(_vm.fields, "street", $$v)
+                                },
+                                expression: "fields.street"
+                              }
+                            })
+                          ],
+                          1
+                        )
+                      ],
+                      1
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _vm._m(0)
+                ]
+              )
+            ])
+          ])
+        ])
+      ])
+    ])
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "buttons" }, [
+      _c("button", { staticClass: "button is-primary" }, [_vm._v("SAVE")])
+    ])
+  }
+]
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Administrator/User/UserPageEdit.vue?vue&type=template&id=52b4328b&":
+/*!*******************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Administrator/User/UserPageEdit.vue?vue&type=template&id=52b4328b& ***!
+  \*******************************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* binding */ render),
+/* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
+/* harmony export */ });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", [
+    _c("div", { staticClass: "section" }, [
+      _c("div", { staticClass: "container" }, [
+        _c("div", { staticClass: "columns" }, [
+          _c("div", { staticClass: "column is-8 is-offset-2" }, [
+            _c("div", { staticClass: "box" }, [
+              _c("h1", { staticClass: "title is-5" }, [
+                _vm._v("ADD/MODIFY USER")
+              ]),
+              _vm._v(" "),
+              _c(
+                "form",
+                {
+                  on: {
+                    submit: function($event) {
+                      $event.preventDefault()
+                      return _vm.submit($event)
+                    }
+                  }
+                },
+                [
+                  _c("div", { staticClass: "columns" }, [
+                    _c(
+                      "div",
+                      { staticClass: "column" },
+                      [
+                        _c(
+                          "b-field",
+                          {
+                            attrs: {
+                              label: "Username",
+                              type: this.errors.username ? "is-danger" : "",
+                              message: this.errors.username
+                                ? this.errors.username[0]
+                                : "",
+                              "label-position": "on-border"
+                            }
+                          },
+                          [
+                            _c("b-input", {
+                              attrs: {
+                                type: "text",
+                                placeholder: "Username",
+                                required: ""
+                              },
+                              model: {
+                                value: _vm.fields.username,
+                                callback: function($$v) {
+                                  _vm.$set(_vm.fields, "username", $$v)
+                                },
+                                expression: "fields.username"
+                              }
+                            })
+                          ],
+                          1
+                        )
+                      ],
+                      1
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "columns" }, [
+                    _c(
+                      "div",
+                      { staticClass: "column" },
+                      [
+                        _c(
+                          "b-field",
+                          {
+                            attrs: {
+                              label: "Password",
+                              type: this.errors.password ? "is-danger" : "",
+                              message: this.errors.password
+                                ? this.errors.password[0]
+                                : "",
+                              "label-position": "on-border"
+                            }
+                          },
+                          [
+                            _c("b-input", {
+                              attrs: {
+                                type: "password",
+                                "password-reveal": "",
+                                placeholder: "Password",
+                                required: ""
+                              },
+                              model: {
+                                value: _vm.fields.password,
+                                callback: function($$v) {
+                                  _vm.$set(_vm.fields, "password", $$v)
+                                },
+                                expression: "fields.password"
+                              }
+                            })
+                          ],
+                          1
+                        )
+                      ],
+                      1
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      { staticClass: "column" },
+                      [
+                        _c(
+                          "b-field",
+                          {
+                            attrs: {
+                              label: "Confirm Password",
+                              "label-position": "on-border"
+                            }
+                          },
+                          [
+                            _c("b-input", {
+                              attrs: {
+                                type: "password",
+                                "password-reveal": "",
+                                placeholder: "Confirm Password",
+                                required: ""
+                              },
+                              model: {
+                                value: _vm.fields.password_confirmation,
+                                callback: function($$v) {
+                                  _vm.$set(
+                                    _vm.fields,
+                                    "password_confirmation",
+                                    $$v
+                                  )
+                                },
+                                expression: "fields.password_confirmation"
+                              }
+                            })
+                          ],
+                          1
+                        )
+                      ],
+                      1
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "columns" }, [
+                    _c(
+                      "div",
+                      { staticClass: "column" },
+                      [
+                        _c(
+                          "b-field",
+                          {
+                            attrs: {
+                              label: "Lastname",
+                              type: this.errors.lname ? "is-danger" : "",
+                              message: this.errors.lname
+                                ? this.errors.lname[0]
+                                : "",
+                              "label-position": "on-border"
+                            }
+                          },
+                          [
+                            _c("b-input", {
+                              attrs: {
+                                type: "text",
+                                placeholder: "Lastname",
+                                required: ""
+                              },
+                              model: {
+                                value: _vm.fields.lname,
+                                callback: function($$v) {
+                                  _vm.$set(_vm.fields, "lname", $$v)
+                                },
+                                expression: "fields.lname"
+                              }
+                            })
+                          ],
+                          1
+                        )
+                      ],
+                      1
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      { staticClass: "column" },
+                      [
+                        _c(
+                          "b-field",
+                          {
+                            attrs: {
+                              label: "Firstname",
+                              type: this.errors.fname ? "is-danger" : "",
+                              message: this.errors.fname
+                                ? this.errors.fname[0]
+                                : "",
+                              "label-position": "on-border"
+                            }
+                          },
+                          [
+                            _c("b-input", {
+                              attrs: {
+                                type: "text",
+                                placeholder: "Firstname",
+                                required: ""
+                              },
+                              model: {
+                                value: _vm.fields.fname,
+                                callback: function($$v) {
+                                  _vm.$set(_vm.fields, "fname", $$v)
+                                },
+                                expression: "fields.fname"
+                              }
+                            })
+                          ],
+                          1
+                        )
+                      ],
+                      1
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      { staticClass: "column" },
+                      [
+                        _c(
+                          "b-field",
+                          {
+                            attrs: {
+                              label: "Middlename",
+                              "label-position": "on-border"
+                            }
+                          },
+                          [
+                            _c("b-input", {
+                              attrs: {
+                                type: "text",
+                                placeholder: "Middlename"
+                              },
+                              model: {
+                                value: _vm.fields.mname,
+                                callback: function($$v) {
+                                  _vm.$set(_vm.fields, "mname", $$v)
+                                },
+                                expression: "fields.mname"
+                              }
+                            })
+                          ],
+                          1
+                        )
+                      ],
+                      1
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "columns" }, [
+                    _c(
+                      "div",
+                      { staticClass: "column" },
+                      [
+                        _c(
+                          "b-field",
+                          {
+                            attrs: {
+                              "label-position": "on-border",
+                              label: "Sex",
+                              expanded: ""
+                            }
+                          },
+                          [
+                            _c(
+                              "b-select",
+                              {
+                                attrs: { expanded: "" },
+                                model: {
+                                  value: _vm.fields.sex,
+                                  callback: function($$v) {
+                                    _vm.$set(_vm.fields, "sex", $$v)
+                                  },
+                                  expression: "fields.sex"
+                                }
+                              },
+                              [
+                                _c("option", { attrs: { value: "MALE" } }, [
+                                  _vm._v("MALE")
+                                ]),
+                                _vm._v(" "),
+                                _c("option", { attrs: { value: "FEMALE" } }, [
+                                  _vm._v("FEMALE")
+                                ])
+                              ]
+                            )
+                          ],
+                          1
+                        )
+                      ],
+                      1
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      { staticClass: "column" },
+                      [
+                        _c(
+                          "b-field",
+                          {
+                            attrs: {
+                              "label-position": "on-border",
+                              label: "Birthdate"
+                            }
+                          },
+                          [
+                            _c("b-datepicker", {
+                              on: { input: _vm.formatDate },
+                              model: {
+                                value: _vm.bdate,
+                                callback: function($$v) {
+                                  _vm.bdate = $$v
+                                },
+                                expression: "bdate"
+                              }
+                            })
+                          ],
+                          1
+                        )
+                      ],
+                      1
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      { staticClass: "column" },
+                      [
+                        _c(
+                          "b-field",
+                          {
+                            attrs: {
+                              "label-position": "on-border",
+                              label: "Role",
+                              expanded: ""
+                            }
+                          },
+                          [
+                            _c(
+                              "b-select",
+                              {
+                                attrs: { expanded: "" },
+                                model: {
+                                  value: _vm.fields.role,
+                                  callback: function($$v) {
+                                    _vm.$set(_vm.fields, "role", $$v)
+                                  },
+                                  expression: "fields.role"
+                                }
+                              },
+                              [
+                                _c(
+                                  "option",
+                                  { attrs: { value: "ADMINISTRATOR" } },
+                                  [_vm._v("ADMINISTRATOR")]
+                                ),
+                                _vm._v(" "),
+                                _c("option", { attrs: { value: "STUDENT" } }, [
+                                  _vm._v("STUDENT")
+                                ])
+                              ]
+                            )
+                          ],
+                          1
+                        )
+                      ],
+                      1
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "columns" }, [
+                    _c(
+                      "div",
+                      { staticClass: "column" },
+                      [
+                        _c(
+                          "b-field",
+                          {
+                            attrs: {
+                              "label-position": "on-border",
+                              label: "Birthplace"
+                            }
+                          },
+                          [
+                            _c("b-input", {
+                              attrs: { type: "text" },
+                              model: {
+                                value: _vm.fields.birthplace,
+                                callback: function($$v) {
+                                  _vm.$set(_vm.fields, "birthplace", $$v)
+                                },
+                                expression: "fields.birthplace"
+                              }
+                            })
+                          ],
+                          1
+                        )
+                      ],
+                      1
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "columns" }, [
+                    _c(
+                      "div",
+                      { staticClass: "column" },
+                      [
+                        _c(
+                          "b-field",
+                          {
+                            attrs: {
+                              "label-position": "on-border",
+                              label: "Contact No."
+                            }
+                          },
+                          [
+                            _c("b-input", {
+                              attrs: {
+                                type: "text",
+                                required: "",
+                                placeholder: "Contact No."
+                              },
+                              model: {
+                                value: _vm.fields.contact_no,
+                                callback: function($$v) {
+                                  _vm.$set(_vm.fields, "contact_no", $$v)
+                                },
+                                expression: "fields.contact_no"
+                              }
+                            })
+                          ],
+                          1
+                        )
+                      ],
+                      1
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      { staticClass: "column" },
+                      [
+                        _c(
+                          "b-field",
+                          {
+                            attrs: {
+                              "label-position": "on-border",
+                              label: "Contact No."
+                            }
+                          },
+                          [
+                            _c("b-input", {
+                              attrs: {
+                                type: "email",
+                                required: "",
+                                placeholder: "Email"
+                              },
+                              model: {
+                                value: _vm.fields.email,
+                                callback: function($$v) {
+                                  _vm.$set(_vm.fields, "email", $$v)
+                                },
+                                expression: "fields.email"
+                              }
+                            })
+                          ],
+                          1
+                        )
+                      ],
+                      1
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "columns" }, [
+                    _c(
+                      "div",
+                      { staticClass: "column" },
+                      [
+                        _c(
+                          "b-field",
+                          {
+                            attrs: {
+                              "label-position": "on-border",
+                              label: "Last School Attended"
+                            }
+                          },
+                          [
+                            _c("b-input", {
+                              attrs: {
+                                type: "text",
+                                required: "",
+                                placeholder: "Last School Attended"
+                              },
+                              model: {
+                                value: _vm.fields.last_school_attended,
+                                callback: function($$v) {
+                                  _vm.$set(
+                                    _vm.fields,
+                                    "last_school_attended",
+                                    $$v
+                                  )
+                                },
+                                expression: "fields.last_school_attended"
+                              }
+                            })
+                          ],
+                          1
+                        )
+                      ],
+                      1
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "columns" }, [
+                    _c(
+                      "div",
+                      { staticClass: "column" },
+                      [
+                        _c(
+                          "b-field",
+                          {
+                            attrs: {
+                              "label-position": "on-border",
+                              label: "Province"
+                            }
+                          },
+                          [
+                            _c("b-input", {
+                              attrs: {
+                                type: "text",
+                                required: "",
+                                placeholder: "Province"
+                              },
+                              model: {
+                                value: _vm.fields.province,
+                                callback: function($$v) {
+                                  _vm.$set(_vm.fields, "province", $$v)
+                                },
+                                expression: "fields.province"
+                              }
+                            })
+                          ],
+                          1
+                        )
+                      ],
+                      1
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      { staticClass: "column" },
+                      [
+                        _c(
+                          "b-field",
+                          {
+                            attrs: {
+                              "label-position": "on-border",
+                              label: "City/Municipality"
+                            }
+                          },
+                          [
+                            _c("b-input", {
+                              attrs: {
+                                type: "text",
+                                required: "",
+                                placeholder: "City/Municipality"
+                              },
+                              model: {
+                                value: _vm.fields.city,
+                                callback: function($$v) {
+                                  _vm.$set(_vm.fields, "city", $$v)
+                                },
+                                expression: "fields.city"
+                              }
+                            })
+                          ],
+                          1
+                        )
+                      ],
+                      1
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "columns" }, [
+                    _c(
+                      "div",
+                      { staticClass: "column" },
+                      [
+                        _c(
+                          "b-field",
+                          {
+                            attrs: {
+                              "label-position": "on-border",
+                              label: "Barangay"
+                            }
+                          },
+                          [
+                            _c("b-input", {
+                              attrs: {
+                                type: "text",
+                                required: "",
+                                placeholder: "Barangay"
+                              },
+                              model: {
+                                value: _vm.fields.barangay,
+                                callback: function($$v) {
+                                  _vm.$set(_vm.fields, "barangay", $$v)
+                                },
+                                expression: "fields.barangay"
+                              }
+                            })
+                          ],
+                          1
+                        )
+                      ],
+                      1
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      { staticClass: "column" },
+                      [
+                        _c(
+                          "b-field",
+                          {
+                            attrs: {
+                              "label-position": "on-border",
+                              label: "Street"
+                            }
+                          },
+                          [
+                            _c("b-input", {
+                              attrs: {
+                                type: "text",
+                                required: "",
+                                placeholder: "Street"
+                              },
+                              model: {
+                                value: _vm.fields.street,
+                                callback: function($$v) {
+                                  _vm.$set(_vm.fields, "street", $$v)
+                                },
+                                expression: "fields.street"
+                              }
+                            })
+                          ],
+                          1
+                        )
+                      ],
+                      1
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _vm._m(0)
+                ]
+              )
+            ])
+          ])
+        ])
+      ])
+    ])
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "buttons" }, [
+      _c("button", { staticClass: "button is-primary" }, [_vm._v("SAVE")])
+    ])
+  }
+]
 render._withStripped = true
 
 

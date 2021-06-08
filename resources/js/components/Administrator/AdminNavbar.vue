@@ -34,6 +34,10 @@
                 Questions
             </b-navbar-item>
 
+            <b-navbar-item href="/panel/user">
+                User
+            </b-navbar-item>
+
              <b-navbar-item href="/panel/report-result">
                 Report
             </b-navbar-item>

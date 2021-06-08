@@ -94,6 +94,13 @@ Route::resource('/panel/section', App\Http\Controllers\Administrator\SectionCont
 Route::get('/ajax/section', [App\Http\Controllers\Administrator\SectionController::class, 'index_data']);
 
 
+//USER
+Route::resource('/panel/user', App\Http\Controllers\Administrator\UserController::class);
+Route::get('/axios-users', [App\Http\Controllers\Administrator\UserController::class, 'index_data']);
+
+
+
+
 //REPORT
 Route::resource('/panel/report-result', App\Http\Controllers\Administrator\ReportResultController::class);
 Route::get('/panel/ajax-studentlist-result', [App\Http\Controllers\Administrator\ReportResultController::class, 'index_data']);
