@@ -34,7 +34,7 @@ class UserSeeder extends Seeder
                 'fname' => 'BERNICE',
                 'mname' => 'N',
                 'sex' => 'FEMALE',
-                'email' => 'admin@pretest.org',
+                'email' => 'guidance@pretest.org',
                 'password' => Hash::make('gu1dance$$'),
                 'role' => 'ADMINISTRATOR',
             ],
