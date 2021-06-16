@@ -26,8 +26,16 @@
                 Home
             </b-navbar-item>
 
+             <b-navbar-item href="/panel/acadyear">
+                Academic Year
+            </b-navbar-item>
+
             <b-navbar-item href="/panel/section">
                 Sections
+            </b-navbar-item>
+
+            <b-navbar-item href="/panel/test-schedule">
+                Schedules
             </b-navbar-item>
 
             <b-navbar-item href="/panel/question">

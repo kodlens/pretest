@@ -69,6 +69,51 @@ class UserController extends Controller
             ->with('data', $data);
     }
 
+    public function update(Request $req, $id){
+
+        if($req->password != ''){
+            $validate = $req->validate([
+                'username' => ['required', 'string', 'max:50', 'unique:users,username,' .$id.',user_id'],
+                'lname' => ['required', 'string', 'max:255'],
+                'fname' => ['required', 'string', 'max:255'],
+                'email' => ['required', 'string', 'email', 'max:255', 'unique:users,email,'. $id. ',user_id'],
+                'password' => ['required', 'string', 'min:4', 'confirmed'],
+            ]);
+        }else{
+            $validate = $req->validate([
+                'username' => ['required', 'string', 'max:50', 'unique:users,username,' .$id.',user_id'],
+                'lname' => ['required', 'string', 'max:255'],
+                'fname' => ['required', 'string', 'max:255'],
+                'email' => ['required', 'string', 'email', 'max:255', 'unique:users,email,'. $id. ',user_id'],
+               
+            ]);
+    
+        }
+
+        $data = User::find($id);
+        $data->username = $req->username;
+        $data->lname = strtoupper($req->lname);
+        $data->fname = strtoupper($req->fname);
+        $data->mname = strtoupper($req->mname);
+        $data->sex = strtoupper($req->sex);
+        $data->bdate = $req->bdate;
+        $data->birthplace = strtoupper($req->birthplace);
+        $data->contact_no = strtoupper($req->contact_no);
+        $data->email = $req->email;
+        $data->last_school_attended = strtoupper($req->last_school_attended);
+        $data->province = strtoupper($req->province);
+        $data->city = strtoupper($req->city);
+        $data->barangay = strtoupper($req->barangay);
+        $data->street = strtoupper($req->street);
+        $data->role = strtoupper($req->role);
+        if($req->password != ''){
+            $data->password = Hash::make($req->password);
+        }
+        $data->save();
+
+        return ['status' => 'updated'];
+    }
+
     public function destroy($id){
         User::destroy($id);
     }

@@ -12,6 +12,8 @@
  //import VueRouter from 'vue-router'
  import Buefy from 'buefy';
 
+//import 'buefy/dist/buefy.css'
+
 
 /**
  * The following block of code may be used to automatically register your
@@ -49,7 +51,22 @@ Vue.component('admin-navbar', require('./components/Administrator/AdminNavbar.vu
 Vue.component('panel-question', require('./components/Administrator/Question/PanelQuestion.vue').default);
 Vue.component('panel-question-create', require('./components/Administrator/Question/PanelQuestionCreate.vue').default);
 
+
+//ACAD YEAR
+Vue.component('acad-year', require('./components/Administrator/AcadYear/AcadYear.vue').default);
+//Vue.component('test-schedule-create', require('./components/Administrator/TestSchedule/TestScheduleCreate.vue').default);
+
+
+
+
+//SCHEDULES
+Vue.component('test-schedule', require('./components/Administrator/TestSchedule/TestSchedule.vue').default);
+Vue.component('test-schedule-create', require('./components/Administrator/TestSchedule/TestScheduleCreate.vue').default);
+Vue.component('test-schedule-edit', require('./components/Administrator/TestSchedule/TestScheduleEdit.vue').default);
+
+//SECTION
 Vue.component('panel-section', require('./components/Administrator/Section/SectionPanel.vue').default);
+
 
 Vue.component('answer-sheet', require('./components/Administrator/Answer/AnswerSheet.vue').default);
 

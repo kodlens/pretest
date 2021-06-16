@@ -74,7 +74,7 @@
 
                                 <div class="column">
                                     <b-field label-position="on-border" label="Birthdate">
-                                        <b-datepicker v-model="bdate" @input="formatDate">
+                                        <b-datepicker editable v-model="bdate" @input="formatDate">
                                         </b-datepicker>
                                     </b-field>
                                 </div>
@@ -101,12 +101,12 @@
                                 <div class="columns">
                                     <div class="column">
                                         <b-field label-position="on-border" label="Contact No.">
-                                            <b-input type="text" v-model="fields.contact_no" required placeholder="Contact No."></b-input>
+                                            <b-input type="text" v-model="fields.contact_no" placeholder="Contact No."></b-input>
                                         </b-field>
                                     </div>
 
                                     <div class="column">
-                                        <b-field label-position="on-border" label="Contact No.">
+                                        <b-field label-position="on-border" label="Email">
                                             <b-input type="email" v-model="fields.email" required placeholder="Email"></b-input>
                                         </b-field>
                                     </div>
@@ -115,7 +115,7 @@
                                 <div class="columns">
                                     <div class="column">
                                         <b-field label-position="on-border" label="Last School Attended">
-                                            <b-input type="text" v-model="fields.last_school_attended" required placeholder="Last School Attended"></b-input>
+                                            <b-input type="text" v-model="fields.last_school_attended" placeholder="Last School Attended"></b-input>
                                         </b-field>
                                     </div>
                                 </div>
@@ -124,13 +124,13 @@
                                 <div class="columns">
                                     <div class="column">
                                         <b-field label-position="on-border" label="Province">
-                                            <b-input type="text" v-model="fields.province" required placeholder="Province"></b-input>
+                                            <b-input type="text" v-model="fields.province" placeholder="Province"></b-input>
                                         </b-field>
                                     </div>
 
                                     <div class="column">
                                         <b-field label-position="on-border" label="City/Municipality">
-                                            <b-input type="text" v-model="fields.city" required placeholder="City/Municipality"></b-input>
+                                            <b-input type="text" v-model="fields.city" placeholder="City/Municipality"></b-input>
                                         </b-field>
                                     </div>
                                 </div>
@@ -138,13 +138,13 @@
                                 <div class="columns">
                                     <div class="column">
                                         <b-field label-position="on-border" label="Barangay">
-                                            <b-input type="text" v-model="fields.barangay" required placeholder="Barangay"></b-input>
+                                            <b-input type="text" v-model="fields.barangay" placeholder="Barangay"></b-input>
                                         </b-field>
                                     </div>
 
                                     <div class="column">
                                         <b-field label-position="on-border" label="Street">
-                                            <b-input type="text" v-model="fields.street" required placeholder="Street"></b-input>
+                                            <b-input type="text" v-model="fields.street" placeholder="Street"></b-input>
                                         </b-field>
                                     </div>
                                 </div>

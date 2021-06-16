@@ -48,7 +48,9 @@
                         {{ props.row.mname }}
                     </b-table-column>
 
-
+                    <b-table-column field="role" label="Role" v-slot="props">
+                        {{ props.row.role }}
+                    </b-table-column>
 
                     <b-table-column field="ay_id" label="Action" v-slot="props">
                         <div class="is-flex">

@@ -72,6 +72,25 @@ Route::post('/panel/login', [App\Http\Controllers\Administrator\PanelLoginContro
 
 
 Route::get('/panel/home', [App\Http\Controllers\Administrator\PanelHomeController::class, 'index']);
+
+
+//ACAD YEAR
+Route::resource('/panel/acadyear', App\Http\Controllers\Administrator\AcadYearController::class);
+Route::get('/fetch-acadyears', [App\Http\Controllers\Administrator\AcadYearController::class, 'index_data']);
+
+
+//SECTIONS
+Route::resource('/panel/section', App\Http\Controllers\Administrator\SectionController::class);
+Route::get('/ajax/section', [App\Http\Controllers\Administrator\SectionController::class, 'index_data']);
+
+
+//SCHEDULES
+Route::resource('/panel/test-schedule', App\Http\Controllers\Administrator\TestScheduleController::class);
+Route::get('/fetch-test-schedules', [App\Http\Controllers\Administrator\TestScheduleController::class, 'index_data']);
+
+
+
+//QUESTIONS
 Route::resource('/panel/question', App\Http\Controllers\Administrator\QuestionController::class);
 Route::get('/ajax/question', [App\Http\Controllers\Administrator\QuestionController::class, 'index_data']);
 //Route::get('/ajax/question/sections', [App\Http\Controllers\Administrator\QuestionController::class, 'ajax_section']);
@@ -89,9 +108,9 @@ Route::get('/ajax/question-option', [App\Http\Controllers\Administrator\Question
 
 
 
-//SECTION
-Route::resource('/panel/section', App\Http\Controllers\Administrator\SectionController::class);
-Route::get('/ajax/section', [App\Http\Controllers\Administrator\SectionController::class, 'index_data']);
+
+
+
 
 
 //USER

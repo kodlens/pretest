@@ -16,6 +16,9 @@ class TestSchedule extends Model
 
     protected $primaryKey = 'test_schedule_id';
 
-    protected $fillable = ['test_from', 'test_to', 'remark', 'active'];
+    protected $fillable = ['acad_year_id',
+        'description',
+        'from', 'to', 'max_user', 'nt_user'
+    ];
 
 }

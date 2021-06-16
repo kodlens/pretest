@@ -24,13 +24,13 @@
                                                  :type="this.errors.password ? 'is-danger' : ''"
                                                  :message="this.errors.password ? this.errors.password[0] : ''"
                                                  label-position="on-border">
-                                            <b-input type="password" password-reveal v-model="fields.password" placeholder="Password" required/>
+                                            <b-input type="password" password-reveal v-model="fields.password" placeholder="Password"/>
                                         </b-field>
                                     </div>
 
                                     <div class="column">
                                         <b-field label="Confirm Password" label-position="on-border">
-                                            <b-input type="password" password-reveal v-model="fields.password_confirmation" placeholder="Confirm Password" required/>
+                                            <b-input type="password" password-reveal v-model="fields.password_confirmation" placeholder="Confirm Password"/>
                                         </b-field>
                                     </div>
                                 </div>
@@ -101,12 +101,12 @@
                                 <div class="columns">
                                     <div class="column">
                                         <b-field label-position="on-border" label="Contact No.">
-                                            <b-input type="text" v-model="fields.contact_no" required placeholder="Contact No."></b-input>
+                                            <b-input type="text" v-model="fields.contact_no" placeholder="Contact No."></b-input>
                                         </b-field>
                                     </div>
 
                                     <div class="column">
-                                        <b-field label-position="on-border" label="Contact No.">
+                                        <b-field label-position="on-border" label="Email">
                                             <b-input type="email" v-model="fields.email" required placeholder="Email"></b-input>
                                         </b-field>
                                     </div>
@@ -115,7 +115,7 @@
                                 <div class="columns">
                                     <div class="column">
                                         <b-field label-position="on-border" label="Last School Attended">
-                                            <b-input type="text" v-model="fields.last_school_attended" required placeholder="Last School Attended"></b-input>
+                                            <b-input type="text" v-model="fields.last_school_attended" placeholder="Last School Attended"></b-input>
                                         </b-field>
                                     </div>
                                 </div>
@@ -124,13 +124,13 @@
                                 <div class="columns">
                                     <div class="column">
                                         <b-field label-position="on-border" label="Province">
-                                            <b-input type="text" v-model="fields.province" required placeholder="Province"></b-input>
+                                            <b-input type="text" v-model="fields.province" placeholder="Province"></b-input>
                                         </b-field>
                                     </div>
 
                                     <div class="column">
                                         <b-field label-position="on-border" label="City/Municipality">
-                                            <b-input type="text" v-model="fields.city" required placeholder="City/Municipality"></b-input>
+                                            <b-input type="text" v-model="fields.city" placeholder="City/Municipality"></b-input>
                                         </b-field>
                                     </div>
                                 </div>
@@ -138,13 +138,13 @@
                                 <div class="columns">
                                     <div class="column">
                                         <b-field label-position="on-border" label="Barangay">
-                                            <b-input type="text" v-model="fields.barangay" required placeholder="Barangay"></b-input>
+                                            <b-input type="text" v-model="fields.barangay" placeholder="Barangay"></b-input>
                                         </b-field>
                                     </div>
 
                                     <div class="column">
                                         <b-field label-position="on-border" label="Street">
-                                            <b-input type="text" v-model="fields.street" required placeholder="Street"></b-input>
+                                            <b-input type="text" v-model="fields.street" placeholder="Street"></b-input>
                                         </b-field>
                                     </div>
                                 </div>
@@ -176,16 +176,18 @@ export default {
             errors: {},
 
             dataJSON: {},
+
+            globalId : 0,
         }
     },
     methods: {
 
         submit(){
-            axios.post('/panel/user', this.fields).then(res=>{
-                if(res.data.status === 'saved'){
+            axios.put('/panel/user/' + this.globalId, this.fields).then(res=>{
+                if(res.data.status === 'updated'){
                     this.$buefy.dialog.alert({
-                        title: 'SAVED!',
-                        message: 'User added successfully.',
+                        title: 'UPDATED!',
+                        message: 'User updated successfully.',
                         type: 'is-success',
                         onConfirm: ()=> window.location = '/panel/user'
                     });
@@ -207,6 +209,7 @@ export default {
         initData(){
             this.dataJSON = JSON.parse(this.edit);
             this.fields = this.dataJSON;
+            this.globalId = this.dataJSON.user_id;
         }
     },
 
