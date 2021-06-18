@@ -42,7 +42,7 @@
                         </a>&nbsp; OR &nbsp;
                         <a class="button is-outlined is-primary" href="/register">
                             <b-icon pack="fa" icon="user"></b-icon>
-                            &nbsp; &nbsp;REIGSTER NOW
+                            &nbsp; &nbsp;REGISTER NOW
                         </a>
                     </div>
                 </div>
