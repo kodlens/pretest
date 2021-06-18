@@ -7,12 +7,17 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use App\Models\User;
 
+use App\Models\Program;
+
+
 class RegistrationController extends Controller
 {
     //
 
     public function index(){
-        return view('registration');
+        $programs = Program::all();
+        return view('registration')
+            ->with('programs', $programs);
     }
 
     public function store(Request $req){

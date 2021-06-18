@@ -87,6 +87,10 @@ Vue.component('report-result', require('./components/Administrator/Report/Report
 
 //STUDENT AREA
 //-----------------------------//
+//verification email
+Vue.component('verify-email', require('./components/VerifyEmail.vue').default);
+
+
 Vue.component('login-page', require('./components/LoginPaga.vue').default);
 
 //STUDENT

@@ -22,15 +22,15 @@ class TakingExamController extends Controller
 
     public function __construct()
     {
-        $this->middleware('auth');
-        $this->middleware('allow_exam');
+        $this->middleware('verified');
+        //$this->middleware('allow_exam');
     }
 
 
-    public function index(Request $req){
+    public function index($schedid, $sectionid){
         $user_id = auth()->user()->user_id;
         $ay = AcadYear::where('active', 1)->first();
-
+            
         $isExist = AnswerSheet::where('user_id', $user_id)
             ->where('code', $ay->code)
                 ->exists();
@@ -39,17 +39,18 @@ class TakingExamController extends Controller
             return redirect('/section')
                 ->with('isTaken', 1);
         }
-        //tiwasonon
+        // //tiwasonon
 
         return view('student.taking-exam')
-            ->with('id', $req->section);
+            ->with('id', $sectionid);
     }
 
 
-    public function examineeQuestion(Request $req)
+    public function examineeQuestion($section_id)
     {
+
         # code...
-        $section_id = $req->section;
+        //$section_id = $req->section;
         $ay = AcadYear::where('active', 1)->first();
         $easy_question = Question::with(['options'])
             ->join('levels', 'questions.level_id', 'levels.level_id')
@@ -57,6 +58,7 @@ class TakingExamController extends Controller
             ->where('level', 'EASY')
             ->where('section_id', $section_id)
             ->inRandomOrder()->take(6)->get();
+        
 
         $average_question = Question::with(['options'])
             ->join('levels', 'questions.level_id', 'levels.level_id')

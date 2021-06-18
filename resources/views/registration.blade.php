@@ -1,7 +1,7 @@
 @extends('layouts.home-app')
 
 @section('content')
-    <registration></registration>
+<registration data-programs='@json($programs)'></registration>
 @endsection
 
 

@@ -9,6 +9,8 @@ use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
+use App\Models\Program;
+
 class RegisterController extends Controller
 {
     /*
@@ -47,13 +49,37 @@ class RegisterController extends Controller
      * @param  array  $data
      * @return \Illuminate\Contracts\Validation\Validator
      */
+
+     public function showRegistrationForm (){
+         $programs = Program::all();
+         return view('auth.register')
+            ->with('programs', $programs);
+     }
+
+
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
-        ]);
+            'username' => ['string', 'max:255', 'required', 'unique:users'],
+            'password' => ['string', 'max:50', 'min:4', 'required', 'confirmed'],
+            'lname' => ['string', 'max:255', 'required'],
+            'fname' => ['string', 'max:255', 'required'],
+            'sex' => ['string', 'max:255', 'required'],
+            'bdate' => ['required'],
+            'contact_no' => ['string', 'max:255', 'required'],
+            'email' => ['string', 'max:255', 'required', 'unique:users'],
+            'first_program_choice' => ['string', 'max:100', 'required'],
+            'second_program_choice' => ['string', 'max:100', 'required'],
+            'last_school_attended' => ['string', 'max:255', 'required'],
+            'province' => ['string', 'max:255', 'required'],
+            'city' => ['string', 'max:255', 'required'],
+            'barangay.barangay_id' => ['required'],
+            ],$message =[
+                'bdate.required' => 'Birthdate is required.',
+                'barangay.barangay_id' => 'Barangay is required.',
+                'password.confirmed' => 'Your password does not match.',
+            ]
+        );
     }
 
     /**
@@ -64,10 +90,29 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+        //return $data['barangay']['barangay'];
+     
         return User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
+            'username' => $data['username'],
             'password' => Hash::make($data['password']),
+            'lname' => $data['lname'],
+            'fname' => $data['fname'],
+            'mname' => $data['mname'],
+            'sex' => $data['sex'],
+            'bdate' => $data['bdate'],
+            'birthplace' => $data['birthplace'],
+            'contact_no' => $data['contact_no'],
+            'email' => $data['email'],
+            'first_program_choice' => strtoupper($data['first_program_choice']),
+            'second_program_choice' => strtoupper($data['second_program_choice']),
+            'last_school_attended' => $data['last_school_attended'],
+            'province' => $data['province'],
+            'city' => $data['city'],
+            'barangay' => $data['barangay']['barangay'],
+            'barangay_id' => $data['barangay']['barangay_id'],
+            'street' => $data['street'],
+            'role' => 'STUDENT',
         ]);
+
     }
 }

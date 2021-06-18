@@ -40,7 +40,7 @@
                             <b-icon pack="fa" icon="arrow-right"></b-icon>
                             &nbsp; &nbsp;LOGIN NOW
                         </a>&nbsp; OR &nbsp;
-                        <a class="button is-outlined is-primary" href="/registration">
+                        <a class="button is-outlined is-primary" href="/register">
                             <b-icon pack="fa" icon="user"></b-icon>
                             &nbsp; &nbsp;REIGSTER NOW
                         </a>

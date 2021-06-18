@@ -2,6 +2,6 @@
 
 @section('content')
 
-    <section-page sections='@json($sections)'></section-page>
+    <section-page sections='@json($sections)' schedid="{{ $sched_id }}"></section-page>
 
 @endsection

@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
-class User extends Authenticatable
+class User extends Authenticatable implements MustVerifyEmail
 {
     use HasFactory, Notifiable;
 
@@ -20,7 +20,7 @@ class User extends Authenticatable
 
 
    // protected $connection = 'mysql';
-    protected $guard = 'admin';
+    //protected $guard = 'admin';
 
     protected $table = 'users';
     protected $primaryKey = 'user_id'; //the fuck.. nahurot akong adlaw nimo ..
@@ -30,6 +30,7 @@ class User extends Authenticatable
         'bdate',
         'birthplace', 'contact_no',
         'email',
+        'first_program_choice', 'second_program_choice',
         'last-school_attended',
         'province', 'city', 'barangay', 'barangay_id', 'street',
         'password', 'role'

@@ -13,10 +13,14 @@ class SectionPageController extends Controller
         $this->middleware('auth');
     }
 
-    public function index(){
+    public function index($sched_id){
         $sections = Section::select('section_id', 'section', 'img_filename', 'set_time')
             ->get();
         return view('student.section-page')
-            ->with('sections', $sections);
+            ->with('sections', $sections)
+            ->with('sched_id', $sched_id);
     }
+
+
+
 }

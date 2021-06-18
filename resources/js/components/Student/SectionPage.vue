@@ -2,7 +2,7 @@
     <div>
         <div class="section">
             <div class="section-wrapper">
-                <a :href="'/taking-exam?section='+item.section_id" v-for="(item, index) in sectionsJSON" :key="index" class="img-wrapper">
+                <a :href="'/taking-exam/'+schedid+'/'+item.section_id" v-for="(item, index) in sectionsJSON" :key="index" class="img-wrapper">
                     <img :src="'/img/' + item.img_filename" class="img-size" alt="..." />
                     <p>SECTION: {{ item.section }}</p>
                     <p>TIME: {{ item.set_time }} minutes</p>
@@ -16,7 +16,7 @@
 
 
 export default {
-    props:['sections'],
+    props:['sections', 'schedid'],
     data(){
         return{
             sectionsJSON: null,

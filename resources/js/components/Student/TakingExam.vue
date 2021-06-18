@@ -4,7 +4,7 @@
             <div class="container">
                 <form @submit.prevent="submit">
                     <div class="columns">
-                        <div class="column is-8 is-offset-2">
+                        <div class="column is-10 is-offset-1">
 
                             <div class="instruction-container">
                                 <div>
@@ -26,31 +26,36 @@
                                 <!--question content-->
 
                                 <!--option content-->
-                                <div class="option-content" v-for="(option, k) in item.options" :key="k">
-                                    <!--if question is text-->
-                                    <div v-if="option.is_img == 0">
-                                        <b-field>
-                                            <b-radio
-                                                v-model="answers[i]"
-                                                :native-value="option.option_id">
-                                                {{option.letter}} - {{ option.content }}
-                                            </b-radio>
-                                        </b-field>
-                                    </div>
+                                <div class="option-container">
+                                    <div class="option-content" v-for="(option, k) in item.options" :key="k">
+                                        <!--if question is text-->
+                                        <div v-if="option.is_img == 0">
+                                            <b-field>
+                                                <b-radio
+                                                    v-model="answers[i]"
+                                                    :native-value="option.option_id">
+                                                    {{option.letter}} - {{ option.content }}
+                                                </b-radio>
+                                            </b-field>
+                                        </div>
 
-                                    <!--if question is img-->
-                                    <div v-else>
-                                        <b-field>
-                                            <b-radio
-                                                v-model="answers[i]" required
-                                                :native-value="option.option_id">
-                                                <div class="question-img">{{option.letter}}. </div>
-                                                <img :src="`/storage/q/`+option.img_path" alt="...">
-                                            </b-radio>
-                                        </b-field>
+                                        <!--if option is img-->
+                                        <div v-else>
+                                            <b-field>
+                                                <b-radio
+                                                    v-model="answers[i]" required
+                                                    :native-value="option.option_id">
+                                                    
+                                                    <div>{{option.letter}}. </div>
+                                                    <img :src="`/storage/q/`+option.img_path" alt="..." class="img-container"> 
+                                                
+                                                </b-radio>
+                                            </b-field> 
+                                        </div>
                                     </div>
-                                </div>
-                                <!--option content-->
+                                    <!--option content-->
+                                </div><!--option container-->
+                                
 
                             </div><!--question-box-->
 
@@ -93,7 +98,7 @@ export default {
     },
     methods: {
         loadQuestion: async function(){
-            await axios.get('/student/taking-exam-question?section='+this.sectionId).then(res=>{
+            await axios.get('/taking-exam-question/'+this.sectionId).then(res=>{
                 //5pxconsole.log(res.data);
                 this.questions = res.data;
             });
@@ -196,6 +201,10 @@ export default {
         display: flex;
     }
 
+
+    .option-container{
+        display: flex;
+    }
     .option-content{
         margin-left: 30px;
         padding: 5px 5px;
@@ -226,6 +235,22 @@ export default {
             display: flex;
             justify-content: center;
         }
+
+         .option-container{
+            flex-direction: column;
+            justify-content: center;
+            
+        }
+
+
+    }
+
+
+
+    .samplebox{
+        height: 100px;
+        width: 100px;
+        border: 1px solid red;
     }
 
 </style>

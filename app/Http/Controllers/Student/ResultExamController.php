@@ -15,7 +15,7 @@ class ResultExamController extends Controller
     //
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware('verified');
         $this->middleware('student');
         //$this->middleware('allow_exam');
     }

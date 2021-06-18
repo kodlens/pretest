@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Request;
 use Carbon\Carbon;
-use App\Models\TestSchedule;
+use App\Models\Program;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,12 +21,12 @@ use App\Models\TestSchedule;
 
 Route::get('/', function () {
     return view('welcome');
-
 });
 
 Auth::routes([
-    'register' => false,
+    'register' => true,
     'login' => true,
+    'verify' => true
 ]);
 
 
@@ -42,23 +42,31 @@ Route::get('/barangays', [App\Http\Controllers\AddressController::class, 'barang
 //////////////////ADDRESS///////////////////
 
 //registration of account
-Route::resource('/registration', App\Http\Controllers\Student\RegistrationController::class);
+//Route::resource('/registration', App\Http\Controllers\Student\RegistrationController::class);
 
 
 //STUDENT
 //Route::get('/student/login', [App\Http\Controllers\Student\StudentLoginController::class, 'showLoginForm']);
 //Route::post('/student/login', [App\Http\Controllers\Student\StudentLoginController::class, 'login'])->name('student-login');
-Route::resource('/section', App\Http\Controllers\Student\SectionPageController::class);
+Route::get('/section/{studsched_id}', [App\Http\Controllers\Student\SectionPageController::class, 'index']);
+//DISPLAY SECTIONS WITH SCHEDULE ID AS PARAM
 
 Route::resource('/section-question', App\Http\Controllers\Student\SectionQuestionController::class);
 
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::resource('/taking-exam', App\Http\Controllers\Student\TakingExamController::class);
-Route::get('/student/taking-exam-question', [App\Http\Controllers\Student\TakingExamController::class, 'examineeQuestion']);
+//Route::resource('/taking-exam', App\Http\Controllers\Student\TakingExamController::class);
+Route::get('/taking-exam/{schedid}/{sectionid}', [App\Http\Controllers\Student\TakingExamController::class, 'index']);
+
+Route::get('/taking-exam-question/{sectionid}', [App\Http\Controllers\Student\TakingExamController::class, 'examineeQuestion']);
 Route::get('/student/result-exam', [App\Http\Controllers\Student\ResultExamController::class, 'index']);
 Route::get('/student/ajax-result-exam', [App\Http\Controllers\Student\ResultExamController::class, 'resultExam']);
 
+
+Route::post('/set-schedule', [App\Http\Controllers\Student\StudentScheduleController::class, 'setSchedule']);
+Route::get('/get-schedule', [App\Http\Controllers\Student\StudentScheduleController::class, 'getSchedule']);
+
+//STUDENT //////////////STUDENT /////////////STUDENT
 
 
 
@@ -67,8 +75,8 @@ Route::get('/student/ajax-result-exam', [App\Http\Controllers\Student\ResultExam
 
 //LOGIN OF PANEL CONTROLLER
 //Route::post('/panel', [App\Http\Controllers\Administrator\PanelLoginController::class, 'index'])->name('panel');
-Route::get('/panel/login', [App\Http\Controllers\Administrator\PanelLoginController::class, 'showLoginForm']);
-Route::post('/panel/login', [App\Http\Controllers\Administrator\PanelLoginController::class, 'login'])->name('panel-login');
+//Route::get('/panel/login', [App\Http\Controllers\Administrator\PanelLoginController::class, 'showLoginForm']);
+//Route::post('/panel/login', [App\Http\Controllers\Administrator\PanelLoginController::class, 'login'])->name('panel-login');
 
 
 Route::get('/panel/home', [App\Http\Controllers\Administrator\PanelHomeController::class, 'index']);
@@ -160,8 +168,8 @@ Route::get('/app/logout/admin', function(){
 });
 
 
-Route::get('/check-redis', function(){
-    print_r(app()->make('redis'));
+Route::get('/date', function(){
+    return Program::all();
 });
 
 //Route::get('/app/test', function(){

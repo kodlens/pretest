@@ -10,6 +10,10 @@
                                     REGISTRATION FORM
                                 </div>
 
+                                <b-notification class="is-success is-light">
+                                    Please use working and valid email address for faster verification.
+                                </b-notification>
+
                                 <div>
                                     <h2><span>ACCOUNT INFORMATION</span></h2>
                                     <div class="columns">
@@ -89,6 +93,28 @@
                                         <div class="column">
                                             <b-field label="Birthplace" label-position="on-border">
                                                 <b-input type="text" placeholder="Birthplace" v-model="fields.birthplace" required />
+                                            </b-field>
+                                        </div>
+                                    </div>
+
+                                    <h2><span>PROGRAM INFORMATION</span></h2>
+                                    <div class="columns">
+                                        <div class="column">
+                                            <b-field label="1st Program Choice" label-position="on-border" 
+                                                :type="this.errors.first_program_choice ? 'is-danger' : ''"
+                                                :message="this.errors.first_program_choice ? this.errors.first_program_choice : ''" expanded>
+                                                <b-select placeholder="1st program choice" v-model="fields.first_program_choice" required expanded>
+                                                    <option :value="item.CCode" v-for="(item, index) in this.programs" :key="index">{{ item.CCode }}</option>
+                                                </b-select>
+                                            </b-field>
+                                        </div>
+                                        <div class="column">
+                                            <b-field label="2nd Program Choice" label-position="on-border" expanded
+                                                :type="this.errors.second_program_choice ? 'is-danger' : ''"
+                                                :message="this.errors.second_program_choice ? this.errors.second_program_choice : ''">
+                                                <b-select placeholder="2nd program choice" v-model="fields.second_program_choice" required expanded>
+                                                    <option :value="item.CCode" v-for="(item, index) in this.programs" :key="index">{{ item.CCode }}</option>
+                                                </b-select>
                                             </b-field>
                                         </div>
                                     </div>
@@ -180,9 +206,35 @@
 <script>
 export default {
 
+    props:{
+        dataPrograms:{
+            type: String,
+            default: '',
+        }
+    },
+
     data(){
         return{
-            fields:{},
+            fields:{
+                username: '',
+                lname: '',
+                fname: '',
+                mname: '',
+                sex: '',
+                bdate: '',
+                birthplace: '',
+                contact_no: '',
+                email: '',
+                first_program_choice: '',
+                second_program_choice: '',
+                last_school_attended: '',
+                province: '',
+                city: '',
+                barangay: '',
+                barangay_id: '',
+                street: '',
+                password: '',
+            },
             errors: {},
             bdate: null,
 
@@ -196,6 +248,7 @@ export default {
             provinces: [],
             cities: [],
             barangays: [],
+            programs: [],
 
 
         }
@@ -232,29 +285,35 @@ export default {
         submit: function(){
             this.btnClass['is-loading'] = true;
 
-            axios.post('/registration', this.fields).then(res=>{
+            axios.post('/register', this.fields).then(res=>{
                 console.log(res);
-                if(res.data.status === 'saved'){
-                    this.$buefy.dialog.alert({
-                        title: 'REGISTERED!',
-                        message: 'Account successfully registered. You can login now.',
-                        type: 'is-success',
-                        onConfirm: ()=> window.location = '/'
-                    });
-                    this.btnClass['is-loading'] = false;
-                }
+                window.location = '/home'
+                // if(res.data.status === 'saved'){
+                //     this.$buefy.dialog.alert({
+                //         title: 'REGISTERED!',
+                //         message: 'Account successfully registered. You can login now.',
+                //         type: 'is-success',
+                //         onConfirm: ()=> 
+                //     });
+                //     this.btnClass['is-loading'] = false;
+                // }
                 this.btnClass['is-loading'] = false;
             }).catch(err=>{
                 this.errors = err.response.data.errors;
                 //console.log(err.response.data)
                 this.btnClass['is-loading'] = false;
             })
+        },
+
+        initData: function(){
+            this.programs = JSON.parse(this.dataPrograms);
         }
 
     },
 
     mounted() {
         this.loadProvinces();
+        this.initData();
     }
 }
 
