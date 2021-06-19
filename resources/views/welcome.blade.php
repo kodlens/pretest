@@ -22,6 +22,11 @@
     <!-- I will hold you tight and I won't let go -->
     <!-- Deuteronomy 31:6 -->
 
+    <!-- Everyone in your life will hurt you sooner or later -->
+    <!-- But it's for you to decide, which is more important -->
+    <!-- the PAIN, or the PERSON :'(-->
+
+
 @endsection
 
 
