@@ -8,6 +8,13 @@
                         <div class="column is-6 is-offset-3">
                             <div class="box">
                                 <h1 class="title is-5">GADTEST SCHEDULE</h1><hr>
+
+                                <b-notification v-if="isNotScheduled == 1"
+                                    type="is-danger"
+                                    aria-close-label="Close notification"
+                                    role="alert">
+                                    Sorry, it is not yet your schedule. You may take the test only by the system generated schedule below.
+                                </b-notification>
                               
                                 <p v-if="schedules" style="text-align:center;">You're schedule is on {{ scheduleNiya }}</p>
                                 <p v-else style="text-align:center;">To take the test, you must request a schedule first.</p>
@@ -67,7 +74,7 @@
 
 <script>
 export default {
-    props: ['isTaken'],
+    props: ['isNotScheduled'],
 
     data() {
         return {
@@ -119,6 +126,15 @@ export default {
                     });
                      this.btnClass['is-loading'] = false;
                 }
+                if(res.data.status === 'no_schedule'){
+                    this.$buefy.dialog.alert({
+                        title: 'NO SCHEDULE!',
+                        message: 'No new schedule found. Maybe admission test is closed.',
+                        type: 'is-danger',
+                        onConfirm: ()=> this.getSchedule()
+                    });
+                    this.btnClass['is-loading'] = false;
+                }
             }).catch(err=>{
                 console.log(err.response);
                  this.btnClass['is-loading'] = false;
@@ -147,7 +163,7 @@ export default {
         getSchedule: function(){
             this.isLoading = true;
             axios.get('/get-schedule').then(res=>{
-                //console.log(res.data[0]);
+                console.log(res.data[0]);
                 this.schedules = res.data[0];
                 this.isLoading = false;
             })

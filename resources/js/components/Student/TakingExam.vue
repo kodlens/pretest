@@ -132,7 +132,7 @@ export default {
 
         submit(){
             this.btnClass["is-loading"] = true;
-            axios.post('/student/taking-exam', this.answers).then(res=>{
+            axios.post('/taking-exam-submit', this.answers).then(res=>{
                 this.btnClass["is-loading"] = false;
                 if(res.data.status === 'saved'){
                     this.$buefy.dialog.alert({

@@ -24,14 +24,19 @@ class StudentScheduleController extends Controller
 
 
     public function setSchedule(Request $req){
-        
+       
         $isFull = false;
         $testSchedules = TestSchedule::where('active', 1)
             ->where('from', '>', date("Y-m-d"))->get();
         //get all schedules where active = 1
+        //and datenow > db recorded date sched
 
         $userid = Auth::user()->user_id;
         
+        if($testSchedules->isEmpty()){
+            return ['status' => 'no_schedule'];
+        }
+
         foreach($testSchedules as $row){
             //loop to schedules
             $countSched = StudentSchedule::where('test_schedule_id', $row->test_schedule_id)->count();
@@ -65,7 +70,7 @@ class StudentScheduleController extends Controller
             return ['status' => 'full'];
         }
 
-        $schedule = DB::table('student_schedules as a')
+        $sched = DB::table('student_schedules as a')
             ->join('test_schedules as b', 'a.test_schedule_id', 'b.test_schedule_id')
             ->where('student_schedule_id', $schedule->student_schedule_id)
             ->first();
@@ -73,14 +78,15 @@ class StudentScheduleController extends Controller
 
         return [
             'status' => 'schedule', 
-            'schedfrom' => $schedule->from, 
-            'schedto' => $schedule->to
+            'schedfrom' => $sched->from, 
+            'schedto' => $sched->to
         ];
 
     }
 
     public function getSchedule(){
         $userid = Auth::user()->user_id;
+        $schedule = '';
         $testSchedules = TestSchedule::where('from', '>', date("Y-m-d"))
             ->where('active', 1)->get();
 
@@ -91,8 +97,6 @@ class StudentScheduleController extends Controller
                 ->where('a.test_schedule_id', $row->test_schedule_id)
                 ->where('b.from', '>', date("Y-m-d"))
                 ->get();
-
-          
 
             if($schedule){
                 break;

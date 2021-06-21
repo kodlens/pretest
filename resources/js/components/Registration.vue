@@ -79,6 +79,18 @@
                                                 </b-select>
                                             </b-field>
                                         </div>
+
+                                        <div class="column">
+                                            <b-field label="Category" label-position="on-border" expanded
+                                                     :type="this.errors.status ? 'is-danger' : ''"
+                                                     :message="this.errors.status ? this.errors.status : ''">
+                                                <b-select placeholder="Category" v-model="fields.status" expanded required>
+                                                    <option value="NEW">NEW</option>
+                                                    <option value="RETURNEE">RETURNEE</option>
+                                                    <option value="TRANSFEREE">TRANSFEREE</option>
+                                                </b-select>
+                                            </b-field>
+                                        </div>
                                     </div>
 
                                     <div class="columns">

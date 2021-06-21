@@ -23,7 +23,7 @@ class TakingExamController extends Controller
     public function __construct()
     {
         $this->middleware('verified');
-        //$this->middleware('allow_exam');
+        $this->middleware('allow_exam');
     }
 
 
@@ -82,15 +82,15 @@ class TakingExamController extends Controller
     }
 
     public function examineeResult(){
-        $student_id = auth()->user()->StudID;
+        $user_id = auth()->user()->user_id;
 
     }
 
     public function store(Request $req){
-        $student_id = auth()->user()->StudID;
+        $user_id = auth()->user()->user_id;
         $ay = AcadYear::where('active', 1)->first();
 
-        $n = AnswerSheet::where('student_id', $student_id)
+        $n = AnswerSheet::where('user_id', $user_id)
             ->where('code', $ay->code)->exists();
 
         if($n){
@@ -98,14 +98,14 @@ class TakingExamController extends Controller
         }
 
         try{
-            DB::transaction(function() use ($req, $student_id) {
+            DB::transaction(function() use ($req, $user_id) {
                 $dateTaken = Carbon::now()->toDateString();
 
                 $ay = AcadYear::where('active', 1)->first();
 
                 $ansSheet = AnswerSheet::create([
                     'code' => $ay->code,
-                    'student_id' => $student_id,
+                    'user_id' => $user_id,
                     'is_taken' => 1,
                     'date_taken' => $dateTaken,
                 ]);
@@ -121,6 +121,8 @@ class TakingExamController extends Controller
                 }
 
                 Answer::insert($arr);
+
+                //forward final result to gadtc_registrar db
             });
             return ['status' => 'saved'];
         }catch(\Exception $e){

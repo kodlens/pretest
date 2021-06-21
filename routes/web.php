@@ -59,8 +59,10 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::get('/taking-exam/{schedid}/{sectionid}', [App\Http\Controllers\Student\TakingExamController::class, 'index']);
 
 Route::get('/taking-exam-question/{sectionid}', [App\Http\Controllers\Student\TakingExamController::class, 'examineeQuestion']);
-Route::get('/student/result-exam', [App\Http\Controllers\Student\ResultExamController::class, 'index']);
-Route::get('/student/ajax-result-exam', [App\Http\Controllers\Student\ResultExamController::class, 'resultExam']);
+//Route::get('/student/result-exam', [App\Http\Controllers\Student\ResultExamController::class, 'index']);
+//Route::get('/student/ajax-result-exam', [App\Http\Controllers\Student\ResultExamController::class, 'resultExam']);
+
+Route::post('/taking-exam-submit', [App\Http\Controllers\Student\TakingExamController::class, 'store']);
 
 
 Route::post('/set-schedule', [App\Http\Controllers\Student\StudentScheduleController::class, 'setSchedule']);
