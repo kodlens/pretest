@@ -1,17 +1,33 @@
 <template>
     <div>
         <section class="section">
-        <div style="font-size: 20px; text-align: center; font-weight: bold;">LIST OF SECTION</div>
+        <div style="font-size: 20px; text-align: center; font-weight: bold;">LIST OF USER</div>
         <div class="columns">
             <div class="column is-8 is-offset-2">
-                <b-field label="Page">
-                    <b-select v-model="perPage" @input="setPerPage">
-                        <option value="5">5 per page</option>
-                        <option value="10">10 per page</option>
-                        <option value="15">15 per page</option>
-                        <option value="20">20 per page</option>
-                    </b-select>
-                </b-field>
+
+                <div class="level">
+                    <div class="level-left">
+                        <div class="level-item">
+                            <b-field label="Page">
+                                <b-select v-model="perPage" @input="setPerPage">
+                                    <option value="5">5 per page</option>
+                                    <option value="10">10 per page</option>
+                                    <option value="15">15 per page</option>
+                                    <option value="20">20 per page</option>
+                                </b-select>
+                            </b-field>
+                        </div>
+                    </div>
+                    <div class="level-right">
+                        <div class="level-item">
+                            <b-field label="Search">
+                                <b-input type="input" v-model="search.lname" placeholder="Search Lastname..." @keyup.native.enter="loadAsyncData" />
+                            </b-field>
+                        </div>
+                    </div>
+                </div>
+
+                
                 <b-table
                     :data="data"
                     :loading="loading"
@@ -100,6 +116,10 @@ export default {
                 'is-loading':false,
             },
 
+            search: {
+                lname: '',
+            }
+
         }
     },
     methods: {
@@ -107,7 +127,8 @@ export default {
             const params = [
                 `sort_by=${this.sortField}.${this.sortOrder}`,
                 `perpage=${this.perPage}`,
-                `page=${this.page}`
+                `page=${this.page}`,
+                `lname=${this.search.lname}`
             ].join('&')
 
             this.loading = true

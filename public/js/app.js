@@ -4748,6 +4748,22 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
@@ -4767,6 +4783,9 @@ __webpack_require__.r(__webpack_exports__);
         'is-success': true,
         'button': true,
         'is-loading': false
+      },
+      search: {
+        lname: ''
       }
     };
   },
@@ -4774,7 +4793,7 @@ __webpack_require__.r(__webpack_exports__);
     loadAsyncData: function loadAsyncData() {
       var _this = this;
 
-      var params = ["sort_by=".concat(this.sortField, ".").concat(this.sortOrder), "perpage=".concat(this.perPage), "page=".concat(this.page)].join('&');
+      var params = ["sort_by=".concat(this.sortField, ".").concat(this.sortOrder), "perpage=".concat(this.perPage), "page=".concat(this.page), "lname=".concat(this.search.lname)].join('&');
       this.loading = true;
       axios.get("/axios-users?".concat(params)).then(function (_ref) {
         var data = _ref.data;
@@ -32533,7 +32552,7 @@ var render = function() {
             "font-weight": "bold"
           }
         },
-        [_vm._v("LIST OF SECTION")]
+        [_vm._v("LIST OF USER")]
       ),
       _vm._v(" "),
       _c("div", { staticClass: "columns" }, [
@@ -32541,43 +32560,101 @@ var render = function() {
           "div",
           { staticClass: "column is-8 is-offset-2" },
           [
-            _c(
-              "b-field",
-              { attrs: { label: "Page" } },
-              [
+            _c("div", { staticClass: "level" }, [
+              _c("div", { staticClass: "level-left" }, [
                 _c(
-                  "b-select",
-                  {
-                    on: { input: _vm.setPerPage },
-                    model: {
-                      value: _vm.perPage,
-                      callback: function($$v) {
-                        _vm.perPage = $$v
-                      },
-                      expression: "perPage"
-                    }
-                  },
+                  "div",
+                  { staticClass: "level-item" },
                   [
-                    _c("option", { attrs: { value: "5" } }, [
-                      _vm._v("5 per page")
-                    ]),
-                    _vm._v(" "),
-                    _c("option", { attrs: { value: "10" } }, [
-                      _vm._v("10 per page")
-                    ]),
-                    _vm._v(" "),
-                    _c("option", { attrs: { value: "15" } }, [
-                      _vm._v("15 per page")
-                    ]),
-                    _vm._v(" "),
-                    _c("option", { attrs: { value: "20" } }, [
-                      _vm._v("20 per page")
-                    ])
-                  ]
+                    _c(
+                      "b-field",
+                      { attrs: { label: "Page" } },
+                      [
+                        _c(
+                          "b-select",
+                          {
+                            on: { input: _vm.setPerPage },
+                            model: {
+                              value: _vm.perPage,
+                              callback: function($$v) {
+                                _vm.perPage = $$v
+                              },
+                              expression: "perPage"
+                            }
+                          },
+                          [
+                            _c("option", { attrs: { value: "5" } }, [
+                              _vm._v("5 per page")
+                            ]),
+                            _vm._v(" "),
+                            _c("option", { attrs: { value: "10" } }, [
+                              _vm._v("10 per page")
+                            ]),
+                            _vm._v(" "),
+                            _c("option", { attrs: { value: "15" } }, [
+                              _vm._v("15 per page")
+                            ]),
+                            _vm._v(" "),
+                            _c("option", { attrs: { value: "20" } }, [
+                              _vm._v("20 per page")
+                            ])
+                          ]
+                        )
+                      ],
+                      1
+                    )
+                  ],
+                  1
                 )
-              ],
-              1
-            ),
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "level-right" }, [
+                _c(
+                  "div",
+                  { staticClass: "level-item" },
+                  [
+                    _c(
+                      "b-field",
+                      { attrs: { label: "Search" } },
+                      [
+                        _c("b-input", {
+                          attrs: {
+                            type: "input",
+                            placeholder: "Search Lastname..."
+                          },
+                          nativeOn: {
+                            keyup: function($event) {
+                              if (
+                                !$event.type.indexOf("key") &&
+                                _vm._k(
+                                  $event.keyCode,
+                                  "enter",
+                                  13,
+                                  $event.key,
+                                  "Enter"
+                                )
+                              ) {
+                                return null
+                              }
+                              return _vm.loadAsyncData($event)
+                            }
+                          },
+                          model: {
+                            value: _vm.search.lname,
+                            callback: function($$v) {
+                              _vm.$set(_vm.search, "lname", $$v)
+                            },
+                            expression: "search.lname"
+                          }
+                        })
+                      ],
+                      1
+                    )
+                  ],
+                  1
+                )
+              ])
+            ]),
             _vm._v(" "),
             _c(
               "b-table",

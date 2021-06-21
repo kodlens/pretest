@@ -23,7 +23,8 @@ class UserController extends Controller
 
     public function index_data(Request $req){
         $sort = explode('.', $req->sort_by);
-        return User::orderBy($sort[0], $sort[1])
+        return User::where('lname', 'like', $req->lname . '%')
+            ->orderBy($sort[0], $sort[1])
             ->paginate($req->perpage);
     }
 
