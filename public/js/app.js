@@ -2221,6 +2221,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: ['isAuth'],
   data: function data() {
@@ -3922,6 +3927,221 @@ __webpack_require__.r(__webpack_exports__);
       this.fields = {};
       this.errors = {};
     }
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Administrator/StudentSchedule/StudentSchedule.vue?vue&type=script&lang=js&":
+/*!****************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Administrator/StudentSchedule/StudentSchedule.vue?vue&type=script&lang=js& ***!
+  \****************************************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  data: function data() {
+    return {
+      data: [],
+      total: 0,
+      loading: false,
+      sortField: '',
+      sortOrder: 'desc',
+      page: 1,
+      perPage: 5,
+      defaultSortDirection: 'asc',
+      isModalActive: false,
+      dataId: 0,
+      fields: {},
+      errors: {},
+      globalId: 0,
+      btnClass: {
+        'is-success': true,
+        'button': true,
+        'is-loading': false
+      },
+      search: {
+        lname: ''
+      }
+    };
+  },
+  methods: {
+    loadAsyncData: function loadAsyncData() {
+      var _this = this;
+
+      var params = ["sort_by=".concat(this.sortField, ".").concat(this.sortOrder), "perpage=".concat(this.perPage), "page=".concat(this.page), "lname=".concat(this.search.lname)].join('&');
+      this.loading = true;
+      axios.get("/fetch-student-schedules?".concat(params)).then(function (_ref) {
+        var data = _ref.data;
+        _this.data = [];
+        var currentTotal = data.total;
+
+        if (data.total / _this.perPage > 1000) {
+          currentTotal = _this.perPage * 1000;
+        }
+
+        _this.total = currentTotal;
+        data.data.forEach(function (item) {
+          //item.release_date = item.release_date ? item.release_date.replace(/-/g, '/') : null
+          _this.data.push(item);
+        });
+        _this.loading = false;
+      })["catch"](function (error) {
+        _this.data = [];
+        _this.total = 0;
+        _this.loading = false;
+        throw error;
+      });
+    },
+
+    /*
+    * Handle page-change event
+    */
+    onPageChange: function onPageChange(page) {
+      this.page = page;
+      this.loadAsyncData();
+    },
+    onSort: function onSort(field, order) {
+      this.sortField = field;
+      this.sortOrder = order;
+      this.loadAsyncData();
+    },
+    setPerPage: function setPerPage() {
+      this.loadAsyncData();
+    },
+    //actions here below
+    deleteSubmit: function deleteSubmit(delete_id) {
+      var _this2 = this;
+
+      axios["delete"]('/panel/student-schedule/' + delete_id).then(function (res) {
+        _this2.loadAsyncData();
+      })["catch"](function (err) {
+        console.log(err);
+      });
+    },
+    //alert
+    confirmDelete: function confirmDelete(delete_id) {
+      var _this3 = this;
+
+      this.$buefy.dialog.confirm({
+        title: 'DELETE!',
+        type: 'is-danger',
+        message: 'Are you sure you want to delete this data?',
+        cancelText: 'Cancel',
+        confirmText: 'Delete',
+        onConfirm: function onConfirm() {
+          return _this3.deleteSubmit(delete_id);
+        }
+      });
+    },
+    openModal: function openModal(id) {
+      this.fields = {};
+      this.errors = {};
+      this.globalId = 0;
+
+      if (id > 0) {
+        this.globalId = id;
+        this.getData();
+      }
+
+      this.isModalActive = true;
+    },
+    getData: function getData() {}
+  },
+  mounted: function mounted() {
+    this.loadAsyncData();
   }
 });
 
@@ -6359,7 +6579,10 @@ vue__WEBPACK_IMPORTED_MODULE_0__.default.component('acad-year', __webpack_requir
 
 vue__WEBPACK_IMPORTED_MODULE_0__.default.component('test-schedule', __webpack_require__(/*! ./components/Administrator/TestSchedule/TestSchedule.vue */ "./resources/js/components/Administrator/TestSchedule/TestSchedule.vue").default);
 vue__WEBPACK_IMPORTED_MODULE_0__.default.component('test-schedule-create', __webpack_require__(/*! ./components/Administrator/TestSchedule/TestScheduleCreate.vue */ "./resources/js/components/Administrator/TestSchedule/TestScheduleCreate.vue").default);
-vue__WEBPACK_IMPORTED_MODULE_0__.default.component('test-schedule-edit', __webpack_require__(/*! ./components/Administrator/TestSchedule/TestScheduleEdit.vue */ "./resources/js/components/Administrator/TestSchedule/TestScheduleEdit.vue").default); //SECTION
+vue__WEBPACK_IMPORTED_MODULE_0__.default.component('test-schedule-edit', __webpack_require__(/*! ./components/Administrator/TestSchedule/TestScheduleEdit.vue */ "./resources/js/components/Administrator/TestSchedule/TestScheduleEdit.vue").default);
+vue__WEBPACK_IMPORTED_MODULE_0__.default.component('student-schedule', __webpack_require__(/*! ./components/Administrator/StudentSchedule/StudentSchedule.vue */ "./resources/js/components/Administrator/StudentSchedule/StudentSchedule.vue").default);
+vue__WEBPACK_IMPORTED_MODULE_0__.default.component('student-schedule-create', __webpack_require__(/*! ./components/Administrator/StudentSchedule/StudentSchedule.vue */ "./resources/js/components/Administrator/StudentSchedule/StudentSchedule.vue").default);
+vue__WEBPACK_IMPORTED_MODULE_0__.default.component('student-schedule-edit', __webpack_require__(/*! ./components/Administrator/StudentSchedule/StudentSchedule.vue */ "./resources/js/components/Administrator/StudentSchedule/StudentSchedule.vue").default); //SECTION
 
 vue__WEBPACK_IMPORTED_MODULE_0__.default.component('panel-section', __webpack_require__(/*! ./components/Administrator/Section/SectionPanel.vue */ "./resources/js/components/Administrator/Section/SectionPanel.vue").default);
 vue__WEBPACK_IMPORTED_MODULE_0__.default.component('answer-sheet', __webpack_require__(/*! ./components/Administrator/Answer/AnswerSheet.vue */ "./resources/js/components/Administrator/Answer/AnswerSheet.vue").default); //USER
@@ -24100,7 +24323,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/*qo mean question options button remove*/\n.qo-btn[data-v-51e93ae4]{\n    margin-left: 5px;\n    border: none;\n}\n.qo-btn > i[data-v-51e93ae4]:hover{\n    color:red;\n    text-decoration: underline;\n}\n.qo-btn-check[data-v-51e93ae4]{\n    border: none;\n    color: red;\n}\n.qo-btn-check-active[data-v-51e93ae4]{\n    border: none;\n    color: green;\n}\n.red-x[data-v-51e93ae4]{\n    color: red;\n}\n.green-check[data-v-51e93ae4]{\n    color: green;\n}\n.option-panel[data-v-51e93ae4]{\n    margin-left: 30px;\n}\n\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\r\n\r\n/*qo mean question options button remove*/\n.qo-btn[data-v-51e93ae4]{\r\n    margin-left: 5px;\r\n    border: none;\n}\n.qo-btn > i[data-v-51e93ae4]:hover{\r\n    color:red;\r\n    text-decoration: underline;\n}\n.qo-btn-check[data-v-51e93ae4]{\r\n    border: none;\r\n    color: red;\n}\n.qo-btn-check-active[data-v-51e93ae4]{\r\n    border: none;\r\n    color: green;\n}\n.red-x[data-v-51e93ae4]{\r\n    color: red;\n}\n.green-check[data-v-51e93ae4]{\r\n    color: green;\n}\n.option-panel[data-v-51e93ae4]{\r\n    margin-left: 30px;\n}\r\n\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -25775,6 +25998,45 @@ component.options.__file = "resources/js/components/Administrator/Section/Sectio
 
 /***/ }),
 
+/***/ "./resources/js/components/Administrator/StudentSchedule/StudentSchedule.vue":
+/*!***********************************************************************************!*\
+  !*** ./resources/js/components/Administrator/StudentSchedule/StudentSchedule.vue ***!
+  \***********************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _StudentSchedule_vue_vue_type_template_id_85169b10_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./StudentSchedule.vue?vue&type=template&id=85169b10&scoped=true& */ "./resources/js/components/Administrator/StudentSchedule/StudentSchedule.vue?vue&type=template&id=85169b10&scoped=true&");
+/* harmony import */ var _StudentSchedule_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./StudentSchedule.vue?vue&type=script&lang=js& */ "./resources/js/components/Administrator/StudentSchedule/StudentSchedule.vue?vue&type=script&lang=js&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+;
+var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__.default)(
+  _StudentSchedule_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__.default,
+  _StudentSchedule_vue_vue_type_template_id_85169b10_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render,
+  _StudentSchedule_vue_vue_type_template_id_85169b10_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
+  false,
+  null,
+  "85169b10",
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/Administrator/StudentSchedule/StudentSchedule.vue"
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
+
+/***/ }),
+
 /***/ "./resources/js/components/Administrator/TestSchedule/TestSchedule.vue":
 /*!*****************************************************************************!*\
   !*** ./resources/js/components/Administrator/TestSchedule/TestSchedule.vue ***!
@@ -26605,6 +26867,22 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/components/Administrator/StudentSchedule/StudentSchedule.vue?vue&type=script&lang=js&":
+/*!************************************************************************************************************!*\
+  !*** ./resources/js/components/Administrator/StudentSchedule/StudentSchedule.vue?vue&type=script&lang=js& ***!
+  \************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_StudentSchedule_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./StudentSchedule.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Administrator/StudentSchedule/StudentSchedule.vue?vue&type=script&lang=js&");
+ /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_StudentSchedule_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__.default); 
+
+/***/ }),
+
 /***/ "./resources/js/components/Administrator/TestSchedule/TestSchedule.vue?vue&type=script&lang=js&":
 /*!******************************************************************************************************!*\
   !*** ./resources/js/components/Administrator/TestSchedule/TestSchedule.vue?vue&type=script&lang=js& ***!
@@ -27030,6 +27308,23 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_SectionPanel_vue_vue_type_template_id_5c1d7d14_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
 /* harmony export */ });
 /* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_SectionPanel_vue_vue_type_template_id_5c1d7d14_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./SectionPanel.vue?vue&type=template&id=5c1d7d14&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Administrator/Section/SectionPanel.vue?vue&type=template&id=5c1d7d14&scoped=true&");
+
+
+/***/ }),
+
+/***/ "./resources/js/components/Administrator/StudentSchedule/StudentSchedule.vue?vue&type=template&id=85169b10&scoped=true&":
+/*!******************************************************************************************************************************!*\
+  !*** ./resources/js/components/Administrator/StudentSchedule/StudentSchedule.vue?vue&type=template&id=85169b10&scoped=true& ***!
+  \******************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_StudentSchedule_vue_vue_type_template_id_85169b10_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render),
+/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_StudentSchedule_vue_vue_type_template_id_85169b10_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
+/* harmony export */ });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_StudentSchedule_vue_vue_type_template_id_85169b10_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./StudentSchedule.vue?vue&type=template&id=85169b10&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Administrator/StudentSchedule/StudentSchedule.vue?vue&type=template&id=85169b10&scoped=true&");
 
 
 /***/ }),
@@ -28147,9 +28442,24 @@ var render = function() {
               _vm._v("\n            Sections\n        ")
             ]),
             _vm._v(" "),
-            _c("b-navbar-item", { attrs: { href: "/panel/test-schedule" } }, [
-              _vm._v("\n            Schedules\n        ")
-            ]),
+            _c(
+              "b-navbar-dropdown",
+              { attrs: { label: "Schedule" } },
+              [
+                _c(
+                  "b-navbar-item",
+                  { attrs: { href: "/panel/test-schedule" } },
+                  [_vm._v("\n                Schedules\n            ")]
+                ),
+                _vm._v(" "),
+                _c(
+                  "b-navbar-item",
+                  { attrs: { href: "/panel/student-schedule" } },
+                  [_vm._v("\n                Student Schedule\n            ")]
+                )
+              ],
+              1
+            ),
             _vm._v(" "),
             _c("b-navbar-item", { attrs: { href: "/panel/question" } }, [
               _vm._v("\n            Questions\n        ")
@@ -31079,6 +31389,319 @@ var render = function() {
                   },
                   [_vm._v("Create Section")]
                 )
+              ],
+              1
+            )
+          ],
+          1
+        )
+      ])
+    ])
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Administrator/StudentSchedule/StudentSchedule.vue?vue&type=template&id=85169b10&scoped=true&":
+/*!*********************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Administrator/StudentSchedule/StudentSchedule.vue?vue&type=template&id=85169b10&scoped=true& ***!
+  \*********************************************************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* binding */ render),
+/* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
+/* harmony export */ });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", [
+    _c("section", { staticClass: "section" }, [
+      _c(
+        "div",
+        {
+          staticStyle: {
+            "font-size": "20px",
+            "text-align": "center",
+            "font-weight": "bold"
+          }
+        },
+        [_vm._v("LIST OF SCHEDULES")]
+      ),
+      _vm._v(" "),
+      _c("div", { staticClass: "columns" }, [
+        _c(
+          "div",
+          { staticClass: "column is-10 is-offset-1" },
+          [
+            _c("div", { staticClass: "level" }, [
+              _c("div", { staticClass: "level-left" }, [
+                _c(
+                  "div",
+                  { staticClass: "level-item" },
+                  [
+                    _c(
+                      "b-field",
+                      { attrs: { label: "Page" } },
+                      [
+                        _c(
+                          "b-select",
+                          {
+                            on: { input: _vm.setPerPage },
+                            model: {
+                              value: _vm.perPage,
+                              callback: function($$v) {
+                                _vm.perPage = $$v
+                              },
+                              expression: "perPage"
+                            }
+                          },
+                          [
+                            _c("option", { attrs: { value: "5" } }, [
+                              _vm._v("5 per page")
+                            ]),
+                            _vm._v(" "),
+                            _c("option", { attrs: { value: "10" } }, [
+                              _vm._v("10 per page")
+                            ]),
+                            _vm._v(" "),
+                            _c("option", { attrs: { value: "15" } }, [
+                              _vm._v("15 per page")
+                            ]),
+                            _vm._v(" "),
+                            _c("option", { attrs: { value: "20" } }, [
+                              _vm._v("20 per page")
+                            ])
+                          ]
+                        )
+                      ],
+                      1
+                    )
+                  ],
+                  1
+                )
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "level-right" }, [
+                _c(
+                  "div",
+                  { staticClass: "level-item" },
+                  [
+                    _c(
+                      "b-field",
+                      { attrs: { label: "Search" } },
+                      [
+                        _c("b-input", {
+                          attrs: {
+                            type: "text",
+                            placeholder: "Search Lastname..."
+                          },
+                          nativeOn: {
+                            keyup: function($event) {
+                              if (
+                                !$event.type.indexOf("key") &&
+                                _vm._k(
+                                  $event.keyCode,
+                                  "enter",
+                                  13,
+                                  $event.key,
+                                  "Enter"
+                                )
+                              ) {
+                                return null
+                              }
+                              return _vm.loadAsyncData($event)
+                            }
+                          },
+                          model: {
+                            value: _vm.search.lname,
+                            callback: function($$v) {
+                              _vm.$set(_vm.search, "lname", $$v)
+                            },
+                            expression: "search.lname"
+                          }
+                        })
+                      ],
+                      1
+                    )
+                  ],
+                  1
+                )
+              ])
+            ]),
+            _vm._v(" "),
+            _c(
+              "b-table",
+              {
+                attrs: {
+                  data: _vm.data,
+                  loading: _vm.loading,
+                  paginated: "",
+                  "backend-pagination": "",
+                  total: _vm.total,
+                  "per-page": _vm.perPage,
+                  "aria-next-label": "Next page",
+                  "aria-previous-label": "Previous page",
+                  "aria-page-label": "Page",
+                  "aria-current-label": "Current page",
+                  "backend-sorting": "",
+                  "default-sort-direction": _vm.defaultSortDirection
+                },
+                on: { "page-change": _vm.onPageChange, sort: _vm.onSort }
+              },
+              [
+                _c("b-table-column", {
+                  attrs: { field: "student_schedule_id", label: "ID" },
+                  scopedSlots: _vm._u([
+                    {
+                      key: "default",
+                      fn: function(props) {
+                        return [
+                          _vm._v(
+                            "\n                        " +
+                              _vm._s(props.row.student_schedule_id) +
+                              "\n                    "
+                          )
+                        ]
+                      }
+                    }
+                  ])
+                }),
+                _vm._v(" "),
+                _c("b-table-column", {
+                  attrs: { field: "fullname", label: "Name" },
+                  scopedSlots: _vm._u([
+                    {
+                      key: "default",
+                      fn: function(props) {
+                        return [
+                          _vm._v(
+                            "\n                        " +
+                              _vm._s(props.row.lname) +
+                              ", " +
+                              _vm._s(props.row.fname) +
+                              " " +
+                              _vm._s(props.row.mname) +
+                              "\n                    "
+                          )
+                        ]
+                      }
+                    }
+                  ])
+                }),
+                _vm._v(" "),
+                _c("b-table-column", {
+                  attrs: { field: "description", label: "Description" },
+                  scopedSlots: _vm._u([
+                    {
+                      key: "default",
+                      fn: function(props) {
+                        return [
+                          _vm._v(
+                            "\n                        " +
+                              _vm._s(props.row.description) +
+                              "\n                    "
+                          )
+                        ]
+                      }
+                    }
+                  ])
+                }),
+                _vm._v(" "),
+                _c("b-table-column", {
+                  attrs: { field: "from", label: "From" },
+                  scopedSlots: _vm._u([
+                    {
+                      key: "default",
+                      fn: function(props) {
+                        return [
+                          _vm._v(
+                            "\n                        " +
+                              _vm._s(props.row.from) +
+                              "\n                    "
+                          )
+                        ]
+                      }
+                    }
+                  ])
+                }),
+                _vm._v(" "),
+                _c("b-table-column", {
+                  attrs: { field: "to", label: "To" },
+                  scopedSlots: _vm._u([
+                    {
+                      key: "default",
+                      fn: function(props) {
+                        return [
+                          _vm._v(
+                            "\n                        " +
+                              _vm._s(props.row.to) +
+                              "\n                    "
+                          )
+                        ]
+                      }
+                    }
+                  ])
+                }),
+                _vm._v(" "),
+                _c("b-table-column", {
+                  attrs: { field: "max_user", label: "Max Examinee" },
+                  scopedSlots: _vm._u([
+                    {
+                      key: "default",
+                      fn: function(props) {
+                        return [
+                          _vm._v(
+                            "\n                        " +
+                              _vm._s(props.row.max_user) +
+                              "\n                    "
+                          )
+                        ]
+                      }
+                    }
+                  ])
+                }),
+                _vm._v(" "),
+                _c("b-table-column", {
+                  attrs: { field: "ay_id", label: "Action" },
+                  scopedSlots: _vm._u([
+                    {
+                      key: "default",
+                      fn: function(props) {
+                        return [
+                          _c(
+                            "div",
+                            { staticClass: "is-flex" },
+                            [
+                              _c("b-button", {
+                                staticClass: "button is-small is-danger mr-1",
+                                attrs: {
+                                  "icon-pack": "fa",
+                                  "icon-right": "trash"
+                                },
+                                on: {
+                                  click: function($event) {
+                                    return _vm.confirmDelete(
+                                      props.row.student_schedule_id
+                                    )
+                                  }
+                                }
+                              })
+                            ],
+                            1
+                          )
+                        ]
+                      }
+                    }
+                  ])
+                })
               ],
               1
             )

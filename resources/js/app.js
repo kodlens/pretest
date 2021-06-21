@@ -64,6 +64,13 @@ Vue.component('test-schedule', require('./components/Administrator/TestSchedule/
 Vue.component('test-schedule-create', require('./components/Administrator/TestSchedule/TestScheduleCreate.vue').default);
 Vue.component('test-schedule-edit', require('./components/Administrator/TestSchedule/TestScheduleEdit.vue').default);
 
+Vue.component('student-schedule', require('./components/Administrator/StudentSchedule/StudentSchedule.vue').default);
+Vue.component('student-schedule-create', require('./components/Administrator/StudentSchedule/StudentSchedule.vue').default);
+Vue.component('student-schedule-edit', require('./components/Administrator/StudentSchedule/StudentSchedule.vue').default);
+
+
+
+
 //SECTION
 Vue.component('panel-section', require('./components/Administrator/Section/SectionPanel.vue').default);
 

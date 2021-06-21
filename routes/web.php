@@ -98,6 +98,10 @@ Route::get('/ajax/section', [App\Http\Controllers\Administrator\SectionControlle
 Route::resource('/panel/test-schedule', App\Http\Controllers\Administrator\TestScheduleController::class);
 Route::get('/fetch-test-schedules', [App\Http\Controllers\Administrator\TestScheduleController::class, 'index_data']);
 
+//STUDENT SCHEDULE
+Route::resource('/panel/student-schedule', App\Http\Controllers\Administrator\StudentTestScheduleController::class);
+Route::get('/fetch-student-schedules', [App\Http\Controllers\Administrator\StudentTestScheduleController::class, 'index_data']);
+
 
 
 //QUESTIONS
@@ -115,7 +119,6 @@ Route::get('/panel/ajax-answer', [App\Http\Controllers\Administrator\AnswerSheet
 Route::get('/panel/question-option', [App\Http\Controllers\Administrator\PanelHomeController::class, 'index']);
 Route::resource('/panel/question-option', App\Http\Controllers\Administrator\OptionController::class);
 Route::get('/ajax/question-option', [App\Http\Controllers\Administrator\QuestionController::class, 'index_data']);
-
 
 
 

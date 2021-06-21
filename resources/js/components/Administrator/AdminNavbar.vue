@@ -34,9 +34,14 @@
                 Sections
             </b-navbar-item>
 
-            <b-navbar-item href="/panel/test-schedule">
-                Schedules
-            </b-navbar-item>
+            <b-navbar-dropdown label="Schedule">
+                <b-navbar-item href="/panel/test-schedule">
+                    Schedules
+                </b-navbar-item>
+                <b-navbar-item href="/panel/student-schedule">
+                    Student Schedule
+                </b-navbar-item>
+            </b-navbar-dropdown>
 
             <b-navbar-item href="/panel/question">
                 Questions
