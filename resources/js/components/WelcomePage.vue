@@ -45,6 +45,10 @@
                             &nbsp; &nbsp;REGISTER NOW
                         </a>
                     </div>
+
+                    <b-notification class="is-danger" v-if="isReg === false">
+                        REGISTRATION IS CLOSED!
+                    </b-notification>
                 </div>
             </div>
         </div>
@@ -56,6 +60,15 @@
 </template>
 
 <script>
+export default {
+    props: {
+        isReg: {
+            type: Boolean,
+            default: 1,
+        }
+    }
+
+}
 
 </script>
 

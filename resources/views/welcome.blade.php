@@ -1,7 +1,15 @@
 @extends('layouts.home-app')
 
 @section('content')
-    <welcome-page></welcome-page>
+
+   
+    
+
+    @if(session('error') == 'reg_not_allowed')
+        <welcome-page :is-reg="false"></welcome-page>
+    @else
+    <welcome-page :is-reg="true"></welcome-page>
+    @endif
 
     <!-- I will stand by you -->
     <!-- Timothy 4:3 -->
