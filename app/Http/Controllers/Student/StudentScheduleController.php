@@ -27,7 +27,9 @@ class StudentScheduleController extends Controller
        
         $isFull = false;
         $testSchedules = TestSchedule::where('active', 1)
-            ->where('from', '>', date("Y-m-d"))->get();
+            ->where('from', '>', date("Y-m-d"))
+            ->orderBy('from', 'asc')
+            ->get();
         //get all schedules where active = 1
         //and datenow > db recorded date sched
 
@@ -87,21 +89,31 @@ class StudentScheduleController extends Controller
     public function getSchedule(){
         $userid = Auth::user()->user_id;
         $schedule = '';
-        $testSchedules = TestSchedule::where('from', '>', date("Y-m-d"))
-            ->where('active', 1)->get();
 
-        foreach($testSchedules as $row){
-
-            $schedule = DB::table('student_schedules as a')
+        $schedule = DB::table('student_schedules as a')
                 ->join('test_schedules as b', 'a.test_schedule_id', 'b.test_schedule_id')
-                ->where('a.test_schedule_id', $row->test_schedule_id)
-                ->where('b.from', '>', date("Y-m-d"))
+                ->where('a.user_id', $userid)
+                ->where('b.from', '>=', date("Y-m-d"))
                 ->get();
 
-            if($schedule){
-                break;
-            }
-        }
+
+        // $testSchedules = TestSchedule::where('from', '>', date("Y-m-d"))
+        //     ->where('active', 1)->get();
+
+        //     return $testSchedules;
+
+        // foreach($testSchedules as $row){
+
+        //     $schedule = DB::table('student_schedules as a')
+        //         ->join('test_schedules as b', 'a.test_schedule_id', 'b.test_schedule_id')
+        //         ->where('a.test_schedule_id', $row->test_schedule_id)
+        //         ->where('b.from', '>', date("Y-m-d"))
+        //         ->get();
+
+        //     if($schedule){
+        //         break;
+        //     }
+        // }
         
         //$this->studentschedule_id = $schedule->student_schedule_id;
 

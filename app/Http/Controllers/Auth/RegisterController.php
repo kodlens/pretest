@@ -53,9 +53,9 @@ class RegisterController extends Controller
      */
 
      public function showRegistrationForm (){
-         $programs = Program::all();
+         $programs = Program::where('programStat', 1)->get();
          return view('auth.register')
-            ->with('programs', $programs);
+            ->with('programs', $programs ? $programs : '');
      }
 
 

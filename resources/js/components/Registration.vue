@@ -116,7 +116,7 @@
                                                 :type="this.errors.first_program_choice ? 'is-danger' : ''"
                                                 :message="this.errors.first_program_choice ? this.errors.first_program_choice : ''" expanded>
                                                 <b-select placeholder="1st program choice" v-model="fields.first_program_choice" required expanded>
-                                                    <option :value="item.CCode" v-for="(item, index) in this.programs" :key="index">{{ item.CCode }}</option>
+                                                    <option :value="item.CCode" v-for="(item, index) in this.programs" :key="index">{{ item.CDesc }} ({{ item.CCode }})</option>
                                                 </b-select>
                                             </b-field>
                                         </div>
@@ -125,7 +125,7 @@
                                                 :type="this.errors.second_program_choice ? 'is-danger' : ''"
                                                 :message="this.errors.second_program_choice ? this.errors.second_program_choice : ''">
                                                 <b-select placeholder="2nd program choice" v-model="fields.second_program_choice" required expanded>
-                                                    <option :value="item.CCode" v-for="(item, index) in this.programs" :key="index">{{ item.CCode }}</option>
+                                                    <option :value="item.CCode" v-for="(item, index) in this.programs" :key="index">{{ item.CDesc }} ({{ item.CCode }})</option>
                                                 </b-select>
                                             </b-field>
                                         </div>

@@ -1,6 +1,6 @@
 /*
 SQLyog Ultimate v12.14 (64 bit)
-MySQL - 10.4.13-MariaDB : Database - gadtest
+MySQL - 5.7.33-0ubuntu0.16.04.1 : Database - gadtest
 *********************************************************************
 */
 
@@ -24,7 +24,7 @@ CREATE TABLE `acad_years` (
   `acad_year_id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `code` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `description` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `active` tinyint(1) NOT NULL DEFAULT 0,
+  `active` tinyint(1) NOT NULL DEFAULT '0',
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`acad_year_id`),
@@ -46,16 +46,19 @@ CREATE TABLE `answer_sheets` (
   `answer_sheet_id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `code` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `user_id` bigint(20) unsigned NOT NULL,
-  `is_taken` tinyint(1) NOT NULL DEFAULT 0,
+  `is_taken` tinyint(1) NOT NULL DEFAULT '0',
   `date_taken` datetime NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`answer_sheet_id`),
   KEY `answer_sheets_user_id_foreign` (`user_id`),
   CONSTRAINT `answer_sheets_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 /*Data for the table `answer_sheets` */
+
+insert  into `answer_sheets`(`answer_sheet_id`,`code`,`user_id`,`is_taken`,`date_taken`,`created_at`,`updated_at`) values 
+(2,'211',8,1,'2021-06-21 00:00:00','2021-06-21 12:15:59','2021-06-21 12:15:59');
 
 /*Table structure for table `answers` */
 
@@ -72,9 +75,28 @@ CREATE TABLE `answers` (
   KEY `answers_option_id_foreign` (`option_id`),
   CONSTRAINT `answers_answer_sheet_id_foreign` FOREIGN KEY (`answer_sheet_id`) REFERENCES `answer_sheets` (`answer_sheet_id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `answers_option_id_foreign` FOREIGN KEY (`option_id`) REFERENCES `options` (`option_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 /*Data for the table `answers` */
+
+insert  into `answers`(`answer_id`,`answer_sheet_id`,`option_id`,`created_at`,`updated_at`) values 
+(4,2,83,NULL,NULL),
+(5,2,86,NULL,NULL),
+(6,2,135,NULL,NULL),
+(7,2,161,NULL,NULL),
+(8,2,173,NULL,NULL),
+(9,2,74,NULL,NULL),
+(10,2,408,NULL,NULL),
+(11,2,298,NULL,NULL),
+(12,2,356,NULL,NULL),
+(13,2,291,NULL,NULL),
+(14,2,319,NULL,NULL),
+(15,2,1899,NULL,NULL),
+(16,2,1979,NULL,NULL),
+(17,2,1879,NULL,NULL),
+(18,2,1895,NULL,NULL),
+(19,2,1963,NULL,NULL),
+(20,2,1938,NULL,NULL);
 
 /*Table structure for table `failed_jobs` */
 
@@ -87,7 +109,7 @@ CREATE TABLE `failed_jobs` (
   `queue` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `payload` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
   `exception` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
-  `failed_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `failed_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   UNIQUE KEY `failed_jobs_uuid_unique` (`uuid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -149,16 +171,16 @@ CREATE TABLE `options` (
   `option_id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `question_id` bigint(20) unsigned NOT NULL,
   `letter` varchar(10) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `content` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `is_img` tinyint(1) NOT NULL DEFAULT 0,
+  `content` text COLLATE utf8mb4_unicode_ci,
+  `is_img` tinyint(1) NOT NULL DEFAULT '0',
   `img_path` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `is_answer` tinyint(1) NOT NULL DEFAULT 0,
+  `is_answer` tinyint(1) NOT NULL DEFAULT '0',
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`option_id`),
   KEY `options_question_id_foreign` (`question_id`),
   CONSTRAINT `options_question_id_foreign` FOREIGN KEY (`question_id`) REFERENCES `questions` (`question_id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=3746 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3750 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 /*Data for the table `options` */
 
@@ -251,10 +273,6 @@ insert  into `options`(`option_id`,`question_id`,`letter`,`content`,`is_img`,`im
 (122,73,'B','',1,'a744b61598bdb6c46c4452ed7a7eb8e2.png',1,NULL,NULL),
 (123,73,'C','',1,'17d0166d8df7f46b61c06cc15960ed90.png',0,NULL,NULL),
 (124,73,'D','',1,'1efb9263ee3261c9fc6052f5c8e29285.png',0,NULL,NULL),
-(125,76,'A','',1,'d60e068c48da0a62b772ef33b77ffc4f.png',0,NULL,NULL),
-(126,76,'B','',1,'412c87fb8cd3ab1f436115d86fb63115.png',0,NULL,NULL),
-(127,76,'C','',1,'2401eeaab5afa61d61f8a212510f1543.png',1,NULL,NULL),
-(128,76,'D','',1,'491546767f96cf26213bb35d671b490e.png',0,NULL,NULL),
 (129,77,'A','',1,'e36c1769c139f6d18040fb116dd3ab4f.png',1,NULL,NULL),
 (130,77,'B','',1,'cce6c7501bfe20c8a584eba15f40e7be.png',0,NULL,NULL),
 (131,77,'C','',1,'8b39c5892baaaf72694a35233921ed7a.png',0,NULL,NULL),
@@ -2534,10 +2552,10 @@ insert  into `options`(`option_id`,`question_id`,`letter`,`content`,`is_img`,`im
 (2601,696,'C','500,000',0,'',0,NULL,NULL),
 (2602,696,'D','1,250,000',0,'',0,NULL,NULL),
 (2603,696,'E','375,000',0,'',0,NULL,NULL),
-(2604,697,'A','P 1,400.00',0,'',0,NULL,NULL),
-(2605,697,'B','P 200.00',0,'',1,NULL,NULL),
-(2606,697,'C','P 250.00',0,'',0,NULL,NULL),
-(2607,697,'D','P 160.00',0,'',0,NULL,NULL),
+(2604,697,'A','P 1,400.00',0,NULL,0,NULL,'2021-06-18 15:31:21'),
+(2605,697,'B','P 200.00',0,NULL,1,NULL,'2021-06-18 15:31:21'),
+(2606,697,'C','P 250.00',0,NULL,0,NULL,'2021-06-18 15:31:21'),
+(2607,697,'D','P 160.00',0,NULL,0,NULL,'2021-06-18 15:31:21'),
 (2608,698,'A','Anterograde Amnesia',0,'',1,NULL,NULL),
 (2609,698,'B','Retrograde Amnesia',0,'',0,NULL,NULL),
 (2610,698,'C','Collective Amnesia',0,'',0,NULL,NULL),
@@ -3628,7 +3646,11 @@ insert  into `options`(`option_id`,`question_id`,`letter`,`content`,`is_img`,`im
 (3742,981,'A','whom',0,'',0,NULL,NULL),
 (3743,981,'B','where',0,'',0,NULL,NULL),
 (3744,981,'C','which',0,'',1,NULL,NULL),
-(3745,981,'D','when',0,'',0,NULL,NULL);
+(3745,981,'D','when',0,'',0,NULL,NULL),
+(3746,982,'A','',1,'7ede8f5c0b2a62f85102753013573901.png',0,NULL,NULL),
+(3747,982,'B','',1,'9f63e889497d92b14fe133a794877647.png',0,NULL,NULL),
+(3748,982,'C','',1,'6aa8a25f2bd53dbad4122768042fe84e.png',0,NULL,NULL),
+(3749,982,'D','',1,'74ab0a3311c9325c40df9eb38cecbefe.png',0,NULL,NULL);
 
 /*Table structure for table `password_resets` */
 
@@ -3653,9 +3675,9 @@ CREATE TABLE `questions` (
   `section_id` bigint(20) unsigned NOT NULL,
   `level_id` bigint(20) unsigned NOT NULL,
   `question` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `is_question_img` tinyint(1) NOT NULL DEFAULT 0,
+  `is_question_img` tinyint(1) NOT NULL DEFAULT '0',
   `question_img` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `set_time` int(11) NOT NULL DEFAULT 10,
+  `set_time` int(11) NOT NULL DEFAULT '10',
   `score` int(11) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
@@ -3666,7 +3688,7 @@ CREATE TABLE `questions` (
   CONSTRAINT `questions_acad_year_id_foreign` FOREIGN KEY (`acad_year_id`) REFERENCES `acad_years` (`acad_year_id`),
   CONSTRAINT `questions_level_id_foreign` FOREIGN KEY (`level_id`) REFERENCES `levels` (`level_id`),
   CONSTRAINT `questions_section_id_foreign` FOREIGN KEY (`section_id`) REFERENCES `sections` (`section_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=982 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=983 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 /*Data for the table `questions` */
 
@@ -3695,7 +3717,6 @@ insert  into `questions`(`question_id`,`acad_year_id`,`section_id`,`level_id`,`q
 (73,3,1,1,'',1,'pZCg9QNpVnOAzErxP7X1QrQ3wyZ0mzIinPIq6lTv.png',10,1,'2021-06-09 22:51:17','2021-06-09 22:51:17'),
 (74,3,1,1,'',1,'N4PA0E9HsyQZaIjd6pAze74pd0cxRV2wu6gO3WXB.png',10,1,'2021-06-09 22:53:33','2021-06-09 22:53:33'),
 (75,3,1,1,'',1,'EpLc6qdeIAcF40027S6Ip8HVknqPSiSV98SQreJY.png',10,1,'2021-06-09 22:53:35','2021-06-09 22:53:35'),
-(76,3,1,1,'',1,'PKbcqJcyibQ0o5AS9dLkhvmfaeqTvobBwsfM2qkv.png',10,1,'2021-06-09 22:54:02','2021-06-09 22:54:02'),
 (77,3,1,1,'',1,'dkD4jp53jzLRat0mc0IyIqXrH0HHzAs8stcY2Ki4.png',10,1,'2021-06-09 22:57:01','2021-06-09 22:57:01'),
 (78,3,1,1,'',1,'ht4CoPTugEvBvepIicB1JSuZWMBF2JryRzZfWba9.png',10,1,'2021-06-09 22:58:36','2021-06-09 22:58:36'),
 (79,3,1,1,'',1,'Zv4HMzWthxnYGvzFl8iWOE8BRpcojCWUvff4hDDY.png',10,1,'2021-06-09 22:58:36','2021-06-09 22:58:36'),
@@ -4265,7 +4286,7 @@ insert  into `questions`(`question_id`,`acad_year_id`,`section_id`,`level_id`,`q
 (694,3,4,2,'Margaux paid P400 for a blouse. If the blouse was sold at 20% discount, what was its original price?',0,NULL,10,1,'2021-06-14 22:54:32','2021-06-14 22:54:32'),
 (695,3,4,2,'If 300 students filled form for entrance test and 280 appeared in test, out of which only 70% have passed the test, then the number of students who failed the test are',0,NULL,10,1,'2021-06-14 22:55:29','2021-06-14 22:55:29'),
 (696,3,1,2,'A company makes a profit equal to 25% of its sales. The profit is shared equally among the 4 owners of the company. If the company generates sales of P2,000,000, how much money does each one of the owners get?',0,NULL,10,1,'2021-06-14 22:57:36','2021-06-14 22:57:36'),
-(697,3,1,2,'A store owner makes a 25% profit by selling an item for P800.00. How much is his profit?',0,NULL,10,1,'2021-06-14 22:58:31','2021-06-14 22:58:31'),
+(697,3,4,2,'A store owner makes a 25% profit by selling an item for P800.00. How much is his profit?',0,NULL,10,1,'2021-06-14 22:58:31','2021-06-18 15:31:21'),
 (698,3,5,3,'This memory loss refers to a decreased ability to retain new information. This can affect your daily activities. It may also interfere with work and social activities because you might have challenges creating new memories.',0,NULL,10,1,'2021-06-14 22:59:03','2021-06-14 22:59:03'),
 (699,3,4,2,'What is the ratio of ¼ to 3/5?',0,NULL,10,1,'2021-06-14 22:59:19','2021-06-14 22:59:19'),
 (700,3,4,2,'Find the value of x, if 3 : 12 = x : 4.',0,NULL,10,1,'2021-06-14 22:59:55','2021-06-14 22:59:55'),
@@ -4535,14 +4556,15 @@ insert  into `questions`(`question_id`,`acad_year_id`,`section_id`,`level_id`,`q
 (975,3,3,3,'The property is well taken _____________ of the by the tenant.',0,NULL,10,1,'2021-06-17 23:52:27','2021-06-17 23:52:27'),
 (977,3,3,3,'The vendor should not _____________ the price of banana.',0,NULL,10,1,'2021-06-17 23:54:57','2021-06-17 23:54:57'),
 (978,3,3,3,'He __________ the patient to the hospital the other day.',0,NULL,10,1,'2021-06-17 23:58:18','2021-06-17 23:58:18'),
-(981,3,3,3,'The expensive umbrella ____________ I bought last night was lost.',0,NULL,10,1,'2021-06-18 00:01:18','2021-06-18 00:01:18');
+(981,3,3,3,'The expensive umbrella ____________ I bought last night was lost.',0,NULL,10,1,'2021-06-18 00:01:18','2021-06-18 00:01:18'),
+(982,3,1,1,'',1,'TUwMy2FgIJuY7IiuaFh31LUz35bwuXG4epWN5FIp.png',10,1,'2021-06-21 12:11:32','2021-06-21 12:11:32');
 
 /*Table structure for table `registration` */
 
 DROP TABLE IF EXISTS `registration`;
 
 CREATE TABLE `registration` (
-  `is_open` tinyint(4) NOT NULL DEFAULT 1,
+  `is_open` tinyint(4) NOT NULL DEFAULT '1',
   PRIMARY KEY (`is_open`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -4559,7 +4581,7 @@ CREATE TABLE `sections` (
   `section_id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `section` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `img_filename` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `set_time` int(11) NOT NULL DEFAULT 10,
+  `set_time` int(11) NOT NULL DEFAULT '10',
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`section_id`),
@@ -4584,7 +4606,7 @@ CREATE TABLE `sessions` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `user_id` bigint(20) unsigned DEFAULT NULL,
   `ip_address` varchar(45) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `user_agent` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `user_agent` text COLLATE utf8mb4_unicode_ci,
   `payload` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
@@ -4609,12 +4631,12 @@ CREATE TABLE `student_schedules` (
   KEY `user_id` (`user_id`),
   CONSTRAINT `student_schedules_ibfk_1` FOREIGN KEY (`test_schedule_id`) REFERENCES `test_schedules` (`test_schedule_id`),
   CONSTRAINT `student_schedules_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
 /*Data for the table `student_schedules` */
 
 insert  into `student_schedules`(`student_schedule_id`,`test_schedule_id`,`user_id`,`created_at`,`updated_at`) values 
-(4,1,5,'2021-06-21 11:48:38','2021-06-21 11:48:38');
+(3,2,7,'2021-06-21 11:39:46','2021-06-21 11:39:46');
 
 /*Table structure for table `test_schedules` */
 
@@ -4626,18 +4648,48 @@ CREATE TABLE `test_schedules` (
   `description` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `from` datetime DEFAULT NULL,
   `to` datetime DEFAULT NULL,
-  `max_user` int(11) DEFAULT 30,
-  `active` tinyint(4) DEFAULT 1,
+  `max_user` int(11) DEFAULT '30',
+  `active` tinyint(4) DEFAULT '1',
   `nt_user` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`test_schedule_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=38 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 /*Data for the table `test_schedules` */
 
 insert  into `test_schedules`(`test_schedule_id`,`acad_year_id`,`description`,`from`,`to`,`max_user`,`active`,`nt_user`,`created_at`,`updated_at`) values 
-(1,3,'1st schedule','2021-06-20 23:00:00','2021-06-20 12:00:00',50,1,NULL,'2021-06-16 22:34:50','2021-06-21 12:16:50');
+(2,3,'1st schedule','2021-07-01 08:00:00','2021-07-01 09:00:00',100,1,NULL,'2021-06-18 13:52:32','2021-06-21 11:36:19'),
+(7,3,'June 26 BATCH 1','2021-06-26 08:00:00','2021-06-26 09:00:00',100,1,NULL,'2021-06-21 16:14:24','2021-06-21 16:24:07'),
+(8,3,'June 26 BATCH 2','2021-06-26 09:00:00','2021-06-26 10:00:00',100,1,NULL,'2021-06-21 16:22:27','2021-06-21 16:23:06'),
+(9,3,'June 26 Batch 3','2021-06-26 11:00:00','2021-06-26 12:00:00',100,1,NULL,'2021-06-21 16:24:39','2021-06-21 16:24:39'),
+(10,3,'June 26 Batch 4','2021-06-26 13:00:00','2021-06-26 14:00:00',100,1,NULL,'2021-06-21 16:25:45','2021-06-21 16:25:45'),
+(11,3,'June 26 Batch 5','2021-06-26 14:00:00','2021-06-26 15:00:00',100,1,NULL,'2021-06-21 16:27:24','2021-06-21 16:27:24'),
+(12,3,'June 26 Batch 6','2021-06-26 15:00:00','2021-06-26 16:00:00',100,1,NULL,'2021-06-21 16:28:41','2021-06-21 16:28:41'),
+(13,3,'June 26 Batch 6','2021-06-26 16:00:00','2021-06-26 17:00:00',100,1,NULL,'2021-06-21 16:29:29','2021-06-21 16:29:29'),
+(14,3,'June 27 Batch 1','2021-06-27 08:00:00','2021-06-27 09:00:00',100,1,NULL,'2021-06-21 16:30:18','2021-06-21 16:30:18'),
+(15,3,'June 27 Batch 2','2021-06-27 09:00:00','2021-06-27 10:00:00',100,1,NULL,'2021-06-21 16:31:38','2021-06-21 16:31:38'),
+(16,3,'June 27 Batch 3','2021-06-27 11:00:00','2021-06-27 12:00:00',100,1,NULL,'2021-06-21 16:32:32','2021-06-21 16:32:32'),
+(17,3,'June 27 Batch 4','2021-06-27 13:00:00','2021-06-27 14:00:00',100,1,NULL,'2021-06-21 16:33:30','2021-06-21 16:33:30'),
+(18,3,'June 27 Batch 5','2021-06-27 15:00:00','2021-06-27 16:00:00',100,1,NULL,'2021-06-21 16:34:38','2021-06-21 16:34:38'),
+(19,3,'June 27 Batch 6','2021-06-27 16:00:00','2021-06-27 17:00:00',100,1,NULL,'2021-06-21 16:35:19','2021-06-21 16:35:19'),
+(20,3,'June 28 Batch 1','2021-06-28 08:00:00','2021-06-28 09:00:00',100,1,NULL,'2021-06-21 16:36:42','2021-06-21 16:36:42'),
+(21,3,'June 28 Batch 2','2021-06-28 09:00:00','2021-06-28 10:00:00',100,1,NULL,'2021-06-21 16:37:32','2021-06-21 16:37:32'),
+(22,3,'June 28 Batch 3','2021-06-28 10:00:00','2021-06-28 11:00:00',100,1,NULL,'2021-06-21 16:38:11','2021-06-21 16:38:11'),
+(23,3,'June 28 Batch 4','2021-06-28 11:00:00','2021-06-28 12:00:00',100,1,NULL,'2021-06-21 16:38:57','2021-06-21 16:38:57'),
+(24,3,'June 28 Batch 5','2021-06-28 13:00:00','2021-06-28 14:00:00',100,1,NULL,'2021-06-21 16:40:17','2021-06-21 16:40:17'),
+(26,3,'July 4 Batch 1','2021-07-04 08:00:00','2021-07-04 09:00:00',100,1,NULL,'2021-06-22 13:45:35','2021-06-22 13:46:59'),
+(27,3,'July 4 Batch 2','2021-07-04 09:00:00','2021-07-04 10:00:00',100,1,NULL,'2021-06-22 13:48:31','2021-06-22 13:48:31'),
+(28,3,'July 4 Batch 3','2021-07-04 10:00:00','2021-07-04 11:00:00',100,1,NULL,'2021-06-22 13:50:47','2021-06-22 13:50:47'),
+(29,3,'July 4 Batch 4','2021-07-04 11:00:00','2021-07-04 12:00:00',100,1,NULL,'2021-06-22 13:51:46','2021-06-22 13:51:46'),
+(30,3,'July 4 Batch 5','2021-07-04 13:00:00','2021-07-04 14:00:00',100,1,NULL,'2021-06-22 13:52:57','2021-06-22 13:52:57'),
+(31,3,'July 4 Batch 6','2021-07-04 14:00:00','2021-07-04 15:00:00',100,1,NULL,'2021-06-22 13:53:52','2021-06-22 13:54:32'),
+(32,3,'July 4 Batch 7','2021-07-04 16:00:00','2021-07-04 17:00:00',100,1,NULL,'2021-06-22 13:55:21','2021-06-22 13:55:21'),
+(33,3,'July 5 Batch 1','2021-07-05 08:00:00','2021-07-05 09:00:00',100,1,NULL,'2021-06-22 13:56:32','2021-06-22 13:56:32'),
+(34,3,'July 5 Batch 2','2021-07-05 09:00:00','2021-07-05 10:00:00',100,1,NULL,'2021-06-22 13:56:32','2021-06-22 13:57:58'),
+(35,3,'July 5 Batch 3','2021-07-05 10:00:00','2021-07-05 11:00:00',100,1,NULL,'2021-06-22 13:57:36','2021-06-22 13:58:56'),
+(36,3,'July 5 Batch 4','2021-07-05 11:00:00','2021-07-05 12:00:00',100,1,NULL,'2021-06-22 13:57:36','2021-06-22 13:59:11'),
+(37,3,'July 5 Batch 5','2021-07-05 13:00:00','2021-07-05 14:00:00',100,1,NULL,'2021-06-22 14:00:38','2021-06-22 14:00:38');
 
 /*Table structure for table `users` */
 
@@ -4672,7 +4724,7 @@ CREATE TABLE `users` (
   PRIMARY KEY (`user_id`),
   UNIQUE KEY `users_username_unique` (`username`),
   UNIQUE KEY `users_email_unique` (`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 /*Data for the table `users` */
 
@@ -4680,7 +4732,12 @@ insert  into `users`(`user_id`,`username`,`lname`,`fname`,`mname`,`sex`,`status`
 (1,'admin','AMPARADO','ETIENNE','N','MALE',NULL,'0000-00-00','','','admin@pretest.org',NULL,NULL,NULL,'','','',0,NULL,NULL,'$2y$10$qUBiPW/OcneJU3SyVCd/besWbz.YA.6tJmteKxm1B7sZFgfyVL/mW','ADMINISTRATOR',NULL,NULL,NULL),
 (2,'student','SUMALINOG','BERNICE','N','FEMALE',NULL,'0000-00-00','','','student@pretest.org',NULL,NULL,NULL,'','','',0,NULL,NULL,'$2y$10$TAqgguNvMS/bOq0zsM4x9eBKdY24JNgntNqJ.dFS8MLk/8K.jViZq','STUDENT',NULL,NULL,NULL),
 (5,'eshen','amparado','etienne',NULL,'MALE',NULL,'2021-06-17','baroy','09167789585','etiennewayne@gmail.com','BSCS','BS CRIM',NULL,'Biliran','Culaba','Guindapunan',4717,NULL,'2021-06-18 13:43:52','$2y$10$IKBIi7jcmOJLuPUloL.98OglB4tE42sr6Qw6coQe9uA1CN6FMQ/e2','STUDENT',NULL,'2021-06-18 13:43:32','2021-06-18 13:43:52'),
-(7,'user01','Laboriosam laborios','Id nihil culpa qui q','Porro excepteur quis','MALE',NULL,'2021-06-21','Id omnis sed nihil s','Rerum aspernatur seq','tacif@mailinator.com','BSED-FIL','AB ENGLISH',NULL,'Shariff Kabunsuan','Datu Odin Sinsuat','Dulangan',36266,'Quia voluptatem Par','2021-06-21 08:40:43','$2y$10$AU0dn3iFz0qfx1g8vsGpVeqiCAyO6KlBkarTPEqLRQpFyVH7EmhbK','STUDENT',NULL,'2021-06-21 08:40:30','2021-06-21 08:40:43');
+(6,'user01','Amparado','Etienne',NULL,'MALE',NULL,'2021-06-21','Officiis mollitia ex','Est iste earum et ma','etiennewayneamparado@gmail.com','BSED','BSBA-HRDM',NULL,'Metropolitan Manila','Quezon City','Balong Bato',25635,'Voluptatem eligendi','2021-06-21 08:55:59','$2y$10$9jXyvdpdFvUPyV0wRcntLOEEI/xJhG5O.KJV/CmHkr5emWX0jwhEe','STUDENT',NULL,'2021-06-21 08:54:52','2021-06-21 08:55:59'),
+(7,'bernalou','Sumalinog','Bernice Jovel','Sabillo','FEMALE','NEW','2021-06-14','Cebu City','09654005667','sumalinog.bernice@gmail.com','AB POLSCI','AB ENGLISH',NULL,'Misamis Occidental','Tangub City','Maloro',26262,'Roses','2021-06-21 11:39:34','$2y$10$mFXZdiUV326XjU1Z9meaNesBItlp9OMFd1Gm47KwThxnbu45OdHSm','STUDENT',NULL,'2021-06-21 11:38:52','2021-06-21 11:39:34'),
+(8,'bernalouz','Sumalinog','Bernice','Sabillo','FEMALE','NEW','2020-08-24','Cebu City','09654005667','jinjahappybeej@gmail.com','AB POLSCI','AB ENGLISH',NULL,'Aurora','Maria Aurora','Bayanihan',2737,'Gangnamdong','2021-06-21 11:59:23','$2y$10$tmzhH6T5tEOltMuksNfGWeC6UIhMCp0MlnTaqSrxoeHM0m8tphz5O','STUDENT',NULL,'2021-06-21 11:58:59','2021-06-21 11:59:23'),
+(9,'chriztino','Gerona','Chriztino','Murallon','MALE','NEW','1998-05-27','San Apolinario, Tangub City','09462931962','chriztino.gerona@gmail.com','AB ENGLISH','AB POLSCI',NULL,'Misamis Occidental','Tangub City','San Apolinario',26276,'1','2021-06-21 12:04:29','$2y$10$SpdNQCuOL86wsgL3yc9z/.JSksvossCDMc3yojIGmFq2ai1AbRdwK','STUDENT',NULL,'2021-06-21 12:03:53','2021-06-21 12:04:29'),
+(10,'account','Alab','Marvilowe','Toraja','MALE','NEW','1997-03-02','Butuan','09104755453','eternalkanye@gmail.com','AB POLSCI','BSCS',NULL,'Misamis Occidental','Tangub City','Maloro',26262,'1',NULL,'$2y$10$SjIGOmkpoANUTmFLzRvVueer1Zq1rCUsOFQDZTgM1gPurPbKXLRB6','STUDENT',NULL,'2021-06-22 06:12:36','2021-06-22 06:12:36'),
+(11,'account11','Truba','Marvilowe Jay Tiki','Toraja','MALE','NEW','1997-03-02','Butuan','09105553242','alabmarvilowe1@gmail.com','BSBA-HRDM','ACT',NULL,'Misamis Occidental','Tangub City','Barangay II - Marilou',26240,'1','2021-06-22 06:29:35','$2y$10$CzQjQkrVD2YaEngiwxdqI.lfr14d0NLqpF0U4p2fIlsBROvlr3wsC','STUDENT',NULL,'2021-06-22 06:29:03','2021-06-22 06:29:35');
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;

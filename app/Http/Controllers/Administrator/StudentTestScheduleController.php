@@ -7,6 +7,9 @@ use Illuminate\Http\Request;
 
 use Illuminate\Support\Facades\DB;
 
+use App\Models\StudentSchedule;
+
+
 class StudentTestScheduleController extends Controller
 {
     //
