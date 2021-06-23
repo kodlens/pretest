@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
 use App\Models\Program;
+use App\Models\LearningModality;
 
 class RegisterController extends Controller
 {
@@ -54,8 +55,13 @@ class RegisterController extends Controller
 
      public function showRegistrationForm (){
          $programs = Program::where('programStat', 1)->get();
+         $learningmodes = LearningModality::all();
+
          return view('auth.register')
-            ->with('programs', $programs ? $programs : '');
+            ->with('programs', $programs ? $programs : '')
+            ->with('learningmodes', $learningmodes);
+
+            
      }
 
 

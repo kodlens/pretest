@@ -131,6 +131,20 @@
                                         </div>
                                     </div>
 
+                                    <div class="columns">
+                                        <div class="column">
+                                            <div class="column">
+                                                <b-field label="Mode of Learning" label-position="on-border" expanded
+                                                    :type="this.errors.learning_mode ? 'is-danger' : ''"
+                                                    :message="this.errors.learning_mode ? this.errors.learning_mode : ''">
+                                                    <b-select placeholder="Mode of Learning" v-model="fields.learning_mode" required expanded>
+                                                        <option :value="item.learning_mode" v-for="(item, index) in this.learningModes" :key="index">{{ item.learning_mode }} - {{ item.learning_desc }}</option>
+                                                    </b-select>
+                                                </b-field>
+                                            </div>
+                                        </div>
+                                    </div>
+
                                     <h2><span>CONTACT INFORMATION</span></h2>
 
                                     <div class="columns">
@@ -222,6 +236,10 @@ export default {
         dataPrograms:{
             type: String,
             default: '',
+        },
+        dataLearningModes: {
+            type: String,
+            default: '',
         }
     },
 
@@ -261,6 +279,7 @@ export default {
             cities: [],
             barangays: [],
             programs: [],
+            learningModes: [],
 
 
         }
@@ -319,6 +338,8 @@ export default {
 
         initData: function(){
             this.programs = JSON.parse(this.dataPrograms);
+            this.learningModes = JSON.parse(this.dataLearningModes);
+            console.log(this.learningModes);
         }
 
     },
