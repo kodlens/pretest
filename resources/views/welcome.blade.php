@@ -11,6 +11,8 @@
     <welcome-page :is-reg="true"></welcome-page>
     @endif
 
+    <footer-page></footer-page>
+
     <!-- I will stand by you -->
     <!-- Timothy 4:3 -->
 

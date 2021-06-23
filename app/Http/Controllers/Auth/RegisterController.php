@@ -61,9 +61,7 @@ class RegisterController extends Controller
 
          return view('auth.register')
             ->with('programs', $programs ? $programs : '')
-            ->with('learningmodes', $learningmodes);
-
-            
+            ->with('learningmodes', $learningmodes);  
      }
 
 
@@ -81,6 +79,7 @@ class RegisterController extends Controller
             'email' => ['string', 'max:255', 'required', 'unique:users'],
             'first_program_choice' => ['string', 'max:100', 'required'],
             'second_program_choice' => ['string', 'max:100', 'required'],
+            'learning_mode' => ['string', 'max:255', 'required'],
             'last_school_attended' => ['string', 'max:255', 'required'],
             'province' => ['string', 'max:255', 'required'],
             'city' => ['string', 'max:255', 'required'],
@@ -117,6 +116,7 @@ class RegisterController extends Controller
             'email' => $data['email'],
             'first_program_choice' => strtoupper($data['first_program_choice']),
             'second_program_choice' => strtoupper($data['second_program_choice']),
+            'learning_mode' => strtoupper($data['learning_mode']),
             'last_school_attended' => $data['last_school_attended'],
             'province' => $data['province'],
             'city' => $data['city'],

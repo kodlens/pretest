@@ -32,6 +32,7 @@ class User extends Authenticatable implements MustVerifyEmail
         'birthplace', 'contact_no',
         'email',
         'first_program_choice', 'second_program_choice',
+        'learning_mode',
         'last-school_attended',
         'province', 'city', 'barangay', 'barangay_id', 'street',
         'password', 'role'

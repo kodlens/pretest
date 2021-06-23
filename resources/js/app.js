@@ -30,9 +30,20 @@ Vue.component('example-component', require('./components/ExampleComponent.vue').
 
 Vue.component('csrf', require('./components/Csrf.vue').default);
 
+//FOOTER
+Vue.component('footer-page', require('./components/FooterPage.vue').default);
+
 
 //REGISTRATION
 Vue.component('registration', require('./components/Registration.vue').default);
+
+
+//AUTH /////////////AUTH ////////AUTH
+Vue.component('email-reset-password', require('./components/Auth/EmailResetPassword.vue').default);
+
+
+//RESET PASSWORD
+Vue.component('password-reset', require('./components/Auth/PasswordReset.vue').default);
 
 
 //WELCOME PAGE

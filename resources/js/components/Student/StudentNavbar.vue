@@ -29,10 +29,10 @@
              <!-- <b-navbar-item href="/student/taking-exam">
                 Quiz
             </b-navbar-item> -->
-            <b-navbar-item href="/result-exam">
-                <b-icon pack="fa" icon="file-o"></b-icon>&nbsp;&nbsp;
-                Result
-            </b-navbar-item>
+<!--            <b-navbar-item href="/result-exam">-->
+<!--                <b-icon pack="fa" icon="file-o"></b-icon>&nbsp;&nbsp;-->
+<!--                Result-->
+<!--            </b-navbar-item>-->
 
 
             <b-navbar-dropdown :label="firstname" icon-pack="fa" icon="id-badge">

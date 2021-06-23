@@ -23,8 +23,9 @@
                                             <span style="color:red; font-weight: bold;">{{ this.errors.username[0] }}</span>
                                         </div>
 
-                                        <div :class="btnClass">
-                                            <button class="button is-primary">LOGIN</button>
+                                        <div class="buttons">
+                                            <button :class="btnClass">LOGIN</button>
+                                            <a class="button is-primary is-light" href="/password/reset">RESET PASSWORD</a>
                                         </div>
                                     </div>
                                 </form>

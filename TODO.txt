@@ -1,0 +1,11 @@
+ADMISSION TEST DIRECTIONS
+1.	You will  take  five (5) sets of  tests; each consists of 18 -item multiple choice test;
+2.	You will take a total of 90  test items randomly generated from our system;
+3.	You are only given 10 minutes to finish each set of tests; 
+4.	Once you click each set, the timer will immediately start; you can find it at the bottom right of the screen;
+5.	Answer each set of tests and click submit;
+6.	After submitting, proceed to the next test;
+7.	If done, wait for the admission results to be sent to your respective e-mail address.
+
+
+ADD search by ID question
