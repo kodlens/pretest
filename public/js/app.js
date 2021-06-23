@@ -5800,9 +5800,9 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     initData: function initData() {
-      this.programs = JSON.parse(this.dataPrograms);
-      this.learningModes = JSON.parse(this.dataLearningModes);
-      console.log(this.learningModes);
+      this.programs = JSON.parse(this.dataPrograms); //this.learningModes = JSON.parse(this.dataLearningModes);
+
+      console.log(this.dataLearningModes);
     }
   },
   mounted: function mounted() {

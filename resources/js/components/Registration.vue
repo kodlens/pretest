@@ -338,8 +338,8 @@ export default {
 
         initData: function(){
             this.programs = JSON.parse(this.dataPrograms);
-            this.learningModes = JSON.parse(this.dataLearningModes);
-            console.log(this.learningModes);
+            //this.learningModes = JSON.parse(this.dataLearningModes);
+            console.log(this.dataLearningModes);
         }
 
     },

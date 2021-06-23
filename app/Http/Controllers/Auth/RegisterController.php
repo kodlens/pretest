@@ -57,6 +57,8 @@ class RegisterController extends Controller
          $programs = Program::where('programStat', 1)->get();
          $learningmodes = LearningModality::all();
 
+         //return $learningmodes;
+
          return view('auth.register')
             ->with('programs', $programs ? $programs : '')
             ->with('learningmodes', $learningmodes);
