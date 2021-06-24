@@ -58,6 +58,10 @@
                         </div>
                     </div>
 
+                    <div style="display:flex; justify-content: flex-end;">
+                        <p style="font-weight: bold; margin-bottom: 10px;">TOTAL ROWS: {{ total }} </p>
+                    </div>
+
                     <b-table
                         :data="data"
                         :loading="loading"

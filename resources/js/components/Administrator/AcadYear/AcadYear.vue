@@ -27,7 +27,11 @@
                             </div>
                         </div>
                     </div>
-                   
+
+                    <div style="display:flex; justify-content: flex-end;">
+                        <p style="font-weight: bold; margin-bottom: 10px;">TOTAL ROWS: {{ total }} </p>
+                    </div>
+
                     <b-table
                         :data="data"
                         :loading="loading"
@@ -109,7 +113,7 @@
                                     <span v-else>NO</span>
                                 </b-checkbox>
                             </b-field>
-                        
+
                         </div>
                     </section>
 
@@ -152,7 +156,7 @@ export default {
             search: {
                 code: ''
             },
-            
+
             errors : {},
             globalId: 0,
 
@@ -266,7 +270,7 @@ export default {
                     if(res.data.status === 'updated'){
                         this.isModalActive = false;
                         this.loadAsyncData()
-                       
+
                     }
                 }).catch(err=>{
                     if(err.response.status === 422){
@@ -277,7 +281,7 @@ export default {
                 axios.post('/panel/acadyear', this.fields).then(res=>{
                     if(res.data.status === 'saved'){
                         this.isModalActive = false;
-                        
+
                         this.loadAsyncData()
                     }
                 }).catch(err=>{

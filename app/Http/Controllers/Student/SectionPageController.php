@@ -14,6 +14,7 @@ class SectionPageController extends Controller
     }
 
     public function index($sched_id){
+
         $sections = Section::select('section_id', 'section', 'img_filename', 'set_time')
             ->get();
         return view('student.section-page')

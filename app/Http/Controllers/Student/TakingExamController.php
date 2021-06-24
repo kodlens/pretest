@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Student;
 use App\Http\Controllers\Controller;
 
 use App\Models\AcadYear;
+use App\Models\TakingTest;
 use App\Rules\SubmitResultRule;
 use Illuminate\Http\Request;
 use Illuminate\Database\Query\Builder;
@@ -30,7 +31,7 @@ class TakingExamController extends Controller
     public function index($schedid, $sectionid){
         $user_id = auth()->user()->user_id;
         $ay = AcadYear::where('active', 1)->first();
-            
+
         $isExist = AnswerSheet::where('user_id', $user_id)
             ->where('code', $ay->code)
                 ->exists();
@@ -39,6 +40,15 @@ class TakingExamController extends Controller
             return redirect('/section')
                 ->with('isTaken', 1);
         }
+
+        //record the user open this section and questions
+        //to avoid taking SS and avoid leakage of questionaire
+        $takingTest = TakingTest::create([
+            'acad_year_id' => $ay->acad_year_id,
+            'user_id' => $user_id,
+            'section_id' => $sectionid,
+        ]);
+
         // //tiwasonon
 
         return view('student.taking-exam')
@@ -58,7 +68,7 @@ class TakingExamController extends Controller
             ->where('level', 'EASY')
             ->where('section_id', $section_id)
             ->inRandomOrder()->take(6)->get();
-        
+
 
         $average_question = Question::with(['options'])
             ->join('levels', 'questions.level_id', 'levels.level_id')

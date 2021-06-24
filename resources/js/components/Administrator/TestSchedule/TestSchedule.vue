@@ -4,14 +4,27 @@
             <div style="font-size: 20px; text-align: center; font-weight: bold;">LIST OF SCHEDULES</div>
             <div class="columns">
                 <div class="column is-8 is-offset-2">
-                    <b-field label="Page">
-                        <b-select v-model="perPage" @input="setPerPage">
-                            <option value="5">5 per page</option>
-                            <option value="10">10 per page</option>
-                            <option value="15">15 per page</option>
-                            <option value="20">20 per page</option>
-                        </b-select>
-                    </b-field>
+                    <div class="level">
+                        <div class="level-left">
+                            <div class="level-item">
+                                <b-field label="Page">
+                                    <b-select v-model="perPage" @input="setPerPage">
+                                        <option value="5">5 per page</option>
+                                        <option value="10">10 per page</option>
+                                        <option value="15">15 per page</option>
+                                        <option value="20">20 per page</option>
+                                    </b-select>
+                                </b-field>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div style="display:flex; justify-content: flex-end;">
+                        <p style="font-weight: bold; margin-bottom: 10px;">TOTAL ROWS: {{ total }} </p>
+                    </div>
+
+
                     <b-table
                         :data="data"
                         :loading="loading"
