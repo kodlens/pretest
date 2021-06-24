@@ -3,7 +3,7 @@
         <section class="section">
         <div style="font-size: 20px; text-align: center; font-weight: bold;">LIST OF USER</div>
         <div class="columns">
-            <div class="column is-8 is-offset-2">
+            <div class="column is-10 is-offset-1">
 
                 <div class="level">
                     <div class="level-left">
@@ -48,7 +48,7 @@
                         {{ props.row.user_id }}
                     </b-table-column>
 
-                     <b-table-column field="username" label="Lastname" v-slot="props">
+                     <b-table-column field="username" label="Username" v-slot="props">
                         {{ props.row.username }}
                     </b-table-column>
 
@@ -62,6 +62,10 @@
 
                     <b-table-column field="mname" label="Middlename" v-slot="props">
                         {{ props.row.mname }}
+                    </b-table-column>
+
+                    <b-table-column field="mname" label="Email" v-slot="props">
+                        {{ props.row.email }}
                     </b-table-column>
 
                     <b-table-column field="role" label="Role" v-slot="props">

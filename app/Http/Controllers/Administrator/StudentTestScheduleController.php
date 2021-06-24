@@ -31,7 +31,8 @@ class StudentTestScheduleController extends Controller
             ->join('users as c',  'a.user_id', 'c.user_id')
             ->select('a.*', 'b.acad_year_id', 'b.description', 'b.from', 'b.to', 'b.max_user', 'b.active', 'b.nt_user',
                 'c.lname', 'c.fname', 'c.mname', 'c.sex', 'c.status')
-            ->where('c.lname', 'like', $req->lanme . '%')
+            ->where('c.lname', 'like', $req->lname . '%')
+            ->orderBy($sort[0], $sort[1])
             ->paginate($req->perpage);
         return $data;
     }

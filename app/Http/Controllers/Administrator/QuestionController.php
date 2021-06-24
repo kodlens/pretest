@@ -44,6 +44,7 @@ class QuestionController extends Controller
                 $query->where('section', 'like', $req->section .'%');
             })
             ->where('question', 'like', $req->question . '%')
+            ->where('question_id', 'like', $req->question_id . '%')
             ->orderBy($sortkey[0], $sortkey[1])
             ->paginate($req->perpage);
     }

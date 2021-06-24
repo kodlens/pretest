@@ -16,7 +16,7 @@
                                     Sorry, it is not yet your schedule. You may take the test only by the system generated schedule below.
                                 </b-notification>
                               
-                                <p v-if="schedules" style="text-align:center;">You're schedule is on {{ scheduleNiya }}</p>
+                                <p v-if="schedules" style="text-align:center;">Your schedule is on {{ scheduleNiya }}</p>
                                 <p v-else style="text-align:center;">To take the test, you must request a schedule first.</p>
 
                                 <div v-if="schedules" class="buttons is-centered mt-5">
@@ -180,8 +180,9 @@ export default {
           
             if(this.schedules.from){
                 return this.formatSchedFromDate(this.schedules.from);
+            }else{
+                return '';
             }
-           
             
         }
     }

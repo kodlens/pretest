@@ -7,7 +7,6 @@
 
                     <div class="level">
                         <div class="level-left">
-
                             <div class="level-item">
                                 <b-select v-model="perPage" @input="setPerPage">
                                     <option value="5">5 per page</option>
@@ -21,15 +20,24 @@
                         <div class="level-right">
                             <div class="level-item">
                                 <b-field label="Section" label-position="on-border">
-                                    <b-input type="text" placeholder="Search Section..."
-                                    v-model="search.section" @keyup.native.enter="loadAsyncData"/>
+                                    <b-select placeholder="Search Section..."
+                                        v-model="search.section" @input="loadAsyncData">
+                                        <option value="">ALL</option>
+                                        <option :value="item.section" v-for="(item, index) in this.sections" :key="index">{{ item.section }}</option>
+                                    </b-select>
                                 </b-field>
                             </div>
                         </div>
                     </div>
 
                     <div class="level">
-                        <div class="item-left">
+                        <div class="level-left">
+                            <div class="level-item">
+                                <b-field label="Question ID" label-position="on-border">
+                                    <b-input type="text" placeholder="Search Question ID..."
+                                    v-model="search.question_id" @keyup.native.enter="loadAsyncData"/>
+                                </b-field>
+                            </div>
                             <div class="level-item">
                                 <b-field label="Question" label-position="on-border">
                                     <b-input type="text" placeholder="Search Question..."
@@ -413,6 +421,7 @@ export default {
             search: {
                 section: '',
                 question: '',
+                question_id: '',
             },
 
             path:'', //path if image retirieve using modal
@@ -430,6 +439,7 @@ export default {
                 `sort_by=${this.sortField}.${this.sortOrder}`,
                 `perpage=${this.perPage}`,
                 `section=${this.search.section}`,
+                `question_id=${this.search.question_id}`,
                 `question=${this.search.question}`,
                 `page=${this.page}`
             ].join('&')

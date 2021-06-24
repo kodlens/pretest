@@ -12,7 +12,7 @@
                                 <form @submit.prevent="submit">
                                     <div class="panel-body">
                                         <b-field label="Username">
-                                            <b-input type="text" v-model="fields.username" placeholder="Username" required></b-input>
+                                            <b-input type="text" class="input-login" v-model="fields.username" placeholder="Username" required></b-input>
                                         </b-field>
 
                                         <b-field label="Password">
@@ -76,5 +76,9 @@ export default{
 <style scoped>
     .panel-body{
         padding: 15px;
+    }
+
+    .input-login input{
+        border: 1px solid red;
     }
 </style>

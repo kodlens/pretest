@@ -1,7 +1,7 @@
 <template>
     <div>
         <section class="section">
-            <div style="font-size: 20px; text-align: center; font-weight: bold;">LIST OF SCHEDULES</div>
+            <div style="font-size: 20px; text-align: center; font-weight: bold;">LIST OF STUDENT'S SCHEDULES</div>
             <div class="columns">
                 <div class="column is-10 is-offset-1">
                     <div class="level">
@@ -94,7 +94,7 @@ export default {
             data: [],
             total: 0,
             loading: false,
-            sortField: '',
+            sortField: 'student_schedule_id',
             sortOrder: 'desc',
             page: 1,
             perPage: 5,
