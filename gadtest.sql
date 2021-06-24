@@ -1,6 +1,6 @@
 /*
 SQLyog Ultimate v12.14 (64 bit)
-MySQL - 5.7.33-0ubuntu0.16.04.1 : Database - gadtest
+MySQL - 10.4.13-MariaDB : Database - gadtest
 *********************************************************************
 */
 
@@ -24,7 +24,7 @@ CREATE TABLE `acad_years` (
   `acad_year_id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `code` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `description` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `active` tinyint(1) NOT NULL DEFAULT '0',
+  `active` tinyint(1) NOT NULL DEFAULT 0,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`acad_year_id`),
@@ -46,7 +46,7 @@ CREATE TABLE `answer_sheets` (
   `answer_sheet_id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `code` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `user_id` bigint(20) unsigned NOT NULL,
-  `is_taken` tinyint(1) NOT NULL DEFAULT '0',
+  `is_taken` tinyint(1) NOT NULL DEFAULT 0,
   `date_taken` datetime NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
@@ -87,7 +87,7 @@ CREATE TABLE `failed_jobs` (
   `queue` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `payload` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
   `exception` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
-  `failed_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `failed_at` timestamp NOT NULL DEFAULT current_timestamp(),
   PRIMARY KEY (`id`),
   UNIQUE KEY `failed_jobs_uuid_unique` (`uuid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -168,10 +168,10 @@ CREATE TABLE `options` (
   `option_id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `question_id` bigint(20) unsigned NOT NULL,
   `letter` varchar(10) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `content` text COLLATE utf8mb4_unicode_ci,
-  `is_img` tinyint(1) NOT NULL DEFAULT '0',
+  `content` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `is_img` tinyint(1) NOT NULL DEFAULT 0,
   `img_path` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `is_answer` tinyint(1) NOT NULL DEFAULT '0',
+  `is_answer` tinyint(1) NOT NULL DEFAULT 0,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`option_id`),
@@ -3698,9 +3698,9 @@ CREATE TABLE `questions` (
   `section_id` bigint(20) unsigned NOT NULL,
   `level_id` bigint(20) unsigned NOT NULL,
   `question` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `is_question_img` tinyint(1) NOT NULL DEFAULT '0',
+  `is_question_img` tinyint(1) NOT NULL DEFAULT 0,
   `question_img` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `set_time` int(11) NOT NULL DEFAULT '10',
+  `set_time` int(11) NOT NULL DEFAULT 10,
   `score` int(11) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
@@ -4587,7 +4587,7 @@ insert  into `questions`(`question_id`,`acad_year_id`,`section_id`,`level_id`,`q
 DROP TABLE IF EXISTS `registration`;
 
 CREATE TABLE `registration` (
-  `is_open` tinyint(4) NOT NULL DEFAULT '1',
+  `is_open` tinyint(4) NOT NULL DEFAULT 1,
   PRIMARY KEY (`is_open`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -4604,7 +4604,7 @@ CREATE TABLE `sections` (
   `section_id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `section` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `img_filename` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `set_time` int(11) NOT NULL DEFAULT '10',
+  `set_time` int(11) NOT NULL DEFAULT 10,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`section_id`),
@@ -4629,7 +4629,7 @@ CREATE TABLE `sessions` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `user_id` bigint(20) unsigned DEFAULT NULL,
   `ip_address` varchar(45) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `user_agent` text COLLATE utf8mb4_unicode_ci,
+  `user_agent` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `payload` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
@@ -4654,7 +4654,7 @@ CREATE TABLE `student_schedules` (
   KEY `user_id` (`user_id`),
   CONSTRAINT `student_schedules_ibfk_1` FOREIGN KEY (`test_schedule_id`) REFERENCES `test_schedules` (`test_schedule_id`),
   CONSTRAINT `student_schedules_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=863 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=864 DEFAULT CHARSET=latin1;
 
 /*Data for the table `student_schedules` */
 
@@ -5514,7 +5514,29 @@ insert  into `student_schedules`(`student_schedule_id`,`test_schedule_id`,`user_
 (859,15,1144,'2021-06-24 11:46:25','2021-06-24 11:46:25'),
 (860,15,1151,'2021-06-24 11:49:19','2021-06-24 11:49:19'),
 (861,15,1116,'2021-06-24 11:49:27','2021-06-24 11:49:27'),
-(862,15,1148,'2021-06-24 11:50:25','2021-06-24 11:50:25');
+(862,15,1148,'2021-06-24 11:50:25','2021-06-24 11:50:25'),
+(863,15,31,'2021-06-24 12:51:21','2021-06-24 12:51:21');
+
+/*Table structure for table `taking_test` */
+
+DROP TABLE IF EXISTS `taking_test`;
+
+CREATE TABLE `taking_test` (
+  `taking_test_id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `acad_year_id` bigint(20) unsigned NOT NULL,
+  `user_id` bigint(20) unsigned NOT NULL,
+  `section_id` bigint(20) unsigned NOT NULL,
+  `created_at` datetime DEFAULT NULL,
+  `updated_at` datetime DEFAULT NULL,
+  PRIMARY KEY (`taking_test_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+
+/*Data for the table `taking_test` */
+
+insert  into `taking_test`(`taking_test_id`,`acad_year_id`,`user_id`,`section_id`,`created_at`,`updated_at`) values 
+(1,3,31,1,'2021-06-24 16:51:32','2021-06-24 16:51:32'),
+(2,3,31,2,'2021-06-24 16:51:50','2021-06-24 16:51:50'),
+(4,3,31,2,'2021-06-24 16:55:11','2021-06-24 16:55:11');
 
 /*Table structure for table `test_schedules` */
 
@@ -5526,8 +5548,8 @@ CREATE TABLE `test_schedules` (
   `description` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `from` datetime DEFAULT NULL,
   `to` datetime DEFAULT NULL,
-  `max_user` int(11) DEFAULT '30',
-  `active` tinyint(4) DEFAULT '1',
+  `max_user` int(11) DEFAULT 30,
+  `active` tinyint(4) DEFAULT 1,
   `nt_user` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
@@ -5546,7 +5568,7 @@ insert  into `test_schedules`(`test_schedule_id`,`acad_year_id`,`description`,`f
 (12,3,'June 26 Batch 6','2021-06-26 15:00:00','2021-06-26 16:00:00',100,1,NULL,'2021-06-21 16:28:41','2021-06-21 16:28:41'),
 (13,3,'June 26 Batch 6','2021-06-26 16:00:00','2021-06-26 17:00:00',100,1,NULL,'2021-06-21 16:29:29','2021-06-21 16:29:29'),
 (14,3,'June 27 Batch 1','2021-06-27 08:00:00','2021-06-27 09:00:00',100,1,NULL,'2021-06-21 16:30:18','2021-06-21 16:30:18'),
-(15,3,'June 27 Batch 2','2021-06-27 09:00:00','2021-06-27 10:00:00',100,1,NULL,'2021-06-21 16:31:38','2021-06-21 16:31:38'),
+(15,3,'June 27 Batch 2 TESTING','2021-06-24 09:00:00','2021-06-25 10:00:00',100,1,NULL,'2021-06-21 16:31:38','2021-06-21 16:31:38'),
 (16,3,'June 27 Batch 3','2021-06-27 11:00:00','2021-06-27 12:00:00',100,1,NULL,'2021-06-21 16:32:32','2021-06-21 16:32:32'),
 (17,3,'June 27 Batch 4','2021-06-27 13:00:00','2021-06-27 14:00:00',100,1,NULL,'2021-06-21 16:33:30','2021-06-21 16:33:30'),
 (18,3,'June 27 Batch 5','2021-06-27 15:00:00','2021-06-27 16:00:00',100,1,NULL,'2021-06-21 16:34:38','2021-06-21 16:34:38'),
