@@ -8,13 +8,13 @@
                     <div class="box">
                         <form @submit.prevent="submit">
 
-                            <h1 class="title is-5">CREATE SCHEDULE</h1>
+                            <h1 class="title is-5">EDIT STUDENT SCHEDULE</h1>
 
                             <div class="columns">
                                 <div class="column">
                                     <b-field label="Academic Year"
-                                        :type="this.errors.acad_year_id ? 'is-danger' : ''"
-                                        :message="this.errors.acad_year_id ? this.errors.acad_year_id[0] : ''">
+                                             :type="this.errors.acad_year_id ? 'is-danger' : ''"
+                                             :message="this.errors.acad_year_id ? this.errors.acad_year_id[0] : ''">
                                         <b-select v-model="fields.acad_year_id" placeholder="Academic Year">
                                             <option :value="item.acad_year_id" v-for="(item, index) in this.academicyears" :key="index">{{ item.code }} - {{ item.description }}</option>
                                         </b-select>
@@ -23,10 +23,10 @@
 
                                 <div class="column">
                                     <b-field label="Max per schedule"
-                                        :type="this.errors.max_user ? 'is-danger' : ''"
-                                        :message="this.errors.max_user ? this.errors.max_user[0] : ''">
+                                             :type="this.errors.max_user ? 'is-danger' : ''"
+                                             :message="this.errors.max_user ? this.errors.max_user[0] : ''">
                                         <b-input type="number" v-model="fields.max_user"
-                                             oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" maxlength="4"></b-input>
+                                                 oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" maxlength="4"></b-input>
                                     </b-field>
                                 </div>
                             </div>
@@ -34,8 +34,8 @@
                             <div class="columns">
                                 <div class="column">
                                     <b-field label="Description"
-                                        :type="this.errors.description ? 'is-danger' : ''"
-                                        :message="this.errors.description ? this.errors.description[0] : ''">
+                                             :type="this.errors.description ? 'is-danger' : ''"
+                                             :message="this.errors.description ? this.errors.description[0] : ''">
                                         <b-input type="text" v-model="fields.description" placeholder="Description" required>
                                         </b-input>
                                     </b-field>
@@ -45,8 +45,8 @@
                             <div class="columns">
                                 <div class="column">
                                     <b-field label="Schedule From"
-                                        :type="this.errors.from ? 'is-danger' : ''"
-                                        :message="this.errors.from ? this.errors.from[0] : ''">
+                                             :type="this.errors.from ? 'is-danger' : ''"
+                                             :message="this.errors.from ? this.errors.from[0] : ''">
                                         <b-datetimepicker
                                             placeholder="Click to select..."
                                             icon="calendar-today"
@@ -56,8 +56,8 @@
                                     </b-field>
 
                                     <b-field label="Schedule To"
-                                        :type="this.errors.to ? 'is-danger' : ''"
-                                        :message="this.errors.to ? this.errors.to[0] : ''">
+                                             :type="this.errors.to ? 'is-danger' : ''"
+                                             :message="this.errors.to ? this.errors.to[0] : ''">
                                         <b-datetimepicker
                                             placeholder="Click to select..."
                                             icon="calendar-today"
@@ -87,13 +87,19 @@ export default {
         dataAcademics:{
             type: String,
             default: '',
-        }
+        },
+        edit:{
+            type: String,
+            default: '',
+        },
+
+
     },
 
     data(){
         return{
             fields: {
-                max_user: 100,
+                max_user: 30,
             },
             errors: {},
 
@@ -102,17 +108,20 @@ export default {
             hourFormat: '12',
 
             academicyears: [],
+
+            editData: null,
+
         }
     },
     methods: {
         submit(){
-            axios.post('/panel/test-schedule', this.fields).then(res=>{
-                if(res.data.status === 'saved'){
+            axios.put('/panel/test-schedule/' + this.fields.test_schedule_id, this.fields).then(res=>{
+                if(res.data.status === 'updated'){
                     this.$buefy.dialog.alert({
-                        title: 'SAVED!',
-                        message: 'Successfully saved.',
+                        title: 'UPDATED!',
+                        message: 'Successfully updated.',
                         type: 'is-success',
-                        //onConfirm: ()=> window.location = '/panel/test-schedule'
+                        onConfirm: ()=> window.location = '/panel/test-schedule'
                     });
                 }
             }).catch(err=>{
@@ -142,6 +151,10 @@ export default {
 
         initData(){
             this.academicyears = JSON.parse(this.dataAcademics);
+            this.fields = JSON.parse(this.edit);
+            //this.editData = JSON.parse(this.edit);
+            this.sched_from = new Date(this.fields.from);
+            this.sched_to = new Date(this.fields.to);
 
         }
 
@@ -154,7 +167,7 @@ export default {
 </script>
 
 <style scoped>
-    .box{
-        border-top: 4px solid blueviolet;
-    }
+.box{
+    border-top: 4px solid blueviolet;
+}
 </style>
