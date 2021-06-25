@@ -31,7 +31,7 @@ class TakingExamController extends Controller
     public function index(Request $req){
 
         $section_id = $req->section_id;
-        $schedule_id = $req->schedule_id;
+        $student_schedule_id = $req->schedule_id;
         //return $section_id . ' - ' . $schedule_id;
 
         $user_id = auth()->user()->user_id;
@@ -52,6 +52,7 @@ class TakingExamController extends Controller
             'acad_year_id' => $ay->acad_year_id,
             'user_id' => $user_id,
             'section_id' => $section_id,
+            'student_schedule_id' => $student_schedule_id,
         ]);
 
         // //tiwasonon

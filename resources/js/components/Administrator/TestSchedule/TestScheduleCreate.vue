@@ -51,6 +51,7 @@
                                             placeholder="Click to select..."
                                             icon="calendar-today"
                                             v-model="sched_from"
+                                            :locale="locale"
                                             @input="formattedFromDate"
                                             :timepicker="{ hourFormat }"></b-datetimepicker>
                                     </b-field>
@@ -62,6 +63,7 @@
                                             placeholder="Click to select..."
                                             icon="calendar-today"
                                             v-model="sched_to"
+                                            :locale="locale"
                                             @input="formattedToDate"
                                             :timepicker="{ hourFormat }"></b-datetimepicker>
                                     </b-field>
@@ -102,6 +104,9 @@ export default {
             hourFormat: '12',
 
             academicyears: [],
+
+            locale: undefined // Browser locale
+
         }
     },
     methods: {

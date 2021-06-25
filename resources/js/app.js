@@ -13,7 +13,7 @@
  import Buefy from 'buefy';
 
 //import 'buefy/dist/buefy.css'
-
+//import moment from 'moment';
 
 /**
  * The following block of code may be used to automatically register your
@@ -134,6 +134,7 @@ Vue.component('result-exam', require('./components/Student/ResultExam.vue').defa
  */
 
 Vue.use(Buefy);
+//Vue.use(moment);
 
 Vue.filter('formatTime', function(value) {
     var timeString = value;

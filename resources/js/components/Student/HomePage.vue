@@ -16,6 +16,13 @@
                                     Sorry, it is not yet your schedule. You may take the test only by the system generated schedule below.
                                 </b-notification>
 
+                                <b-notification v-if="alreadyVisitedSection.trim() == 'visited'"
+                                    type="is-danger is-light"
+                                    aria-close-label="Close notification"
+                                    role="alert">
+                                    Entering twice is prohibited.
+                                </b-notification>
+
                                 <p v-if="schedules" style="text-align:center;">Your schedule is on {{ scheduleNiya }}</p>
                                 <p v-else style="text-align:center;">To take the test, you must request a schedule first.</p>
 
@@ -78,8 +85,9 @@
 </template>
 
 <script>
+
 export default {
-    props: ['isNotScheduled'],
+    props: ['isNotScheduled', 'alreadyVisitedSection'],
 
     data() {
         return {
@@ -149,20 +157,29 @@ export default {
         },
 
         formatSchedFromDate(from){
-
+            //moment().format()
+            //console.log(moment.format('Y-m-D'));
             const monthNames = ["January", "February", "March", "April", "May", "June",
                 "July", "August", "September", "October", "November", "December"
             ];
 
-            let d = new Date(from);
+            try {
+                //non iOS
+                let d = new Date(from);
+                let hours = d.getHours();
+                hours = hours % 12;
+                hours = hours ? hours : 12; // the hour '0' should be '12'
+                let minute = ('0' + d.getMinutes()).slice(-2);
+                let ampm = d.getHours() < 12 ? 'AM' : 'PM';
+                let monthname = d.getMonth();
+                return monthNames[monthname] + ' ' + d.getDate() + ' ' + d.getFullYear() + ' at exactly ' + hours+':'+minute+' '+ampm;
+            }
+            catch(err) {
+                return from;
+            }
 
-            let hours = d.getHours();
-            hours = hours % 12;
-            hours = hours ? hours : 12; // the hour '0' should be '12'
-            let minute = ('0' + d.getMinutes()).slice(-2);
-            let ampm = d.getHours() < 12 ? 'AM' : 'PM';
-            let monthname = d.getMonth();
-            return monthNames[monthname] + ' ' + d.getDate() + ' ' + d.getFullYear() + ' at exactly ' + hours+':'+minute+' '+ampm;
+
+
         },
 
         getSchedule: function(){

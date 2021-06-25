@@ -2,6 +2,8 @@
 
 namespace App\Http\Middleware;
 
+use App\Models\AcadYear;
+use App\Models\TakingTest;
 use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -25,6 +27,7 @@ class AllowExam
     {
         $nDateTime = Carbon::now()->toDateTimeString();
         $userid = Auth::user()->user_id;
+        $acadyear = AcadYear::where('active', 1)->first();
 
         if(Auth::check()){
 
@@ -34,11 +37,22 @@ class AllowExam
                 ->where('a.to', '>=', $nDateTime)
                 ->where('b.user_id', $userid)
                 ->exists();
-            //$isVisitedSection =
+
+            $isVisitedSection = TakingTest::where('acad_year_id', $acadyear->acad_year_id)
+                ->where('user_id', $userid)
+                ->where('section_id', $request->section_id)
+                ->where('student_schedule_id', $request->schedule_id)
+                ->exists();
+
 
             if(!$is_allow){
                 return redirect('/home')
                     ->with('error', 'not_scheduled');
+            }
+
+            if($isVisitedSection){
+                return redirect('/home')
+                    ->with('error', 'already_visited_section');
             }
 
             return $next($request);
