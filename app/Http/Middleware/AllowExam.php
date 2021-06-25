@@ -55,7 +55,9 @@ class AllowExam
                     ->with('error', 'already_visited_section');
             }
 
-            return $next($request);
+            return $next($request)
+                ->header('Cache-Control','nocache, no-store, max-age=0, must-revalidate')
+                ->header('Pragma','no-cache');
         }else{
             return redirect('/');
         }

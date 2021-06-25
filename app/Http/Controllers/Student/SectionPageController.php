@@ -14,6 +14,7 @@ class SectionPageController extends Controller
     }
 
     public function index(Request $req){
+        //student_scehdule_id
         $sched_id = $req->student_schedule_id;
 
         $sections = Section::select('section_id', 'section', 'img_filename', 'set_time')

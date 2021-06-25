@@ -39,10 +39,11 @@ class TakingExamController extends Controller
 
         $isExist = AnswerSheet::where('user_id', $user_id)
             ->where('code', $ay->code)
+            ->where('section_id', $section_id)
                 ->exists();
 
         if($isExist){
-            return redirect('/section')
+            return redirect('/home')
                 ->with('isTaken', 1);
         }
 
@@ -58,7 +59,8 @@ class TakingExamController extends Controller
         // //tiwasonon
 
         return view('student.taking-exam')
-            ->with('id', $section_id);
+            ->with('id', $section_id)
+            ->with('student_schedule_id', $student_schedule_id);
     }
 
 
@@ -103,18 +105,23 @@ class TakingExamController extends Controller
     }
 
     public function store(Request $req){
+
         $user_id = auth()->user()->user_id;
         $ay = AcadYear::where('active', 1)->first();
+        $section_id = $req->section_id;
+
 
         $n = AnswerSheet::where('user_id', $user_id)
-            ->where('code', $ay->code)->exists();
+            ->where('code', $ay->code)
+            ->where('section_id', $req->section_id)
+            ->exists();
 
         if($n){
             return ['status' => 'exist'];
         }
 
         try{
-            DB::transaction(function() use ($req, $user_id) {
+            DB::transaction(function() use ($req, $user_id, $section_id) {
                 $dateTaken = Carbon::now()->toDateString();
 
                 $ay = AcadYear::where('active', 1)->first();
@@ -122,12 +129,13 @@ class TakingExamController extends Controller
                 $ansSheet = AnswerSheet::create([
                     'code' => $ay->code,
                     'user_id' => $user_id,
+                    'section_id' => $section_id,
                     'is_taken' => 1,
                     'date_taken' => $dateTaken,
                 ]);
 
                 $arr=[];
-                foreach($req->all() as $row){
+                foreach($req->answers as $row){
                     if($row != null){
                         array_push($arr,[
                             'answer_sheet_id' => $ansSheet->answer_sheet_id,

@@ -10,22 +10,8 @@
                                     TEST RESULT
                                 </div>
                                 <div class="panel-body">
-                                    <table class="table is-fullwidth">
-                                        <thead>
-                                            <th>Category</th>
-                                            <th>Score</th>
-                                        </thead>
-                                        <tbody>
-                                            <tr v-for="item in this.results" :key="item.section_id">
-                                                <td>{{ item.section}}</td>
-                                                <td>{{ item.total_score}}</td>
-                                            </tr>
-                                            <tr>
-                                                <td><strong>TOTAL</strong></td>
-                                                <td><strong>{{ this.totalSum }}</strong></td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
+                                    <p class="title">TOTAL SCORE</p>
+                                   <p class="score">{{ this.results }}</p>
                                 </div>
                             </div>
                         </div><!--col-->
@@ -40,13 +26,13 @@
 export default {
     data(){
         return{
-            results: []
+            results: 0
 
         }
     },
     methods: {
         loadResult(){
-            axios('/student/ajax-result-exam').then(res=>{
+            axios('/fetch-result-exam').then(res=>{
                 this.results = res.data;
             });
         }
@@ -69,5 +55,11 @@ export default {
 <style scoped>
     .panel-body{
         padding: 15px;
+        text-align: center;
+    }
+
+    .score{
+        font-weight: bold;
+        font-size: 3em;
     }
 </style>

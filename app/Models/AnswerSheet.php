@@ -12,7 +12,7 @@ class AnswerSheet extends Model
     protected $table = 'answer_sheets';
     protected $primaryKey = 'answer_sheet_id';
 
-    protected $fillable = ['code', 'user_id', 'is_taken', 'date_taken'];
+    protected $fillable = ['code', 'user_id', 'section_id', 'is_taken', 'date_taken'];
 
     // public function student(){
     //     return $this->hasOne(Student::class, 'StudID', 'student_id');
@@ -26,7 +26,7 @@ class AnswerSheet extends Model
             'question', 'is_question_img', 'question_img');
     }
 
-    
+
 
 
 }

@@ -62,8 +62,8 @@ Route::post('/taking-exam', [App\Http\Controllers\Student\TakingExamController::
 
 
 Route::get('/taking-exam-question/{sectionid}', [App\Http\Controllers\Student\TakingExamController::class, 'examineeQuestion']);
-//Route::get('/student/result-exam', [App\Http\Controllers\Student\ResultExamController::class, 'index']);
-//Route::get('/student/ajax-result-exam', [App\Http\Controllers\Student\ResultExamController::class, 'resultExam']);
+Route::get('/result-exam', [App\Http\Controllers\Student\ResultExamController::class, 'index']);
+Route::get('/fetch-result-exam', [App\Http\Controllers\Student\ResultExamController::class, 'resultExam']);
 
 Route::post('/taking-exam-submit', [App\Http\Controllers\Student\TakingExamController::class, 'store']);
 
@@ -104,6 +104,8 @@ Route::get('/fetch-test-schedules', [App\Http\Controllers\Administrator\TestSche
 //STUDENT SCHEDULE
 Route::resource('/panel/student-schedule', App\Http\Controllers\Administrator\StudentTestScheduleController::class);
 Route::get('/fetch-student-schedules', [App\Http\Controllers\Administrator\StudentTestScheduleController::class, 'index_data']);
+Route::get('/fetch-schedules', [App\Http\Controllers\Administrator\StudentTestScheduleController::class, 'getSchedules']);
+Route::get('/fetch-users', [App\Http\Controllers\Administrator\StudentTestScheduleController::class, 'getUsers']);
 
 
 

@@ -45,17 +45,17 @@
                                                 <b-radio
                                                     v-model="answers[i]" required
                                                     :native-value="option.option_id">
-                                                    
+
                                                     <div>{{option.letter}}. </div>
-                                                    <img :src="`/storage/q/`+option.img_path" alt="..." class="img-container"> 
-                                                
+                                                    <img :src="`/storage/q/`+option.img_path" alt="..." class="img-container">
+
                                                 </b-radio>
-                                            </b-field> 
+                                            </b-field>
                                         </div>
                                     </div>
                                     <!--option content-->
                                 </div><!--option container-->
-                                
+
 
                             </div><!--question-box-->
 
@@ -69,6 +69,12 @@
             </div><!--container-->
         </div><!--section-->
 
+        <form id="form-section" action="/section" method="POST">
+            <csrf></csrf>
+            <input type="hidden" name="student_schedule_id" v-model="student_schedule_id" />
+
+        </form>
+
         <div class="timer-container">
             <b-icon pack="fa" icon="clock-o"></b-icon> &nbsp;
             <div>{{ nTime }}</div>
@@ -79,12 +85,12 @@
 
 <script>
 export default {
-    props: ['sectionId'],
+    props: ['sectionId', 'studentschedId'],
     data(){
         return{
             questions: [],
             errors: {},
-            answers:[],
+            answers:{},
             btnClass:{
                 'button': true,
                 'is-success': true,
@@ -94,10 +100,15 @@ export default {
             isShow: true,
 
             nTime: '',
+
+            student_schedule_id: 0,
         }
     },
     methods: {
         loadQuestion: async function(){
+
+            this.student_schedule_id = this.studentschedId;
+
             await axios.get('/taking-exam-question/'+this.sectionId).then(res=>{
                 //5pxconsole.log(res.data);
                 this.questions = res.data;
@@ -132,14 +143,17 @@ export default {
 
         submit(){
             this.btnClass["is-loading"] = true;
-            axios.post('/taking-exam-submit', this.answers).then(res=>{
+            axios.post('/taking-exam-submit', {
+                section_id: this.sectionId,
+                answers: this.answers
+            }).then(res=>{
                 this.btnClass["is-loading"] = false;
                 if(res.data.status === 'saved'){
                     this.$buefy.dialog.alert({
                         title: 'SAVED.',
                         message: 'Your test successfully saved.',
                         confirmText: 'OK',
-                        onConfirm: ()=> window.location = '/student/result-exam'
+                        onConfirm: ()=> this.proceedToSectionPage()
                     });
                 }
                 if(res.data.status === 'exist'){
@@ -148,7 +162,7 @@ export default {
                         type: 'is-danger',
                         message: 'You already took the exam. Thank you.',
                         confirmText: 'OK',
-                        onConfirm: ()=> window.location = '/student/home'
+                        onConfirm: ()=> window.location = '/home'
                     });
                 }
             }).catch(err=>{
@@ -166,6 +180,14 @@ export default {
                 }
             });
         },
+
+        proceedToSectionPage: function(){
+            if(this.student_schedule_id){
+                document.getElementById('form-section').submit();
+            }else{
+                alert('An error occured. No Schedule detected. If this error occured, please take screenshots and contact the admin.');
+            }
+        }
 
     },
     mounted(){
@@ -239,7 +261,7 @@ export default {
          .option-container{
             flex-direction: column;
             justify-content: center;
-            
+
         }
 
 

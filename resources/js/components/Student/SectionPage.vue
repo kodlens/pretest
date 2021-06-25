@@ -11,6 +11,7 @@
 
             <form method="POST" id="form-taking-exam" action="/taking-exam">
                 <csrf></csrf>
+                <!--student_schedule_id -->
                 <input type="hidden" id="schedule_id" name="schedule_id" />
                 <input type="hidden" id="section_id" name="section_id" />
             </form>
@@ -23,6 +24,7 @@
 
 export default {
     props:['sections', 'schedid'],
+
     data(){
         return{
             sectionsJSON: null,
@@ -43,7 +45,7 @@ export default {
                 form.submit();
             }else{
                 alert('An error occured. Please check your internet connectivity and start the the home page. If' +
-                    ' problem still exist, please contact CISO Personnel.')
+                    ' the problem still exist, please contact CISO Personnel.');
             }
 
         }

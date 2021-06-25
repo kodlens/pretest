@@ -2,6 +2,6 @@
 
 @section('content')
 
- <test-schedule-create data-academics='@json($acads)'></test-schedule-create>
+ <student-schedule-create></student-schedule-create>
 
 @endsection

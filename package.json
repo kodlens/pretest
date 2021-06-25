@@ -28,8 +28,8 @@
         "@mdi/font": "^5.9.55",
         "animate": "^1.0.0",
         "animate.css": "^4.1.1",
-        "buefy": "^0.9.6",
-        "bulma": "^0.9.2",
+        "buefy": "^0.9.8",
+        "bulma": "^0.9.3",
         "font-awesome": "^4.7.0",
         "moment": "^2.29.1"
     }

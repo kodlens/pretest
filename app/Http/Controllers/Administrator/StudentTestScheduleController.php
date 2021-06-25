@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Administrator;
 
 use App\Http\Controllers\Controller;
 use App\Models\AcadYear;
+use App\Models\TestSchedule;
 use Illuminate\Http\Request;
 
 use Illuminate\Support\Facades\DB;
@@ -36,6 +37,24 @@ class StudentTestScheduleController extends Controller
             ->orderBy($sort[0], $sort[1])
             ->paginate($req->perpage);
         return $data;
+    }
+
+    public function getSchedules(Request $req){
+        $sort = explode('.', $req->sort_by);
+        return TestSchedule::where('description', 'like', '%'.$req->description . '%')
+            ->orderBy($sort[0], $sort[1])
+            ->paginate($req->perpage);
+    }
+
+    public function getUsers(){
+        $sort = explode('.', $req->sort_by);
+        return User::where('lname', 'like', $req->lname . '%')
+            ->orderBy($sort[0], $sort[1])
+            ->paginate($req->perpage);
+    }
+
+    public function create(){
+        return view('panel.student_schedule.student-schedule-create');
     }
 
     public function edit($id){

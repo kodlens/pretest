@@ -77,10 +77,10 @@
 
                     </b-table>
 
-                    <!-- <div class="buttons mt-3">
+                    <div class="buttons mt-3">
                         <b-button icon-pack="fa" icon-left="plus" tag="a"
-                            :href="'/panel/test-schedule/create'" class="is-primary">New Schedule</b-button>
-                    </div> -->
+                            href="/panel/student-schedule/create" class="is-primary">New Student Schedule</b-button>
+                    </div>
                 </div><!--close column-->
             </div>
         </section>
