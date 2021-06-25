@@ -2,6 +2,7 @@
 
 //use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Request;
@@ -48,15 +49,17 @@ Route::get('/barangays', [App\Http\Controllers\AddressController::class, 'barang
 //STUDENT
 //Route::get('/student/login', [App\Http\Controllers\Student\StudentLoginController::class, 'showLoginForm']);
 //Route::post('/student/login', [App\Http\Controllers\Student\StudentLoginController::class, 'login'])->name('student-login');
-Route::get('/section/{studsched_id}', [App\Http\Controllers\Student\SectionPageController::class, 'index']);
-//DISPLAY SECTIONS WITH SCHEDULE ID AS PARAM
 
-Route::resource('/section-question', App\Http\Controllers\Student\SectionQuestionController::class);
+//DISPLAY SECTIONS WITH SCHEDULE ID AS PARAM
 
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-//Route::resource('/taking-exam', App\Http\Controllers\Student\TakingExamController::class);
-Route::get('/taking-exam/{schedid}/{sectionid}', [App\Http\Controllers\Student\TakingExamController::class, 'index']);
+
+Route::post('/section', [App\Http\Controllers\Student\SectionPageController::class, 'index']);
+Route::resource('/section-question', App\Http\Controllers\Student\SectionQuestionController::class);
+
+Route::post('/taking-exam', [App\Http\Controllers\Student\TakingExamController::class, 'index']);
+
 
 Route::get('/taking-exam-question/{sectionid}', [App\Http\Controllers\Student\TakingExamController::class, 'examineeQuestion']);
 //Route::get('/student/result-exam', [App\Http\Controllers\Student\ResultExamController::class, 'index']);
@@ -174,7 +177,23 @@ Route::get('/app/logout/admin', function(){
 
 
 Route::get('/date', function(){
-    return Program::all();
+
+    $nDateTime = Carbon::now()->toDateTimeString();
+
+    $is_allow = DB::table('test_schedules as a')
+        ->join('student_schedules as b', 'a.test_schedule_id', 'b.test_schedule_id')
+        ->where('a.from', '<=',$nDateTime)
+        ->where('a.to', '>=', $nDateTime)
+        ->where('b.user_id', 31)
+        ->exists();
+    //$isVisitedSection =
+
+    return $is_allow;
+
+//    if(!$is_allow){
+//        return redirect('/home')
+//            ->with('error', 'not_scheduled');
+//    }
 });
 
 //Route::get('/app/test', function(){

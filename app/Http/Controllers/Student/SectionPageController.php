@@ -13,7 +13,8 @@ class SectionPageController extends Controller
         $this->middleware('auth');
     }
 
-    public function index($sched_id){
+    public function index(Request $req){
+        $sched_id = $req->student_schedule_id;
 
         $sections = Section::select('section_id', 'section', 'img_filename', 'set_time')
             ->get();

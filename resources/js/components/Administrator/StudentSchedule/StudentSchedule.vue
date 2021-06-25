@@ -70,7 +70,7 @@
 
                         <b-table-column field="ay_id" label="Action" v-slot="props">
                             <div class="is-flex">
-                                <b-button class="button is-small is-warning mr-1" tag="a" icon-right="pencil" icon-pack="fa" :href="'/panel/student-schedule/'+ props.row.student_schedule_id + '/edit'"></b-button>
+<!--                                <b-button class="button is-small is-warning mr-1" tag="a" icon-right="pencil" icon-pack="fa" :href="'/panel/student-schedule/'+ props.row.student_schedule_id + '/edit'"></b-button>-->
                                 <b-button class="button is-small is-danger mr-1" icon-pack="fa" icon-right="trash" @click="confirmDelete(props.row.student_schedule_id)"></b-button>
                             </div>
                         </b-table-column>

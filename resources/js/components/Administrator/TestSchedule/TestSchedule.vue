@@ -7,13 +7,22 @@
                     <div class="level">
                         <div class="level-left">
                             <div class="level-item">
-                                <b-field label="Page">
+                                <b-field label="Page" label-position="on-border">
                                     <b-select v-model="perPage" @input="setPerPage">
                                         <option value="5">5 per page</option>
                                         <option value="10">10 per page</option>
                                         <option value="15">15 per page</option>
                                         <option value="20">20 per page</option>
                                     </b-select>
+                                </b-field>
+                            </div>
+                        </div>
+
+                        <div class="level-right">
+                            <div class="level-item">
+                                <b-field label="Search" label-position="on-border">
+                                    <b-input type="text" placeholder="Search Description..."
+                                        v-model="search.description" @keyup.native.enter="loadAsyncData" />
                                 </b-field>
                             </div>
                         </div>
@@ -112,6 +121,10 @@ export default {
                 'is-loading':false,
             },
 
+            search: {
+                description: '',
+            }
+
         }
     },
     methods: {
@@ -119,7 +132,8 @@ export default {
             const params = [
                 `sort_by=${this.sortField}.${this.sortOrder}`,
                 `perpage=${this.perPage}`,
-                `page=${this.page}`
+                `page=${this.page}`,
+                `description=${this.search.description}`
             ].join('&')
 
             this.loading = true

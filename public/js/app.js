@@ -4261,6 +4261,15 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
@@ -4281,6 +4290,9 @@ __webpack_require__.r(__webpack_exports__);
         'is-success': true,
         'button': true,
         'is-loading': false
+      },
+      search: {
+        description: ''
       }
     };
   },
@@ -4288,7 +4300,7 @@ __webpack_require__.r(__webpack_exports__);
     loadAsyncData: function loadAsyncData() {
       var _this = this;
 
-      var params = ["sort_by=".concat(this.sortField, ".").concat(this.sortOrder), "perpage=".concat(this.perPage), "page=".concat(this.page)].join('&');
+      var params = ["sort_by=".concat(this.sortField, ".").concat(this.sortOrder), "perpage=".concat(this.perPage), "page=".concat(this.page), "description=".concat(this.search.description)].join('&');
       this.loading = true;
       axios.get("/fetch-test-schedules?".concat(params)).then(function (_ref) {
         var data = _ref.data;
@@ -6169,6 +6181,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: ['isNotScheduled'],
   data: function data() {
@@ -6260,10 +6277,19 @@ __webpack_require__.r(__webpack_exports__);
 
       this.isLoading = true;
       axios.get('/get-schedule').then(function (res) {
-        console.log(res.data[0]);
+        //console.log(res.data[0]);
         _this2.schedules = res.data[0];
         _this2.isLoading = false;
       });
+    },
+    proceedNext: function proceedNext() {
+      var form = document.getElementById('section-form'); //this.schedules.student_schedule_id = null; //testing only
+
+      if (this.schedules.student_schedule_id) {
+        form.submit();
+      } else {
+        alert('Please acquire schedule first. Rest assured you have enough internet connectivity in your area and ' + 'kindly reload the page. If still the problem exist, please contact CISO Personnel for this matter.');
+      }
     }
   },
   mounted: function mounted() {
@@ -6387,6 +6413,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: ['sections', 'schedid'],
   data: function data() {
@@ -6397,6 +6429,17 @@ __webpack_require__.r(__webpack_exports__);
   methods: {
     initializeData: function initializeData() {
       this.sectionsJSON = JSON.parse(this.sections);
+    },
+    proceedTakingExam: function proceedTakingExam(schedId, sectionId) {
+      var form = document.getElementById('form-taking-exam');
+      var var1 = document.getElementById('schedule_id').value = schedId;
+      var var2 = document.getElementById('section_id').value = sectionId;
+
+      if (var1 && var2) {
+        form.submit();
+      } else {
+        alert('An error occured. Please check your internet connectivity and start the the home page. If' + ' problem still exist, please contact CISO Personnel.');
+      }
     }
   },
   mounted: function mounted() {
@@ -24659,7 +24702,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\r\n\r\n/*qo mean question options button remove*/\n.qo-btn[data-v-51e93ae4]{\r\n    margin-left: 5px;\r\n    border: none;\n}\n.qo-btn > i[data-v-51e93ae4]:hover{\r\n    color:red;\r\n    text-decoration: underline;\n}\n.qo-btn-check[data-v-51e93ae4]{\r\n    border: none;\r\n    color: red;\n}\n.qo-btn-check-active[data-v-51e93ae4]{\r\n    border: none;\r\n    color: green;\n}\n.red-x[data-v-51e93ae4]{\r\n    color: red;\n}\n.green-check[data-v-51e93ae4]{\r\n    color: green;\n}\n.option-panel[data-v-51e93ae4]{\r\n    margin-left: 30px;\n}\r\n\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/*qo mean question options button remove*/\n.qo-btn[data-v-51e93ae4]{\n    margin-left: 5px;\n    border: none;\n}\n.qo-btn > i[data-v-51e93ae4]:hover{\n    color:red;\n    text-decoration: underline;\n}\n.qo-btn-check[data-v-51e93ae4]{\n    border: none;\n    color: red;\n}\n.qo-btn-check-active[data-v-51e93ae4]{\n    border: none;\n    color: green;\n}\n.red-x[data-v-51e93ae4]{\n    color: red;\n}\n.green-check[data-v-51e93ae4]{\n    color: green;\n}\n.option-panel[data-v-51e93ae4]{\n    margin-left: 30px;\n}\n\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -24923,7 +24966,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.brand-title-desktop[data-v-60c7b05c]{\r\n    font-weight: bold;\r\n    display: block;\n}\n.brand-subtitle-desktop[data-v-60c7b05c]{\r\n    font-size: 14px;\r\n    display: block;\n}\n.brand-title-mobile[data-v-60c7b05c]{\r\n    font-weight: bold;\r\n    display: none;\n}\n.brand-subtitle-mobile[data-v-60c7b05c]{\r\n    font-size: 14px;\r\n    display: none;\n}\n@media only screen and (max-width: 768px) {\n.brand-title-desktop[data-v-60c7b05c]{\r\n        font-weight: bold;\r\n        display: none;\n}\n.brand-subtitle-desktop[data-v-60c7b05c]{\r\n        font-size: 14px;\r\n        display: none;\n}\n.brand-title-mobile[data-v-60c7b05c]{\r\n        font-weight: bold;\r\n        display: block;\n}\n.brand-subtitle-mobile[data-v-60c7b05c]{\r\n        font-size: 14px;\r\n        display: block;\n}\n}\r\n\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.brand-title-desktop[data-v-60c7b05c]{\n    font-weight: bold;\n    display: block;\n}\n.brand-subtitle-desktop[data-v-60c7b05c]{\n    font-size: 14px;\n    display: block;\n}\n.brand-title-mobile[data-v-60c7b05c]{\n    font-weight: bold;\n    display: none;\n}\n.brand-subtitle-mobile[data-v-60c7b05c]{\n    font-size: 14px;\n    display: none;\n}\n@media only screen and (max-width: 768px) {\n.brand-title-desktop[data-v-60c7b05c]{\n        font-weight: bold;\n        display: none;\n}\n.brand-subtitle-desktop[data-v-60c7b05c]{\n        font-size: 14px;\n        display: none;\n}\n.brand-title-mobile[data-v-60c7b05c]{\n        font-weight: bold;\n        display: block;\n}\n.brand-subtitle-mobile[data-v-60c7b05c]{\n        font-size: 14px;\n        display: block;\n}\n}\n\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -32310,9 +32353,9 @@ var render = function() {
                       fn: function(props) {
                         return [
                           _vm._v(
-                            "\n                        " +
+                            "\n                            " +
                               _vm._s(props.row.student_schedule_id) +
-                              "\n                    "
+                              "\n                        "
                           )
                         ]
                       }
@@ -32328,13 +32371,13 @@ var render = function() {
                       fn: function(props) {
                         return [
                           _vm._v(
-                            "\n                        " +
+                            "\n                            " +
                               _vm._s(props.row.lname) +
                               ", " +
                               _vm._s(props.row.fname) +
                               " " +
                               _vm._s(props.row.mname) +
-                              "\n                    "
+                              "\n                        "
                           )
                         ]
                       }
@@ -32350,9 +32393,9 @@ var render = function() {
                       fn: function(props) {
                         return [
                           _vm._v(
-                            "\n                        " +
+                            "\n                            " +
                               _vm._s(props.row.description) +
-                              "\n                    "
+                              "\n                        "
                           )
                         ]
                       }
@@ -32368,9 +32411,9 @@ var render = function() {
                       fn: function(props) {
                         return [
                           _vm._v(
-                            "\n                        " +
+                            "\n                            " +
                               _vm._s(props.row.from) +
-                              "\n                    "
+                              "\n                        "
                           )
                         ]
                       }
@@ -32386,9 +32429,9 @@ var render = function() {
                       fn: function(props) {
                         return [
                           _vm._v(
-                            "\n                        " +
+                            "\n                            " +
                               _vm._s(props.row.to) +
-                              "\n                    "
+                              "\n                        "
                           )
                         ]
                       }
@@ -32404,9 +32447,9 @@ var render = function() {
                       fn: function(props) {
                         return [
                           _vm._v(
-                            "\n                        " +
+                            "\n                            " +
                               _vm._s(props.row.max_user) +
-                              "\n                    "
+                              "\n                        "
                           )
                         ]
                       }
@@ -32425,19 +32468,6 @@ var render = function() {
                             "div",
                             { staticClass: "is-flex" },
                             [
-                              _c("b-button", {
-                                staticClass: "button is-small is-warning mr-1",
-                                attrs: {
-                                  tag: "a",
-                                  "icon-right": "pencil",
-                                  "icon-pack": "fa",
-                                  href:
-                                    "/panel/student-schedule/" +
-                                    props.row.student_schedule_id +
-                                    "/edit"
-                                }
-                              }),
-                              _vm._v(" "),
                               _c("b-button", {
                                 staticClass: "button is-small is-danger mr-1",
                                 attrs: {
@@ -32520,7 +32550,9 @@ var render = function() {
                   [
                     _c(
                       "b-field",
-                      { attrs: { label: "Page" } },
+                      {
+                        attrs: { label: "Page", "label-position": "on-border" }
+                      },
                       [
                         _c(
                           "b-select",
@@ -32552,6 +32584,58 @@ var render = function() {
                             ])
                           ]
                         )
+                      ],
+                      1
+                    )
+                  ],
+                  1
+                )
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "level-right" }, [
+                _c(
+                  "div",
+                  { staticClass: "level-item" },
+                  [
+                    _c(
+                      "b-field",
+                      {
+                        attrs: {
+                          label: "Search",
+                          "label-position": "on-border"
+                        }
+                      },
+                      [
+                        _c("b-input", {
+                          attrs: {
+                            type: "text",
+                            placeholder: "Search Description..."
+                          },
+                          nativeOn: {
+                            keyup: function($event) {
+                              if (
+                                !$event.type.indexOf("key") &&
+                                _vm._k(
+                                  $event.keyCode,
+                                  "enter",
+                                  13,
+                                  $event.key,
+                                  "Enter"
+                                )
+                              ) {
+                                return null
+                              }
+                              return _vm.loadAsyncData($event)
+                            }
+                          },
+                          model: {
+                            value: _vm.search.description,
+                            callback: function($$v) {
+                              _vm.$set(_vm.search, "description", $$v)
+                            },
+                            expression: "search.description"
+                          }
+                        })
                       ],
                       1
                     )
@@ -36723,25 +36807,56 @@ var render = function() {
                       ]),
                   _vm._v(" "),
                   _vm.schedules
-                    ? _c("div", { staticClass: "buttons is-centered mt-5" }, [
-                        _c(
-                          "a",
-                          {
-                            staticClass: "button is-primary is-outlined",
-                            attrs: {
-                              href:
-                                "/section/" + this.schedules.student_schedule_id
-                            }
-                          },
-                          [
-                            _c("b-icon", {
-                              attrs: { pack: "fa", icon: "arrow-right" }
-                            }),
-                            _vm._v("   NEXT\n                                ")
-                          ],
-                          1
-                        )
-                      ])
+                    ? _c(
+                        "div",
+                        { staticClass: "buttons is-centered mt-5" },
+                        [
+                          _c(
+                            "b-button",
+                            {
+                              staticClass: "button is-primary is-outlined",
+                              on: { click: _vm.proceedNext }
+                            },
+                            [
+                              _c("b-icon", {
+                                attrs: { pack: "fa", icon: "arrow-right" }
+                              }),
+                              _vm._v(
+                                "   NEXT\n                                "
+                              )
+                            ],
+                            1
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "form",
+                            {
+                              attrs: {
+                                id: "section-form",
+                                method: "POST",
+                                action: "/section"
+                              }
+                            },
+                            [
+                              _c("csrf"),
+                              _vm._v(" "),
+                              _c("input", {
+                                attrs: {
+                                  type: "hidden",
+                                  id: "schedule_id",
+                                  name: "student_schedule_id",
+                                  readonly: ""
+                                },
+                                domProps: {
+                                  value: this.schedules.student_schedule_id
+                                }
+                              })
+                            ],
+                            1
+                          )
+                        ],
+                        1
+                      )
                     : _c("div", { staticClass: "buttons mt-5 is-centered" }, [
                         _c(
                           "button",
@@ -36891,12 +37006,14 @@ var render = function() {
         { staticClass: "section-wrapper" },
         _vm._l(_vm.sectionsJSON, function(item, index) {
           return _c(
-            "a",
+            "div",
             {
               key: index,
               staticClass: "img-wrapper",
-              attrs: {
-                href: "/taking-exam/" + _vm.schedid + "/" + item.section_id
+              on: {
+                click: function($event) {
+                  return _vm.proceedTakingExam(_vm.schedid, item.section_id)
+                }
               }
             },
             [
@@ -36912,6 +37029,29 @@ var render = function() {
           )
         }),
         0
+      ),
+      _vm._v(" "),
+      _c(
+        "form",
+        {
+          attrs: {
+            method: "POST",
+            id: "form-taking-exam",
+            action: "/taking-exam"
+          }
+        },
+        [
+          _c("csrf"),
+          _vm._v(" "),
+          _c("input", {
+            attrs: { type: "hidden", id: "schedule_id", name: "schedule_id" }
+          }),
+          _vm._v(" "),
+          _c("input", {
+            attrs: { type: "hidden", id: "section_id", name: "section_id" }
+          })
+        ],
+        1
       )
     ])
   ])

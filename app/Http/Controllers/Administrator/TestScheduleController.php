@@ -25,6 +25,7 @@ class TestScheduleController extends Controller
     public function index_data(Request $req){
         $sort = explode('.', $req->sort_by);
         return TestSchedule::orderBy($sort[0], $sort[1])
+            ->where('description', 'like', '%' .$req->description . '%')
             ->paginate($req->perpage);
     }
 
@@ -35,8 +36,8 @@ class TestScheduleController extends Controller
     }
 
     public function store(Request $req){
-      
-   
+
+
         $validate = $req->validate([
             'acad_year_id' => ['numeric', 'required'],
             'description' => ['string', 'max:255', 'required'],

@@ -2,12 +2,18 @@
     <div>
         <div class="section">
             <div class="section-wrapper">
-                <a :href="'/taking-exam/'+schedid+'/'+item.section_id" v-for="(item, index) in sectionsJSON" :key="index" class="img-wrapper">
+                <div v-for="(item, index) in sectionsJSON" :key="index" @click="proceedTakingExam(schedid, item.section_id)" class="img-wrapper">
                     <img :src="'/img/' + item.img_filename" class="img-size" alt="..." />
                     <p>SECTION: {{ item.section }}</p>
                     <p>TIME: {{ item.set_time }} minutes</p>
-                </a>
+                </div>
             </div>
+
+            <form method="POST" id="form-taking-exam" action="/taking-exam">
+                <csrf></csrf>
+                <input type="hidden" id="schedule_id" name="schedule_id" />
+                <input type="hidden" id="section_id" name="section_id" />
+            </form>
         </div>
     </div><!--root div-->
 </template>
@@ -26,8 +32,23 @@ export default {
     methods: {
         initializeData(){
             this.sectionsJSON = JSON.parse(this.sections);
+        },
+
+        proceedTakingExam: function (schedId, sectionId){
+            let form = document.getElementById('form-taking-exam');
+            let var1 = document.getElementById('schedule_id').value = schedId;
+            let var2 = document.getElementById('section_id').value = sectionId;
+
+            if(var1 && var2){
+                form.submit();
+            }else{
+                alert('An error occured. Please check your internet connectivity and start the the home page. If' +
+                    ' problem still exist, please contact CISO Personnel.')
+            }
+
         }
     },
+
 
     mounted() {
         this.initializeData()

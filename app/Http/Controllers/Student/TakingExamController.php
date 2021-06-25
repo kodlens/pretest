@@ -28,7 +28,12 @@ class TakingExamController extends Controller
     }
 
 
-    public function index($schedid, $sectionid){
+    public function index(Request $req){
+
+        $section_id = $req->section_id;
+        $schedule_id = $req->schedule_id;
+        //return $section_id . ' - ' . $schedule_id;
+
         $user_id = auth()->user()->user_id;
         $ay = AcadYear::where('active', 1)->first();
 
@@ -46,13 +51,13 @@ class TakingExamController extends Controller
         $takingTest = TakingTest::create([
             'acad_year_id' => $ay->acad_year_id,
             'user_id' => $user_id,
-            'section_id' => $sectionid,
+            'section_id' => $section_id,
         ]);
 
         // //tiwasonon
 
         return view('student.taking-exam')
-            ->with('id', $sectionid);
+            ->with('id', $section_id);
     }
 
 

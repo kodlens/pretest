@@ -15,14 +15,19 @@
                                     role="alert">
                                     Sorry, it is not yet your schedule. You may take the test only by the system generated schedule below.
                                 </b-notification>
-                              
+
                                 <p v-if="schedules" style="text-align:center;">Your schedule is on {{ scheduleNiya }}</p>
                                 <p v-else style="text-align:center;">To take the test, you must request a schedule first.</p>
 
                                 <div v-if="schedules" class="buttons is-centered mt-5">
-                                    <a :href="'/section/'+this.schedules.student_schedule_id" class="button is-primary is-outlined">
+                                    <b-button @click="proceedNext" class="button is-primary is-outlined">
                                         <b-icon pack="fa" icon="arrow-right"></b-icon> &nbsp;&nbsp;NEXT
-                                    </a>
+                                    </b-button>
+
+                                    <form id="section-form" method="POST" action="/section">
+                                        <csrf></csrf>
+                                        <input type="hidden" id="schedule_id" name="student_schedule_id" readonly :value="this.schedules.student_schedule_id"></input>
+                                    </form>
                                 </div>
                                 <div v-else class="buttons mt-5 is-centered">
                                     <button  @click="requestSchedule" :class="btnClass">REQUEST SCHEDULE</button>
@@ -65,7 +70,7 @@
                         </div>
                     </div> -->
 
-                    
+
                 </div>
             </div>
         </div>
@@ -78,7 +83,7 @@ export default {
 
     data() {
         return {
-            
+
             btnClass:{
                 'button': true,
                 'is-success': true,
@@ -91,7 +96,7 @@ export default {
             schedules: {
                 from: null,
             },
-           
+
         }
     },
 
@@ -140,7 +145,7 @@ export default {
                  this.btnClass['is-loading'] = false;
             })
 
-           
+
         },
 
         formatSchedFromDate(from){
@@ -150,7 +155,7 @@ export default {
             ];
 
             let d = new Date(from);
-           
+
             let hours = d.getHours();
             hours = hours % 12;
             hours = hours ? hours : 12; // the hour '0' should be '12'
@@ -163,10 +168,22 @@ export default {
         getSchedule: function(){
             this.isLoading = true;
             axios.get('/get-schedule').then(res=>{
-                console.log(res.data[0]);
+                //console.log(res.data[0]);
                 this.schedules = res.data[0];
                 this.isLoading = false;
             })
+        },
+
+        proceedNext: function(){
+            let form = document.getElementById('section-form');
+            //this.schedules.student_schedule_id = null; //testing only
+            if(this.schedules.student_schedule_id){
+                form.submit();
+            }else{
+                alert('Please acquire schedule first. Rest assured you have enough internet connectivity in your area and ' +
+                    'kindly reload the page. If still the problem exist, please contact CISO Personnel for this matter.');
+            }
+
         }
     },
 
@@ -177,13 +194,13 @@ export default {
     computed:{
 
         scheduleNiya: function(){
-          
+
             if(this.schedules.from){
                 return this.formatSchedFromDate(this.schedules.from);
             }else{
                 return '';
             }
-            
+
         }
     }
 
