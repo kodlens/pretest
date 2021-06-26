@@ -1,35 +1,40 @@
 <template>
     <div>
         <div class="section">
-            <div style="font-size: 20px; text-align: center; font-weight: bold; margin-bottom: 20px;">LIST OF STUDENT ANSWERS</div>
+            <div style="font-size: 20px; text-align: center; font-weight: bold; margin-bottom: 20px;">LIST OF STUDENT RESULTS</div>
             <div class="columns">
                 <div class="column is-10 is-offset-1">
 
                     <div class="level">
                         <div class="level-left">
-
                             <div class="level-item">
-                                <b-select v-model="perPage" @input="setPerPage">
-                                    <option value="5">5 per page</option>
-                                    <option value="10">10 per page</option>
-                                    <option value="15">15 per page</option>
-                                    <option value="20">20 per page</option>
-                                </b-select>
-                            </div>
-
-                            <div class="level-item">
-                                <div class="buttons">
-                                    <!-- <b-button tag="a" href="/cpanel-academicyear/create" class="is-primary">Create Account</b-button> -->
-                                    <!-- <b-button @click="openModal" class="is-primary"></b-button> -->
-                                </div>
+                                <b-field label="Page" label-position="on-border">
+                                    <b-select v-model="perPage" @input="setPerPage">
+                                        <option value="5">5 per page</option>
+                                        <option value="10">10 per page</option>
+                                        <option value="15">15 per page</option>
+                                        <option value="20">20 per page</option>
+                                    </b-select>
+                                </b-field>
                             </div>
                         </div>
 
                         <div class="level-right">
                             <div class="level-item">
-                                <b-field>
-                                    <b-input type="text" placeholder="Search Student ID..."
-                                    v-model="search.student_id" @keyup.native.enter="loadAsyncData"/>
+                                <b-field label-position="on-border" label="Search User ID">
+                                    <b-input type="text" placeholder="Search User ID..."
+                                             v-model="search.user_id" @keyup.native.enter="loadAsyncData"/>
+                                </b-field>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="level">
+                        <div class="level-right">
+                            <div class="level-item">
+                                <b-field label-position="on-border" label="Search Lastname">
+                                    <b-input type="text" placeholder="Search Student Lastname..."
+                                             v-model="search.lname" @keyup.native.enter="loadAsyncData"/>
                                 </b-field>
                             </div>
                         </div>
@@ -44,7 +49,7 @@
                         :total="total"
                         :per-page="perPage"
                         @page-change="onPageChange"
-                        detailed
+
                         detail-transition = ""
                         aria-next-label="Next page"
                         aria-previous-label="Previous page"
@@ -59,51 +64,44 @@
                             {{ props.row.answer_sheet_id }}
                         </b-table-column>
 
-                         <b-table-column field="student_id" label="Student No" v-slot="props">
-                            {{ props.row.student_id }}
-                        </b-table-column>
-
-                        <b-table-column field="student_name" label="Student Name" v-slot="props">
-                            {{ props.row.student.StudLName }}, {{ props.row.student.StudFName }} {{ props.row.student.StudMName }}
-                        </b-table-column>
-
                         <b-table-column field="code" label="A.Y. Code" v-slot="props">
                             {{ props.row.code }}
                         </b-table-column>
 
-                        <b-table-column field="" label="Action" v-slot="props">
-                            <div class="is-flex">
-                                <b-button outlined class="button is-small is-danger mr-1" icon-pack="fa" icon-right="trash" @click="confirmDelete(props.row.answer_sheet_id)">DELETE</b-button>
-                            </div>
+                        <b-table-column field="user_id" label="User ID" v-slot="props">
+                            {{ props.row.user_id }}
                         </b-table-column>
 
-                        <template slot="detail" slot-scope="props">
-                            <div class="title is-5">ANSWERS</div>
-                            <table class="table">
-                                <thead>
-                                    <tr>
-                                        <th>Letter</th>
-                                        <th>Answer</th>
-                                        <th>Question</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr v-for="item in props.row.answers" :key="item.answer_id">
-                                        <td>{{ item.letter }}</td>
-                                        <td style="width: 300px;" v-if="item.content != ''">{{ item.content }}</td>
-                                        <td v-else><a @click="showImg(item.img_path)">{{ item.img_path }}</a></td>
-                                        <td v-if="item.is_question_img == 0">
-                                            {{ item.question }}
-                                        </td>
-                                        <td v-else>
-                                            
-                                            <a @click="showImg(item.question_img)">{{ item.question_img }}</a>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
+                        <b-table-column field="fullname" label="Student Name" v-slot="props">
+                            {{ props.row.lname }}, {{ props.row.fname }} {{ props.row.mname }}
+                        </b-table-column>
 
-                        </template>
+                        <b-table-column field="first_program_choice" label="1st Program" v-slot="props">
+                            {{ props.row.first_program_choice }}
+                        </b-table-column>
+
+                        <b-table-column field="first_program_choice" label="2nd Program" v-slot="props">
+                            {{ props.row.second_program_choice }}
+                        </b-table-column>
+
+                        <b-table-column field="section" label="Section" v-slot="props">
+                            {{ props.row.section }}
+                        </b-table-column>
+
+                        <b-table-column field="score" label="Score" v-slot="props">
+                            {{ props.row.score }}
+                        </b-table-column>
+
+                        <b-table-column field="created_at" label="Created At" v-slot="props">
+                            {{ props.row.created_at }}
+                        </b-table-column>
+
+<!--                        <b-table-column field="" label="Action" v-slot="props">-->
+<!--                            <div class="is-flex">-->
+<!--                                <b-button outlined class="button is-small is-danger mr-1" icon-pack="fa" icon-right="trash" @click="confirmDelete(props.row.answer_sheet_id)">DELETE</b-button>-->
+<!--                            </div>-->
+<!--                        </b-table-column>-->
+
                     </b-table>
                 </div><!--close column-->
             </div>
@@ -177,7 +175,8 @@ export default {
             },
 
             search: {
-                student_id: '',
+                user_id: '',
+                lname: '',
             },
 
             path:'', //path if image retirieve using modal
@@ -192,12 +191,13 @@ export default {
             const params = [
                 `sort_by=${this.sortField}.${this.sortOrder}`,
                 `perpage=${this.perPage}`,
-                `idno=${this.search.student_id}`,
-                `page=${this.page}`
+                `page=${this.page}`,
+                `user_id=${this.search.user_id}`,
+                `lname=${this.search.lname}`
             ].join('&')
 
             this.loading = true
-            axios.get(`/panel/ajax-answer?${params}`)
+            axios.get(`/fetch-student-answers?${params}`)
                 .then(({ data }) => {
                     this.data = []
                     let currentTotal = data.total
@@ -238,14 +238,14 @@ export default {
             this.loadAsyncData()
         },
 
-        
+
 
         showImg(path){
             this.modalImage = true;
             this.path = '/storage/q/'+path;
         },
 
-        
+
 
         confirmDelete(dataId){
             this.$buefy.dialog.confirm({
@@ -264,13 +264,13 @@ export default {
         },
 
 
-        
+
 
     },
 
     mounted() {
         this.loadAsyncData();
-        
+
     }
 
 }

@@ -117,7 +117,7 @@ Route::get('/ajax/question', [App\Http\Controllers\Administrator\QuestionControl
 
 //Answer
 Route::resource('/panel/answer', App\Http\Controllers\Administrator\AnswerSheetController::class);
-Route::get('/panel/ajax-answer', [App\Http\Controllers\Administrator\AnswerSheetController::class, 'index_data']);
+Route::get('/fetch-student-answers', [App\Http\Controllers\Administrator\AnswerSheetController::class, 'index_data']);
 
 
 //options

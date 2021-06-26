@@ -26,13 +26,16 @@
                 Home
             </b-navbar-item>
 
-             <b-navbar-item href="/panel/acadyear">
-                Academic Year
-            </b-navbar-item>
+            <b-navbar-dropdown label="A.Y. & Section">
+                <b-navbar-item href="/panel/acadyear">
+                    Academic Year
+                </b-navbar-item>
 
-            <b-navbar-item href="/panel/section">
-                Sections
-            </b-navbar-item>
+                <b-navbar-item href="/panel/section">
+                    Sections
+                </b-navbar-item>
+            </b-navbar-dropdown>
+
 
             <b-navbar-dropdown label="Schedule">
                 <b-navbar-item href="/panel/test-schedule">
@@ -43,9 +46,16 @@
                 </b-navbar-item>
             </b-navbar-dropdown>
 
-            <b-navbar-item href="/panel/question">
-                Questions
-            </b-navbar-item>
+            <b-navbar-dropdown label="Q&A">
+                <b-navbar-item href="/panel/question">
+                    Question
+                </b-navbar-item>
+                <b-navbar-item href="/panel/answer">
+                    Student Result
+                </b-navbar-item>
+            </b-navbar-dropdown>
+
+
 
             <b-navbar-item href="/panel/user">
                 User

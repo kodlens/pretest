@@ -24,8 +24,10 @@ class StudentScheduleController extends Controller
 
 
     public function setSchedule(Request $req){
-       
+
+
         $isFull = false;
+
         $testSchedules = TestSchedule::where('active', 1)
             ->where('from', '>', date("Y-m-d"))
             ->orderBy('from', 'asc')
@@ -34,7 +36,7 @@ class StudentScheduleController extends Controller
         //and datenow > db recorded date sched
 
         $userid = Auth::user()->user_id;
-        
+
         if($testSchedules->isEmpty()){
             return ['status' => 'no_schedule'];
         }
@@ -42,7 +44,7 @@ class StudentScheduleController extends Controller
         foreach($testSchedules as $row){
             //loop to schedules
             $countSched = StudentSchedule::where('test_schedule_id', $row->test_schedule_id)->count();
-            
+
             //count how many in schedules are in student schedules
             if($countSched < $row->max_user){ //2 <= 200
                 //insert scheudle
@@ -79,8 +81,8 @@ class StudentScheduleController extends Controller
 
 
         return [
-            'status' => 'schedule', 
-            'schedfrom' => $sched->from, 
+            'status' => 'schedule',
+            'schedfrom' => $sched->from,
             'schedto' => $sched->to
         ];
 
@@ -93,7 +95,7 @@ class StudentScheduleController extends Controller
         $schedule = DB::table('student_schedules as a')
                 ->join('test_schedules as b', 'a.test_schedule_id', 'b.test_schedule_id')
                 ->where('a.user_id', $userid)
-                ->where('b.from', '>=', date("Y-m-d"))
+//                ->where('b.from', '>=', date("Y-m-d"))
                 ->get();
 
 
@@ -114,7 +116,7 @@ class StudentScheduleController extends Controller
         //         break;
         //     }
         // }
-        
+
         //$this->studentschedule_id = $schedule->student_schedule_id;
 
         return $schedule;

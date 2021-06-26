@@ -26,6 +26,21 @@
                                 <p v-if="schedules" style="text-align:center;">Your schedule is on {{ scheduleNiya }}</p>
                                 <p v-else style="text-align:center;">To take the test, you must request a schedule first.</p>
 
+                                <div class="instruction">
+                                    <p class="title is-5">ADMISSION TEST DIRECTIONS</p>
+                                    <ul>
+                                        <li>1. You will  take  five (5) sets of  tests; each consists of 18 - item multiple choice test.</li>
+                                        <li>2. You will take a total of 90  test items randomly generated from our system.</li>
+                                        <li>3. You are only given 10 minutes to finish each set of tests.</li>
+                                        <li>4. Once you click each set, the timer will immediately start; you can find it at the bottom right of the screen; avoid clicking back without submitting the test.</li>
+                                        <li>5. Answer each set of tests and click submit.</li>
+                                        <li>6. After submitting, proceed to the next test.</li>
+                                        <li>7. If done, wait for the admission results to be sent to your respective e-mail address.</li>
+                                    </ul>
+
+                                </div>
+
+
                                 <div v-if="schedules" class="buttons is-centered mt-5">
                                     <b-button @click="proceedNext" class="button is-primary is-outlined">
                                         <b-icon pack="fa" icon="arrow-right"></b-icon> &nbsp;&nbsp;NEXT
@@ -36,9 +51,12 @@
                                         <input type="hidden" id="schedule_id" name="student_schedule_id" readonly :value="this.schedules.student_schedule_id"></input>
                                     </form>
                                 </div>
+
                                 <div v-else class="buttons mt-5 is-centered">
                                     <button  @click="requestSchedule" :class="btnClass">REQUEST SCHEDULE</button>
                                 </div>
+
+
 
                                <b-loading :is-full-page="false" v-model="isLoading" :can-cancel="true"></b-loading>
                             </div>
@@ -225,16 +243,16 @@ export default {
 </script>
 
 <style scoped>
-    .instruction{
-        display: flex;
-        justify-content: center;
-        text-align: justify;
-        font-size: 20px;
-        font-weight: bold;
-        margin: 15px;
-        border-bottom: 1px solid darkgreen;
-        padding: 15px;
-    }
+    /*.instruction{*/
+    /*    display: flex;*/
+    /*    justify-content: center;*/
+    /*    text-align: justify;*/
+    /*    font-size: 20px;*/
+    /*    font-weight: bold;*/
+    /*    margin: 15px;*/
+    /*    border-bottom: 1px solid darkgreen;*/
+    /*    padding: 15px;*/
+    /*}*/
 
     .horizontal-word {
         width: 100%;
@@ -253,6 +271,13 @@ export default {
 
     .box{
         border-top: 3px solid green;
+    }
+
+    .instruction{
+        margin-top: 30px;
+    }
+    .instruction > ul > li{
+        font-style: italic;
     }
 
 </style>

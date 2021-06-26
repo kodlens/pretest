@@ -178,7 +178,7 @@ export default {
             this.$emit('description', dataRow.description.toUpperCase());
         }
 
-    },0
+    },
 
     computed: {
         valueDesc(){
