@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Administrator;
 
 use App\Http\Controllers\Controller;
+use App\Models\LearningModality;
+use App\Models\Program;
 use Illuminate\Http\Request;
 
 use App\Models\User;
@@ -65,9 +67,14 @@ class UserController extends Controller
     }
 
     public function edit($id){
+        $programs = Program::where('programStat', 1)->get();
+        $learningmodes = LearningModality::all();
+
         $data = User::find($id);
         return view('panel.user.user-edit')
-            ->with('data', $data);
+            ->with('data', $data)
+            ->with('programs', $programs ? $programs : '')
+            ->with('learningmodes', $learningmodes);
     }
 
     public function update(Request $req, $id){
@@ -86,9 +93,7 @@ class UserController extends Controller
                 'lname' => ['required', 'string', 'max:255'],
                 'fname' => ['required', 'string', 'max:255'],
                 'email' => ['required', 'string', 'email', 'max:255', 'unique:users,email,'. $id. ',user_id'],
-               
             ]);
-    
         }
 
         $data = User::find($id);
@@ -97,15 +102,19 @@ class UserController extends Controller
         $data->fname = strtoupper($req->fname);
         $data->mname = strtoupper($req->mname);
         $data->sex = strtoupper($req->sex);
+        $data->status = strtoupper($req->status);
         $data->bdate = $req->bdate;
         $data->birthplace = strtoupper($req->birthplace);
         $data->contact_no = strtoupper($req->contact_no);
         $data->email = $req->email;
+        $data->first_program_choice = $req->first_program_choice;
+        $data->second_program_choice = $req->second_program_choice;
+        $data->learning_mode = $req->learning_mode;
         $data->last_school_attended = strtoupper($req->last_school_attended);
-        $data->province = strtoupper($req->province);
-        $data->city = strtoupper($req->city);
-        $data->barangay = strtoupper($req->barangay);
-        $data->street = strtoupper($req->street);
+//        $data->province = strtoupper($req->province);
+//        $data->city = strtoupper($req->city);
+//        $data->barangay = strtoupper($req->barangay);
+//        $data->street = strtoupper($req->street);
         $data->role = strtoupper($req->role);
         if($req->password != ''){
             $data->password = Hash::make($req->password);

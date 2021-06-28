@@ -4,7 +4,7 @@
             <div class="container">
                 <div class="columns">
                     <div class="column is-8 is-offset-2">
-                       <div class="box">
+                        <div class="box">
                             <h1 class="title is-5">ADD/MODIFY USER</h1>
                             <form @submit.prevent="submit">
                                 <div class="columns">
@@ -63,6 +63,7 @@
                                 </div>
 
                                 <div class="columns">
+
                                     <div class="column">
                                         <b-field label-position="on-border" label="Sex" expanded>
                                             <b-select v-model="fields.sex" expanded>
@@ -72,30 +73,31 @@
                                         </b-field>
                                     </div>
 
-                                <div class="column">
-                                    <b-field label-position="on-border" label="Birthdate">
-                                        <b-datepicker editable v-model="bdate" @input="formatDate">
-                                        </b-datepicker>
-                                    </b-field>
-                                </div>
-
-                                <div class="column">
-                                    <b-field label-position="on-border" label="Role" expanded>
-                                        <b-select v-model="fields.role" expanded>
-                                            <option value="ADMINISTRATOR">ADMINISTRATOR</option>
-                                            <option value="STUDENT">STUDENT</option>
-                                        </b-select>
-                                    </b-field>
-                                </div>
+                                    <div class="column">
+                                        <b-field label-position="on-border" label="Role" expanded>
+                                            <b-select v-model="fields.role" expanded>
+                                                <option value="ADMINISTRATOR">ADMINISTRATOR</option>
+                                                <option value="STUDENT">STUDENT</option>
+                                            </b-select>
+                                        </b-field>
+                                    </div>
 
                                 </div><!--cols-->
 
                                 <div class="columns">
                                     <div class="column">
+                                        <b-field label-position="on-border" label="Birthdate">
+                                            <b-datepicker editable v-model="bdate" @input="formatDate">
+                                            </b-datepicker>
+                                        </b-field>
+                                    </div>
+                                    <div class="column">
                                         <b-field label-position="on-border" label="Birthplace">
                                             <b-input type="text" v-model="fields.birthplace"></b-input>
                                         </b-field>
                                     </div>
+
+
                                 </div>
 
                                 <div class="columns">

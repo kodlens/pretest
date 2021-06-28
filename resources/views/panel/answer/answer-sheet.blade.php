@@ -2,6 +2,6 @@
 
 @section('content')
 
-    <answer-sheet></answer-sheet>
+    <answer-sheet prop-programs='@json($programs)'></answer-sheet>
 
 @endsection

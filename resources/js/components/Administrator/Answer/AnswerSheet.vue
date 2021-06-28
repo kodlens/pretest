@@ -30,11 +30,24 @@
                     </div>
 
                     <div class="level">
+
+                        <div class="level-left">
+                            <div class="level-item">
+                                <b-field label-position="on-border" label="Search Program">
+                                    <b-select placeholder="Search Program"
+                                             v-model="search.first_program_choice" @input="loadAsyncData">
+                                        <option value="">ALL</option>
+                                        <option v-for="(item, index) in this.programs" :key="index" :value="item.CCode">{{ item.CCode }}</option>
+                                    </b-select>
+                                </b-field>
+                            </div>
+                        </div>
+
                         <div class="level-right">
                             <div class="level-item">
                                 <b-field label-position="on-border" label="Search Lastname">
                                     <b-input type="text" placeholder="Search Student Lastname..."
-                                             v-model="search.lname" @keyup.native.enter="loadAsyncData"/>
+                                             v-model="search.lname" @keyup.native.enter="loadAsyncData" />
                                 </b-field>
                             </div>
                         </div>
@@ -49,7 +62,6 @@
                         :total="total"
                         :per-page="perPage"
                         @page-change="onPageChange"
-
                         detail-transition = ""
                         aria-next-label="Next page"
                         aria-previous-label="Previous page"
@@ -107,51 +119,19 @@
             </div>
         </div>
 
-
-        <!--modal show image-->
-        <!--MODAL FOR IMAGE, CONTAINER-->
-        <b-modal v-model="modalImage" has-modal-card
-                 trap-focus
-                 width="640"
-                 aria-role="dialog"
-                 aria-modal>
-
-
-            <div class="modal-card">
-                <header class="modal-card-head">
-                    <p class="modal-card-title">Image</p>
-                    <button
-                        type="button"
-                        class="delete"
-                        @click="modalImage = false"/>
-                </header>
-                <section class="modal-card-body">
-                    <div>
-                        <img :src="path" alt="...">
-                    </div>
-                </section>
-                <footer class="modal-card-foot">
-                    <b-button
-                        label="Close"
-                        @click="modalImage=false"/>
-<!--                    <button-->
-<!--                        :class="btnClass"-->
-<!--                        label="Save"-->
-<!--                        @click="submit"-->
-<!--                        type="is-success">SAVE</button>-->
-                </footer>
-            </div>
-
-        </b-modal>
-
-
-
-
     </div>
 </template>
 
 <script>
 export default {
+
+    props: {
+        propPrograms: {
+            type: String,
+            default: '',
+        }
+    },
+
     data(){
         return{
             data: [],
@@ -166,8 +146,6 @@ export default {
             //modal
             modalImage: false,
 
-
-
             btnClass: {
                 'is-success': true,
                 'button': true,
@@ -177,11 +155,10 @@ export default {
             search: {
                 user_id: '',
                 lname: '',
+                first_program_choice: '',
             },
 
-            path:'', //path if image retirieve using modal
-            //optionsssss
-           // activeColors: ['red'],
+            programs: [],
         }
     },
 
@@ -193,8 +170,10 @@ export default {
                 `perpage=${this.perPage}`,
                 `page=${this.page}`,
                 `user_id=${this.search.user_id}`,
-                `lname=${this.search.lname}`
-            ].join('&')
+                `lname=${this.search.lname}`,
+                `first_program_choice=${this.search.first_program_choice}`
+
+            ].join('&');
 
             this.loading = true
             axios.get(`/fetch-student-answers?${params}`)
@@ -209,14 +188,14 @@ export default {
                     data.data.forEach((item) => {
                         //item.release_date = item.release_date ? item.release_date.replace(/-/g, '/') : null
                         this.data.push(item)
-                    })
+                    });
                     this.loading = false
                 })
                 .catch((error) => {
-                    this.data = []
-                    this.total = 0
-                    this.loading = false
-                    throw error
+                    this.data = [];
+                    this.total = 0;
+                    this.loading = false;
+                    throw error;
                 })
         },
 
@@ -239,14 +218,6 @@ export default {
         },
 
 
-
-        showImg(path){
-            this.modalImage = true;
-            this.path = '/storage/q/'+path;
-        },
-
-
-
         confirmDelete(dataId){
             this.$buefy.dialog.confirm({
                 title: 'DELETE',
@@ -263,14 +234,14 @@ export default {
             });
         },
 
-
-
-
+        initData: function(){
+            this.programs = JSON.parse(this.propPrograms);
+        }
     },
 
     mounted() {
+        this.initData();
         this.loadAsyncData();
-
     }
 
 }
