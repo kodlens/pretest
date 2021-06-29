@@ -2,7 +2,6 @@
 
 @section('content')
 
- <student-schedule-edit data-academics='@json($acads)'
-    edit='@json($data)'></student-schedule-edit>
+ <student-schedule-edit prop-student-schedule='@json($data)'></student-schedule-edit>
 
 @endsection

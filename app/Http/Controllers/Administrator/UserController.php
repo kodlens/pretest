@@ -30,6 +30,14 @@ class UserController extends Controller
             ->paginate($req->perpage);
     }
 
+    public function allStudents(Request $req){
+        $sort = explode('.', $req->sort_by);
+        return User::where('lname', 'like', $req->lname . '%')
+            ->where('role', 'STUDENT')
+            ->orderBy($sort[0], $sort[1])
+            ->paginate($req->perpage);
+    }
+
     public function create(){
         return view('panel.user.user-create');
     }

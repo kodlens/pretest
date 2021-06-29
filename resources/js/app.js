@@ -77,10 +77,16 @@ Vue.component('test-schedule-edit', require('./components/Administrator/TestSche
 
 Vue.component('student-schedule', require('./components/Administrator/StudentSchedule/StudentSchedule.vue').default);
 Vue.component('student-schedule-create', require('./components/Administrator/StudentSchedule/StudentScheduleCreate.vue').default);
-Vue.component('student-schedule-edit', require('./components/Administrator/StudentSchedule/StudentSchedule.vue').default);
+Vue.component('student-schedule-edit', require('./components/Administrator/StudentSchedule/StudentScheduleEdit.vue').default);
+
+//STUDENT SECTION TAKEN
+Vue.component('student-section-taken', require('./components/Administrator/StudentSectionTaken/StudentSectionTaken.vue').default);
+
+
 
 //MODAL COMPONENT
 Vue.component('modal-schedule', require('./components/Administrator/StudentSchedule/Modal/ModalSchedule.vue').default);
+Vue.component('modal-browse-student', require('./components/Administrator/StudentSchedule/Modal/ModalBrowseStudent.vue').default);
 //Vue.component('modal-users', require('./components/Administrator/StudentSchedule/Modal/ModalUser.vue').default);
 
 
@@ -90,7 +96,11 @@ Vue.component('modal-schedule', require('./components/Administrator/StudentSched
 Vue.component('panel-section', require('./components/Administrator/Section/SectionPanel.vue').default);
 
 
-Vue.component('answer-sheet', require('./components/Administrator/Answer/AnswerSheet.vue').default);
+//STUDENT ANSWER
+Vue.component('student-answer', require('./components/Administrator/StudentAnswer/StudentAnswer.vue').default);
+
+//STUDENT RESULT (REPORT)
+Vue.component('student-result', require('./components/Administrator/StudentResult/StudentResult.vue').default);
 
 //USER
 Vue.component('user-page', require('./components/Administrator/User/UserPage.vue').default);

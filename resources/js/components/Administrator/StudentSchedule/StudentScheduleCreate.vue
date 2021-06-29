@@ -11,20 +11,13 @@
 
                             <div class="columns">
                                 <div class="column">
-                                    <modal-schedule></modal-schedule>
+                                    <modal-schedule :prop-desc="schedule.description" @description="emitSchedule($event)"></modal-schedule>
                                 </div>
                             </div>
 
                             <div class="columns">
                                 <div class="column">
-                                    <b-field label="Browse Student"
-                                             :type="this.errors.user_id ? 'is-danger' : ''"
-                                             :message="this.errors.user_id ? this.errors.user_id[0] : ''">
-                                        <b-input type="text" v-model="fields.user_id" placeholder="Browse Schedule" expanded />
-                                        <p class="control">
-                                            <b-button class="is-primary" @click="isModalUser=true">...</b-button>
-                                        </p>
-                                    </b-field>
+                                    <modal-browse-student :prop-name="student.fullname" @student="emitStudent($event)"></modal-browse-student>
                                 </div>
                             </div>
 
@@ -44,20 +37,22 @@
 <script>
 export default {
 
-    props:{
-        dataAcademics:{
-            type: String,
-            default: '',
-        }
-    },
+    // props:{
+    //     dataAcademics:{
+    //         type: String,
+    //         default: '',
+    //     }
+    // },
 
     data(){
         return{
             fields: {
-                max_user: 30,
+                test_schedule_id: null,
+                user_id: null,
             },
             errors: {},
-
+            schedule: {},
+            student: {},
             sched_from: null,
             sched_to: null,
             hourFormat: '12',
@@ -70,13 +65,13 @@ export default {
     },
     methods: {
         submit(){
-            axios.post('/panel/test-schedule', this.fields).then(res=>{
+            axios.post('/panel/student-schedule', this.fields).then(res=>{
                 if(res.data.status === 'saved'){
                     this.$buefy.dialog.alert({
                         title: 'SAVED!',
                         message: 'Successfully saved.',
                         type: 'is-success',
-                        onConfirm: ()=> window.location = '/panel/test-schedule'
+                        onConfirm: ()=> window.location = '/panel/student-schedule'
                     });
                 }
             }).catch(err=>{
@@ -86,28 +81,25 @@ export default {
             })
         },
 
-        formattedFromDate(){
-            let ndate = new Date(Date.parse(this.sched_from));
-            let realDateTime = ndate.getFullYear() + "-" + ("0" + (ndate.getMonth() + 1)).slice(-2) + "-"+ ("0" + (ndate.getDate())).slice(-2)
-                +' ' +("0" + ndate.getHours()).slice(-2) + ':'+ ("0" + ndate.getMinutes()).slice(-2) + ':00';
-            console.log(realDateTime);
-            this.fields.from = realDateTime;
-        },
-        formattedToDate(){
-            let ndate = new Date(Date.parse(this.sched_to));
-            let realDateTime = ndate.getFullYear() + "-" + ("0" + (ndate.getMonth() + 1)).slice(-2) + "-"+ ("0" + (ndate.getDate())).slice(-2)
-                +' ' +("0" + ndate.getHours()).slice(-2) + ':'+ ("0" + ndate.getMinutes()).slice(-2) + ':00';
-            console.log(realDateTime);
-            this.fields.to = realDateTime;
+
+
+        emitSchedule: function(data){
+            this.schedule = data;
+            this.fields.test_schedule_id = data.test_schedule_id;
+
         },
 
+        emitStudent: function(data){
+            this.student = data;
+            this.student.fullname = data.lname + ', ' + data.fname + ' ' + data.mname;
+            this.fields.user_id = data.user_id;
+        },
 
         loadSchedules: function(){
             axios.get('/fetch-studen-schedules').then(res=>{
 
             })
         },
-
 
         loadUsers: function(){
             axios.get('/fetch-users').then(res=>{
@@ -117,7 +109,7 @@ export default {
 
 
         initData(){
-            this.academicyears = JSON.parse(this.dataAcademics);
+           // this.academicyears = JSON.parse(this.dataAcademics);
 
         }
 

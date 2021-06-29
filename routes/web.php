@@ -105,7 +105,14 @@ Route::get('/fetch-test-schedules', [App\Http\Controllers\Administrator\TestSche
 Route::resource('/panel/student-schedule', App\Http\Controllers\Administrator\StudentTestScheduleController::class);
 Route::get('/fetch-student-schedules', [App\Http\Controllers\Administrator\StudentTestScheduleController::class, 'index_data']);
 Route::get('/fetch-schedules', [App\Http\Controllers\Administrator\StudentTestScheduleController::class, 'getSchedules']);
-Route::get('/fetch-users', [App\Http\Controllers\Administrator\StudentTestScheduleController::class, 'getUsers']);
+
+
+
+//STUDENT SECTION TAKEN
+Route::resource('/panel/student-section-taken', App\Http\Controllers\Administrator\StudentSectionTakenController::class);
+Route::get('/fetch-student-section-taken', [App\Http\Controllers\Administrator\StudentSectionTakenController::class, 'index_data']);
+Route::delete('/delete-student-section-taken/{userid}/{sectionid}', [App\Http\Controllers\Administrator\StudentSectionTakenController::class, 'deleteTaken']);
+
 
 
 
@@ -114,10 +121,14 @@ Route::resource('/panel/question', App\Http\Controllers\Administrator\QuestionCo
 Route::get('/ajax/question', [App\Http\Controllers\Administrator\QuestionController::class, 'index_data']);
 //Route::get('/ajax/question/sections', [App\Http\Controllers\Administrator\QuestionController::class, 'ajax_section']);
 
+//Student Answer
+Route::resource('/panel/student-answer', App\Http\Controllers\Administrator\StudentAnswerController::class);
+Route::get('/fetch-student-answer', [App\Http\Controllers\Administrator\StudentAnswerController::class, 'index_data']);
 
-//Answer
-Route::resource('/panel/answer', App\Http\Controllers\Administrator\AnswerSheetController::class);
-Route::get('/fetch-student-answers', [App\Http\Controllers\Administrator\AnswerSheetController::class, 'index_data']);
+
+//Student Result
+Route::resource('/panel/student-result', App\Http\Controllers\Administrator\StudentResultController::class);
+Route::get('/fetch-student-result', [App\Http\Controllers\Administrator\StudentResultController::class, 'index_data']);
 
 
 //options
@@ -134,6 +145,7 @@ Route::get('/ajax/question-option', [App\Http\Controllers\Administrator\Question
 //USER
 Route::resource('/panel/user', App\Http\Controllers\Administrator\UserController::class);
 Route::get('/axios-users', [App\Http\Controllers\Administrator\UserController::class, 'index_data']);
+Route::get('/fetch-students', [App\Http\Controllers\Administrator\UserController::class, 'allStudents']);
 
 
 

@@ -1,13 +1,13 @@
 <template>
     <div>
         <section class="section">
-            <div style="font-size: 20px; text-align: center; font-weight: bold;">LIST OF STUDENT'S SCHEDULES</div>
+            <div style="font-size: 20px; text-align: center; font-weight: bold;">LIST OF STUDENT TAKEN</div>
             <div class="columns">
                 <div class="column is-10 is-offset-1">
                     <div class="level">
                         <div class="level-left">
                             <div class="level-item">
-                                <b-field label="Page">
+                                <b-field label="Page" label-position="on-border">
                                     <b-select v-model="perPage" @input="setPerPage">
                                         <option value="5">5 per page</option>
                                         <option value="10">10 per page</option>
@@ -17,17 +17,23 @@
                                 </b-field>
                             </div>
                         </div>
+
                         <div class="level-right">
                             <div class="level-item">
-                                <b-field label="Search">
-                                    <b-input type="text" v-model="search.lname" placeholder="Search Lastname..." @keyup.native.enter="loadAsyncData" />
+                                <b-field label="Search" label-position="on-border">
+                                    <b-input type="text" placeholder="Search Lastname..."
+                                        v-model="search.lname" @keyup.native.enter="loadAsyncData" />
                                 </b-field>
                             </div>
                         </div>
                     </div>
+
+
                     <div style="display:flex; justify-content: flex-end;">
                         <p style="font-weight: bold; margin-bottom: 10px;">TOTAL ROWS: {{ total }} </p>
                     </div>
+
+
                     <b-table
                         :data="data"
                         :loading="loading"
@@ -35,6 +41,8 @@
                         backend-pagination
                         :total="total"
                         :per-page="perPage"
+                        :range-before="rangeBefore"
+                        :range-after="rangeAfter"
                         @page-change="onPageChange"
                         aria-next-label="Next page"
                         aria-previous-label="Previous page"
@@ -44,43 +52,39 @@
                         :default-sort-direction="defaultSortDirection"
                         @sort="onSort">
 
-                        <b-table-column field="student_schedule_id" label="ID" v-slot="props">
-                            {{ props.row.student_schedule_id }}
+                        <b-table-column field="taking_test_id" label="ID" v-slot="props">
+                            {{ props.row.taking_test_id }}
                         </b-table-column>
 
-                        <b-table-column field="fullname" label="Name" v-slot="props">
+                        <b-table-column field="code" label="AY Code" v-slot="props">
+                            {{ props.row.code }}
+                        </b-table-column>
+
+                        <b-table-column field="fullname" label="Fullname" v-slot="props">
                             {{ props.row.lname }}, {{ props.row.fname }} {{ props.row.mname }}
                         </b-table-column>
 
-                        <b-table-column field="description" label="Description" v-slot="props">
-                            {{ props.row.description }}
+                        <b-table-column field="from" label="From/To" v-slot="props">
+                            {{ props.row.from }} - {{ props.row.from }}
                         </b-table-column>
 
-                        <b-table-column field="from" label="From" v-slot="props">
-                            {{ props.row.from }}
+                        <b-table-column field="section" label="Section" v-slot="props">
+                            {{ props.row.section }}
                         </b-table-column>
 
-                        <b-table-column field="to" label="To" v-slot="props">
-                            {{ props.row.to }}
-                        </b-table-column>
-
-                        <b-table-column field="max_user" label="Max Examinee" v-slot="props">
-                            {{ props.row.max_user }}
+                        <b-table-column field="created_date" label="Time Taken" v-slot="props">
+                            {{ props.row.created_date }} {{ props.row.created_time }}
                         </b-table-column>
 
                         <b-table-column field="ay_id" label="Action" v-slot="props">
                             <div class="is-flex">
-                                <b-button class="button is-small is-warning mr-1" tag="a" icon-right="pencil" icon-pack="fa" :href="'/panel/student-schedule/'+ props.row.student_schedule_id + '/edit'"></b-button>
-                                <b-button class="button is-small is-danger mr-1" icon-pack="fa" icon-right="trash" @click="confirmDelete(props.row.student_schedule_id)"></b-button>
+                                <!-- <b-button class="button is-small is-warning mr-1" tag="a" icon-right="pencil" icon-pack="fa" :href="'/panel/test-schedule/'+ props.row.test_schedule_id + '/edit'"></b-button> -->
+                                <b-button class="button is-small is-danger mr-1" icon-pack="fa" icon-right="trash" @click="confirmDelete(props.row.test_schedule_id)"></b-button>
                             </div>
                         </b-table-column>
 
                     </b-table>
 
-                    <div class="buttons mt-3">
-                        <b-button icon-pack="fa" icon-left="plus" tag="a"
-                            href="/panel/student-schedule/create" class="is-primary">New Student Schedule</b-button>
-                    </div>
                 </div><!--close column-->
             </div>
         </section>
@@ -96,16 +100,17 @@ export default {
             data: [],
             total: 0,
             loading: false,
-            sortField: 'student_schedule_id',
+            sortField: 'test_schedule_id',
             sortOrder: 'desc',
             page: 1,
-            perPage: 5,
+            perPage: 10,
             defaultSortDirection: 'asc',
+            rangeBefore: 5,
+            rangeAfter: 5,
 
             isModalActive: false,
 
             dataId: 0,
-
 
             fields: {},
             errors : {},
@@ -133,8 +138,8 @@ export default {
                 `lname=${this.search.lname}`
             ].join('&')
 
-            this.loading = true
-            axios.get(`/fetch-student-schedules?${params}`)
+            this.loading = true;
+            axios.get(`/fetch-student-section-taken?${params}`)
                 .then(({ data }) => {
                     this.data = []
                     let currentTotal = data.total
@@ -166,9 +171,9 @@ export default {
         },
 
         onSort(field, order) {
-            this.sortField = field
-            this.sortOrder = order
-            this.loadAsyncData()
+            this.sortField = field;
+            this.sortOrder = order;
+            this.loadAsyncData();
         },
 
         setPerPage(){
@@ -178,8 +183,8 @@ export default {
 
         //actions here below
 
-        deleteSubmit(delete_id){
-            axios.delete('/panel/student-schedule/'+ delete_id).then(res=>{
+        deleteSubmit(deleteId,sectionId){
+            axios.delete('/delete-student-section-taken/'+ deleteId + '/' + sectionId).then(res=>{
                 this.loadAsyncData();
             }).catch(err=>{
                 console.log(err);
@@ -188,14 +193,14 @@ export default {
 
 
         //alert
-        confirmDelete(delete_id) {
+        confirmDelete(deleteId) {
             this.$buefy.dialog.confirm({
                 title: 'DELETE!',
                 type: 'is-danger',
-                message: 'Are you sure you want to delete this data?',
+                message: 'Are you sure you want to delete this data? This will also delete the answers record of this section',
                 cancelText: 'Cancel',
                 confirmText: 'Delete',
-                onConfirm: () => this.deleteSubmit(delete_id)
+                onConfirm: () => this.deleteSubmit(deleteId)
             });
         },
 

@@ -23,6 +23,13 @@
                                     Entering twice is prohibited.
                                 </b-notification>
 
+                                <b-notification v-if="isExist.trim() == 'exist'"
+                                                type="is-danger is-light"
+                                                aria-close-label="Close notification"
+                                                role="alert">
+                                    You already have test records.
+                                </b-notification>
+
                                 <p v-if="schedules" style="text-align:center;">Your schedule is on {{ scheduleNiya }}</p>
                                 <p v-else style="text-align:center;">To take the test, you must request a schedule first.</p>
 
@@ -105,7 +112,7 @@
 <script>
 
 export default {
-    props: ['isNotScheduled', 'alreadyVisitedSection'],
+    props: ['isNotScheduled', 'alreadyVisitedSection', 'isExist'],
 
     data() {
         return {

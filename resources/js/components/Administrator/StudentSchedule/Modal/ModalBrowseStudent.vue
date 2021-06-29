@@ -2,8 +2,8 @@
     <div>
         <b-field label="Schedule">
 
-            <b-input :value="valueDesc" expanded icon-pack="fa"
-                     icon="globe" placeholder="SELECT SCHEDULE" required readonly>
+            <b-input :value="valueFullname" expanded icon-pack="fa"
+                     icon="globe" placeholder="SELECT STUDENT" required readonly>
             </b-input>
 
             <p class="control">
@@ -18,13 +18,14 @@
                     <p class="modal-card-title">Schedules</p>
                     <button type="button" class="delete"
                             @click="isModalActive = false"/>
+
                 </header>
 
                 <section class="modal-card-body">
                     <div>
 
                         <b-field label="Search" label-position="on-border" >
-                            <b-input type="text" v-model="search.description" placeholder="Search..." expanded auto-focus></b-input>
+                            <b-input type="text" v-model="search.lname" placeholder="Search..." expanded auto-focus></b-input>
                             <p class="control">
                                 <b-button class="is-primary" icon-pack="fa" icon-left="search" @click="loadAsyncData"></b-button>
                             </p>
@@ -48,20 +49,16 @@
                             default-sort-direction="defualtSortDirection"
                             @sort="onSort">
 
-                            <b-table-column field="test_schedule_id" label="ID" v-slot="props">
-                                {{props.row.test_schedule_id}}
+                            <b-table-column field="user_id" label="ID" v-slot="props">
+                                {{props.row.user_id}}
                             </b-table-column>
 
-                            <b-table-column field="description" label="Description" v-slot="props">
-                                {{props.row.description.toUpperCase()}}
+                            <b-table-column field="fullname" label="Fullname" v-slot="props">
+                                {{props.row.lname.toUpperCase()}}, {{props.row.fname.toUpperCase()}} {{props.row.mname.toUpperCase()}}
                             </b-table-column>
 
-                            <b-table-column field="from" label="From" v-slot="props">
-                                {{props.row.from}}
-                            </b-table-column>
-
-                            <b-table-column field="to" label="To" v-slot="props">
-                                {{props.row.to}}
+                            <b-table-column field="sex" label="Description" v-slot="props">
+                                {{ props.row.sex }}
                             </b-table-column>
 
                             <b-table-column field="" label="Action" v-slot="props">
@@ -89,7 +86,7 @@
 <script>
 export default {
     props: {
-        propDesc: {
+        propName: {
             type: String,
             default: '',
         },
@@ -99,7 +96,7 @@ export default {
             data: [],
             total: 0,
             loading: false,
-            sortfield: 'test_schedule_id',
+            sortfield: 'user_id',
             sortOrder:'desc',
             page: 1,
             perPage: 5,
@@ -109,10 +106,10 @@ export default {
             errors:{},
 
             search: {
-                description: '',
+                lname: '',
             },
 
-            schedules: {},
+            student: {},
         }
     },
     methods: {
@@ -121,12 +118,12 @@ export default {
                 `sort_by=${this.sortfield}.${this.sortOrder}`,
                 `perpage=${this.perPage}`,
                 `page=${this.page}`,
-                `description=${this.search.description}`,
+                `lname=${this.search.lname}`,
 
             ].join('&');
 
             this.loading = true;
-            axios.get(`/fetch-schedules?${params}`).then(({data}) => {
+            axios.get(`/fetch-students?${params}`).then(({data}) => {
                 this.data = [];
                 let currentTotal = data.total;
                 if (data.total / this.perPage > 1000) {
@@ -170,16 +167,16 @@ export default {
 
         selectData(dataRow){
             this.isModalActive = false;
-            this.schedules.desc = dataRow.description.toUpperCase();
-            this.$emit('description', dataRow);
+            this.student.fullname = dataRow.lname.toUpperCase() + ', ' + dataRow.fname.toUpperCase() + ' ' + dataRow.mname.toUpperCase();
+            this.$emit('student', dataRow);
         }
 
     },
 
     computed: {
-        valueDesc(){
-            this.schedules.desc = this.propDesc;
-            return this.propDesc;
+        valueFullname(){
+            this.student.fullname = this.propName;
+            return this.propName;
         }
     },
 

@@ -1,7 +1,7 @@
 <template>
     <div>
         <div class="section">
-            <div style="font-size: 20px; text-align: center; font-weight: bold; margin-bottom: 20px;">LIST OF STUDENT RESULTS</div>
+            <div style="font-size: 20px; text-align: center; font-weight: bold; margin-bottom: 20px;">LIST OF STUDENT ANSWERS</div>
             <div class="columns">
                 <div class="column is-10 is-offset-1">
 
@@ -100,19 +100,15 @@
                             {{ props.row.section }}
                         </b-table-column>
 
-                        <b-table-column field="score" label="Score" v-slot="props">
-                            {{ props.row.score }}
-                        </b-table-column>
-
                         <b-table-column field="created_at" label="Created At" v-slot="props">
                             {{ props.row.created_at }}
                         </b-table-column>
 
-<!--                        <b-table-column field="" label="Action" v-slot="props">-->
-<!--                            <div class="is-flex">-->
-<!--                                <b-button outlined class="button is-small is-danger mr-1" icon-pack="fa" icon-right="trash" @click="confirmDelete(props.row.answer_sheet_id)">DELETE</b-button>-->
-<!--                            </div>-->
-<!--                        </b-table-column>-->
+                        <b-table-column field="" label="Action" v-slot="props">
+                            <div class="is-flex">
+                                <b-button outlined class="button is-small is-danger mr-1" icon-pack="fa" icon-right="trash" @click="confirmDelete(props.row.answer_sheet_id)">DELETE</b-button>
+                            </div>
+                        </b-table-column>
 
                     </b-table>
                 </div><!--close column-->
@@ -176,7 +172,7 @@ export default {
             ].join('&');
 
             this.loading = true
-            axios.get(`/fetch-student-answers?${params}`)
+            axios.get(`/fetch-student-answer?${params}`)
                 .then(({ data }) => {
                     this.data = []
                     let currentTotal = data.total
@@ -222,14 +218,14 @@ export default {
             this.$buefy.dialog.confirm({
                 title: 'DELETE',
                 type: 'is-danger',
-                message: 'Are you sure you want to delete this answer of the student permanently? It will also delete his/her answers.',
+                message: 'Are you sure you want to delete this record permanently? It will also delete his/her answers.',
                 cancelText: 'Cancel',
                 confirmText: 'Delete',
                 onConfirm: ()=> this.deleteSubmit(dataId)
             });
         },
         deleteSubmit(dataId){
-            axios.delete('/panel/answer/'+dataId).then(res=>{
+            axios.delete('/panel/student-answer/'+dataId).then(res=>{
                 this.loadAsyncData();
             });
         },

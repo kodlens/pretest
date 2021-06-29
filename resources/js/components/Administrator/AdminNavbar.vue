@@ -44,13 +44,19 @@
                 <b-navbar-item href="/panel/student-schedule">
                     Student Schedule
                 </b-navbar-item>
+                <b-navbar-item href="/panel/student-section-taken">
+                    Student Section Taken
+                </b-navbar-item>
             </b-navbar-dropdown>
 
             <b-navbar-dropdown label="Q&A">
                 <b-navbar-item href="/panel/question">
                     Question
                 </b-navbar-item>
-                <b-navbar-item href="/panel/answer">
+                <b-navbar-item href="/panel/student-answer">
+                    Student Answer
+                </b-navbar-item>
+                <b-navbar-item href="/panel/student-result">
                     Student Result
                 </b-navbar-item>
             </b-navbar-dropdown>

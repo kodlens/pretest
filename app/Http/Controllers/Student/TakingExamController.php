@@ -44,7 +44,7 @@ class TakingExamController extends Controller
 
         if($isExist){
             return redirect('/home')
-                ->with('isTaken', 1);
+                ->with('error', 'exist');
         }
 
         //record the user open this section and questions

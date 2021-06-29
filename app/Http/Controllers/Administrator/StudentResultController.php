@@ -3,18 +3,14 @@
 namespace App\Http\Controllers\Administrator;
 
 use App\Http\Controllers\Controller;
+use App\Models\AnswerSheet;
 use App\Models\Program;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
-
-use App\Models\AnswerSheet;
-
-
-class AnswerSheetController extends Controller
+class StudentResultController extends Controller
 {
     //
-
     public function __construct(){
         $this->middleware('auth');
         $this->middleware('admin');
@@ -23,7 +19,7 @@ class AnswerSheetController extends Controller
 
     public function index(){
         $programs = Program::where('programStat', 1)->get();
-        return view('panel.answer.answer-sheet')
+        return view('panel.student_result.student-result')
             ->with('programs', $programs);
     }
 
@@ -54,6 +50,4 @@ class AnswerSheetController extends Controller
         AnswerSheet::destroy($id);
         return ['status'=>'deleted'];
     }
-
-
 }

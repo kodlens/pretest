@@ -44,7 +44,7 @@ export default {
             if(var1 && var2){
                 form.submit();
             }else{
-                alert('An error occured. Please check your internet connectivity and start the the home page. If' +
+                alert('An error occured. Please check your internet connectivity and start the step from home page. If' +
                     ' the problem still exist, please contact CISO Personnel.');
             }
 
