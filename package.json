@@ -31,6 +31,7 @@
         "buefy": "^0.9.8",
         "bulma": "^0.9.3",
         "font-awesome": "^4.7.0",
-        "moment": "^2.29.1"
+        "moment": "^2.29.1",
+        "vue-json-excel": "^0.3.0"
     }
 }

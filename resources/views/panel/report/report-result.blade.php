@@ -2,6 +2,6 @@
 
 @section('content')
 
-    <report-result></report-result>
+    <report-result prop-programs='@json($programs)'></report-result>
 
 @endsection

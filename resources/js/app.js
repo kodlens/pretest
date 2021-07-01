@@ -11,6 +11,8 @@
  import Vue from 'vue';
  //import VueRouter from 'vue-router'
  import Buefy from 'buefy';
+ //import JsonExcel from "vue-json-excel";
+
 
 //import 'buefy/dist/buefy.css'
 //import moment from 'moment';
@@ -148,6 +150,8 @@ Vue.component('result-exam', require('./components/Student/ResultExam.vue').defa
  */
 
 Vue.use(Buefy);
+//Vue.use(JsonExcel);
+//Vue.component("downloadExcel", JsonExcel);
 //Vue.use(moment);
 
 Vue.filter('formatTime', function(value) {

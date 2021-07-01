@@ -36,6 +36,7 @@ class StudentAnswerController extends Controller
             ->join('sections as c', 'a.section_id', 'c.section_id')
             ->where('a.user_id', $req->user_id == '' ? 'like' : '=', $req->user_id == '' ? '%' : $req->user_id)
             ->where('b.lname', 'like', $req->lname .'%')
+            ->where('b.fname', 'like', $req->fname .'%')
             ->where('b.first_program_choice', 'like', $req->first_program_choice .'%')
             ->select('a.answer_sheet_id', 'a.code', 'a.user_id', 'b.lname', 'b.fname', 'b.mname',
                 'b.sex', 'b.first_program_choice', 'b.second_program_choice',

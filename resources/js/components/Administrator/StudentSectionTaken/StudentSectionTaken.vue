@@ -20,14 +20,20 @@
 
                         <div class="level-right">
                             <div class="level-item">
-                                <b-field label="Search" label-position="on-border">
+                                <b-field label="Search Lastname" label-position="on-border">
                                     <b-input type="text" placeholder="Search Lastname..."
                                         v-model="search.lname" @keyup.native.enter="loadAsyncData" />
                                 </b-field>
                             </div>
+
+                            <div class="level-item">
+                                <b-field label="Search Firstname" label-position="on-border">
+                                    <b-input type="text" placeholder="Search Firstname..."
+                                        v-model="search.fname" @keyup.native.enter="loadAsyncData" />
+                                </b-field>
+                            </div>
                         </div>
                     </div>
-
 
                     <div style="display:flex; justify-content: flex-end;">
                         <p style="font-weight: bold; margin-bottom: 10px;">TOTAL ROWS: {{ total }} </p>
@@ -79,7 +85,7 @@
                         <b-table-column field="ay_id" label="Action" v-slot="props">
                             <div class="is-flex">
                                 <!-- <b-button class="button is-small is-warning mr-1" tag="a" icon-right="pencil" icon-pack="fa" :href="'/panel/test-schedule/'+ props.row.test_schedule_id + '/edit'"></b-button> -->
-                                <b-button class="button is-small is-danger mr-1" icon-pack="fa" icon-right="trash" @click="confirmDelete(props.row.test_schedule_id)"></b-button>
+                                <b-button class="button is-small is-danger mr-1" icon-pack="fa" icon-right="trash" @click="confirmDelete(props.row)"></b-button>
                             </div>
                         </b-table-column>
 
@@ -125,6 +131,7 @@ export default {
 
             search: {
                 lname: '',
+                fname: '',
             }
 
         }
@@ -135,7 +142,8 @@ export default {
                 `sort_by=${this.sortField}.${this.sortOrder}`,
                 `perpage=${this.perPage}`,
                 `page=${this.page}`,
-                `lname=${this.search.lname}`
+                `lname=${this.search.lname}`,
+                `fname=${this.search.fname}`
             ].join('&')
 
             this.loading = true;
@@ -153,6 +161,7 @@ export default {
                         this.data.push(item)
                     })
                     this.loading = false
+                    
                 })
                 .catch((error) => {
                     this.data = []
@@ -183,8 +192,8 @@ export default {
 
         //actions here below
 
-        deleteSubmit(deleteId,sectionId){
-            axios.delete('/delete-student-section-taken/'+ deleteId + '/' + sectionId).then(res=>{
+        deleteSubmit(dataRow){
+            axios.post('/delete-student-section-taken', dataRow).then(res=>{
                 this.loadAsyncData();
             }).catch(err=>{
                 console.log(err);
@@ -193,14 +202,15 @@ export default {
 
 
         //alert
-        confirmDelete(deleteId) {
+
+        confirmDelete(dataRow) {
             this.$buefy.dialog.confirm({
                 title: 'DELETE!',
                 type: 'is-danger',
                 message: 'Are you sure you want to delete this data? This will also delete the answers record of this section',
                 cancelText: 'Cancel',
                 confirmText: 'Delete',
-                onConfirm: () => this.deleteSubmit(deleteId)
+                onConfirm: () => this.deleteSubmit(dataRow)
             });
         },
 

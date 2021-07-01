@@ -3300,6 +3300,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var vue_json_excel__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue-json-excel */ "./node_modules/vue-json-excel/dist/vue-json-excel.esm.js");
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
 //
 //
 //
@@ -3392,36 +3401,149 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  props: {
+    propPrograms: {
+      type: String,
+      "default": ''
+    }
+  },
+  components: {
+    downloadexcel: vue_json_excel__WEBPACK_IMPORTED_MODULE_1__.default
+  },
   data: function data() {
     return {
       data: [],
       total: 0,
       loading: false,
-      sortField: 'student_id',
+      sortField: 'user_id',
       sortOrder: 'desc',
       page: 1,
       perPage: 20,
       defaultSortDirection: 'asc',
-      //modal
-      modalImage: false,
+      json_fields: {
+        'USER ID': 'user_id',
+        'LASTNAME': 'lname',
+        'FIRSTNAME': 'fname',
+        'MIDDLENAME': 'mname',
+        'SEX': 'sex',
+        '1ST PROGRAM': 'first_program_choice',
+        '2ND PROGRAM': 'second_program_choice',
+        'ABSTRACTION': 'abstraction',
+        'LOGICAL REASONING': 'logical',
+        'ENGLISH PROFICIENCY': 'english',
+        'NUMERICAL REASONING': 'numerical',
+        'GENERAL KNWOLEDGE': 'general',
+        'TOTAL SCORE': 'total'
+      },
+      report_data: [],
       btnClass: {
         'is-success': true,
         'button': true,
         'is-loading': false
       },
-      search: '',
-      path: '' //path if image retirieve using modal
-      //optionsssss
-      // activeColors: ['red'],
-
+      search: {
+        lname: '',
+        fname: '',
+        first_program: ''
+      },
+      programs: {}
     };
   },
   methods: {
     loadAsyncData: function loadAsyncData() {
       var _this = this;
 
-      var params = ["sort_by=".concat(this.sortField, ".").concat(this.sortOrder), "perpage=".concat(this.perPage), "searchkey=".concat(this.search), "page=".concat(this.page)].join('&');
+      var params = ["sort_by=".concat(this.sortField, ".").concat(this.sortOrder), "perpage=".concat(this.perPage), "lname=".concat(this.search.lname), "fname=".concat(this.search.fname), "first_program=".concat(this.search.first_program), "page=".concat(this.page)].join('&');
       this.loading = true;
       axios.get("/panel/ajax-studentlist-result?".concat(params)).then(function (_ref) {
         var data = _ref.data;
@@ -3433,7 +3555,7 @@ __webpack_require__.r(__webpack_exports__);
         }
 
         _this.total = currentTotal;
-        data.forEach(function (item) {
+        data.data.forEach(function (item) {
           //item.release_date = item.release_date ? item.release_date.replace(/-/g, '/') : null
           _this.data.push(item);
         });
@@ -3460,10 +3582,49 @@ __webpack_require__.r(__webpack_exports__);
     },
     setPerPage: function setPerPage() {
       this.loadAsyncData();
+    },
+    loadDataForReport: function () {
+      var _loadDataForReport = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
+        var params, response;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                params = ["first_program=".concat(this.search.first_program)].join('&');
+                _context.next = 3;
+                return axios.get("/panel/report-excel-studentlist-result?".concat(params));
+
+              case 3:
+                response = _context.sent;
+                return _context.abrupt("return", response.data);
+
+              case 5:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee, this);
+      }));
+
+      function loadDataForReport() {
+        return _loadDataForReport.apply(this, arguments);
+      }
+
+      return loadDataForReport;
+    }(),
+    startDownload: function startDownload() {
+      this.btnClass['is-loading'] = true;
+    },
+    finishDownload: function finishDownload() {
+      this.btnClass['is-loading'] = false;
+    },
+    initData: function initData() {
+      this.programs = JSON.parse(this.propPrograms);
+      this.loadAsyncData();
     }
   },
   mounted: function mounted() {
-    this.loadAsyncData();
+    this.initData();
   }
 });
 
@@ -3827,6 +3988,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: {
     propPrograms: {
@@ -3854,6 +4021,7 @@ __webpack_require__.r(__webpack_exports__);
       search: {
         user_id: '',
         lname: '',
+        fname: '',
         first_program_choice: ''
       },
       programs: []
@@ -3863,7 +4031,7 @@ __webpack_require__.r(__webpack_exports__);
     loadAsyncData: function loadAsyncData() {
       var _this = this;
 
-      var params = ["sort_by=".concat(this.sortField, ".").concat(this.sortOrder), "perpage=".concat(this.perPage), "page=".concat(this.page), "user_id=".concat(this.search.user_id), "lname=".concat(this.search.lname), "first_program_choice=".concat(this.search.first_program_choice)].join('&');
+      var params = ["sort_by=".concat(this.sortField, ".").concat(this.sortOrder), "perpage=".concat(this.perPage), "page=".concat(this.page), "user_id=".concat(this.search.user_id), "lname=".concat(this.search.lname), "fname=".concat(this.search.fname), "first_program_choice=".concat(this.search.first_program_choice)].join('&');
       this.loading = true;
       axios.get("/fetch-student-answer?".concat(params)).then(function (_ref) {
         var data = _ref.data;
@@ -5095,6 +5263,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
@@ -5119,7 +5293,8 @@ __webpack_require__.r(__webpack_exports__);
         'is-loading': false
       },
       search: {
-        lname: ''
+        lname: '',
+        fname: ''
       }
     };
   },
@@ -5127,7 +5302,7 @@ __webpack_require__.r(__webpack_exports__);
     loadAsyncData: function loadAsyncData() {
       var _this = this;
 
-      var params = ["sort_by=".concat(this.sortField, ".").concat(this.sortOrder), "perpage=".concat(this.perPage), "page=".concat(this.page), "lname=".concat(this.search.lname)].join('&');
+      var params = ["sort_by=".concat(this.sortField, ".").concat(this.sortOrder), "perpage=".concat(this.perPage), "page=".concat(this.page), "lname=".concat(this.search.lname), "fname=".concat(this.search.fname)].join('&');
       this.loading = true;
       axios.get("/fetch-student-section-taken?".concat(params)).then(function (_ref) {
         var data = _ref.data;
@@ -5168,17 +5343,17 @@ __webpack_require__.r(__webpack_exports__);
       this.loadAsyncData();
     },
     //actions here below
-    deleteSubmit: function deleteSubmit(deleteId, sectionId) {
+    deleteSubmit: function deleteSubmit(dataRow) {
       var _this2 = this;
 
-      axios["delete"]('/delete-student-section-taken/' + deleteId + '/' + sectionId).then(function (res) {
+      axios.post('/delete-student-section-taken', dataRow).then(function (res) {
         _this2.loadAsyncData();
       })["catch"](function (err) {
         console.log(err);
       });
     },
     //alert
-    confirmDelete: function confirmDelete(deleteId) {
+    confirmDelete: function confirmDelete(dataRow) {
       var _this3 = this;
 
       this.$buefy.dialog.confirm({
@@ -5188,7 +5363,7 @@ __webpack_require__.r(__webpack_exports__);
         cancelText: 'Cancel',
         confirmText: 'Delete',
         onConfirm: function onConfirm() {
-          return _this3.deleteSubmit(deleteId);
+          return _this3.deleteSubmit(dataRow);
         }
       });
     },
@@ -8075,7 +8250,8 @@ window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js"
 window.axios = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
  //import VueRouter from 'vue-router'
 
- //import 'buefy/dist/buefy.css'
+ //import JsonExcel from "vue-json-excel";
+//import 'buefy/dist/buefy.css'
 //import moment from 'moment';
 
 /**
@@ -8155,7 +8331,9 @@ vue__WEBPACK_IMPORTED_MODULE_0__.default.component('result-exam', __webpack_requ
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-vue__WEBPACK_IMPORTED_MODULE_0__.default.use(buefy__WEBPACK_IMPORTED_MODULE_1__.default); //Vue.use(moment);
+vue__WEBPACK_IMPORTED_MODULE_0__.default.use(buefy__WEBPACK_IMPORTED_MODULE_1__.default); //Vue.use(JsonExcel);
+//Vue.component("downloadExcel", JsonExcel);
+//Vue.use(moment);
 
 vue__WEBPACK_IMPORTED_MODULE_0__.default.filter('formatTime', function (value) {
   var timeString = value;
@@ -26017,7 +26195,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/*qo mean question options button remove*/\n.qo-btn[data-v-5e6aad46]{\n    margin-left: 5px;\n    border: none;\n}\n.qo-btn > i[data-v-5e6aad46]:hover{\n    color:red;\n    text-decoration: underline;\n}\n.qo-btn-check[data-v-5e6aad46]{\n    border: none;\n    color: red;\n}\n.qo-btn-check-active[data-v-5e6aad46]{\n    border: none;\n    color: green;\n}\n.red-x[data-v-5e6aad46]{\n    color: red;\n}\n.green-check[data-v-5e6aad46]{\n    color: green;\n}\n.option-panel[data-v-5e6aad46]{\n    margin-left: 30px;\n}\n\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/*qo mean question options button remove*/\n.qo-btn[data-v-5e6aad46]{\n    margin-left: 5px;\n    border: none;\n}\n.qo-btn > i[data-v-5e6aad46]:hover{\n    color:red;\n    text-decoration: underline;\n}\n.qo-btn-check[data-v-5e6aad46]{\n    border: none;\n    color: red;\n}\n.qo-btn-check-active[data-v-5e6aad46]{\n    border: none;\n    color: green;\n}\n.red-x[data-v-5e6aad46]{\n    color: red;\n}\n.green-check[data-v-5e6aad46]{\n    color: green;\n}\n.option-panel[data-v-5e6aad46]{\n    margin-left: 30px;\n}\n\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -27421,6 +27599,673 @@ try {
   // problems, please detail your unique predicament in a GitHub issue.
   Function("r", "regeneratorRuntime = r")(runtime);
 }
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-json-excel/dist/vue-json-excel.esm.js":
+/*!****************************************************************!*\
+  !*** ./node_modules/vue-json-excel/dist/vue-json-excel.esm.js ***!
+  \****************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+var commonjsGlobal = typeof globalThis !== 'undefined' ? globalThis : typeof window !== 'undefined' ? window : typeof __webpack_require__.g !== 'undefined' ? __webpack_require__.g : typeof self !== 'undefined' ? self : {};
+
+function createCommonjsModule(fn, module) {
+	return module = { exports: {} }, fn(module, module.exports), module.exports;
+}
+
+var download = createCommonjsModule(function (module, exports) {
+//download.js v4.2, by dandavis; 2008-2016. [MIT] see http://danml.com/download.html for tests/usage
+// v1 landed a FF+Chrome compat way of downloading strings to local un-named files, upgraded to use a hidden frame and optional mime
+// v2 added named files via a[download], msSaveBlob, IE (10+) support, and window.URL support for larger+faster saves than dataURLs
+// v3 added dataURL and Blob Input, bind-toggle arity, and legacy dataURL fallback was improved with force-download mime and base64 support. 3.1 improved safari handling.
+// v4 adds AMD/UMD, commonJS, and plain browser support
+// v4.1 adds url download capability via solo URL argument (same domain/CORS only)
+// v4.2 adds semantic variable names, long (over 2MB) dataURL support, and hidden by default temp anchors
+// https://github.com/rndme/download
+
+(function (root, factory) {
+	{
+		// Node. Does not work with strict CommonJS, but
+		// only CommonJS-like environments that support module.exports,
+		// like Node.
+		module.exports = factory();
+	}
+}(commonjsGlobal, function () {
+
+	return function download(data, strFileName, strMimeType) {
+
+		var self = window, // this script is only for browsers anyway...
+			defaultMime = "application/octet-stream", // this default mime also triggers iframe downloads
+			mimeType = strMimeType || defaultMime,
+			payload = data,
+			url = !strFileName && !strMimeType && payload,
+			anchor = document.createElement("a"),
+			toString = function(a){return String(a);},
+			myBlob = (self.Blob || self.MozBlob || self.WebKitBlob || toString),
+			fileName = strFileName || "download",
+			blob,
+			reader;
+			myBlob= myBlob.call ? myBlob.bind(self) : Blob ;
+	  
+		if(String(this)==="true"){ //reverse arguments, allowing download.bind(true, "text/xml", "export.xml") to act as a callback
+			payload=[payload, mimeType];
+			mimeType=payload[0];
+			payload=payload[1];
+		}
+
+
+		if(url && url.length< 2048){ // if no filename and no mime, assume a url was passed as the only argument
+			fileName = url.split("/").pop().split("?")[0];
+			anchor.href = url; // assign href prop to temp anchor
+		  	if(anchor.href.indexOf(url) !== -1){ // if the browser determines that it's a potentially valid url path:
+        		var ajax=new XMLHttpRequest();
+        		ajax.open( "GET", url, true);
+        		ajax.responseType = 'blob';
+        		ajax.onload= function(e){ 
+				  download(e.target.response, fileName, defaultMime);
+				};
+        		setTimeout(function(){ ajax.send();}, 0); // allows setting custom ajax headers using the return:
+			    return ajax;
+			} // end if valid url?
+		} // end if url?
+
+
+		//go ahead and download dataURLs right away
+		if(/^data:([\w+-]+\/[\w+.-]+)?[,;]/.test(payload)){
+		
+			if(payload.length > (1024*1024*1.999) && myBlob !== toString ){
+				payload=dataUrlToBlob(payload);
+				mimeType=payload.type || defaultMime;
+			}else {			
+				return navigator.msSaveBlob ?  // IE10 can't do a[download], only Blobs:
+					navigator.msSaveBlob(dataUrlToBlob(payload), fileName) :
+					saver(payload) ; // everyone else can save dataURLs un-processed
+			}
+			
+		}else {//not data url, is it a string with special needs?
+			if(/([\x80-\xff])/.test(payload)){			  
+				var i=0, tempUiArr= new Uint8Array(payload.length), mx=tempUiArr.length;
+				for(i;i<mx;++i) tempUiArr[i]= payload.charCodeAt(i);
+			 	payload=new myBlob([tempUiArr], {type: mimeType});
+			}		  
+		}
+		blob = payload instanceof myBlob ?
+			payload :
+			new myBlob([payload], {type: mimeType}) ;
+
+
+		function dataUrlToBlob(strUrl) {
+			var parts= strUrl.split(/[:;,]/),
+			type= parts[1],
+			decoder= parts[2] == "base64" ? atob : decodeURIComponent,
+			binData= decoder( parts.pop() ),
+			mx= binData.length,
+			i= 0,
+			uiArr= new Uint8Array(mx);
+
+			for(i;i<mx;++i) uiArr[i]= binData.charCodeAt(i);
+
+			return new myBlob([uiArr], {type: type});
+		 }
+
+		function saver(url, winMode){
+
+			if ('download' in anchor) { //html5 A[download]
+				anchor.href = url;
+				anchor.setAttribute("download", fileName);
+				anchor.className = "download-js-link";
+				anchor.innerHTML = "downloading...";
+				anchor.style.display = "none";
+				document.body.appendChild(anchor);
+				setTimeout(function() {
+					anchor.click();
+					document.body.removeChild(anchor);
+					if(winMode===true){setTimeout(function(){ self.URL.revokeObjectURL(anchor.href);}, 250 );}
+				}, 66);
+				return true;
+			}
+
+			// handle non-a[download] safari as best we can:
+			if(/(Version)\/(\d+)\.(\d+)(?:\.(\d+))?.*Safari\//.test(navigator.userAgent)) {
+				if(/^data:/.test(url))	url="data:"+url.replace(/^data:([\w\/\-\+]+)/, defaultMime);
+				if(!window.open(url)){ // popup blocked, offer direct download:
+					if(confirm("Displaying New Document\n\nUse Save As... to download, then click back to return to this page.")){ location.href=url; }
+				}
+				return true;
+			}
+
+			//do iframe dataURL download (old ch+FF):
+			var f = document.createElement("iframe");
+			document.body.appendChild(f);
+
+			if(!winMode && /^data:/.test(url)){ // force a mime that will download:
+				url="data:"+url.replace(/^data:([\w\/\-\+]+)/, defaultMime);
+			}
+			f.src=url;
+			setTimeout(function(){ document.body.removeChild(f); }, 333);
+
+		}//end saver
+
+
+
+
+		if (navigator.msSaveBlob) { // IE10+ : (has Blob, but not a[download] or URL)
+			return navigator.msSaveBlob(blob, fileName);
+		}
+
+		if(self.URL){ // simple fast and modern way using Blob and URL:
+			saver(self.URL.createObjectURL(blob), true);
+		}else {
+			// handle non-Blob()+non-URL browsers:
+			if(typeof blob === "string" || blob.constructor===toString ){
+				try{
+					return saver( "data:" +  mimeType   + ";base64,"  +  self.btoa(blob)  );
+				}catch(y){
+					return saver( "data:" +  mimeType   + "," + encodeURIComponent(blob)  );
+				}
+			}
+
+			// Blob but not URL support:
+			reader=new FileReader();
+			reader.onload=function(e){
+				saver(this.result);
+			};
+			reader.readAsDataURL(blob);
+		}
+		return true;
+	}; /* end download() */
+}));
+});
+
+//
+
+var script = {
+  props: {
+    // mime type [xls, csv]
+    type: {
+      type: String,
+      default: "xls",
+    },
+    // Json to download
+    data: {
+      type: Array,
+      required: false,
+      default: null,
+    },
+    // fields inside the Json Object that you want to export
+    // if no given, all the properties in the Json are exported
+    fields: {
+      type: Object,
+      default: () => null,
+    },
+    // this prop is used to fix the problem with other components that use the
+    // variable fields, like vee-validate. exportFields works exactly like fields
+    exportFields: {
+      type: Object,
+      default: () => null,
+    },
+    // Use as fallback when the row has no field values
+    defaultValue: {
+      type: String,
+      required: false,
+      default: "",
+    },
+    // Title(s) for the data, could be a string or an array of strings (multiple titles)
+    header: {
+      default: null,
+    },
+    // Footer(s) for the data, could be a string or an array of strings (multiple footers)
+    footer: {
+      default: null,
+    },
+    // filename to export
+    name: {
+      type: String,
+      default: "data.xls",
+    },
+    fetch: {
+      type: Function,
+    },
+    meta: {
+      type: Array,
+      default: () => [],
+    },
+    worksheet: {
+      type: String,
+      default: "Sheet1",
+    },
+    //event before generate was called
+    beforeGenerate: {
+      type: Function,
+    },
+    //event before download pops up
+    beforeFinish: {
+      type: Function,
+    },
+    // Determine if CSV Data should be escaped
+    escapeCsv: {
+      type: Boolean,
+      default: true,
+    },
+    // long number stringify
+    stringifyLongNum: {
+      type: Boolean,
+      default: false,
+    },
+  },
+  computed: {
+    // unique identifier
+    idName() {
+      var now = new Date().getTime();
+      return "export_" + now;
+    },
+
+    downloadFields() {
+      if (this.fields) return this.fields;
+
+      if (this.exportFields) return this.exportFields;
+    },
+  },
+  methods: {
+    async generate() {
+      if (typeof this.beforeGenerate === "function") {
+        await this.beforeGenerate();
+      }
+      let data = this.data;
+      if (typeof this.fetch === "function" || !data) data = await this.fetch();
+
+      if (!data || !data.length) {
+        return;
+      }
+
+      let json = this.getProcessedJson(data, this.downloadFields);
+      if (this.type === "html") {
+        // this is mainly for testing
+        return this.export(
+          this.jsonToXLS(json),
+          this.name.replace(".xls", ".html"),
+          "text/html"
+        );
+      } else if (this.type === "csv") {
+        return this.export(
+          this.jsonToCSV(json),
+          this.name.replace(".xls", ".csv"),
+          "application/csv"
+        );
+      }
+      return this.export(
+        this.jsonToXLS(json),
+        this.name,
+        "application/vnd.ms-excel"
+      );
+    },
+    /*
+		Use downloadjs to generate the download link
+		*/
+    export: async function (data, filename, mime) {
+      let blob = this.base64ToBlob(data, mime);
+      if (typeof this.beforeFinish === "function") await this.beforeFinish();
+      download(blob, filename, mime);
+    },
+    /*
+		jsonToXLS
+		---------------
+		Transform json data into an xml document with MS Excel format, sadly
+		it shows a prompt when it opens, that is a default behavior for
+		Microsoft office and cannot be avoided. It's recommended to use CSV format instead.
+		*/
+    jsonToXLS(data) {
+      let xlsTemp =
+        '<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns="http://www.w3.org/TR/REC-html40"><head><meta name=ProgId content=Excel.Sheet> <meta name=Generator content="Microsoft Excel 11"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><!--[if gte mso 9]><xml><x:ExcelWorkbook><x:ExcelWorksheets><x:ExcelWorksheet><x:Name>${worksheet}</x:Name><x:WorksheetOptions><x:DisplayGridlines/></x:WorksheetOptions></x:ExcelWorksheet></x:ExcelWorksheets></x:ExcelWorkbook></xml><![endif]--><style>br {mso-data-placement: same-cell;}</style></head><body><table>${table}</table></body></html>';
+      let xlsData = "<thead>";
+      const colspan = Object.keys(data[0]).length;
+      let _self = this;
+
+      //Header
+      const header = this.header || this.$attrs.title;
+      if (header) {
+        xlsData += this.parseExtraData(
+          header,
+          '<tr><th colspan="' + colspan + '">${data}</th></tr>'
+        );
+      }
+
+      //Fields
+      xlsData += "<tr>";
+      for (let key in data[0]) {
+        xlsData += "<th>" + key + "</th>";
+      }
+      xlsData += "</tr>";
+      xlsData += "</thead>";
+
+      //Data
+      xlsData += "<tbody>";
+      data.map(function (item, index) {
+        xlsData += "<tr>";
+        for (let key in item) {
+          xlsData +=
+            "<td>" +
+            _self.preprocessLongNum(
+              _self.valueReformattedForMultilines(item[key])
+            ) +
+            "</td>";
+        }
+        xlsData += "</tr>";
+      });
+      xlsData += "</tbody>";
+
+      //Footer
+      if (this.footer != null) {
+        xlsData += "<tfoot>";
+        xlsData += this.parseExtraData(
+          this.footer,
+          '<tr><td colspan="' + colspan + '">${data}</td></tr>'
+        );
+        xlsData += "</tfoot>";
+      }
+
+      return xlsTemp
+        .replace("${table}", xlsData)
+        .replace("${worksheet}", this.worksheet);
+    },
+    /*
+		jsonToCSV
+		---------------
+		Transform json data into an CSV file.
+		*/
+    jsonToCSV(data) {
+      let _self = this;
+      var csvData = [];
+
+      //Header
+      const header = this.header || this.$attrs.title;
+      if (header) {
+        csvData.push(this.parseExtraData(header, "${data}\r\n"));
+      }
+
+      //Fields
+      for (let key in data[0]) {
+        csvData.push(key);
+        csvData.push(",");
+      }
+      csvData.pop();
+      csvData.push("\r\n");
+      //Data
+      data.map(function (item) {
+        for (let key in item) {
+          let escapedCSV = item[key] + "";
+          // Escaped CSV data to string to avoid problems with numbers or other types of values
+          // this is controlled by the prop escapeCsv
+          if (_self.escapeCsv) {
+            escapedCSV = '="' + escapedCSV + '"'; // cast Numbers to string
+            if (escapedCSV.match(/[,"\n]/)) {
+              escapedCSV = '"' + escapedCSV.replace(/\"/g, '""') + '"';
+            }
+          }
+          csvData.push(escapedCSV);
+          csvData.push(",");
+        }
+        csvData.pop();
+        csvData.push("\r\n");
+      });
+      //Footer
+      if (this.footer != null) {
+        csvData.push(this.parseExtraData(this.footer, "${data}\r\n"));
+      }
+      return csvData.join("");
+    },
+    /*
+		getProcessedJson
+		---------------
+		Get only the data to export, if no fields are set return all the data
+		*/
+    getProcessedJson(data, header) {
+      let keys = this.getKeys(data, header);
+      let newData = [];
+      let _self = this;
+      data.map(function (item, index) {
+        let newItem = {};
+        for (let label in keys) {
+          let property = keys[label];
+          newItem[label] = _self.getValue(property, item);
+        }
+        newData.push(newItem);
+      });
+
+      return newData;
+    },
+    getKeys(data, header) {
+      if (header) {
+        return header;
+      }
+
+      let keys = {};
+      for (let key in data[0]) {
+        keys[key] = key;
+      }
+      return keys;
+    },
+    /*
+		parseExtraData
+		---------------
+		Parse title and footer attribute to the csv format
+		*/
+    parseExtraData(extraData, format) {
+      let parseData = "";
+      if (Array.isArray(extraData)) {
+        for (var i = 0; i < extraData.length; i++) {
+          if (extraData[i])
+            parseData += format.replace("${data}", extraData[i]);
+        }
+      } else {
+        parseData += format.replace("${data}", extraData);
+      }
+      return parseData;
+    },
+
+    getValue(key, item) {
+      const field = typeof key !== "object" ? key : key.field;
+      let indexes = typeof field !== "string" ? [] : field.split(".");
+      let value = this.defaultValue;
+
+      if (!field) value = item;
+      else if (indexes.length > 1)
+        value = this.getValueFromNestedItem(item, indexes);
+      else value = this.parseValue(item[field]);
+
+      if (key.hasOwnProperty("callback"))
+        value = this.getValueFromCallback(value, key.callback);
+
+      return value;
+    },
+
+    /*
+    convert values with newline \n characters into <br/>
+    */
+    valueReformattedForMultilines(value) {
+      if (typeof value == "string") return value.replace(/\n/gi, "<br/>");
+      else return value;
+    },
+    preprocessLongNum(value) {
+      if (this.stringifyLongNum) {
+        if (String(value).startsWith("0x")) {
+          return value;
+        }
+        if (!isNaN(value) && value != "") {
+          if (value > 99999999999 || value < 0.0000000000001) {
+            return '="' + value + '"';
+          }
+        }
+      }
+      return value;
+    },
+    getValueFromNestedItem(item, indexes) {
+      let nestedItem = item;
+      for (let index of indexes) {
+        if (nestedItem) nestedItem = nestedItem[index];
+      }
+      return this.parseValue(nestedItem);
+    },
+
+    getValueFromCallback(item, callback) {
+      if (typeof callback !== "function") return this.defaultValue;
+      const value = callback(item);
+      return this.parseValue(value);
+    },
+    parseValue(value) {
+      return value || value === 0 || typeof value === "boolean"
+        ? value
+        : this.defaultValue;
+    },
+    base64ToBlob(data, mime) {
+      let base64 = window.btoa(window.unescape(encodeURIComponent(data)));
+      let bstr = atob(base64);
+      let n = bstr.length;
+      let u8arr = new Uint8ClampedArray(n);
+      while (n--) {
+        u8arr[n] = bstr.charCodeAt(n);
+      }
+      return new Blob([u8arr], { type: mime });
+    },
+  }, // end methods
+};
+
+function normalizeComponent(template, style, script, scopeId, isFunctionalTemplate, moduleIdentifier
+/* server only */
+, shadowMode, createInjector, createInjectorSSR, createInjectorShadow) {
+  if (typeof shadowMode !== 'boolean') {
+    createInjectorSSR = createInjector;
+    createInjector = shadowMode;
+    shadowMode = false;
+  } // Vue.extend constructor export interop.
+
+
+  var options = typeof script === 'function' ? script.options : script; // render functions
+
+  if (template && template.render) {
+    options.render = template.render;
+    options.staticRenderFns = template.staticRenderFns;
+    options._compiled = true; // functional template
+
+    if (isFunctionalTemplate) {
+      options.functional = true;
+    }
+  } // scopedId
+
+
+  if (scopeId) {
+    options._scopeId = scopeId;
+  }
+
+  var hook;
+
+  if (moduleIdentifier) {
+    // server build
+    hook = function hook(context) {
+      // 2.3 injection
+      context = context || // cached call
+      this.$vnode && this.$vnode.ssrContext || // stateful
+      this.parent && this.parent.$vnode && this.parent.$vnode.ssrContext; // functional
+      // 2.2 with runInNewContext: true
+
+      if (!context && typeof __VUE_SSR_CONTEXT__ !== 'undefined') {
+        context = __VUE_SSR_CONTEXT__;
+      } // inject component styles
+
+
+      if (style) {
+        style.call(this, createInjectorSSR(context));
+      } // register component module identifier for async chunk inference
+
+
+      if (context && context._registeredComponents) {
+        context._registeredComponents.add(moduleIdentifier);
+      }
+    }; // used by ssr in case component is cached and beforeCreate
+    // never gets called
+
+
+    options._ssrRegister = hook;
+  } else if (style) {
+    hook = shadowMode ? function () {
+      style.call(this, createInjectorShadow(this.$root.$options.shadowRoot));
+    } : function (context) {
+      style.call(this, createInjector(context));
+    };
+  }
+
+  if (hook) {
+    if (options.functional) {
+      // register for functional component in vue file
+      var originalRender = options.render;
+
+      options.render = function renderWithStyleInjection(h, context) {
+        hook.call(context);
+        return originalRender(h, context);
+      };
+    } else {
+      // inject component registration as beforeCreate hook
+      var existing = options.beforeCreate;
+      options.beforeCreate = existing ? [].concat(existing, hook) : [hook];
+    }
+  }
+
+  return script;
+}
+
+var normalizeComponent_1 = normalizeComponent;
+
+/* script */
+const __vue_script__ = script;
+
+/* template */
+var __vue_render__ = function() {
+  var _vm = this;
+  var _h = _vm.$createElement;
+  var _c = _vm._self._c || _h;
+  return _c(
+    "div",
+    { attrs: { id: _vm.idName }, on: { click: _vm.generate } },
+    [_vm._t("default", [_vm._v(" Download " + _vm._s(_vm.name) + " ")])],
+    2
+  )
+};
+var __vue_staticRenderFns__ = [];
+__vue_render__._withStripped = true;
+
+  /* style */
+  const __vue_inject_styles__ = undefined;
+  /* scoped */
+  const __vue_scope_id__ = undefined;
+  /* module identifier */
+  const __vue_module_identifier__ = undefined;
+  /* functional template */
+  const __vue_is_functional_template__ = false;
+  /* style inject */
+  
+  /* style inject SSR */
+  
+
+  
+  var JsonExcel = normalizeComponent_1(
+    { render: __vue_render__, staticRenderFns: __vue_staticRenderFns__ },
+    __vue_inject_styles__,
+    __vue_script__,
+    __vue_scope_id__,
+    __vue_is_functional_template__,
+    __vue_module_identifier__,
+    undefined,
+    undefined
+  );
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (JsonExcel);
 
 
 /***/ }),
@@ -33123,13 +33968,19 @@ var render = function() {
           { staticClass: "column is-12" },
           [
             _c("div", { staticClass: "level" }, [
-              _c("div", { staticClass: "level-right" }, [
+              _c("div", { staticClass: "level-left" }, [
                 _c(
                   "div",
                   { staticClass: "level-item" },
                   [
                     _c(
                       "b-field",
+                      {
+                        attrs: {
+                          label: "Search Lastname",
+                          "label-position": "on-border"
+                        }
+                      },
                       [
                         _c("b-input", {
                           attrs: { type: "text", placeholder: "Search" },
@@ -33151,13 +34002,113 @@ var render = function() {
                             }
                           },
                           model: {
-                            value: _vm.search,
+                            value: _vm.search.lname,
                             callback: function($$v) {
-                              _vm.search = $$v
+                              _vm.$set(_vm.search, "lname", $$v)
                             },
-                            expression: "search"
+                            expression: "search.lname"
                           }
                         })
+                      ],
+                      1
+                    )
+                  ],
+                  1
+                ),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  { staticClass: "level-item" },
+                  [
+                    _c(
+                      "b-field",
+                      {
+                        attrs: {
+                          label: "Search Firstname",
+                          "label-position": "on-border"
+                        }
+                      },
+                      [
+                        _c("b-input", {
+                          attrs: {
+                            type: "text",
+                            placeholder: "Search Firstname"
+                          },
+                          nativeOn: {
+                            keyup: function($event) {
+                              if (
+                                !$event.type.indexOf("key") &&
+                                _vm._k(
+                                  $event.keyCode,
+                                  "enter",
+                                  13,
+                                  $event.key,
+                                  "Enter"
+                                )
+                              ) {
+                                return null
+                              }
+                              return _vm.loadAsyncData($event)
+                            }
+                          },
+                          model: {
+                            value: _vm.search.fname,
+                            callback: function($$v) {
+                              _vm.$set(_vm.search, "fname", $$v)
+                            },
+                            expression: "search.fname"
+                          }
+                        })
+                      ],
+                      1
+                    )
+                  ],
+                  1
+                )
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "level-right" }, [
+                _c(
+                  "div",
+                  { staticClass: "level-item" },
+                  [
+                    _c(
+                      "b-field",
+                      {
+                        attrs: {
+                          label: "1st Program",
+                          "label-position": "on-border"
+                        }
+                      },
+                      [
+                        _c(
+                          "b-select",
+                          {
+                            attrs: { placeholder: "SELECT 1ST PROGRAM" },
+                            on: { input: _vm.loadAsyncData },
+                            model: {
+                              value: _vm.search.first_program,
+                              callback: function($$v) {
+                                _vm.$set(_vm.search, "first_program", $$v)
+                              },
+                              expression: "search.first_program"
+                            }
+                          },
+                          [
+                            _c("option", { attrs: { value: "" } }, [
+                              _vm._v("ALL")
+                            ]),
+                            _vm._v(" "),
+                            _vm._l(this.programs, function(item, index) {
+                              return _c(
+                                "option",
+                                { key: index, domProps: { value: item.CCode } },
+                                [_vm._v(_vm._s(item.CCode))]
+                              )
+                            })
+                          ],
+                          2
+                        )
                       ],
                       1
                     )
@@ -33168,11 +34119,31 @@ var render = function() {
             ]),
             _vm._v(" "),
             _c(
+              "div",
+              {
+                staticStyle: { display: "flex", "justify-content": "flex-end" }
+              },
+              [
+                _c(
+                  "p",
+                  {
+                    staticStyle: {
+                      "font-weight": "bold",
+                      "margin-bottom": "10px"
+                    }
+                  },
+                  [_vm._v("TOTAL ROWS: " + _vm._s(_vm.total) + " ")]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c(
               "b-table",
               {
                 attrs: {
                   data: _vm.data,
                   loading: _vm.loading,
+                  paginated: "",
                   "backend-pagination": "",
                   total: _vm.total,
                   "per-page": _vm.perPage,
@@ -33189,7 +34160,7 @@ var render = function() {
               },
               [
                 _c("b-table-column", {
-                  attrs: { field: "student_id", label: "Student No" },
+                  attrs: { field: "user_id", label: "User ID" },
                   scopedSlots: _vm._u([
                     {
                       key: "default",
@@ -33197,7 +34168,7 @@ var render = function() {
                         return [
                           _vm._v(
                             "\n                        " +
-                              _vm._s(props.row.student_id) +
+                              _vm._s(props.row.user_id) +
                               "\n                    "
                           )
                         ]
@@ -33207,7 +34178,7 @@ var render = function() {
                 }),
                 _vm._v(" "),
                 _c("b-table-column", {
-                  attrs: { field: "StudLName", label: "Lastname" },
+                  attrs: { field: "StudLName", label: "Fullname" },
                   scopedSlots: _vm._u([
                     {
                       key: "default",
@@ -33215,11 +34186,11 @@ var render = function() {
                         return [
                           _vm._v(
                             "\n                        " +
-                              _vm._s(props.row.StudLName) +
+                              _vm._s(props.row.lname) +
                               ", " +
-                              _vm._s(props.row.StudFName) +
+                              _vm._s(props.row.fname) +
                               " " +
-                              _vm._s(props.row.StudMName) +
+                              _vm._s(props.row.mname) +
                               "\n                    "
                           )
                         ]
@@ -33229,7 +34200,7 @@ var render = function() {
                 }),
                 _vm._v(" "),
                 _c("b-table-column", {
-                  attrs: { field: "EnrCourse", label: "Program/Year" },
+                  attrs: { field: "sex", label: "Sex", centered: "" },
                   scopedSlots: _vm._u([
                     {
                       key: "default",
@@ -33237,9 +34208,43 @@ var render = function() {
                         return [
                           _vm._v(
                             "\n                        " +
-                              _vm._s(props.row.EnrCourse) +
-                              "/ " +
-                              _vm._s(props.row.EnrYear) +
+                              _vm._s(props.row.sex) +
+                              "\n                    "
+                          )
+                        ]
+                      }
+                    }
+                  ])
+                }),
+                _vm._v(" "),
+                _c("b-table-column", {
+                  attrs: { field: "program", label: "1st Program" },
+                  scopedSlots: _vm._u([
+                    {
+                      key: "default",
+                      fn: function(props) {
+                        return [
+                          _vm._v(
+                            "\n                        " +
+                              _vm._s(props.row.first_program_choice) +
+                              "\n                    "
+                          )
+                        ]
+                      }
+                    }
+                  ])
+                }),
+                _vm._v(" "),
+                _c("b-table-column", {
+                  attrs: { field: "program", label: "2nd Program" },
+                  scopedSlots: _vm._u([
+                    {
+                      key: "default",
+                      fn: function(props) {
+                        return [
+                          _vm._v(
+                            "\n                        " +
+                              _vm._s(props.row.second_program_choice) +
                               "\n                    "
                           )
                         ]
@@ -33260,11 +34265,35 @@ var render = function() {
                       key: "default",
                       fn: function(props) {
                         return [
-                          _vm._v(
-                            "\n                        " +
-                              _vm._s(props.row.abstraction) +
-                              "\n                    "
-                          )
+                          props.row.abstraction < 1
+                            ? _c("div", [
+                                _c(
+                                  "span",
+                                  {
+                                    staticStyle: {
+                                      color: "red",
+                                      "font-weight": "bold"
+                                    }
+                                  },
+                                  [_vm._v(_vm._s(props.row.abstraction))]
+                                )
+                              ])
+                            : _c(
+                                "div",
+                                {
+                                  staticStyle: {
+                                    color: "green",
+                                    "font-weight": "bold"
+                                  }
+                                },
+                                [
+                                  _vm._v(
+                                    "\n                            " +
+                                      _vm._s(props.row.abstraction) +
+                                      "\n                        "
+                                  )
+                                ]
+                              )
                         ]
                       }
                     }
@@ -33273,7 +34302,7 @@ var render = function() {
                 _vm._v(" "),
                 _c("b-table-column", {
                   attrs: {
-                    field: "abstraction",
+                    field: "logical",
                     label: "LOGICAL",
                     centered: "",
                     numeric: ""
@@ -33283,11 +34312,35 @@ var render = function() {
                       key: "default",
                       fn: function(props) {
                         return [
-                          _vm._v(
-                            "\n                        " +
-                              _vm._s(props.row.logical) +
-                              "\n                    "
-                          )
+                          props.row.logical < 1
+                            ? _c("div", [
+                                _c(
+                                  "span",
+                                  {
+                                    staticStyle: {
+                                      color: "red",
+                                      "font-weight": "bold"
+                                    }
+                                  },
+                                  [_vm._v(_vm._s(props.row.logical))]
+                                )
+                              ])
+                            : _c(
+                                "div",
+                                {
+                                  staticStyle: {
+                                    color: "green",
+                                    "font-weight": "bold"
+                                  }
+                                },
+                                [
+                                  _vm._v(
+                                    "\n                            " +
+                                      _vm._s(props.row.logical) +
+                                      "\n                        "
+                                  )
+                                ]
+                              )
                         ]
                       }
                     }
@@ -33306,11 +34359,35 @@ var render = function() {
                       key: "default",
                       fn: function(props) {
                         return [
-                          _vm._v(
-                            "\n                        " +
-                              _vm._s(props.row.english) +
-                              "\n                    "
-                          )
+                          props.row.english < 1
+                            ? _c("div", [
+                                _c(
+                                  "span",
+                                  {
+                                    staticStyle: {
+                                      color: "red",
+                                      "font-weight": "bold"
+                                    }
+                                  },
+                                  [_vm._v(_vm._s(props.row.english))]
+                                )
+                              ])
+                            : _c(
+                                "div",
+                                {
+                                  staticStyle: {
+                                    color: "green",
+                                    "font-weight": "bold"
+                                  }
+                                },
+                                [
+                                  _vm._v(
+                                    "\n                            " +
+                                      _vm._s(props.row.english) +
+                                      "\n                        "
+                                  )
+                                ]
+                              )
                         ]
                       }
                     }
@@ -33329,11 +34406,35 @@ var render = function() {
                       key: "default",
                       fn: function(props) {
                         return [
-                          _vm._v(
-                            "\n                        " +
-                              _vm._s(props.row.numerical) +
-                              "\n                    "
-                          )
+                          props.row.numerical < 1
+                            ? _c("div", [
+                                _c(
+                                  "span",
+                                  {
+                                    staticStyle: {
+                                      color: "red",
+                                      "font-weight": "bold"
+                                    }
+                                  },
+                                  [_vm._v(_vm._s(props.row.numerical))]
+                                )
+                              ])
+                            : _c(
+                                "div",
+                                {
+                                  staticStyle: {
+                                    color: "green",
+                                    "font-weight": "bold"
+                                  }
+                                },
+                                [
+                                  _vm._v(
+                                    "\n                            " +
+                                      _vm._s(props.row.numerical) +
+                                      "\n                        "
+                                  )
+                                ]
+                              )
                         ]
                       }
                     }
@@ -33352,11 +34453,35 @@ var render = function() {
                       key: "default",
                       fn: function(props) {
                         return [
-                          _vm._v(
-                            "\n                        " +
-                              _vm._s(props.row.general) +
-                              "\n                    "
-                          )
+                          props.row.general < 1
+                            ? _c("div", [
+                                _c(
+                                  "span",
+                                  {
+                                    staticStyle: {
+                                      color: "red",
+                                      "font-weight": "bold"
+                                    }
+                                  },
+                                  [_vm._v(_vm._s(props.row.general))]
+                                )
+                              ])
+                            : _c(
+                                "div",
+                                {
+                                  staticStyle: {
+                                    color: "green",
+                                    "font-weight": "bold"
+                                  }
+                                },
+                                [
+                                  _vm._v(
+                                    "\n                            " +
+                                      _vm._s(props.row.general) +
+                                      "\n                        "
+                                  )
+                                ]
+                              )
                         ]
                       }
                     }
@@ -33375,22 +34500,92 @@ var render = function() {
                       key: "default",
                       fn: function(props) {
                         return [
-                          _vm._v(
-                            "\n                        " +
-                              _vm._s(
-                                Number(props.row.general) +
-                                  Number(props.row.numerical) +
-                                  Number(props.row.english) +
-                                  Number(props.row.logical) +
-                                  Number(props.row.abstraction)
-                              ) +
-                              "\n                    "
-                          )
+                          Number(props.row.total) <= 0
+                            ? _c("div", [
+                                _c(
+                                  "span",
+                                  {
+                                    staticStyle: {
+                                      color: "white",
+                                      "background-color": "red",
+                                      padding: "3px 10px",
+                                      "border-radius": "5px",
+                                      "font-weight": "bold"
+                                    }
+                                  },
+                                  [_vm._v(_vm._s(props.row.total))]
+                                )
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          Number(props.row.total) >= 1 &&
+                          Number(props.row.total) < 45
+                            ? _c("div", [
+                                _c(
+                                  "span",
+                                  {
+                                    staticStyle: {
+                                      color: "white",
+                                      "background-color": "orange",
+                                      padding: "3px 10px",
+                                      "border-radius": "5px",
+                                      "font-weight": "bold"
+                                    }
+                                  },
+                                  [_vm._v(_vm._s(props.row.total))]
+                                )
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          Number(props.row.total) >= 45
+                            ? _c("div", [
+                                _c(
+                                  "span",
+                                  {
+                                    staticStyle: {
+                                      color: "white",
+                                      "background-color": "green",
+                                      padding: "3px 10px",
+                                      "border-radius": "5px",
+                                      "font-weight": "bold"
+                                    }
+                                  },
+                                  [_vm._v(_vm._s(props.row.total))]
+                                )
+                              ])
+                            : _vm._e()
                         ]
                       }
                     }
                   ])
                 })
+              ],
+              1
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              { staticClass: "buttons" },
+              [
+                _c(
+                  "downloadexcel",
+                  {
+                    class: _vm.btnClass,
+                    attrs: {
+                      fetch: _vm.loadDataForReport,
+                      fields: _vm.json_fields,
+                      worksheet: "REPORT",
+                      "before-generate": _vm.startDownload,
+                      "before-finish": _vm.finishDownload,
+                      name: "student_result.xls"
+                    }
+                  },
+                  [
+                    _vm._v(
+                      "\n                        Export to Excel\n                    "
+                    )
+                  ]
+                )
               ],
               1
             )
@@ -33868,6 +35063,56 @@ var render = function() {
                               _vm.$set(_vm.search, "lname", $$v)
                             },
                             expression: "search.lname"
+                          }
+                        })
+                      ],
+                      1
+                    )
+                  ],
+                  1
+                ),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  { staticClass: "level-item" },
+                  [
+                    _c(
+                      "b-field",
+                      {
+                        attrs: {
+                          "label-position": "on-border",
+                          label: "Search Firstaname"
+                        }
+                      },
+                      [
+                        _c("b-input", {
+                          attrs: {
+                            type: "text",
+                            placeholder: "Search Student Firstname..."
+                          },
+                          nativeOn: {
+                            keyup: function($event) {
+                              if (
+                                !$event.type.indexOf("key") &&
+                                _vm._k(
+                                  $event.keyCode,
+                                  "enter",
+                                  13,
+                                  $event.key,
+                                  "Enter"
+                                )
+                              ) {
+                                return null
+                              }
+                              return _vm.loadAsyncData($event)
+                            }
+                          },
+                          model: {
+                            value: _vm.search.fname,
+                            callback: function($$v) {
+                              _vm.$set(_vm.search, "fname", $$v)
+                            },
+                            expression: "search.fname"
                           }
                         })
                       ],
@@ -35805,7 +37050,7 @@ var render = function() {
                       "b-field",
                       {
                         attrs: {
-                          label: "Search",
+                          label: "Search Lastname",
                           "label-position": "on-border"
                         }
                       },
@@ -35838,6 +37083,56 @@ var render = function() {
                               _vm.$set(_vm.search, "lname", $$v)
                             },
                             expression: "search.lname"
+                          }
+                        })
+                      ],
+                      1
+                    )
+                  ],
+                  1
+                ),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  { staticClass: "level-item" },
+                  [
+                    _c(
+                      "b-field",
+                      {
+                        attrs: {
+                          label: "Search Firstname",
+                          "label-position": "on-border"
+                        }
+                      },
+                      [
+                        _c("b-input", {
+                          attrs: {
+                            type: "text",
+                            placeholder: "Search Firstname..."
+                          },
+                          nativeOn: {
+                            keyup: function($event) {
+                              if (
+                                !$event.type.indexOf("key") &&
+                                _vm._k(
+                                  $event.keyCode,
+                                  "enter",
+                                  13,
+                                  $event.key,
+                                  "Enter"
+                                )
+                              ) {
+                                return null
+                              }
+                              return _vm.loadAsyncData($event)
+                            }
+                          },
+                          model: {
+                            value: _vm.search.fname,
+                            callback: function($$v) {
+                              _vm.$set(_vm.search, "fname", $$v)
+                            },
+                            expression: "search.fname"
                           }
                         })
                       ],
@@ -36025,9 +37320,7 @@ var render = function() {
                                 },
                                 on: {
                                   click: function($event) {
-                                    return _vm.confirmDelete(
-                                      props.row.test_schedule_id
-                                    )
+                                    return _vm.confirmDelete(props.row)
                                   }
                                 }
                               })

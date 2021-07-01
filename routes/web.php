@@ -111,7 +111,7 @@ Route::get('/fetch-schedules', [App\Http\Controllers\Administrator\StudentTestSc
 //STUDENT SECTION TAKEN
 Route::resource('/panel/student-section-taken', App\Http\Controllers\Administrator\StudentSectionTakenController::class);
 Route::get('/fetch-student-section-taken', [App\Http\Controllers\Administrator\StudentSectionTakenController::class, 'index_data']);
-Route::delete('/delete-student-section-taken/{userid}/{sectionid}', [App\Http\Controllers\Administrator\StudentSectionTakenController::class, 'deleteTaken']);
+Route::post('/delete-student-section-taken', [App\Http\Controllers\Administrator\StudentSectionTakenController::class, 'deleteTaken']);
 
 
 
@@ -153,6 +153,7 @@ Route::get('/fetch-students', [App\Http\Controllers\Administrator\UserController
 //REPORT
 Route::resource('/panel/report-result', App\Http\Controllers\Administrator\ReportResultController::class);
 Route::get('/panel/ajax-studentlist-result', [App\Http\Controllers\Administrator\ReportResultController::class, 'index_data']);
+Route::get('/panel/report-excel-studentlist-result', [App\Http\Controllers\Administrator\ReportResultController::class, 'reportExcel']);
 
 
 Route::get('/session-test', function(Request $req){

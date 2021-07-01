@@ -50,6 +50,12 @@
                                              v-model="search.lname" @keyup.native.enter="loadAsyncData" />
                                 </b-field>
                             </div>
+                            <div class="level-item">
+                                <b-field label-position="on-border" label="Search Firstaname">
+                                    <b-input type="text" placeholder="Search Student Firstname..."
+                                             v-model="search.fname" @keyup.native.enter="loadAsyncData" />
+                                </b-field>
+                            </div>
                         </div>
                     </div>
 
@@ -151,6 +157,7 @@ export default {
             search: {
                 user_id: '',
                 lname: '',
+                fname: '',
                 first_program_choice: '',
             },
 
@@ -167,6 +174,7 @@ export default {
                 `page=${this.page}`,
                 `user_id=${this.search.user_id}`,
                 `lname=${this.search.lname}`,
+                `fname=${this.search.fname}`,
                 `first_program_choice=${this.search.first_program_choice}`
 
             ].join('&');

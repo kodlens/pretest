@@ -7,6 +7,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 use App\Models\TakingTest;
+use App\Models\AcadYear;
+use App\Models\AnswerSheet;
+
 
 
 class StudentSectionTakenController extends Controller
@@ -37,16 +40,21 @@ class StudentSectionTakenController extends Controller
                 'a.student_schedule_id', 'e.student_schedule_id',
                 'f.description as schedule_description', 'f.from', 'f.to', 'f.max_user')
             ->where('lname', 'like', $req->lname . '%')
+            ->where('fname', 'like', $req->fname . '%')
             ->paginate($req->perpage);
         return $data;
     }
 
-    public function deleteTaken($id, $sectionId){
+    public function deleteTaken(Request $req){
+        
+        //return $req;
+        TakingTest::where('taking_test_id', $req->taking_test_id)
+            ->delete();
 
-        $acad = AcadYear::where('active', 1)->first();
-        TakingTest::destroy($id);
-
-
+        AnswerSheet::where('code', $req->code)
+            ->where('user_id', $req->user_id)
+            ->where('section_id', $req->section_id)
+            ->delete();
         return ['status' => 'deleted'];
     }
 
