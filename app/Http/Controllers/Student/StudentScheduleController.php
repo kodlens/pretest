@@ -28,10 +28,13 @@ class StudentScheduleController extends Controller
 
         $isFull = false;
 
-        $testSchedules = TestSchedule::where('active', 1)
-            ->where('from', '>', date("Y-m-d"))
+  
+        $testSchedules = TestSchedule::whereRaw("date(`from`) > ?", [date("Y-m-d")])
+            ->where('active', 1)
             ->orderBy('from', 'asc')
             ->get();
+
+        //    return $testSchedules;
         //get all schedules where active = 1
         //and datenow > db recorded date sched
 

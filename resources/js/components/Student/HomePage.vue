@@ -178,7 +178,7 @@ export default {
                  this.btnClass['is-loading'] = false;
             })
 
-
+            this.btnClass['is-loading'] = false; //activate this for debugging only
         },
 
         formatSchedFromDate(from){

@@ -77,8 +77,8 @@ class RegisterController extends Controller
             'bdate' => ['required'],
             'contact_no' => ['string', 'max:255', 'required'],
             'email' => ['string', 'max:255', 'required', 'unique:users'],
-            'first_program_choice' => ['string', 'max:100', 'required'],
-            'second_program_choice' => ['string', 'max:100', 'required'],
+            'first_program_choice' => ['string', 'max:100', 'required', 'different:second_program_choice'],
+            'second_program_choice' => ['string', 'max:100', 'required', 'different:first_program_choice'],
             'learning_mode' => ['string', 'max:255', 'required'],
             'last_school_attended' => ['string', 'max:255', 'required'],
             'province' => ['string', 'max:255', 'required'],
@@ -102,6 +102,7 @@ class RegisterController extends Controller
     {
         //return $data['barangay']['barangay'];
         
+
         return User::create([
             'username' => $data['username'],
             'password' => Hash::make($data['password']),

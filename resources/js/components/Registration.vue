@@ -331,6 +331,10 @@ export default {
                 this.errors = err.response.data.errors;
                 //console.log(err.response.data)
                  this.btnClass['is-loading'] = false;
+
+                 if(err.response.status === 500){
+                     this.btnClass['is-loading'] = false;
+                 }
             })
         },
 

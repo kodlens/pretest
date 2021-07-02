@@ -71,6 +71,10 @@
                         {{ props.row.email }}
                     </b-table-column>
 
+                    <b-table-column field="email_verified_at" label="Verified At" v-slot="props">
+                        {{ props.row.email_verified_at }}
+                    </b-table-column>
+
                     <b-table-column field="role" label="Role" v-slot="props">
                         {{ props.row.role }}
                     </b-table-column>

@@ -212,6 +212,7 @@ export default {
                 'FIRSTNAME': 'fname',
                 'MIDDLENAME': 'mname',
                 'SEX': 'sex',
+                'EMAIL': 'email',
                 '1ST PROGRAM': 'first_program_choice',
                 '2ND PROGRAM': 'second_program_choice',
                 'ABSTRACTION': 'abstraction',
@@ -220,6 +221,7 @@ export default {
                 'NUMERICAL REASONING': 'numerical',
                 'GENERAL KNWOLEDGE': 'general',
                 'TOTAL SCORE': 'total',
+                'CREATED AT': 'created_at',
             },
 
             report_data: [],
