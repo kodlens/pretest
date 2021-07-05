@@ -61,8 +61,12 @@
                             {{ props.row.user_id }}
                         </b-table-column>
 
-                        <b-table-column field="StudLName" label="Fullname" v-slot="props">
+                        <b-table-column field="fullname" label="Fullname" v-slot="props">
                             {{ props.row.lname }}, {{ props.row.fname }} {{ props.row.mname }}
+                        </b-table-column>
+
+                        <b-table-column field="fromTo" label="Schedule" v-slot="props">
+                            {{ props.row.from }} / {{ props.row.to }}
                         </b-table-column>
 
                         <b-table-column field="sex" label="Sex" centered v-slot="props">
@@ -215,6 +219,9 @@ export default {
                 'EMAIL': 'email',
                 '1ST PROGRAM': 'first_program_choice',
                 '2ND PROGRAM': 'second_program_choice',
+                'PROVINCE': 'province',
+                'CITY': 'city',
+                'BARANGAY': 'barangay',
                 'ABSTRACTION': 'abstraction',
                 'LOGICAL REASONING': 'logical',
                 'ENGLISH PROFICIENCY': 'english',
