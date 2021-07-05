@@ -94,7 +94,7 @@ Route::get('/fetch-acadyears', [App\Http\Controllers\Administrator\AcadYearContr
 
 //SECTIONS
 Route::resource('/panel/section', App\Http\Controllers\Administrator\SectionController::class);
-Route::get('/ajax/section', [App\Http\Controllers\Administrator\SectionController::class, 'index_data']);
+Route::get('/fetch-sections', [App\Http\Controllers\Administrator\SectionController::class, 'index_data']);
 
 
 //SCHEDULES
@@ -137,6 +137,8 @@ Route::resource('/panel/question-option', App\Http\Controllers\Administrator\Opt
 Route::get('/ajax/question-option', [App\Http\Controllers\Administrator\QuestionController::class, 'index_data']);
 
 
+//ADMIT STUDENT
+Route::post('/admit-student', [App\Http\Controllers\Administrator\AdmitController::class, 'admitStudent']);
 
 
 
@@ -146,6 +148,7 @@ Route::get('/ajax/question-option', [App\Http\Controllers\Administrator\Question
 Route::resource('/panel/user', App\Http\Controllers\Administrator\UserController::class);
 Route::get('/axios-users', [App\Http\Controllers\Administrator\UserController::class, 'index_data']);
 Route::get('/fetch-students', [App\Http\Controllers\Administrator\UserController::class, 'allStudents']);
+Route::post('/verify-email-students/{userid}', [App\Http\Controllers\Administrator\UserController::class, 'verifyEmailStudents']);
 
 
 

@@ -4,14 +4,29 @@
         <div style="font-size: 20px; text-align: center; font-weight: bold;">LIST OF SECTION</div>
         <div class="columns">
             <div class="column is-8 is-offset-2">
-                <b-field label="Page">
-                    <b-select v-model="perPage" @input="setPerPage">
-                        <option value="5">5 per page</option>
-                        <option value="10">10 per page</option>
-                        <option value="15">15 per page</option>
-                        <option value="20">20 per page</option>
-                    </b-select>
-                </b-field>
+                <div class="level">
+                    <div class="level-right">
+                        <div class="level-item">
+                            <b-field label="Page">
+                                <b-select v-model="perPage" @input="setPerPage">
+                                    <option value="5">5 per page</option>
+                                    <option value="10">10 per page</option>
+                                    <option value="15">15 per page</option>
+                                    <option value="20">20 per page</option>
+                                </b-select>
+                            </b-field>
+                        </div>
+                    </div>
+
+                    <div class="level-left">
+                        <div class="level-item">
+                            <b-field label="Search Section">
+                                <b-input type="text" v-model="search.section" placeholder="Search section..." @keyup.native.enter="loadAsyncData"/>
+                            </b-field>
+                        </div>
+                    </div>
+                </div>
+                
                 <b-table
                     :data="data"
                     :loading="loading"
@@ -78,6 +93,10 @@ export default {
             fields: {},
             errors : {},
 
+            search: {
+                section: '',
+            },
+
             btnClass: {
                 'is-success': true,
                 'button': true,
@@ -91,11 +110,12 @@ export default {
             const params = [
                 `sort_by=${this.sortField}.${this.sortOrder}`,
                 `perpage=${this.perPage}`,
-                `page=${this.page}`
+                `page=${this.page}`,
+                `section=${this.search.section}`
             ].join('&')
 
             this.loading = true
-            axios.get(`/ajax/section?${params}`)
+            axios.get(`/fetch-sections?${params}`)
                 .then(({ data }) => {
                     this.data = []
                     let currentTotal = data.total
@@ -225,6 +245,10 @@ export default {
         },
 
 
+    },
+
+    mounted(){
+        this.loadAsyncData();
     }
 
 }

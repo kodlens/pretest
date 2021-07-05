@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\LearningModality;
 use App\Models\Program;
 use Illuminate\Http\Request;
+use DB;
 
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
@@ -36,6 +37,15 @@ class UserController extends Controller
             ->where('role', 'STUDENT')
             ->orderBy($sort[0], $sort[1])
             ->paginate($req->perpage);
+    }
+
+    public function verifyEmailStudents($id){
+       User::where('user_id', $id)
+        ->update([
+            'email_verified_at' => DB::raw('now()')
+        ]);
+
+        return ['status' => 'verified'];
     }
 
     public function create(){

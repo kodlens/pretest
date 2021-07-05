@@ -152,11 +152,11 @@
 
                         </b-table-column>
 
-                        <!-- <b-table-column field="" label="Action" v-slot="props">
-                            <div class="is-flex">
-                                <b-button outlined class="button is-small is-danger mr-1" icon-pack="fa" icon-right="trash" @click="confirmDelete(props.row.answer_sheet_id)">DELETE</b-button>
+                        <b-table-column field="" label="Action" v-slot="props">
+                            <div class="buttons">
+                                <b-button outlined class="button is-small is-success mr-1" icon-pack="fa" icon-right="arrow-circle-right" @click="admit(props.row)">ADMIT</b-button>
                             </div>
-                        </b-table-column> -->
+                        </b-table-column>
                     </b-table>
 
 
@@ -316,6 +316,13 @@ export default {
         },
         finishDownload(){
             this.btnClass['is-loading'] = false;
+        },
+
+
+        admit: function(dataRow){
+            axios.post('/admit-student', dataRow).then(res=>{
+                console.log(res.data);
+            })
         },
 
 
