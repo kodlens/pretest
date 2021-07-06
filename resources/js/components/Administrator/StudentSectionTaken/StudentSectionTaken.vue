@@ -1,98 +1,94 @@
 <template>
     <div>
         <section class="section">
-            <div style="font-size: 20px; text-align: center; font-weight: bold;">LIST OF STUDENT TAKEN</div>
-            <div class="columns">
-                <div class="column is-10 is-offset-1">
-                    <div class="level">
-                        <div class="level-left">
-                            <div class="level-item">
-                                <b-field label="Page" label-position="on-border">
-                                    <b-select v-model="perPage" @input="setPerPage">
-                                        <option value="5">5 per page</option>
-                                        <option value="10">10 per page</option>
-                                        <option value="15">15 per page</option>
-                                        <option value="20">20 per page</option>
-                                    </b-select>
-                                </b-field>
-                            </div>
-                        </div>
+            <div class="table-title">LIST OF STUDENT TAKEN</div>
 
-                        <div class="level-right">
-                            <div class="level-item">
-                                <b-field label="Search Lastname" label-position="on-border">
-                                    <b-input type="text" placeholder="Search Lastname..."
-                                        v-model="search.lname" @keyup.native.enter="loadAsyncData" />
-                                </b-field>
-                            </div>
+            <div class="level">
+                <div class="level-left">
+                    <div class="level-item">
+                        <b-field label="Page" label-position="on-border">
+                            <b-select v-model="perPage" @input="setPerPage">
+                                <option value="5">5 per page</option>
+                                <option value="10">10 per page</option>
+                                <option value="15">15 per page</option>
+                                <option value="20">20 per page</option>
+                            </b-select>
+                        </b-field>
+                    </div>
+                </div>
 
-                            <div class="level-item">
-                                <b-field label="Search Firstname" label-position="on-border">
-                                    <b-input type="text" placeholder="Search Firstname..."
-                                        v-model="search.fname" @keyup.native.enter="loadAsyncData" />
-                                </b-field>
-                            </div>
-                        </div>
+                <div class="level-right">
+                    <div class="level-item">
+                        <b-field label="Search Lastname" label-position="on-border">
+                            <b-input type="text" placeholder="Search Lastname..."
+                                     v-model="search.lname" @keyup.native.enter="loadAsyncData" />
+                        </b-field>
                     </div>
 
-                    <div style="display:flex; justify-content: flex-end;">
-                        <p style="font-weight: bold; margin-bottom: 10px;">TOTAL ROWS: {{ total }} </p>
+                    <div class="level-item">
+                        <b-field label="Search Firstname" label-position="on-border">
+                            <b-input type="text" placeholder="Search Firstname..."
+                                     v-model="search.fname" @keyup.native.enter="loadAsyncData" />
+                        </b-field>
                     </div>
-
-
-                    <b-table
-                        :data="data"
-                        :loading="loading"
-                        paginated
-                        backend-pagination
-                        :total="total"
-                        :per-page="perPage"
-                        :range-before="rangeBefore"
-                        :range-after="rangeAfter"
-                        @page-change="onPageChange"
-                        aria-next-label="Next page"
-                        aria-previous-label="Previous page"
-                        aria-page-label="Page"
-                        aria-current-label="Current page"
-                        backend-sorting
-                        :default-sort-direction="defaultSortDirection"
-                        @sort="onSort">
-
-                        <b-table-column field="taking_test_id" label="ID" v-slot="props">
-                            {{ props.row.taking_test_id }}
-                        </b-table-column>
-
-                        <b-table-column field="code" label="AY Code" v-slot="props">
-                            {{ props.row.code }}
-                        </b-table-column>
-
-                        <b-table-column field="fullname" label="Fullname" v-slot="props">
-                            {{ props.row.lname }}, {{ props.row.fname }} {{ props.row.mname }}
-                        </b-table-column>
-
-                        <b-table-column field="from" label="From/To" v-slot="props">
-                            {{ props.row.from }} - {{ props.row.from }}
-                        </b-table-column>
-
-                        <b-table-column field="section" label="Section" v-slot="props">
-                            {{ props.row.section }}
-                        </b-table-column>
-
-                        <b-table-column field="created_date" label="Time Taken" v-slot="props">
-                            {{ props.row.created_date }} {{ props.row.created_time }}
-                        </b-table-column>
-
-                        <b-table-column field="ay_id" label="Action" v-slot="props">
-                            <div class="is-flex">
-                                <!-- <b-button class="button is-small is-warning mr-1" tag="a" icon-right="pencil" icon-pack="fa" :href="'/panel/test-schedule/'+ props.row.test_schedule_id + '/edit'"></b-button> -->
-                                <b-button class="button is-small is-danger mr-1" icon-pack="fa" icon-right="trash" @click="confirmDelete(props.row)"></b-button>
-                            </div>
-                        </b-table-column>
-
-                    </b-table>
-
-                </div><!--close column-->
+                </div>
             </div>
+
+            <div style="display:flex; justify-content: flex-end;">
+                <p style="font-weight: bold; margin-bottom: 10px;">TOTAL ROWS: {{ total }} </p>
+            </div>
+
+            <b-table
+                :data="data"
+                :loading="loading"
+                paginated
+                backend-pagination
+                :total="total"
+                :per-page="perPage"
+                :range-before="rangeBefore"
+                :range-after="rangeAfter"
+                @page-change="onPageChange"
+                aria-next-label="Next page"
+                aria-previous-label="Previous page"
+                aria-page-label="Page"
+                aria-current-label="Current page"
+                backend-sorting
+                :default-sort-direction="defaultSortDirection"
+                @sort="onSort">
+
+                <b-table-column field="taking_test_id" label="ID" v-slot="props">
+                    {{ props.row.taking_test_id }}
+                </b-table-column>
+
+                <b-table-column field="code" label="AY Code" v-slot="props">
+                    {{ props.row.code }}
+                </b-table-column>
+
+                <b-table-column field="fullname" label="Fullname" v-slot="props">
+                    {{ props.row.lname }}, {{ props.row.fname }} {{ props.row.mname }}
+                </b-table-column>
+
+                <b-table-column field="from" label="From/To" v-slot="props">
+                    {{ props.row.from }} - {{ props.row.from }}
+                </b-table-column>
+
+                <b-table-column field="section" label="Section" v-slot="props">
+                    {{ props.row.section }}
+                </b-table-column>
+
+                <b-table-column field="created_date" label="Time Taken" v-slot="props">
+                    {{ props.row.created_date }} {{ props.row.created_time }}
+                </b-table-column>
+
+                <b-table-column field="ay_id" label="Action" v-slot="props">
+                    <div class="is-flex">
+                        <!-- <b-button class="button is-small is-warning mr-1" tag="a" icon-right="pencil" icon-pack="fa" :href="'/panel/test-schedule/'+ props.row.test_schedule_id + '/edit'"></b-button> -->
+                        <b-button class="button is-small is-danger mr-1" icon-pack="fa" icon-right="trash" @click="confirmDelete(props.row)"></b-button>
+                    </div>
+                </b-table-column>
+
+            </b-table>
+
         </section>
 
     </div>
@@ -161,7 +157,7 @@ export default {
                         this.data.push(item)
                     })
                     this.loading = false
-                    
+
                 })
                 .catch((error) => {
                     this.data = []

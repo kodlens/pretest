@@ -2,99 +2,98 @@
     <div>
         <div class="section">
             <div style="font-size: 20px; text-align: center; font-weight: bold;">LIST OF USER</div>
-            <div class="columns">
-                <div class="column">
-                    
-                    <div class="level">
-                        <div class="level-left">
-                            <div class="level-item">
-                                <b-field label="Page">
-                                    <b-select v-model="perPage" @input="setPerPage">
-                                        <option value="5">5 per page</option>
-                                        <option value="10">10 per page</option>
-                                        <option value="15">15 per page</option>
-                                        <option value="20">20 per page</option>
-                                    </b-select>
-                                </b-field>
-                            </div>
-                        </div>
-                        <div class="level-right">
-                            <div class="level-item">
-                                <b-field label="Search">
-                                    <b-input type="input" v-model="search.lname" placeholder="Search Lastname..." @keyup.native.enter="loadAsyncData" />
-                                </b-field>
-                            </div>
-                        </div>
+
+            <div class="level">
+                <div class="level-left">
+                    <div class="level-item">
+                        <b-field label="Page">
+                            <b-select v-model="perPage" @input="setPerPage">
+                                <option value="5">5 per page</option>
+                                <option value="10">10 per page</option>
+                                <option value="15">15 per page</option>
+                                <option value="20">20 per page</option>
+                            </b-select>
+                        </b-field>
                     </div>
-
-                    <div style="display:flex; justify-content: flex-end;">
-                        <p style="font-weight: bold; margin-bottom: 10px;">TOTAL ROWS: {{ total }} </p>
+                </div>
+                <div class="level-right">
+                    <div class="level-item">
+                        <b-field label="Search">
+                            <b-input type="input" v-model="search.lname" placeholder="Search Lastname..." @keyup.native.enter="loadAsyncData" />
+                        </b-field>
                     </div>
-
-                    <b-table
-                        :data="data"
-                        :loading="loading"
-                        paginated
-                        backend-pagination
-                        :total="total"
-                        :per-page="perPage"
-                        @page-change="onPageChange"
-                        aria-next-label="Next page"
-                        aria-previous-label="Previous page"
-                        aria-page-label="Page"
-                        aria-current-label="Current page"
-                        backend-sorting
-                        :default-sort-direction="defaultSortDirection"
-                        @sort="onSort">
-
-                        <b-table-column field="user_id" label="ID" v-slot="props">
-                            {{ props.row.user_id }}
-                        </b-table-column>
-
-                        <b-table-column field="username" label="Username" v-slot="props">
-                            {{ props.row.username }}
-                        </b-table-column>
-
-                        <b-table-column field="lname" label="Lastname" v-slot="props">
-                            {{ props.row.lname }}
-                        </b-table-column>
-
-                        <b-table-column field="fname" label="Firstname" v-slot="props">
-                            {{ props.row.fname }}
-                        </b-table-column>
-
-                        <b-table-column field="mname" label="Middlename" v-slot="props">
-                            {{ props.row.mname }}
-                        </b-table-column>
-
-                        <b-table-column field="mname" label="Email" v-slot="props">
-                            {{ props.row.email }}
-                        </b-table-column>
-
-                        <b-table-column field="email_verified_at" label="Verified At" v-slot="props">
-                            {{ props.row.email_verified_at }}
-                        </b-table-column>
-
-                        <b-table-column field="role" label="Role" v-slot="props">
-                            {{ props.row.role }}
-                        </b-table-column>
-
-                        <b-table-column field="" label="Action" v-slot="props">
-                            <div class="buttons" style="width: 120px;">
-                                <b-button class="button is-small is-success is-outlined mr-1" tag="a" icon-right="envelope-o" icon-pack="fa" @click="verifyEmail(props.row)"></b-button>
-                                <b-button class="button is-small is-warning mr-1" tag="a" icon-right="pencil" icon-pack="fa" :href="'/panel/user/'+ props.row.user_id + '/edit'"></b-button>
-                                <b-button class="button is-small is-danger mr-1" icon-pack="fa" icon-right="trash" @click="confirmDelete(props.row.user_id)"></b-button>
-                            </div>
-                        </b-table-column>
-                    </b-table>
-
-                    <div class="buttons mt-3">
-                        <!-- <b-button tag="a" href="/cpanel-academicyear/create" class="is-primary">Create Account</b-button> -->
-                        <b-button icon-pack="fa" icon-left="plus" tag="a" href="/panel/user/create" class="is-primary">New User</b-button>
-                    </div>
-                </div><!--close column-->
+                </div>
             </div>
-        </div>
+
+            <div style="display:flex; justify-content: flex-end;">
+                <p style="font-weight: bold; margin-bottom: 10px;">TOTAL ROWS: {{ total }} </p>
+            </div>
+
+            <b-table
+                :data="data"
+                :loading="loading"
+                paginated
+                backend-pagination
+                :total="total"
+                narrowed
+                :per-page="perPage"
+                @page-change="onPageChange"
+                aria-next-label="Next page"
+                aria-previous-label="Previous page"
+                aria-page-label="Page"
+                aria-current-label="Current page"
+                backend-sorting
+                :default-sort-direction="defaultSortDirection"
+                @sort="onSort">
+
+                <b-table-column field="user_id" label="ID" v-slot="props">
+                    {{ props.row.user_id }}
+                </b-table-column>
+
+                <b-table-column field="username" label="Username" v-slot="props">
+                    {{ props.row.username }}
+                </b-table-column>
+
+                <b-table-column field="lname" label="Lastname" v-slot="props">
+                    {{ props.row.lname }}
+                </b-table-column>
+
+                <b-table-column field="fname" label="Firstname" v-slot="props">
+                    {{ props.row.fname }}
+                </b-table-column>
+
+                <b-table-column field="mname" label="Middlename" v-slot="props">
+                    {{ props.row.mname }}
+                </b-table-column>
+
+                <b-table-column field="mname" label="Email" v-slot="props">
+                    {{ props.row.email }}
+                </b-table-column>
+
+                <b-table-column field="email_verified_at" label="Verified At" v-slot="props">
+                    {{ props.row.email_verified_at }}
+                </b-table-column>
+
+                <b-table-column field="role" label="Role" v-slot="props">
+                    {{ props.row.role }}
+                </b-table-column>
+
+                <b-table-column field="" label="Action" v-slot="props">
+                    <div class="buttons" style="width: 120px;">
+                        <b-button class="button is-small is-success is-outlined mr-1" tag="a" icon-right="envelope-o" icon-pack="fa" @click="verifyEmail(props.row)"></b-button>
+                        <b-button class="button is-small is-warning mr-1" tag="a" icon-right="pencil" icon-pack="fa" :href="'/panel/user/'+ props.row.user_id + '/edit'"></b-button>
+                        <b-button class="button is-small is-danger mr-1" icon-pack="fa" icon-right="trash" @click="confirmDelete(props.row.user_id)"></b-button>
+                    </div>
+                </b-table-column>
+            </b-table>
+
+             <div class="buttons mt-3">
+                <!-- <b-button tag="a" href="/cpanel-academicyear/create" class="is-primary">Create Account</b-button> -->
+                <b-button icon-pack="fa" icon-left="plus" tag="a" href="/panel/user/create" class="is-primary">New User</b-button>
+            </div>
+
+            
+        </div><!--section-->
     </div>
 </template>
 

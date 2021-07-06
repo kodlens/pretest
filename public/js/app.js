@@ -3486,13 +3486,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: {
@@ -5300,10 +5293,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
@@ -5977,7 +5966,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-//
 //
 //
 //
@@ -34009,710 +33997,682 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
-    _c("div", { staticClass: "section" }, [
-      _c(
-        "div",
-        {
-          staticStyle: {
-            "font-size": "20px",
-            "text-align": "center",
-            "font-weight": "bold",
-            "margin-bottom": "20px"
-          }
-        },
-        [_vm._v("LIST OF STUDENT AND RESULT")]
-      ),
-      _vm._v(" "),
-      _c("div", { staticClass: "columns" }, [
-        _c(
-          "div",
-          { staticClass: "column is-12" },
-          [
-            _c("div", { staticClass: "level" }, [
-              _c("div", { staticClass: "level-left" }, [
-                _c(
-                  "div",
-                  { staticClass: "level-item" },
-                  [
-                    _c(
-                      "b-field",
-                      {
-                        attrs: {
-                          label: "Search Lastname",
-                          "label-position": "on-border"
-                        }
-                      },
-                      [
-                        _c("b-input", {
-                          attrs: { type: "text", placeholder: "Search" },
-                          nativeOn: {
-                            keyup: function($event) {
-                              if (
-                                !$event.type.indexOf("key") &&
-                                _vm._k(
-                                  $event.keyCode,
-                                  "enter",
-                                  13,
-                                  $event.key,
-                                  "Enter"
-                                )
-                              ) {
-                                return null
-                              }
-                              return _vm.loadAsyncData($event)
-                            }
-                          },
-                          model: {
-                            value: _vm.search.lname,
-                            callback: function($$v) {
-                              _vm.$set(_vm.search, "lname", $$v)
-                            },
-                            expression: "search.lname"
-                          }
-                        })
-                      ],
-                      1
-                    )
-                  ],
-                  1
-                ),
-                _vm._v(" "),
-                _c(
-                  "div",
-                  { staticClass: "level-item" },
-                  [
-                    _c(
-                      "b-field",
-                      {
-                        attrs: {
-                          label: "Search Firstname",
-                          "label-position": "on-border"
-                        }
-                      },
-                      [
-                        _c("b-input", {
-                          attrs: {
-                            type: "text",
-                            placeholder: "Search Firstname"
-                          },
-                          nativeOn: {
-                            keyup: function($event) {
-                              if (
-                                !$event.type.indexOf("key") &&
-                                _vm._k(
-                                  $event.keyCode,
-                                  "enter",
-                                  13,
-                                  $event.key,
-                                  "Enter"
-                                )
-                              ) {
-                                return null
-                              }
-                              return _vm.loadAsyncData($event)
-                            }
-                          },
-                          model: {
-                            value: _vm.search.fname,
-                            callback: function($$v) {
-                              _vm.$set(_vm.search, "fname", $$v)
-                            },
-                            expression: "search.fname"
-                          }
-                        })
-                      ],
-                      1
-                    )
-                  ],
-                  1
-                )
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "level-right" }, [
-                _c(
-                  "div",
-                  { staticClass: "level-item" },
-                  [
-                    _c(
-                      "b-field",
-                      {
-                        attrs: {
-                          label: "1st Program",
-                          "label-position": "on-border"
-                        }
-                      },
-                      [
-                        _c(
-                          "b-select",
-                          {
-                            attrs: { placeholder: "SELECT 1ST PROGRAM" },
-                            on: { input: _vm.loadAsyncData },
-                            model: {
-                              value: _vm.search.first_program,
-                              callback: function($$v) {
-                                _vm.$set(_vm.search, "first_program", $$v)
-                              },
-                              expression: "search.first_program"
-                            }
-                          },
-                          [
-                            _c("option", { attrs: { value: "" } }, [
-                              _vm._v("ALL")
-                            ]),
-                            _vm._v(" "),
-                            _vm._l(this.programs, function(item, index) {
-                              return _c(
-                                "option",
-                                { key: index, domProps: { value: item.CCode } },
-                                [_vm._v(_vm._s(item.CCode))]
-                              )
-                            })
-                          ],
-                          2
-                        )
-                      ],
-                      1
-                    )
-                  ],
-                  1
-                )
-              ])
-            ]),
-            _vm._v(" "),
+    _c(
+      "div",
+      { staticClass: "section" },
+      [
+        _c("div", { staticClass: "table-title" }, [
+          _vm._v("LIST OF STUDENT AND RESULT")
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "level" }, [
+          _c("div", { staticClass: "level-left" }, [
             _c(
               "div",
-              {
-                staticStyle: { display: "flex", "justify-content": "flex-end" }
-              },
+              { staticClass: "level-item" },
               [
                 _c(
-                  "p",
+                  "b-field",
                   {
-                    staticStyle: {
-                      "font-weight": "bold",
-                      "margin-bottom": "10px"
+                    attrs: {
+                      label: "Search Lastname",
+                      "label-position": "on-border"
                     }
                   },
-                  [_vm._v("TOTAL ROWS: " + _vm._s(_vm.total) + " ")]
+                  [
+                    _c("b-input", {
+                      attrs: { type: "text", placeholder: "Search" },
+                      nativeOn: {
+                        keyup: function($event) {
+                          if (
+                            !$event.type.indexOf("key") &&
+                            _vm._k(
+                              $event.keyCode,
+                              "enter",
+                              13,
+                              $event.key,
+                              "Enter"
+                            )
+                          ) {
+                            return null
+                          }
+                          return _vm.loadAsyncData($event)
+                        }
+                      },
+                      model: {
+                        value: _vm.search.lname,
+                        callback: function($$v) {
+                          _vm.$set(_vm.search, "lname", $$v)
+                        },
+                        expression: "search.lname"
+                      }
+                    })
+                  ],
+                  1
                 )
-              ]
-            ),
-            _vm._v(" "),
-            _c(
-              "b-table",
-              {
-                attrs: {
-                  data: _vm.data,
-                  loading: _vm.loading,
-                  paginated: "",
-                  "backend-pagination": "",
-                  total: _vm.total,
-                  "per-page": _vm.perPage,
-                  "detail-transition": "",
-                  "aria-next-label": "Next page",
-                  "aria-previous-label": "Previous page",
-                  "aria-page-label": "Page",
-                  "show-detail-icon": true,
-                  "aria-current-label": "Current page",
-                  "backend-sorting": "",
-                  "default-sort-direction": _vm.defaultSortDirection
-                },
-                on: { "page-change": _vm.onPageChange, sort: _vm.onSort }
-              },
-              [
-                _c("b-table-column", {
-                  attrs: { field: "user_id", label: "User ID" },
-                  scopedSlots: _vm._u([
-                    {
-                      key: "default",
-                      fn: function(props) {
-                        return [
-                          _vm._v(
-                            "\n                        " +
-                              _vm._s(props.row.user_id) +
-                              "\n                    "
-                          )
-                        ]
-                      }
-                    }
-                  ])
-                }),
-                _vm._v(" "),
-                _c("b-table-column", {
-                  attrs: { field: "fullname", label: "Fullname" },
-                  scopedSlots: _vm._u([
-                    {
-                      key: "default",
-                      fn: function(props) {
-                        return [
-                          _vm._v(
-                            "\n                        " +
-                              _vm._s(props.row.lname) +
-                              ", " +
-                              _vm._s(props.row.fname) +
-                              " " +
-                              _vm._s(props.row.mname) +
-                              "\n                    "
-                          )
-                        ]
-                      }
-                    }
-                  ])
-                }),
-                _vm._v(" "),
-                _c("b-table-column", {
-                  attrs: { field: "fromTo", label: "Schedule" },
-                  scopedSlots: _vm._u([
-                    {
-                      key: "default",
-                      fn: function(props) {
-                        return [
-                          _vm._v(
-                            "\n                        " +
-                              _vm._s(props.row.from) +
-                              " / " +
-                              _vm._s(props.row.to) +
-                              "\n                    "
-                          )
-                        ]
-                      }
-                    }
-                  ])
-                }),
-                _vm._v(" "),
-                _c("b-table-column", {
-                  attrs: { field: "sex", label: "Sex", centered: "" },
-                  scopedSlots: _vm._u([
-                    {
-                      key: "default",
-                      fn: function(props) {
-                        return [
-                          _vm._v(
-                            "\n                        " +
-                              _vm._s(props.row.sex) +
-                              "\n                    "
-                          )
-                        ]
-                      }
-                    }
-                  ])
-                }),
-                _vm._v(" "),
-                _c("b-table-column", {
-                  attrs: { field: "program", label: "1st Program" },
-                  scopedSlots: _vm._u([
-                    {
-                      key: "default",
-                      fn: function(props) {
-                        return [
-                          _vm._v(
-                            "\n                        " +
-                              _vm._s(props.row.first_program_choice) +
-                              "\n                    "
-                          )
-                        ]
-                      }
-                    }
-                  ])
-                }),
-                _vm._v(" "),
-                _c("b-table-column", {
-                  attrs: { field: "program", label: "2nd Program" },
-                  scopedSlots: _vm._u([
-                    {
-                      key: "default",
-                      fn: function(props) {
-                        return [
-                          _vm._v(
-                            "\n                        " +
-                              _vm._s(props.row.second_program_choice) +
-                              "\n                    "
-                          )
-                        ]
-                      }
-                    }
-                  ])
-                }),
-                _vm._v(" "),
-                _c("b-table-column", {
-                  attrs: {
-                    field: "abstraction",
-                    label: "ABSTRACTION",
-                    centered: "",
-                    numeric: ""
-                  },
-                  scopedSlots: _vm._u([
-                    {
-                      key: "default",
-                      fn: function(props) {
-                        return [
-                          props.row.abstraction < 1
-                            ? _c("div", [
-                                _c(
-                                  "span",
-                                  {
-                                    staticStyle: {
-                                      color: "red",
-                                      "font-weight": "bold"
-                                    }
-                                  },
-                                  [_vm._v(_vm._s(props.row.abstraction))]
-                                )
-                              ])
-                            : _c(
-                                "div",
-                                {
-                                  staticStyle: {
-                                    color: "green",
-                                    "font-weight": "bold"
-                                  }
-                                },
-                                [
-                                  _vm._v(
-                                    "\n                            " +
-                                      _vm._s(props.row.abstraction) +
-                                      "\n                        "
-                                  )
-                                ]
-                              )
-                        ]
-                      }
-                    }
-                  ])
-                }),
-                _vm._v(" "),
-                _c("b-table-column", {
-                  attrs: {
-                    field: "logical",
-                    label: "LOGICAL",
-                    centered: "",
-                    numeric: ""
-                  },
-                  scopedSlots: _vm._u([
-                    {
-                      key: "default",
-                      fn: function(props) {
-                        return [
-                          props.row.logical < 1
-                            ? _c("div", [
-                                _c(
-                                  "span",
-                                  {
-                                    staticStyle: {
-                                      color: "red",
-                                      "font-weight": "bold"
-                                    }
-                                  },
-                                  [_vm._v(_vm._s(props.row.logical))]
-                                )
-                              ])
-                            : _c(
-                                "div",
-                                {
-                                  staticStyle: {
-                                    color: "green",
-                                    "font-weight": "bold"
-                                  }
-                                },
-                                [
-                                  _vm._v(
-                                    "\n                            " +
-                                      _vm._s(props.row.logical) +
-                                      "\n                        "
-                                  )
-                                ]
-                              )
-                        ]
-                      }
-                    }
-                  ])
-                }),
-                _vm._v(" "),
-                _c("b-table-column", {
-                  attrs: {
-                    field: "english",
-                    label: "ENGLISH",
-                    centered: "",
-                    numeric: ""
-                  },
-                  scopedSlots: _vm._u([
-                    {
-                      key: "default",
-                      fn: function(props) {
-                        return [
-                          props.row.english < 1
-                            ? _c("div", [
-                                _c(
-                                  "span",
-                                  {
-                                    staticStyle: {
-                                      color: "red",
-                                      "font-weight": "bold"
-                                    }
-                                  },
-                                  [_vm._v(_vm._s(props.row.english))]
-                                )
-                              ])
-                            : _c(
-                                "div",
-                                {
-                                  staticStyle: {
-                                    color: "green",
-                                    "font-weight": "bold"
-                                  }
-                                },
-                                [
-                                  _vm._v(
-                                    "\n                            " +
-                                      _vm._s(props.row.english) +
-                                      "\n                        "
-                                  )
-                                ]
-                              )
-                        ]
-                      }
-                    }
-                  ])
-                }),
-                _vm._v(" "),
-                _c("b-table-column", {
-                  attrs: {
-                    field: "numerical",
-                    label: "NUMERICAL",
-                    centered: "",
-                    numeric: ""
-                  },
-                  scopedSlots: _vm._u([
-                    {
-                      key: "default",
-                      fn: function(props) {
-                        return [
-                          props.row.numerical < 1
-                            ? _c("div", [
-                                _c(
-                                  "span",
-                                  {
-                                    staticStyle: {
-                                      color: "red",
-                                      "font-weight": "bold"
-                                    }
-                                  },
-                                  [_vm._v(_vm._s(props.row.numerical))]
-                                )
-                              ])
-                            : _c(
-                                "div",
-                                {
-                                  staticStyle: {
-                                    color: "green",
-                                    "font-weight": "bold"
-                                  }
-                                },
-                                [
-                                  _vm._v(
-                                    "\n                            " +
-                                      _vm._s(props.row.numerical) +
-                                      "\n                        "
-                                  )
-                                ]
-                              )
-                        ]
-                      }
-                    }
-                  ])
-                }),
-                _vm._v(" "),
-                _c("b-table-column", {
-                  attrs: {
-                    field: "general",
-                    label: "GENERAL",
-                    centered: "",
-                    numeric: ""
-                  },
-                  scopedSlots: _vm._u([
-                    {
-                      key: "default",
-                      fn: function(props) {
-                        return [
-                          props.row.general < 1
-                            ? _c("div", [
-                                _c(
-                                  "span",
-                                  {
-                                    staticStyle: {
-                                      color: "red",
-                                      "font-weight": "bold"
-                                    }
-                                  },
-                                  [_vm._v(_vm._s(props.row.general))]
-                                )
-                              ])
-                            : _c(
-                                "div",
-                                {
-                                  staticStyle: {
-                                    color: "green",
-                                    "font-weight": "bold"
-                                  }
-                                },
-                                [
-                                  _vm._v(
-                                    "\n                            " +
-                                      _vm._s(props.row.general) +
-                                      "\n                        "
-                                  )
-                                ]
-                              )
-                        ]
-                      }
-                    }
-                  ])
-                }),
-                _vm._v(" "),
-                _c("b-table-column", {
-                  attrs: {
-                    field: "total",
-                    label: "TOTAL",
-                    centered: "",
-                    numeric: ""
-                  },
-                  scopedSlots: _vm._u([
-                    {
-                      key: "default",
-                      fn: function(props) {
-                        return [
-                          Number(props.row.total) <= 0
-                            ? _c("div", [
-                                _c(
-                                  "span",
-                                  {
-                                    staticStyle: {
-                                      color: "white",
-                                      "background-color": "red",
-                                      padding: "3px 10px",
-                                      "border-radius": "5px",
-                                      "font-weight": "bold"
-                                    }
-                                  },
-                                  [_vm._v(_vm._s(props.row.total))]
-                                )
-                              ])
-                            : _vm._e(),
-                          _vm._v(" "),
-                          Number(props.row.total) >= 1 &&
-                          Number(props.row.total) < 45
-                            ? _c("div", [
-                                _c(
-                                  "span",
-                                  {
-                                    staticStyle: {
-                                      color: "white",
-                                      "background-color": "orange",
-                                      padding: "3px 10px",
-                                      "border-radius": "5px",
-                                      "font-weight": "bold"
-                                    }
-                                  },
-                                  [_vm._v(_vm._s(props.row.total))]
-                                )
-                              ])
-                            : _vm._e(),
-                          _vm._v(" "),
-                          Number(props.row.total) >= 45
-                            ? _c("div", [
-                                _c(
-                                  "span",
-                                  {
-                                    staticStyle: {
-                                      color: "white",
-                                      "background-color": "green",
-                                      padding: "3px 10px",
-                                      "border-radius": "5px",
-                                      "font-weight": "bold"
-                                    }
-                                  },
-                                  [_vm._v(_vm._s(props.row.total))]
-                                )
-                              ])
-                            : _vm._e()
-                        ]
-                      }
-                    }
-                  ])
-                }),
-                _vm._v(" "),
-                _c("b-table-column", {
-                  attrs: { field: "", label: "Action" },
-                  scopedSlots: _vm._u([
-                    {
-                      key: "default",
-                      fn: function(props) {
-                        return [
-                          _c(
-                            "div",
-                            { staticClass: "buttons" },
-                            [
-                              _c(
-                                "b-button",
-                                {
-                                  staticClass:
-                                    "button is-small is-success mr-1",
-                                  attrs: {
-                                    outlined: "",
-                                    "icon-pack": "fa",
-                                    "icon-right": "arrow-circle-right"
-                                  },
-                                  on: {
-                                    click: function($event) {
-                                      return _vm.admit(props.row)
-                                    }
-                                  }
-                                },
-                                [_vm._v("ADMIT")]
-                              )
-                            ],
-                            1
-                          )
-                        ]
-                      }
-                    }
-                  ])
-                })
               ],
               1
             ),
             _vm._v(" "),
             _c(
               "div",
-              { staticClass: "buttons" },
+              { staticClass: "level-item" },
               [
                 _c(
-                  "downloadexcel",
+                  "b-field",
                   {
-                    class: _vm.btnClass,
                     attrs: {
-                      fetch: _vm.loadDataForReport,
-                      fields: _vm.json_fields,
-                      worksheet: "REPORT",
-                      "before-generate": _vm.startDownload,
-                      "before-finish": _vm.finishDownload,
-                      name: "student_result.xls"
+                      label: "Search Firstname",
+                      "label-position": "on-border"
                     }
                   },
                   [
-                    _vm._v(
-                      "\n                        Export to Excel\n                    "
-                    )
-                  ]
+                    _c("b-input", {
+                      attrs: { type: "text", placeholder: "Search Firstname" },
+                      nativeOn: {
+                        keyup: function($event) {
+                          if (
+                            !$event.type.indexOf("key") &&
+                            _vm._k(
+                              $event.keyCode,
+                              "enter",
+                              13,
+                              $event.key,
+                              "Enter"
+                            )
+                          ) {
+                            return null
+                          }
+                          return _vm.loadAsyncData($event)
+                        }
+                      },
+                      model: {
+                        value: _vm.search.fname,
+                        callback: function($$v) {
+                          _vm.$set(_vm.search, "fname", $$v)
+                        },
+                        expression: "search.fname"
+                      }
+                    })
+                  ],
+                  1
                 )
               ],
               1
             )
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "level-right" }, [
+            _c(
+              "div",
+              { staticClass: "level-item" },
+              [
+                _c(
+                  "b-field",
+                  {
+                    attrs: {
+                      label: "1st Program",
+                      "label-position": "on-border"
+                    }
+                  },
+                  [
+                    _c(
+                      "b-select",
+                      {
+                        attrs: { placeholder: "SELECT 1ST PROGRAM" },
+                        on: { input: _vm.loadAsyncData },
+                        model: {
+                          value: _vm.search.first_program,
+                          callback: function($$v) {
+                            _vm.$set(_vm.search, "first_program", $$v)
+                          },
+                          expression: "search.first_program"
+                        }
+                      },
+                      [
+                        _c("option", { attrs: { value: "" } }, [_vm._v("ALL")]),
+                        _vm._v(" "),
+                        _vm._l(this.programs, function(item, index) {
+                          return _c(
+                            "option",
+                            { key: index, domProps: { value: item.CCode } },
+                            [_vm._v(_vm._s(item.CCode))]
+                          )
+                        })
+                      ],
+                      2
+                    )
+                  ],
+                  1
+                )
+              ],
+              1
+            )
+          ])
+        ]),
+        _vm._v(" "),
+        _c(
+          "div",
+          { staticStyle: { display: "flex", "justify-content": "flex-end" } },
+          [
+            _c(
+              "p",
+              {
+                staticStyle: { "font-weight": "bold", "margin-bottom": "10px" }
+              },
+              [_vm._v("TOTAL ROWS: " + _vm._s(_vm.total) + " ")]
+            )
+          ]
+        ),
+        _vm._v(" "),
+        _c(
+          "b-table",
+          {
+            attrs: {
+              data: _vm.data,
+              loading: _vm.loading,
+              paginated: "",
+              "backend-pagination": "",
+              total: _vm.total,
+              "per-page": _vm.perPage,
+              "detail-transition": "",
+              "aria-next-label": "Next page",
+              "aria-previous-label": "Previous page",
+              "aria-page-label": "Page",
+              "show-detail-icon": true,
+              "aria-current-label": "Current page",
+              "backend-sorting": "",
+              "default-sort-direction": _vm.defaultSortDirection
+            },
+            on: { "page-change": _vm.onPageChange, sort: _vm.onSort }
+          },
+          [
+            _c("b-table-column", {
+              attrs: { field: "user_id", label: "User ID" },
+              scopedSlots: _vm._u([
+                {
+                  key: "default",
+                  fn: function(props) {
+                    return [
+                      _vm._v(
+                        "\n                " +
+                          _vm._s(props.row.user_id) +
+                          "\n            "
+                      )
+                    ]
+                  }
+                }
+              ])
+            }),
+            _vm._v(" "),
+            _c("b-table-column", {
+              attrs: { field: "fullname", label: "Fullname" },
+              scopedSlots: _vm._u([
+                {
+                  key: "default",
+                  fn: function(props) {
+                    return [
+                      _vm._v(
+                        "\n                " +
+                          _vm._s(props.row.lname) +
+                          ", " +
+                          _vm._s(props.row.fname) +
+                          " " +
+                          _vm._s(props.row.mname) +
+                          "\n            "
+                      )
+                    ]
+                  }
+                }
+              ])
+            }),
+            _vm._v(" "),
+            _c("b-table-column", {
+              attrs: { field: "fromTo", label: "Schedule" },
+              scopedSlots: _vm._u([
+                {
+                  key: "default",
+                  fn: function(props) {
+                    return [
+                      _vm._v(
+                        "\n                " +
+                          _vm._s(props.row.from) +
+                          " / " +
+                          _vm._s(props.row.to) +
+                          "\n            "
+                      )
+                    ]
+                  }
+                }
+              ])
+            }),
+            _vm._v(" "),
+            _c("b-table-column", {
+              attrs: { field: "sex", label: "Sex", centered: "" },
+              scopedSlots: _vm._u([
+                {
+                  key: "default",
+                  fn: function(props) {
+                    return [
+                      _vm._v(
+                        "\n                " +
+                          _vm._s(props.row.sex) +
+                          "\n            "
+                      )
+                    ]
+                  }
+                }
+              ])
+            }),
+            _vm._v(" "),
+            _c("b-table-column", {
+              attrs: { field: "program", label: "1st Program" },
+              scopedSlots: _vm._u([
+                {
+                  key: "default",
+                  fn: function(props) {
+                    return [
+                      _vm._v(
+                        "\n                " +
+                          _vm._s(props.row.first_program_choice) +
+                          "\n            "
+                      )
+                    ]
+                  }
+                }
+              ])
+            }),
+            _vm._v(" "),
+            _c("b-table-column", {
+              attrs: { field: "program", label: "2nd Program" },
+              scopedSlots: _vm._u([
+                {
+                  key: "default",
+                  fn: function(props) {
+                    return [
+                      _vm._v(
+                        "\n                " +
+                          _vm._s(props.row.second_program_choice) +
+                          "\n            "
+                      )
+                    ]
+                  }
+                }
+              ])
+            }),
+            _vm._v(" "),
+            _c("b-table-column", {
+              attrs: {
+                field: "abstraction",
+                label: "ABSTRACTION",
+                centered: "",
+                numeric: ""
+              },
+              scopedSlots: _vm._u([
+                {
+                  key: "default",
+                  fn: function(props) {
+                    return [
+                      props.row.abstraction < 1
+                        ? _c("div", [
+                            _c(
+                              "span",
+                              {
+                                staticStyle: {
+                                  color: "red",
+                                  "font-weight": "bold"
+                                }
+                              },
+                              [_vm._v(_vm._s(props.row.abstraction))]
+                            )
+                          ])
+                        : _c(
+                            "div",
+                            {
+                              staticStyle: {
+                                color: "green",
+                                "font-weight": "bold"
+                              }
+                            },
+                            [
+                              _vm._v(
+                                "\n                    " +
+                                  _vm._s(props.row.abstraction) +
+                                  "\n                "
+                              )
+                            ]
+                          )
+                    ]
+                  }
+                }
+              ])
+            }),
+            _vm._v(" "),
+            _c("b-table-column", {
+              attrs: {
+                field: "logical",
+                label: "LOGICAL",
+                centered: "",
+                numeric: ""
+              },
+              scopedSlots: _vm._u([
+                {
+                  key: "default",
+                  fn: function(props) {
+                    return [
+                      props.row.logical < 1
+                        ? _c("div", [
+                            _c(
+                              "span",
+                              {
+                                staticStyle: {
+                                  color: "red",
+                                  "font-weight": "bold"
+                                }
+                              },
+                              [_vm._v(_vm._s(props.row.logical))]
+                            )
+                          ])
+                        : _c(
+                            "div",
+                            {
+                              staticStyle: {
+                                color: "green",
+                                "font-weight": "bold"
+                              }
+                            },
+                            [
+                              _vm._v(
+                                "\n                    " +
+                                  _vm._s(props.row.logical) +
+                                  "\n                "
+                              )
+                            ]
+                          )
+                    ]
+                  }
+                }
+              ])
+            }),
+            _vm._v(" "),
+            _c("b-table-column", {
+              attrs: {
+                field: "english",
+                label: "ENGLISH",
+                centered: "",
+                numeric: ""
+              },
+              scopedSlots: _vm._u([
+                {
+                  key: "default",
+                  fn: function(props) {
+                    return [
+                      props.row.english < 1
+                        ? _c("div", [
+                            _c(
+                              "span",
+                              {
+                                staticStyle: {
+                                  color: "red",
+                                  "font-weight": "bold"
+                                }
+                              },
+                              [_vm._v(_vm._s(props.row.english))]
+                            )
+                          ])
+                        : _c(
+                            "div",
+                            {
+                              staticStyle: {
+                                color: "green",
+                                "font-weight": "bold"
+                              }
+                            },
+                            [
+                              _vm._v(
+                                "\n                    " +
+                                  _vm._s(props.row.english) +
+                                  "\n                "
+                              )
+                            ]
+                          )
+                    ]
+                  }
+                }
+              ])
+            }),
+            _vm._v(" "),
+            _c("b-table-column", {
+              attrs: {
+                field: "numerical",
+                label: "NUMERICAL",
+                centered: "",
+                numeric: ""
+              },
+              scopedSlots: _vm._u([
+                {
+                  key: "default",
+                  fn: function(props) {
+                    return [
+                      props.row.numerical < 1
+                        ? _c("div", [
+                            _c(
+                              "span",
+                              {
+                                staticStyle: {
+                                  color: "red",
+                                  "font-weight": "bold"
+                                }
+                              },
+                              [_vm._v(_vm._s(props.row.numerical))]
+                            )
+                          ])
+                        : _c(
+                            "div",
+                            {
+                              staticStyle: {
+                                color: "green",
+                                "font-weight": "bold"
+                              }
+                            },
+                            [
+                              _vm._v(
+                                "\n                    " +
+                                  _vm._s(props.row.numerical) +
+                                  "\n                "
+                              )
+                            ]
+                          )
+                    ]
+                  }
+                }
+              ])
+            }),
+            _vm._v(" "),
+            _c("b-table-column", {
+              attrs: {
+                field: "general",
+                label: "GENERAL",
+                centered: "",
+                numeric: ""
+              },
+              scopedSlots: _vm._u([
+                {
+                  key: "default",
+                  fn: function(props) {
+                    return [
+                      props.row.general < 1
+                        ? _c("div", [
+                            _c(
+                              "span",
+                              {
+                                staticStyle: {
+                                  color: "red",
+                                  "font-weight": "bold"
+                                }
+                              },
+                              [_vm._v(_vm._s(props.row.general))]
+                            )
+                          ])
+                        : _c(
+                            "div",
+                            {
+                              staticStyle: {
+                                color: "green",
+                                "font-weight": "bold"
+                              }
+                            },
+                            [
+                              _vm._v(
+                                "\n                    " +
+                                  _vm._s(props.row.general) +
+                                  "\n                "
+                              )
+                            ]
+                          )
+                    ]
+                  }
+                }
+              ])
+            }),
+            _vm._v(" "),
+            _c("b-table-column", {
+              attrs: {
+                field: "total",
+                label: "TOTAL",
+                centered: "",
+                numeric: ""
+              },
+              scopedSlots: _vm._u([
+                {
+                  key: "default",
+                  fn: function(props) {
+                    return [
+                      Number(props.row.total) <= 0
+                        ? _c("div", [
+                            _c(
+                              "span",
+                              {
+                                staticStyle: {
+                                  color: "white",
+                                  "background-color": "red",
+                                  padding: "3px 10px",
+                                  "border-radius": "5px",
+                                  "font-weight": "bold"
+                                }
+                              },
+                              [_vm._v(_vm._s(props.row.total))]
+                            )
+                          ])
+                        : _vm._e(),
+                      _vm._v(" "),
+                      Number(props.row.total) >= 1 &&
+                      Number(props.row.total) < 45
+                        ? _c("div", [
+                            _c(
+                              "span",
+                              {
+                                staticStyle: {
+                                  color: "white",
+                                  "background-color": "orange",
+                                  padding: "3px 10px",
+                                  "border-radius": "5px",
+                                  "font-weight": "bold"
+                                }
+                              },
+                              [_vm._v(_vm._s(props.row.total))]
+                            )
+                          ])
+                        : _vm._e(),
+                      _vm._v(" "),
+                      Number(props.row.total) >= 45
+                        ? _c("div", [
+                            _c(
+                              "span",
+                              {
+                                staticStyle: {
+                                  color: "white",
+                                  "background-color": "green",
+                                  padding: "3px 10px",
+                                  "border-radius": "5px",
+                                  "font-weight": "bold"
+                                }
+                              },
+                              [_vm._v(_vm._s(props.row.total))]
+                            )
+                          ])
+                        : _vm._e()
+                    ]
+                  }
+                }
+              ])
+            }),
+            _vm._v(" "),
+            _c("b-table-column", {
+              attrs: { field: "", label: "Action" },
+              scopedSlots: _vm._u([
+                {
+                  key: "default",
+                  fn: function(props) {
+                    return [
+                      _c(
+                        "div",
+                        { staticClass: "buttons" },
+                        [
+                          _c(
+                            "b-button",
+                            {
+                              staticClass: "button is-small is-success mr-1",
+                              attrs: {
+                                outlined: "",
+                                "icon-pack": "fa",
+                                "icon-right": "arrow-circle-right"
+                              },
+                              on: {
+                                click: function($event) {
+                                  return _vm.admit(props.row)
+                                }
+                              }
+                            },
+                            [_vm._v("ADMIT")]
+                          )
+                        ],
+                        1
+                      )
+                    ]
+                  }
+                }
+              ])
+            })
+          ],
+          1
+        ),
+        _vm._v(" "),
+        _c(
+          "div",
+          { staticClass: "buttons" },
+          [
+            _c(
+              "downloadexcel",
+              {
+                class: _vm.btnClass,
+                attrs: {
+                  fetch: _vm.loadDataForReport,
+                  fields: _vm.json_fields,
+                  worksheet: "REPORT",
+                  "before-generate": _vm.startDownload,
+                  "before-finish": _vm.finishDownload,
+                  name: "student_result.xls"
+                }
+              },
+              [_vm._v("\n                Export to Excel\n            ")]
+            )
           ],
           1
         )
-      ])
-    ])
+      ],
+      1
+    )
   ])
 }
 var staticRenderFns = []
@@ -37150,373 +37110,351 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
-    _c("section", { staticClass: "section" }, [
-      _c(
-        "div",
-        {
-          staticStyle: {
-            "font-size": "20px",
-            "text-align": "center",
-            "font-weight": "bold"
-          }
-        },
-        [_vm._v("LIST OF STUDENT TAKEN")]
-      ),
-      _vm._v(" "),
-      _c("div", { staticClass: "columns" }, [
-        _c(
-          "div",
-          { staticClass: "column is-10 is-offset-1" },
-          [
-            _c("div", { staticClass: "level" }, [
-              _c("div", { staticClass: "level-left" }, [
-                _c(
-                  "div",
-                  { staticClass: "level-item" },
-                  [
-                    _c(
-                      "b-field",
-                      {
-                        attrs: { label: "Page", "label-position": "on-border" }
-                      },
-                      [
-                        _c(
-                          "b-select",
-                          {
-                            on: { input: _vm.setPerPage },
-                            model: {
-                              value: _vm.perPage,
-                              callback: function($$v) {
-                                _vm.perPage = $$v
-                              },
-                              expression: "perPage"
-                            }
-                          },
-                          [
-                            _c("option", { attrs: { value: "5" } }, [
-                              _vm._v("5 per page")
-                            ]),
-                            _vm._v(" "),
-                            _c("option", { attrs: { value: "10" } }, [
-                              _vm._v("10 per page")
-                            ]),
-                            _vm._v(" "),
-                            _c("option", { attrs: { value: "15" } }, [
-                              _vm._v("15 per page")
-                            ]),
-                            _vm._v(" "),
-                            _c("option", { attrs: { value: "20" } }, [
-                              _vm._v("20 per page")
-                            ])
-                          ]
-                        )
-                      ],
-                      1
-                    )
-                  ],
-                  1
-                )
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "level-right" }, [
-                _c(
-                  "div",
-                  { staticClass: "level-item" },
-                  [
-                    _c(
-                      "b-field",
-                      {
-                        attrs: {
-                          label: "Search Lastname",
-                          "label-position": "on-border"
-                        }
-                      },
-                      [
-                        _c("b-input", {
-                          attrs: {
-                            type: "text",
-                            placeholder: "Search Lastname..."
-                          },
-                          nativeOn: {
-                            keyup: function($event) {
-                              if (
-                                !$event.type.indexOf("key") &&
-                                _vm._k(
-                                  $event.keyCode,
-                                  "enter",
-                                  13,
-                                  $event.key,
-                                  "Enter"
-                                )
-                              ) {
-                                return null
-                              }
-                              return _vm.loadAsyncData($event)
-                            }
-                          },
-                          model: {
-                            value: _vm.search.lname,
-                            callback: function($$v) {
-                              _vm.$set(_vm.search, "lname", $$v)
-                            },
-                            expression: "search.lname"
-                          }
-                        })
-                      ],
-                      1
-                    )
-                  ],
-                  1
-                ),
-                _vm._v(" "),
-                _c(
-                  "div",
-                  { staticClass: "level-item" },
-                  [
-                    _c(
-                      "b-field",
-                      {
-                        attrs: {
-                          label: "Search Firstname",
-                          "label-position": "on-border"
-                        }
-                      },
-                      [
-                        _c("b-input", {
-                          attrs: {
-                            type: "text",
-                            placeholder: "Search Firstname..."
-                          },
-                          nativeOn: {
-                            keyup: function($event) {
-                              if (
-                                !$event.type.indexOf("key") &&
-                                _vm._k(
-                                  $event.keyCode,
-                                  "enter",
-                                  13,
-                                  $event.key,
-                                  "Enter"
-                                )
-                              ) {
-                                return null
-                              }
-                              return _vm.loadAsyncData($event)
-                            }
-                          },
-                          model: {
-                            value: _vm.search.fname,
-                            callback: function($$v) {
-                              _vm.$set(_vm.search, "fname", $$v)
-                            },
-                            expression: "search.fname"
-                          }
-                        })
-                      ],
-                      1
-                    )
-                  ],
-                  1
-                )
-              ])
-            ]),
-            _vm._v(" "),
+    _c(
+      "section",
+      { staticClass: "section" },
+      [
+        _c("div", { staticClass: "table-title" }, [
+          _vm._v("LIST OF STUDENT TAKEN")
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "level" }, [
+          _c("div", { staticClass: "level-left" }, [
             _c(
               "div",
-              {
-                staticStyle: { display: "flex", "justify-content": "flex-end" }
-              },
+              { staticClass: "level-item" },
               [
                 _c(
-                  "p",
-                  {
-                    staticStyle: {
-                      "font-weight": "bold",
-                      "margin-bottom": "10px"
-                    }
-                  },
-                  [_vm._v("TOTAL ROWS: " + _vm._s(_vm.total) + " ")]
+                  "b-field",
+                  { attrs: { label: "Page", "label-position": "on-border" } },
+                  [
+                    _c(
+                      "b-select",
+                      {
+                        on: { input: _vm.setPerPage },
+                        model: {
+                          value: _vm.perPage,
+                          callback: function($$v) {
+                            _vm.perPage = $$v
+                          },
+                          expression: "perPage"
+                        }
+                      },
+                      [
+                        _c("option", { attrs: { value: "5" } }, [
+                          _vm._v("5 per page")
+                        ]),
+                        _vm._v(" "),
+                        _c("option", { attrs: { value: "10" } }, [
+                          _vm._v("10 per page")
+                        ]),
+                        _vm._v(" "),
+                        _c("option", { attrs: { value: "15" } }, [
+                          _vm._v("15 per page")
+                        ]),
+                        _vm._v(" "),
+                        _c("option", { attrs: { value: "20" } }, [
+                          _vm._v("20 per page")
+                        ])
+                      ]
+                    )
+                  ],
+                  1
                 )
-              ]
-            ),
-            _vm._v(" "),
-            _c(
-              "b-table",
-              {
-                attrs: {
-                  data: _vm.data,
-                  loading: _vm.loading,
-                  paginated: "",
-                  "backend-pagination": "",
-                  total: _vm.total,
-                  "per-page": _vm.perPage,
-                  "range-before": _vm.rangeBefore,
-                  "range-after": _vm.rangeAfter,
-                  "aria-next-label": "Next page",
-                  "aria-previous-label": "Previous page",
-                  "aria-page-label": "Page",
-                  "aria-current-label": "Current page",
-                  "backend-sorting": "",
-                  "default-sort-direction": _vm.defaultSortDirection
-                },
-                on: { "page-change": _vm.onPageChange, sort: _vm.onSort }
-              },
-              [
-                _c("b-table-column", {
-                  attrs: { field: "taking_test_id", label: "ID" },
-                  scopedSlots: _vm._u([
-                    {
-                      key: "default",
-                      fn: function(props) {
-                        return [
-                          _vm._v(
-                            "\n                        " +
-                              _vm._s(props.row.taking_test_id) +
-                              "\n                    "
-                          )
-                        ]
-                      }
-                    }
-                  ])
-                }),
-                _vm._v(" "),
-                _c("b-table-column", {
-                  attrs: { field: "code", label: "AY Code" },
-                  scopedSlots: _vm._u([
-                    {
-                      key: "default",
-                      fn: function(props) {
-                        return [
-                          _vm._v(
-                            "\n                        " +
-                              _vm._s(props.row.code) +
-                              "\n                    "
-                          )
-                        ]
-                      }
-                    }
-                  ])
-                }),
-                _vm._v(" "),
-                _c("b-table-column", {
-                  attrs: { field: "fullname", label: "Fullname" },
-                  scopedSlots: _vm._u([
-                    {
-                      key: "default",
-                      fn: function(props) {
-                        return [
-                          _vm._v(
-                            "\n                        " +
-                              _vm._s(props.row.lname) +
-                              ", " +
-                              _vm._s(props.row.fname) +
-                              " " +
-                              _vm._s(props.row.mname) +
-                              "\n                    "
-                          )
-                        ]
-                      }
-                    }
-                  ])
-                }),
-                _vm._v(" "),
-                _c("b-table-column", {
-                  attrs: { field: "from", label: "From/To" },
-                  scopedSlots: _vm._u([
-                    {
-                      key: "default",
-                      fn: function(props) {
-                        return [
-                          _vm._v(
-                            "\n                        " +
-                              _vm._s(props.row.from) +
-                              " - " +
-                              _vm._s(props.row.from) +
-                              "\n                    "
-                          )
-                        ]
-                      }
-                    }
-                  ])
-                }),
-                _vm._v(" "),
-                _c("b-table-column", {
-                  attrs: { field: "section", label: "Section" },
-                  scopedSlots: _vm._u([
-                    {
-                      key: "default",
-                      fn: function(props) {
-                        return [
-                          _vm._v(
-                            "\n                        " +
-                              _vm._s(props.row.section) +
-                              "\n                    "
-                          )
-                        ]
-                      }
-                    }
-                  ])
-                }),
-                _vm._v(" "),
-                _c("b-table-column", {
-                  attrs: { field: "created_date", label: "Time Taken" },
-                  scopedSlots: _vm._u([
-                    {
-                      key: "default",
-                      fn: function(props) {
-                        return [
-                          _vm._v(
-                            "\n                        " +
-                              _vm._s(props.row.created_date) +
-                              " " +
-                              _vm._s(props.row.created_time) +
-                              "\n                    "
-                          )
-                        ]
-                      }
-                    }
-                  ])
-                }),
-                _vm._v(" "),
-                _c("b-table-column", {
-                  attrs: { field: "ay_id", label: "Action" },
-                  scopedSlots: _vm._u([
-                    {
-                      key: "default",
-                      fn: function(props) {
-                        return [
-                          _c(
-                            "div",
-                            { staticClass: "is-flex" },
-                            [
-                              _c("b-button", {
-                                staticClass: "button is-small is-danger mr-1",
-                                attrs: {
-                                  "icon-pack": "fa",
-                                  "icon-right": "trash"
-                                },
-                                on: {
-                                  click: function($event) {
-                                    return _vm.confirmDelete(props.row)
-                                  }
-                                }
-                              })
-                            ],
-                            1
-                          )
-                        ]
-                      }
-                    }
-                  ])
-                })
               ],
               1
             )
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "level-right" }, [
+            _c(
+              "div",
+              { staticClass: "level-item" },
+              [
+                _c(
+                  "b-field",
+                  {
+                    attrs: {
+                      label: "Search Lastname",
+                      "label-position": "on-border"
+                    }
+                  },
+                  [
+                    _c("b-input", {
+                      attrs: {
+                        type: "text",
+                        placeholder: "Search Lastname..."
+                      },
+                      nativeOn: {
+                        keyup: function($event) {
+                          if (
+                            !$event.type.indexOf("key") &&
+                            _vm._k(
+                              $event.keyCode,
+                              "enter",
+                              13,
+                              $event.key,
+                              "Enter"
+                            )
+                          ) {
+                            return null
+                          }
+                          return _vm.loadAsyncData($event)
+                        }
+                      },
+                      model: {
+                        value: _vm.search.lname,
+                        callback: function($$v) {
+                          _vm.$set(_vm.search, "lname", $$v)
+                        },
+                        expression: "search.lname"
+                      }
+                    })
+                  ],
+                  1
+                )
+              ],
+              1
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              { staticClass: "level-item" },
+              [
+                _c(
+                  "b-field",
+                  {
+                    attrs: {
+                      label: "Search Firstname",
+                      "label-position": "on-border"
+                    }
+                  },
+                  [
+                    _c("b-input", {
+                      attrs: {
+                        type: "text",
+                        placeholder: "Search Firstname..."
+                      },
+                      nativeOn: {
+                        keyup: function($event) {
+                          if (
+                            !$event.type.indexOf("key") &&
+                            _vm._k(
+                              $event.keyCode,
+                              "enter",
+                              13,
+                              $event.key,
+                              "Enter"
+                            )
+                          ) {
+                            return null
+                          }
+                          return _vm.loadAsyncData($event)
+                        }
+                      },
+                      model: {
+                        value: _vm.search.fname,
+                        callback: function($$v) {
+                          _vm.$set(_vm.search, "fname", $$v)
+                        },
+                        expression: "search.fname"
+                      }
+                    })
+                  ],
+                  1
+                )
+              ],
+              1
+            )
+          ])
+        ]),
+        _vm._v(" "),
+        _c(
+          "div",
+          { staticStyle: { display: "flex", "justify-content": "flex-end" } },
+          [
+            _c(
+              "p",
+              {
+                staticStyle: { "font-weight": "bold", "margin-bottom": "10px" }
+              },
+              [_vm._v("TOTAL ROWS: " + _vm._s(_vm.total) + " ")]
+            )
+          ]
+        ),
+        _vm._v(" "),
+        _c(
+          "b-table",
+          {
+            attrs: {
+              data: _vm.data,
+              loading: _vm.loading,
+              paginated: "",
+              "backend-pagination": "",
+              total: _vm.total,
+              "per-page": _vm.perPage,
+              "range-before": _vm.rangeBefore,
+              "range-after": _vm.rangeAfter,
+              "aria-next-label": "Next page",
+              "aria-previous-label": "Previous page",
+              "aria-page-label": "Page",
+              "aria-current-label": "Current page",
+              "backend-sorting": "",
+              "default-sort-direction": _vm.defaultSortDirection
+            },
+            on: { "page-change": _vm.onPageChange, sort: _vm.onSort }
+          },
+          [
+            _c("b-table-column", {
+              attrs: { field: "taking_test_id", label: "ID" },
+              scopedSlots: _vm._u([
+                {
+                  key: "default",
+                  fn: function(props) {
+                    return [
+                      _vm._v(
+                        "\n                " +
+                          _vm._s(props.row.taking_test_id) +
+                          "\n            "
+                      )
+                    ]
+                  }
+                }
+              ])
+            }),
+            _vm._v(" "),
+            _c("b-table-column", {
+              attrs: { field: "code", label: "AY Code" },
+              scopedSlots: _vm._u([
+                {
+                  key: "default",
+                  fn: function(props) {
+                    return [
+                      _vm._v(
+                        "\n                " +
+                          _vm._s(props.row.code) +
+                          "\n            "
+                      )
+                    ]
+                  }
+                }
+              ])
+            }),
+            _vm._v(" "),
+            _c("b-table-column", {
+              attrs: { field: "fullname", label: "Fullname" },
+              scopedSlots: _vm._u([
+                {
+                  key: "default",
+                  fn: function(props) {
+                    return [
+                      _vm._v(
+                        "\n                " +
+                          _vm._s(props.row.lname) +
+                          ", " +
+                          _vm._s(props.row.fname) +
+                          " " +
+                          _vm._s(props.row.mname) +
+                          "\n            "
+                      )
+                    ]
+                  }
+                }
+              ])
+            }),
+            _vm._v(" "),
+            _c("b-table-column", {
+              attrs: { field: "from", label: "From/To" },
+              scopedSlots: _vm._u([
+                {
+                  key: "default",
+                  fn: function(props) {
+                    return [
+                      _vm._v(
+                        "\n                " +
+                          _vm._s(props.row.from) +
+                          " - " +
+                          _vm._s(props.row.from) +
+                          "\n            "
+                      )
+                    ]
+                  }
+                }
+              ])
+            }),
+            _vm._v(" "),
+            _c("b-table-column", {
+              attrs: { field: "section", label: "Section" },
+              scopedSlots: _vm._u([
+                {
+                  key: "default",
+                  fn: function(props) {
+                    return [
+                      _vm._v(
+                        "\n                " +
+                          _vm._s(props.row.section) +
+                          "\n            "
+                      )
+                    ]
+                  }
+                }
+              ])
+            }),
+            _vm._v(" "),
+            _c("b-table-column", {
+              attrs: { field: "created_date", label: "Time Taken" },
+              scopedSlots: _vm._u([
+                {
+                  key: "default",
+                  fn: function(props) {
+                    return [
+                      _vm._v(
+                        "\n                " +
+                          _vm._s(props.row.created_date) +
+                          " " +
+                          _vm._s(props.row.created_time) +
+                          "\n            "
+                      )
+                    ]
+                  }
+                }
+              ])
+            }),
+            _vm._v(" "),
+            _c("b-table-column", {
+              attrs: { field: "ay_id", label: "Action" },
+              scopedSlots: _vm._u([
+                {
+                  key: "default",
+                  fn: function(props) {
+                    return [
+                      _c(
+                        "div",
+                        { staticClass: "is-flex" },
+                        [
+                          _c("b-button", {
+                            staticClass: "button is-small is-danger mr-1",
+                            attrs: { "icon-pack": "fa", "icon-right": "trash" },
+                            on: {
+                              click: function($event) {
+                                return _vm.confirmDelete(props.row)
+                              }
+                            }
+                          })
+                        ],
+                        1
+                      )
+                    ]
+                  }
+                }
+              ])
+            })
           ],
           1
         )
-      ])
-    ])
+      ],
+      1
+    )
   ])
 }
 var staticRenderFns = []
@@ -38416,392 +38354,380 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
-    _c("div", { staticClass: "section" }, [
-      _c(
-        "div",
-        {
-          staticStyle: {
-            "font-size": "20px",
-            "text-align": "center",
-            "font-weight": "bold"
-          }
-        },
-        [_vm._v("LIST OF USER")]
-      ),
-      _vm._v(" "),
-      _c("div", { staticClass: "columns" }, [
+    _c(
+      "div",
+      { staticClass: "section" },
+      [
         _c(
           "div",
-          { staticClass: "column" },
-          [
-            _c("div", { staticClass: "level" }, [
-              _c("div", { staticClass: "level-left" }, [
+          {
+            staticStyle: {
+              "font-size": "20px",
+              "text-align": "center",
+              "font-weight": "bold"
+            }
+          },
+          [_vm._v("LIST OF USER")]
+        ),
+        _vm._v(" "),
+        _c("div", { staticClass: "level" }, [
+          _c("div", { staticClass: "level-left" }, [
+            _c(
+              "div",
+              { staticClass: "level-item" },
+              [
                 _c(
-                  "div",
-                  { staticClass: "level-item" },
+                  "b-field",
+                  { attrs: { label: "Page" } },
                   [
                     _c(
-                      "b-field",
-                      { attrs: { label: "Page" } },
-                      [
-                        _c(
-                          "b-select",
-                          {
-                            on: { input: _vm.setPerPage },
-                            model: {
-                              value: _vm.perPage,
-                              callback: function($$v) {
-                                _vm.perPage = $$v
-                              },
-                              expression: "perPage"
-                            }
+                      "b-select",
+                      {
+                        on: { input: _vm.setPerPage },
+                        model: {
+                          value: _vm.perPage,
+                          callback: function($$v) {
+                            _vm.perPage = $$v
                           },
-                          [
-                            _c("option", { attrs: { value: "5" } }, [
-                              _vm._v("5 per page")
-                            ]),
-                            _vm._v(" "),
-                            _c("option", { attrs: { value: "10" } }, [
-                              _vm._v("10 per page")
-                            ]),
-                            _vm._v(" "),
-                            _c("option", { attrs: { value: "15" } }, [
-                              _vm._v("15 per page")
-                            ]),
-                            _vm._v(" "),
-                            _c("option", { attrs: { value: "20" } }, [
-                              _vm._v("20 per page")
-                            ])
-                          ]
-                        )
-                      ],
-                      1
+                          expression: "perPage"
+                        }
+                      },
+                      [
+                        _c("option", { attrs: { value: "5" } }, [
+                          _vm._v("5 per page")
+                        ]),
+                        _vm._v(" "),
+                        _c("option", { attrs: { value: "10" } }, [
+                          _vm._v("10 per page")
+                        ]),
+                        _vm._v(" "),
+                        _c("option", { attrs: { value: "15" } }, [
+                          _vm._v("15 per page")
+                        ]),
+                        _vm._v(" "),
+                        _c("option", { attrs: { value: "20" } }, [
+                          _vm._v("20 per page")
+                        ])
+                      ]
                     )
                   ],
                   1
-                )
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "level-right" }, [
-                _c(
-                  "div",
-                  { staticClass: "level-item" },
-                  [
-                    _c(
-                      "b-field",
-                      { attrs: { label: "Search" } },
-                      [
-                        _c("b-input", {
-                          attrs: {
-                            type: "input",
-                            placeholder: "Search Lastname..."
-                          },
-                          nativeOn: {
-                            keyup: function($event) {
-                              if (
-                                !$event.type.indexOf("key") &&
-                                _vm._k(
-                                  $event.keyCode,
-                                  "enter",
-                                  13,
-                                  $event.key,
-                                  "Enter"
-                                )
-                              ) {
-                                return null
-                              }
-                              return _vm.loadAsyncData($event)
-                            }
-                          },
-                          model: {
-                            value: _vm.search.lname,
-                            callback: function($$v) {
-                              _vm.$set(_vm.search, "lname", $$v)
-                            },
-                            expression: "search.lname"
-                          }
-                        })
-                      ],
-                      1
-                    )
-                  ],
-                  1
-                )
-              ])
-            ]),
-            _vm._v(" "),
-            _c(
-              "div",
-              {
-                staticStyle: { display: "flex", "justify-content": "flex-end" }
-              },
-              [
-                _c(
-                  "p",
-                  {
-                    staticStyle: {
-                      "font-weight": "bold",
-                      "margin-bottom": "10px"
-                    }
-                  },
-                  [_vm._v("TOTAL ROWS: " + _vm._s(_vm.total) + " ")]
-                )
-              ]
-            ),
-            _vm._v(" "),
-            _c(
-              "b-table",
-              {
-                attrs: {
-                  data: _vm.data,
-                  loading: _vm.loading,
-                  paginated: "",
-                  "backend-pagination": "",
-                  total: _vm.total,
-                  "per-page": _vm.perPage,
-                  "aria-next-label": "Next page",
-                  "aria-previous-label": "Previous page",
-                  "aria-page-label": "Page",
-                  "aria-current-label": "Current page",
-                  "backend-sorting": "",
-                  "default-sort-direction": _vm.defaultSortDirection
-                },
-                on: { "page-change": _vm.onPageChange, sort: _vm.onSort }
-              },
-              [
-                _c("b-table-column", {
-                  attrs: { field: "user_id", label: "ID" },
-                  scopedSlots: _vm._u([
-                    {
-                      key: "default",
-                      fn: function(props) {
-                        return [
-                          _vm._v(
-                            "\n                        " +
-                              _vm._s(props.row.user_id) +
-                              "\n                    "
-                          )
-                        ]
-                      }
-                    }
-                  ])
-                }),
-                _vm._v(" "),
-                _c("b-table-column", {
-                  attrs: { field: "username", label: "Username" },
-                  scopedSlots: _vm._u([
-                    {
-                      key: "default",
-                      fn: function(props) {
-                        return [
-                          _vm._v(
-                            "\n                        " +
-                              _vm._s(props.row.username) +
-                              "\n                    "
-                          )
-                        ]
-                      }
-                    }
-                  ])
-                }),
-                _vm._v(" "),
-                _c("b-table-column", {
-                  attrs: { field: "lname", label: "Lastname" },
-                  scopedSlots: _vm._u([
-                    {
-                      key: "default",
-                      fn: function(props) {
-                        return [
-                          _vm._v(
-                            "\n                        " +
-                              _vm._s(props.row.lname) +
-                              "\n                    "
-                          )
-                        ]
-                      }
-                    }
-                  ])
-                }),
-                _vm._v(" "),
-                _c("b-table-column", {
-                  attrs: { field: "fname", label: "Firstname" },
-                  scopedSlots: _vm._u([
-                    {
-                      key: "default",
-                      fn: function(props) {
-                        return [
-                          _vm._v(
-                            "\n                        " +
-                              _vm._s(props.row.fname) +
-                              "\n                    "
-                          )
-                        ]
-                      }
-                    }
-                  ])
-                }),
-                _vm._v(" "),
-                _c("b-table-column", {
-                  attrs: { field: "mname", label: "Middlename" },
-                  scopedSlots: _vm._u([
-                    {
-                      key: "default",
-                      fn: function(props) {
-                        return [
-                          _vm._v(
-                            "\n                        " +
-                              _vm._s(props.row.mname) +
-                              "\n                    "
-                          )
-                        ]
-                      }
-                    }
-                  ])
-                }),
-                _vm._v(" "),
-                _c("b-table-column", {
-                  attrs: { field: "mname", label: "Email" },
-                  scopedSlots: _vm._u([
-                    {
-                      key: "default",
-                      fn: function(props) {
-                        return [
-                          _vm._v(
-                            "\n                        " +
-                              _vm._s(props.row.email) +
-                              "\n                    "
-                          )
-                        ]
-                      }
-                    }
-                  ])
-                }),
-                _vm._v(" "),
-                _c("b-table-column", {
-                  attrs: { field: "email_verified_at", label: "Verified At" },
-                  scopedSlots: _vm._u([
-                    {
-                      key: "default",
-                      fn: function(props) {
-                        return [
-                          _vm._v(
-                            "\n                        " +
-                              _vm._s(props.row.email_verified_at) +
-                              "\n                    "
-                          )
-                        ]
-                      }
-                    }
-                  ])
-                }),
-                _vm._v(" "),
-                _c("b-table-column", {
-                  attrs: { field: "role", label: "Role" },
-                  scopedSlots: _vm._u([
-                    {
-                      key: "default",
-                      fn: function(props) {
-                        return [
-                          _vm._v(
-                            "\n                        " +
-                              _vm._s(props.row.role) +
-                              "\n                    "
-                          )
-                        ]
-                      }
-                    }
-                  ])
-                }),
-                _vm._v(" "),
-                _c("b-table-column", {
-                  attrs: { field: "", label: "Action" },
-                  scopedSlots: _vm._u([
-                    {
-                      key: "default",
-                      fn: function(props) {
-                        return [
-                          _c(
-                            "div",
-                            {
-                              staticClass: "buttons",
-                              staticStyle: { width: "120px" }
-                            },
-                            [
-                              _c("b-button", {
-                                staticClass:
-                                  "button is-small is-success is-outlined mr-1",
-                                attrs: {
-                                  tag: "a",
-                                  "icon-right": "envelope-o",
-                                  "icon-pack": "fa"
-                                },
-                                on: {
-                                  click: function($event) {
-                                    return _vm.verifyEmail(props.row)
-                                  }
-                                }
-                              }),
-                              _vm._v(" "),
-                              _c("b-button", {
-                                staticClass: "button is-small is-warning mr-1",
-                                attrs: {
-                                  tag: "a",
-                                  "icon-right": "pencil",
-                                  "icon-pack": "fa",
-                                  href:
-                                    "/panel/user/" + props.row.user_id + "/edit"
-                                }
-                              }),
-                              _vm._v(" "),
-                              _c("b-button", {
-                                staticClass: "button is-small is-danger mr-1",
-                                attrs: {
-                                  "icon-pack": "fa",
-                                  "icon-right": "trash"
-                                },
-                                on: {
-                                  click: function($event) {
-                                    return _vm.confirmDelete(props.row.user_id)
-                                  }
-                                }
-                              })
-                            ],
-                            1
-                          )
-                        ]
-                      }
-                    }
-                  ])
-                })
-              ],
-              1
-            ),
-            _vm._v(" "),
-            _c(
-              "div",
-              { staticClass: "buttons mt-3" },
-              [
-                _c(
-                  "b-button",
-                  {
-                    staticClass: "is-primary",
-                    attrs: {
-                      "icon-pack": "fa",
-                      "icon-left": "plus",
-                      tag: "a",
-                      href: "/panel/user/create"
-                    }
-                  },
-                  [_vm._v("New User")]
                 )
               ],
               1
             )
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "level-right" }, [
+            _c(
+              "div",
+              { staticClass: "level-item" },
+              [
+                _c(
+                  "b-field",
+                  { attrs: { label: "Search" } },
+                  [
+                    _c("b-input", {
+                      attrs: {
+                        type: "input",
+                        placeholder: "Search Lastname..."
+                      },
+                      nativeOn: {
+                        keyup: function($event) {
+                          if (
+                            !$event.type.indexOf("key") &&
+                            _vm._k(
+                              $event.keyCode,
+                              "enter",
+                              13,
+                              $event.key,
+                              "Enter"
+                            )
+                          ) {
+                            return null
+                          }
+                          return _vm.loadAsyncData($event)
+                        }
+                      },
+                      model: {
+                        value: _vm.search.lname,
+                        callback: function($$v) {
+                          _vm.$set(_vm.search, "lname", $$v)
+                        },
+                        expression: "search.lname"
+                      }
+                    })
+                  ],
+                  1
+                )
+              ],
+              1
+            )
+          ])
+        ]),
+        _vm._v(" "),
+        _c(
+          "div",
+          { staticStyle: { display: "flex", "justify-content": "flex-end" } },
+          [
+            _c(
+              "p",
+              {
+                staticStyle: { "font-weight": "bold", "margin-bottom": "10px" }
+              },
+              [_vm._v("TOTAL ROWS: " + _vm._s(_vm.total) + " ")]
+            )
+          ]
+        ),
+        _vm._v(" "),
+        _c(
+          "b-table",
+          {
+            attrs: {
+              data: _vm.data,
+              loading: _vm.loading,
+              paginated: "",
+              "backend-pagination": "",
+              total: _vm.total,
+              narrowed: "",
+              "per-page": _vm.perPage,
+              "aria-next-label": "Next page",
+              "aria-previous-label": "Previous page",
+              "aria-page-label": "Page",
+              "aria-current-label": "Current page",
+              "backend-sorting": "",
+              "default-sort-direction": _vm.defaultSortDirection
+            },
+            on: { "page-change": _vm.onPageChange, sort: _vm.onSort }
+          },
+          [
+            _c("b-table-column", {
+              attrs: { field: "user_id", label: "ID" },
+              scopedSlots: _vm._u([
+                {
+                  key: "default",
+                  fn: function(props) {
+                    return [
+                      _vm._v(
+                        "\n                " +
+                          _vm._s(props.row.user_id) +
+                          "\n            "
+                      )
+                    ]
+                  }
+                }
+              ])
+            }),
+            _vm._v(" "),
+            _c("b-table-column", {
+              attrs: { field: "username", label: "Username" },
+              scopedSlots: _vm._u([
+                {
+                  key: "default",
+                  fn: function(props) {
+                    return [
+                      _vm._v(
+                        "\n                " +
+                          _vm._s(props.row.username) +
+                          "\n            "
+                      )
+                    ]
+                  }
+                }
+              ])
+            }),
+            _vm._v(" "),
+            _c("b-table-column", {
+              attrs: { field: "lname", label: "Lastname" },
+              scopedSlots: _vm._u([
+                {
+                  key: "default",
+                  fn: function(props) {
+                    return [
+                      _vm._v(
+                        "\n                " +
+                          _vm._s(props.row.lname) +
+                          "\n            "
+                      )
+                    ]
+                  }
+                }
+              ])
+            }),
+            _vm._v(" "),
+            _c("b-table-column", {
+              attrs: { field: "fname", label: "Firstname" },
+              scopedSlots: _vm._u([
+                {
+                  key: "default",
+                  fn: function(props) {
+                    return [
+                      _vm._v(
+                        "\n                " +
+                          _vm._s(props.row.fname) +
+                          "\n            "
+                      )
+                    ]
+                  }
+                }
+              ])
+            }),
+            _vm._v(" "),
+            _c("b-table-column", {
+              attrs: { field: "mname", label: "Middlename" },
+              scopedSlots: _vm._u([
+                {
+                  key: "default",
+                  fn: function(props) {
+                    return [
+                      _vm._v(
+                        "\n                " +
+                          _vm._s(props.row.mname) +
+                          "\n            "
+                      )
+                    ]
+                  }
+                }
+              ])
+            }),
+            _vm._v(" "),
+            _c("b-table-column", {
+              attrs: { field: "mname", label: "Email" },
+              scopedSlots: _vm._u([
+                {
+                  key: "default",
+                  fn: function(props) {
+                    return [
+                      _vm._v(
+                        "\n                " +
+                          _vm._s(props.row.email) +
+                          "\n            "
+                      )
+                    ]
+                  }
+                }
+              ])
+            }),
+            _vm._v(" "),
+            _c("b-table-column", {
+              attrs: { field: "email_verified_at", label: "Verified At" },
+              scopedSlots: _vm._u([
+                {
+                  key: "default",
+                  fn: function(props) {
+                    return [
+                      _vm._v(
+                        "\n                " +
+                          _vm._s(props.row.email_verified_at) +
+                          "\n            "
+                      )
+                    ]
+                  }
+                }
+              ])
+            }),
+            _vm._v(" "),
+            _c("b-table-column", {
+              attrs: { field: "role", label: "Role" },
+              scopedSlots: _vm._u([
+                {
+                  key: "default",
+                  fn: function(props) {
+                    return [
+                      _vm._v(
+                        "\n                " +
+                          _vm._s(props.row.role) +
+                          "\n            "
+                      )
+                    ]
+                  }
+                }
+              ])
+            }),
+            _vm._v(" "),
+            _c("b-table-column", {
+              attrs: { field: "", label: "Action" },
+              scopedSlots: _vm._u([
+                {
+                  key: "default",
+                  fn: function(props) {
+                    return [
+                      _c(
+                        "div",
+                        {
+                          staticClass: "buttons",
+                          staticStyle: { width: "120px" }
+                        },
+                        [
+                          _c("b-button", {
+                            staticClass:
+                              "button is-small is-success is-outlined mr-1",
+                            attrs: {
+                              tag: "a",
+                              "icon-right": "envelope-o",
+                              "icon-pack": "fa"
+                            },
+                            on: {
+                              click: function($event) {
+                                return _vm.verifyEmail(props.row)
+                              }
+                            }
+                          }),
+                          _vm._v(" "),
+                          _c("b-button", {
+                            staticClass: "button is-small is-warning mr-1",
+                            attrs: {
+                              tag: "a",
+                              "icon-right": "pencil",
+                              "icon-pack": "fa",
+                              href: "/panel/user/" + props.row.user_id + "/edit"
+                            }
+                          }),
+                          _vm._v(" "),
+                          _c("b-button", {
+                            staticClass: "button is-small is-danger mr-1",
+                            attrs: { "icon-pack": "fa", "icon-right": "trash" },
+                            on: {
+                              click: function($event) {
+                                return _vm.confirmDelete(props.row.user_id)
+                              }
+                            }
+                          })
+                        ],
+                        1
+                      )
+                    ]
+                  }
+                }
+              ])
+            })
+          ],
+          1
+        ),
+        _vm._v(" "),
+        _c(
+          "div",
+          { staticClass: "buttons mt-3" },
+          [
+            _c(
+              "b-button",
+              {
+                staticClass: "is-primary",
+                attrs: {
+                  "icon-pack": "fa",
+                  "icon-left": "plus",
+                  tag: "a",
+                  href: "/panel/user/create"
+                }
+              },
+              [_vm._v("New User")]
+            )
           ],
           1
         )
-      ])
-    ])
+      ],
+      1
+    )
   ])
 }
 var staticRenderFns = []
