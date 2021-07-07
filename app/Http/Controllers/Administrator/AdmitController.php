@@ -5,8 +5,10 @@ namespace App\Http\Controllers\Administrator;
 use App\Http\Controllers\Controller;
 use App\Models\AcadYear;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 
+use App\Mail\AdmitStudent;
 use App\Models\Gadtest;
 use Illuminate\Support\Facades\Hash;
 
@@ -18,6 +20,7 @@ class AdmitController extends Controller
         $n = time() . $req->user_id;
         $studentCode = substr(md5($n), -6);
 
+        
         $ay = AcadYear::where('active', 1)->first();
         //return $req->fields;
 
@@ -30,26 +33,40 @@ class AdmitController extends Controller
         $programs = substr_replace($programs, '', -1);
         $status = strtoupper($req->fields['status']);
 
-        Gadtest::create([
-            'StudLName' => strtoupper($req->fields['lname']),
-            'StudFName' => strtoupper($req->fields['fname']),
-            'StudMName' => strtoupper($req->fields['mname']),
-            'StudSex' => strtoupper($req->fields['sex']),
-            'StudClass' => $status,
-            'StudBDate' => $req->fields['bdate'],
-            'StudCNum' => $req->fields['contact_no'],
-            'StudCourse' => strtoupper($programs),
-            'StudYear' => $status == 'NEW' ? '1' : '0',
-            'email' => $req->fields['email'],
-            'term' => $ay->code,
-            'StudLSBrgyCode' => $req->fields['barangay_id'],
-            'StudPStr' => $req->fields['street'],
-            'password' => Hash::make($studentCode),
-            'rating' => $req->fields['total'],
-            'learning_mode' => $req->fields['learning_mode'],
-        ]);
+        try {
+            
+            Mail::to($req->fields['email'])->send(new AdmitStudent($studentCode));
+            return ['status' => 'mailed'];
+        } catch (Exception $e) {
+            return ['status' => 'failed'];
+        }
 
-        return $studentCode;
+
+
+        
+
+        // Gadtest::create([
+        //     'StudLName' => strtoupper($req->fields['lname']),
+        //     'StudFName' => strtoupper($req->fields['fname']),
+        //     'StudMName' => strtoupper($req->fields['mname']),
+        //     'StudSex' => strtoupper($req->fields['sex']),
+        //     'StudClass' => $status,
+        //     'StudBDate' => $req->fields['bdate'],
+        //     'StudCNum' => $req->fields['contact_no'],
+        //     'StudCourse' => strtoupper($programs),
+        //     'StudYear' => $status == 'NEW' ? '1' : '0',
+        //     'email' => $req->fields['email'],
+        //     'term' => $ay->code,
+        //     'StudLSBrgyCode' => $req->fields['barangay_id'],
+        //     'StudPStr' => $req->fields['street'],
+        //     'password' => Hash::make($studentCode),
+        //     'rating' => $req->fields['total'],
+        //     'learning_mode' => $req->fields['learning_mode'],
+        // ]);
+
+        
+
+       
 
     }
 }

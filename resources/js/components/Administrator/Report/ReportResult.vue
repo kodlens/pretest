@@ -383,11 +383,25 @@ export default {
                 return;
             }
 
+            this.isModalActive = false;
+            this.loading = true;
+
             axios.post('/admit-student', {
                 fields: this.selectedData,
                 programs: this.programTags
             }).then(res=>{
                 //console.log(res.data);
+                
+                this.isModalActive = false;
+                this.loading = false;
+                if(res.data.status === 'mailed'){
+                    
+                    this.$buefy.dialog.alert({
+                        title: 'SUCCESSFULLY EMAILED.',
+                        message: 'Student was successfully emailed with there admission code.',
+                        type: 'is-success',
+                    })
+                }
             })
 
         },
