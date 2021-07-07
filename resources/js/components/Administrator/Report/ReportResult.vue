@@ -6,19 +6,13 @@
             <div class="level">
                 <div class="level-left">
                     <div class="level-item">
-                        <b-field label="Search Lastname" label-position="on-border">
-                            <b-input type="text" placeholder="Search"
+                        <b-field label="SEARCH" label-position="on-border">
+                            <b-input type="text" placeholder="Search Lastname"
                                      v-model="search.lname" @keyup.native.enter="loadAsyncData"/>
-                        </b-field>
-                    </div>
-
-                    <div class="level-item">
-                        <b-field label="Search Firstname" label-position="on-border">
                             <b-input type="text" placeholder="Search Firstname"
                                      v-model="search.fname" @keyup.native.enter="loadAsyncData"/>
                         </b-field>
                     </div>
-
                 </div>
                 <div class="level-right">
                     <div class="level-item">
@@ -152,7 +146,7 @@
 
                 <b-table-column field="" label="Action" v-slot="props">
                     <div class="buttons">
-                        <b-button outlined class="button is-small is-success mr-1" icon-pack="fa" icon-right="arrow-circle-right" @click="admit(props.row)">ADMIT</b-button>
+                        <b-button outlined class="button is-small is-success mr-1" icon-pack="fa" icon-right="arrow-circle-right" @click="openModal(props.row)">ADMIT</b-button>
                     </div>
                 </b-table-column>
             </b-table>
@@ -171,6 +165,53 @@
             </div>
 
         </div><!--section-->
+
+
+
+        <b-modal v-model="this.isModalActive" has-modal-card
+                 trap-focus aria-role="dialog" aria-modal>
+            <div class="modal-card" style="height: 350px;">
+                <header class="modal-card-head">
+                    <p class="modal-card-title">PROGRAMS</p>
+                    <button type="button" class="delete"
+                            @click="isModalActive = false"/>
+
+                </header>
+
+                <section class="modal-card-body">
+                    <div>
+                        <b-field label="Add program">
+                            <b-taginput
+                                v-model="programTags"
+                                :data="filteredPrograms"
+                                autocomplete
+                                field="CCode"
+                                icon="label"
+                                placeholder="Type a program (eg. BSCS)"
+                                @typing="getFilteredTags">
+                                <template v-slot="props">
+                                    <strong>{{props.option.CCode}}</strong>: {{props.option.CDesc}}
+                                </template>
+                                <template #empty>
+                                    There are no items
+                                </template>
+                            </b-taginput>
+                        </b-field>
+                    </div>
+                </section>
+
+                <footer class="modal-card-foot">
+                    <b-button
+                        label="Close"
+                        @click="isModalActive=false"></b-button>
+                    <b-button
+                        label="ADMIT" class="is-success"
+                        icon-pack="fa" icon-right="arrow-circle-right"
+                        @click="admit"></b-button>
+                </footer>
+            </div>
+        </b-modal>
+
 
     </div><!--root div-->
 </template>
@@ -202,6 +243,8 @@ export default {
             page: 1,
             perPage: 20,
             defaultSortDirection: 'asc',
+
+            errors: {},
 
             json_fields: {
                 'USER ID' : 'user_id',
@@ -238,7 +281,15 @@ export default {
                 first_program: '',
             },
 
-            programs: {},
+            programs: [],
+
+            filteredPrograms: {},
+            isSelectOnly: false,
+            programTags: [],
+            isModalActive: false,
+
+            selectedData: {},
+
 
         }
     },
@@ -312,15 +363,40 @@ export default {
         },
 
 
-        admit: function(dataRow){
-            axios.post('/admit-student', dataRow).then(res=>{
-                console.log(res.data);
+        openModal: function(dataRow){
+            this.programTags = [];
+            this.errors = {};
+            this.isModalActive = true;
+            this.selectedData = dataRow;
+            console.log(this.selectedData);
+        },
+        getFilteredTags: function(text) {
+            this.filteredPrograms = this.programs.filter((option) => {
+                return option.CCode.toString().toLowerCase().indexOf(text.toLowerCase()) >= 0
             })
         },
 
+        admit: function(){
+            if(this.programTags.length < 1){
+                //this.errors.programTag = 'No program selected. Please select atleast 1 program.';
+                alert('No program selected. Please select atleast 1 program.');
+                return;
+            }
 
+            axios.post('/admit-student', {
+                fields: this.selectedData,
+                programs: this.programTags
+            }).then(res=>{
+                //console.log(res.data);
+            })
+
+        },
+
+        //initialize data
         initData: function(){
             this.programs = JSON.parse(this.propPrograms);
+            this.filteredPrograms = this.programs;
+
             this.loadAsyncData();
         }
     },
@@ -333,4 +409,10 @@ export default {
 
 }
 </script>
+
+
+<style scoped>
+
+
+</style>
 

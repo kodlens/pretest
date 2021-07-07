@@ -1,12 +1,12 @@
 <template>
     <div>
         <div class="section">
-            <div style="font-size: 20px; text-align: center; font-weight: bold;">LIST OF USER</div>
+            <div class="table-title">LIST OF USER</div>
 
             <div class="level">
                 <div class="level-left">
                     <div class="level-item">
-                        <b-field label="Page">
+                        <b-field label="PAGE" label-position="on-border">
                             <b-select v-model="perPage" @input="setPerPage">
                                 <option value="5">5 per page</option>
                                 <option value="10">10 per page</option>
@@ -18,9 +18,11 @@
                 </div>
                 <div class="level-right">
                     <div class="level-item">
-                        <b-field label="Search">
+                        <b-field label="SEARCH" label-position="on-border">
                             <b-input type="input" v-model="search.lname" placeholder="Search Lastname..." @keyup.native.enter="loadAsyncData" />
+                            <b-input type="input" v-model="search.fname" placeholder="Search Firstname..." @keyup.native.enter="loadAsyncData" />
                         </b-field>
+
                     </div>
                 </div>
             </div>
@@ -92,7 +94,7 @@
                 <b-button icon-pack="fa" icon-left="plus" tag="a" href="/panel/user/create" class="is-primary">New User</b-button>
             </div>
 
-            
+
         </div><!--section-->
     </div>
 </template>
@@ -127,18 +129,20 @@ export default {
 
             search: {
                 lname: '',
+                fname: '',
             }
 
         }
     },
     methods: {
-    
+
         loadAsyncData() {
             const params = [
                 `sort_by=${this.sortField}.${this.sortOrder}`,
                 `perpage=${this.perPage}`,
                 `page=${this.page}`,
-                `lname=${this.search.lname}`
+                `lname=${this.search.lname}`,
+                `fname=${this.search.fname}`
             ].join('&')
 
             this.loading = true

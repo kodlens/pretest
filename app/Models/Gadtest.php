@@ -18,10 +18,8 @@ class Gadtest extends Model
     protected $fillable =[
         'StudLName', 'StudFName', 'StudMName', 'StudSex',
         'StudBType', 'StudClass', 'StudBDate', 'StudCNum',
-        'StudCourse', 'StudYear', 'StudRel', 'email', 'StudLTerm', 'StudLSchool',
-        'StudLTown', 'StudLYear', 'StudBbrgy', 'StudPStr', 'StudPZip', 'StudPFName',
-        'StudPFAge', 'StudPFOcc', 'StudPMName', 'StudPMAge', 'StudPMOcc', 'StudGName',
-        'StudGCNum', 'StudGTown', 'StudGRelation', 'StudRname1', 'StudRname2',
+        'StudCourse', 'StudYear', 'email', 'term', 'StudLSBrgyCode',
+        'StudPStr', 'password', 'rating', 'learning_mode'
     ];
 
     //StudLSBrgy -> address. ID
