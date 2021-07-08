@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Mail;
 
 use App\Mail\AdmitStudent;
 use App\Models\Gadtest;
+use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 
 class AdmitController extends Controller
@@ -61,7 +62,12 @@ class AdmitController extends Controller
                 ],
             ]);
 
-            //Mail::to($req->fields['email'])->send(new AdmitStudent($req->fields, $studentCode, $req->programs));
+             Mail::to($req->fields['email'])->send(new AdmitStudent($req->fields, $studentCode, $req->programs));
+
+            User::where('user_id', $req->fields['user_id'])
+                ->update(['is_submitted' => 1]);
+
+           
 
 
             return ['status' => 'mailed'];

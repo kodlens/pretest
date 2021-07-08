@@ -26,131 +26,168 @@
                 </div>
             </div>
 
-            <div style="display:flex; justify-content: flex-end;">
+
+            <div class="level">
+                <div class="level-left">
+                    <div class="level-item">
+                        
+                    </div>
+                </div>
+                <div class="level-right">
+                    <div class="level-item">
+                        
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+
+        <div class="section">
+            <div style="display:flex; justify-content: flex-end; margin-bottom: 10px;">
+               
+                <b-button class="is-small is-success is-outlined" style="margin-right:auto;" icon-pack="fa" icon-right="refresh" @click="loadAsyncData">REFRESH</b-button>
+               
                 <p style="font-weight: bold; margin-bottom: 10px;">TOTAL ROWS: {{ total }} </p>
             </div>
 
-            <b-table
-                :data="data"
-                :loading="loading"
-                paginated
-                backend-pagination
-                :total="total"
-                narrowed
-                :per-page="perPage"
-                @page-change="onPageChange"
-                detail-transition = ""
-                aria-next-label="Next page"
-                aria-previous-label="Previous page"
-                aria-page-label="Page"
-                :show-detail-icon=true
-                aria-current-label="Current page"
-                backend-sorting
-                :default-sort-direction="defaultSortDirection"
-                @sort="onSort">
+            <div class="table-container">
+                <b-table
+                    :data="data"
+                    :loading="loading"
+                    paginated
+                    backend-pagination
+                    :total="total"
+                    narrowed
+                    :per-page="perPage"
+                    @page-change="onPageChange"
+                    detail-transition = ""
+                    aria-next-label="Next page"
+                    aria-previous-label="Previous page"
+                    aria-page-label="Page"
+                    :show-detail-icon=true
+                    aria-current-label="Current page"
+                    backend-sorting
+                    :default-sort-direction="defaultSortDirection"
+                    @sort="onSort" class="is-fullwidth">
 
 
-                <b-table-column field="user_id" label="User ID" v-slot="props">
-                    {{ props.row.user_id }}
-                </b-table-column>
+                    <b-table-column field="user_id" label="User ID" v-slot="props">
+                        {{ props.row.user_id }}
+                    </b-table-column>
 
-                <b-table-column field="fullname" label="Fullname" v-slot="props">
-                    {{ props.row.lname }}, {{ props.row.fname }} {{ props.row.mname }}
-                </b-table-column>
+                    <b-table-column field="fullname" label="Fullname" v-slot="props">
+                        {{ props.row.lname }}, {{ props.row.fname }} {{ props.row.mname }}
+                    </b-table-column>
 
-                <b-table-column field="fromTo" label="Schedule" v-slot="props">
-                    {{ props.row.from }} / {{ props.row.to }}
-                </b-table-column>
+                    <b-table-column field="fromTo" label="Schedule" v-slot="props">
+                        {{ props.row.from }} / {{ props.row.to }}
+                    </b-table-column>
 
-                <b-table-column field="sex" label="Sex" centered v-slot="props">
-                    {{ props.row.sex }}
-                </b-table-column>
+                    <b-table-column field="sex" label="Sex" centered v-slot="props">
+                        {{ props.row.sex }}
+                    </b-table-column>
 
-                <b-table-column field="program" label="1st Program" v-slot="props">
-                    {{ props.row.first_program_choice }}
-                </b-table-column>
+                    <b-table-column field="program" label="1st Program" v-slot="props">
+                        {{ props.row.first_program_choice }}
+                    </b-table-column>
 
-                <b-table-column field="program" label="2nd Program" v-slot="props">
-                    {{ props.row.second_program_choice }}
-                </b-table-column>
+                    <b-table-column field="program" label="2nd Program" v-slot="props">
+                        {{ props.row.second_program_choice }}
+                    </b-table-column>
 
-                <b-table-column field="abstraction" label="ABSTRACTION" centered numeric v-slot="props">
+                    <b-table-column field="abstraction" label="ABSTRACTION" centered numeric v-slot="props">
 
-                    <div v-if="props.row.abstraction < 1">
-                        <span style="color:red; font-weight: bold;">{{ props.row.abstraction }}</span>
-                    </div>
-                    <div v-else style="color: green; font-weight: bold;">
-                        {{ props.row.abstraction}}
-                    </div>
-                </b-table-column>
+                        <div v-if="props.row.abstraction < 1">
+                            <span style="color:red; font-weight: bold;">{{ props.row.abstraction }}</span>
+                        </div>
+                        <div v-else style="color: green; font-weight: bold;">
+                            {{ props.row.abstraction}}
+                        </div>
+                    </b-table-column>
 
-                <b-table-column field="logical" label="LOGICAL" centered numeric v-slot="props">
+                    <b-table-column field="logical" label="LOGICAL" centered numeric v-slot="props">
 
-                    <div v-if="props.row.logical < 1">
-                        <span style="color:red; font-weight: bold;">{{ props.row.logical }}</span>
-                    </div>
-                    <div v-else style="color: green; font-weight: bold;">
-                        {{ props.row.logical}}
-                    </div>
+                        <div v-if="props.row.logical < 1">
+                            <span style="color:red; font-weight: bold;">{{ props.row.logical }}</span>
+                        </div>
+                        <div v-else style="color: green; font-weight: bold;">
+                            {{ props.row.logical}}
+                        </div>
 
-                </b-table-column>
+                    </b-table-column>
 
-                <b-table-column field="english" label="ENGLISH" centered numeric v-slot="props">
+                    <b-table-column field="english" label="ENGLISH" centered numeric v-slot="props">
 
-                    <div v-if="props.row.english < 1">
-                        <span style="color:red; font-weight: bold;">{{ props.row.english }}</span>
-                    </div>
-                    <div v-else style="color: green; font-weight: bold;">
-                        {{ props.row.english}}
-                    </div>
+                        <div v-if="props.row.english < 1">
+                            <span style="color:red; font-weight: bold;">{{ props.row.english }}</span>
+                        </div>
+                        <div v-else style="color: green; font-weight: bold;">
+                            {{ props.row.english}}
+                        </div>
 
-                </b-table-column>
+                    </b-table-column>
 
-                <b-table-column field="numerical" label="NUMERICAL" centered numeric v-slot="props">
+                    <b-table-column field="numerical" label="NUMERICAL" centered numeric v-slot="props">
 
-                    <div v-if="props.row.numerical < 1">
-                        <span style="color:red; font-weight: bold;">{{ props.row.numerical }}</span>
-                    </div>
-                    <div v-else style="color: green; font-weight: bold;">
-                        {{ props.row.numerical}}
-                    </div>
+                        <div v-if="props.row.numerical < 1">
+                            <span style="color:red; font-weight: bold;">{{ props.row.numerical }}</span>
+                        </div>
+                        <div v-else style="color: green; font-weight: bold;">
+                            {{ props.row.numerical}}
+                        </div>
 
-                </b-table-column>
+                    </b-table-column>
 
-                <b-table-column field="general" label="GENERAL" centered numeric v-slot="props">
+                    <b-table-column field="general" label="GENERAL" centered numeric v-slot="props">
 
-                    <div v-if="props.row.general < 1">
-                        <span style="color:red; font-weight: bold;">{{ props.row.general }}</span>
-                    </div>
-                    <div v-else style="color: green; font-weight: bold;">
-                        {{ props.row.general}}
-                    </div>
+                        <div v-if="props.row.general < 1">
+                            <span style="color:red; font-weight: bold;">{{ props.row.general }}</span>
+                        </div>
+                        <div v-else style="color: green; font-weight: bold;">
+                            {{ props.row.general}}
+                        </div>
 
-                </b-table-column>
+                    </b-table-column>
 
-                <b-table-column field="total" label="TOTAL" centered numeric v-slot="props">
-                    <!-- {{ Number(props.row.general) + Number(props.row.numerical) + Number(props.row.english)
-                    + Number(props.row.logical) + Number(props.row.abstraction) }} -->
-                    <div v-if="Number(props.row.total) <= 0">
-                        <span style="color:white; background-color: red; padding: 3px 10px; border-radius: 5px; font-weight: bold;">{{ props.row.total }}</span>
-                    </div>
+                    <b-table-column field="total" label="TOTAL" centered numeric v-slot="props">
+                        <!-- {{ Number(props.row.general) + Number(props.row.numerical) + Number(props.row.english)
+                        + Number(props.row.logical) + Number(props.row.abstraction) }} -->
+                        <div v-if="Number(props.row.total) <= 0">
+                            <span style="color:white; background-color: red; padding: 3px 10px; border-radius: 5px; font-weight: bold;">{{ props.row.total }}</span>
+                        </div>
 
-                    <div v-if="Number(props.row.total) >= 1 && Number(props.row.total) < 45">
-                        <span style="color:white; background-color: orange; padding: 3px 10px; border-radius: 5px; font-weight: bold;">{{ props.row.total }}</span>
-                    </div>
+                        <div v-if="Number(props.row.total) >= 1 && Number(props.row.total) < 45">
+                            <span style="color:white; background-color: orange; padding: 3px 10px; border-radius: 5px; font-weight: bold;">{{ props.row.total }}</span>
+                        </div>
 
-                    <div v-if="Number(props.row.total) >= 45">
-                        <span style="color:white; background-color: green; padding: 3px 10px; border-radius: 5px; font-weight: bold;">{{ props.row.total }}</span>
-                    </div>
+                        <div v-if="Number(props.row.total) >= 45">
+                            <span style="color:white; background-color: green; padding: 3px 10px; border-radius: 5px; font-weight: bold;">{{ props.row.total }}</span>
+                        </div>
 
-                </b-table-column>
+                    </b-table-column>
 
-                <b-table-column field="" label="Action" v-slot="props">
-                    <div class="buttons">
-                        <b-button outlined class="button is-small is-success mr-1" icon-pack="fa" icon-right="arrow-circle-right" @click="openModal(props.row)">ADMIT</b-button>
-                    </div>
-                </b-table-column>
-            </b-table>
+                    <b-table-column field="" label="Action" v-slot="props">
+                        <div class="buttons">
+                            <b-button v-if="props.row.is_submitted == 1" outlined class="button is-small is-link mr-1" 
+                                icon-pack="fa" 
+                                icon-right="arrow-circle-right" 
+                                @click="openModal(props.row)">
+                                    READMIT
+                            </b-button>
+
+                            <b-button v-else outlined class="button is-small is-success mr-1" 
+                                icon-pack="fa" 
+                                icon-right="arrow-circle-right" 
+                                @click="openModal(props.row)">
+                                    ADMIT
+                            </b-button>
+
+
+                        </div>
+                    </b-table-column>
+                </b-table>
+            </div> <!--table container-->
 
             <div class="buttons">
                 <downloadexcel
@@ -213,6 +250,10 @@
             </div>
         </b-modal>
 
+        <b-loading :is-full-page="isFullPage" v-model="isLoading">
+            
+        </b-loading>
+
 
     </div><!--root div-->
 </template>
@@ -244,6 +285,9 @@ export default {
             page: 1,
             perPage: 20,
             defaultSortDirection: 'asc',
+
+            isFullPage: true,
+            isLoading: false,
 
             errors: {},
 
@@ -400,7 +444,7 @@ export default {
             }
 
             this.isModalActive = false;
-            this.loading = true;
+            this.isLoading = true;
 
             axios.post('/admit-student', {
                 fields: this.selectedData,
@@ -409,13 +453,13 @@ export default {
                 //console.log(res.data);
                 
                 this.isModalActive = false;
-                this.loading = false;
+                this.isLoading = false;
                 if(res.data.status === 'mailed'){
-                    
                     this.$buefy.dialog.alert({
                         title: 'SUCCESSFULLY EMAILED.',
                         message: 'Student was successfully emailed with there admission code.',
                         type: 'is-success',
+                        onConfirm: ()=> this.loadAsyncData()
                     })
                 }
             })

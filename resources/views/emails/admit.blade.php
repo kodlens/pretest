@@ -1,9 +1,9 @@
 @component('mail::message')
 # Hi {{ $student['lname'] }} {{ $student['fname'] }},
 
-Congratulations,
+Congratulation,
 
-Good day, you received this email because we believe you took the admission test from Gov. Alfonso D. Tan College.
+Good day, you received this email because we believed you took the admission test from Gov. Alfonso D. Tan College.
 Here are the break down of your score:
 <ul>
     <li>ABSTRACT - {{ $student['abstraction'] }}</li>
@@ -23,10 +23,12 @@ You are also qualified for these programs:
 Here is your admission code: <strong>{{ $admission_code }}</strong>.
 
 
-@component('mail::button', ['url' => 'admission.gadtc.edu.ph'])
+@component('mail::button', ['url' => 'http://admission.gadtc.edu.ph/login'])
 Click here to proceed for admission
 @endcomponent
+or you may visit http://admission.gadtc.edu.ph
 
+<br><br>
 Thanks,<br>
 {{-- {{ config('app.name') }} --}}
 GADTC GUIDANCE OFFICE

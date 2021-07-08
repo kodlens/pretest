@@ -36,6 +36,7 @@ class AdmitStudent extends Mailable
     public function build()
     {
         return $this->markdown('emails.admit')
+            ->subject('ADMISSION')
             ->with('student',$this->student)
             ->with('admission_code',$this->admission_code)
             ->with('programs',$this->programs);
