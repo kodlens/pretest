@@ -32,37 +32,45 @@ class AdmitController extends Controller
 
         $programs = substr_replace($programs, '', -1);
         $status = strtoupper($req->fields['status']);
+        //return $req->fields;
 
         try {
             
-            Mail::to($req->fields['email'])->send(new AdmitStudent($studentCode));
+            //update if email exist.. if not create new record
+             Gadtest::updateOrCreate(
+                 [
+                     'email' => $req->fields['email']
+                 ],
+                 [
+                    'StudLName' => strtoupper($req->fields['lname']),
+                    'StudFName' => strtoupper($req->fields['fname']),
+                    'StudMName' => strtoupper($req->fields['mname']),
+                    'StudSex' => strtoupper($req->fields['sex']),
+                    'StudClass' => $status,
+                    'StudBDate' => $req->fields['bdate'],
+                    'StudCNum' => $req->fields['contact_no'],
+                    'StudCourse' => strtoupper($programs),
+                    'StudYear' => $status == 'NEW' ? '1' : '0',
+                    'email' => $req->fields['email'],
+                    'term' => $ay->code,
+                    'StudLSBrgyCode' => $req->fields['barangay_id'],
+                    'StudPStr' => $req->fields['street'],
+                    'password' => Hash::make($studentCode),
+                    'rating' => $req->fields['total'],
+                    'learning_mode' => $req->fields['learning_mode'
+                ],
+            ]);
+
+            //Mail::to($req->fields['email'])->send(new AdmitStudent($req->fields, $studentCode, $req->programs));
+
+
             return ['status' => 'mailed'];
         } catch (Exception $e) {
             return ['status' => 'failed'];
         }
 
 
-
-        
-
-        // Gadtest::create([
-        //     'StudLName' => strtoupper($req->fields['lname']),
-        //     'StudFName' => strtoupper($req->fields['fname']),
-        //     'StudMName' => strtoupper($req->fields['mname']),
-        //     'StudSex' => strtoupper($req->fields['sex']),
-        //     'StudClass' => $status,
-        //     'StudBDate' => $req->fields['bdate'],
-        //     'StudCNum' => $req->fields['contact_no'],
-        //     'StudCourse' => strtoupper($programs),
-        //     'StudYear' => $status == 'NEW' ? '1' : '0',
-        //     'email' => $req->fields['email'],
-        //     'term' => $ay->code,
-        //     'StudLSBrgyCode' => $req->fields['barangay_id'],
-        //     'StudPStr' => $req->fields['street'],
-        //     'password' => Hash::make($studentCode),
-        //     'rating' => $req->fields['total'],
-        //     'learning_mode' => $req->fields['learning_mode'],
-        // ]);
+       
 
         
 

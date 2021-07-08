@@ -16,12 +16,16 @@ class AdmitStudent extends Mailable
      *
      * @return void
      */
-    private $studentCode;
+    private $student;
+    private $admission_code;
+    private $programs;
 
-    public function __construct($studentCode)
+    public function __construct($student, $admission_code, $programs)
     {
         //
-        $this->studentCode = $studentCode;
+        $this->student = $student;
+        $this->admission_code = $admission_code;
+        $this->programs = $programs;
     }
 
     /**
@@ -32,6 +36,8 @@ class AdmitStudent extends Mailable
     public function build()
     {
         return $this->markdown('emails.admit')
-            ->with('studentCode',$this->studentCode);
+            ->with('student',$this->student)
+            ->with('admission_code',$this->admission_code)
+            ->with('programs',$this->programs);
     }
 }

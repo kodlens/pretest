@@ -36,6 +36,7 @@
                 paginated
                 backend-pagination
                 :total="total"
+                narrowed
                 :per-page="perPage"
                 @page-change="onPageChange"
                 detail-transition = ""
@@ -364,11 +365,26 @@ export default {
 
 
         openModal: function(dataRow){
-            this.programTags = [];
+            this.programTags = []; //init
             this.errors = {};
             this.isModalActive = true;
             this.selectedData = dataRow;
-            console.log(this.selectedData);
+
+            //if 1st program is same with 2nd program, then ignore the 2nd program
+            if(dataRow.first_program_choice !== dataRow.second_program_choice){
+                this.programTags.push({
+                    CCode: dataRow.first_program_choice,
+                });
+                this.programTags.push({
+                    CCode: dataRow.second_program_choice,
+                });
+            }else{
+                this.programTags.push({
+                    CCode: dataRow.first_program_choice,
+                });
+            }
+            
+           // console.log(dataRow.first_program_choice);
         },
         getFilteredTags: function(text) {
             this.filteredPrograms = this.programs.filter((option) => {
