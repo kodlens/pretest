@@ -66,5 +66,6 @@ class Kernel extends HttpKernel
         'allow_registration' => \App\Http\Middleware\AllowRegistration::class,
         'admin' => \App\Http\Middleware\AdminAuth::class,
         'student' => \App\Http\Middleware\StudentAuth::class,
+        'staff' => \App\Http\Middleware\StaffAuth::class,
     ];
 }

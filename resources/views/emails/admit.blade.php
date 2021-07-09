@@ -31,5 +31,5 @@ or you may visit http://admission.gadtc.edu.ph
 <br><br>
 Thanks,<br>
 {{-- {{ config('app.name') }} --}}
-GADTC GUIDANCE OFFICE
+GADTC
 @endcomponent

@@ -31,7 +31,7 @@ class RedirectIfAuthenticated
                 // }
                 //return redirect(RouteServiceProvider::HOME);
                 $role = Auth::user()->role;
-                if(strtolower($role) === 'administrator'){
+                if(strtolower($role) === 'administrator' || strtolower($role) === 'staff'){
                     return redirect('/panel/home');
                 }
 

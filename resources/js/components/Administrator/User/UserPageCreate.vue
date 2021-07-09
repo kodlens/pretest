@@ -77,6 +77,7 @@
                                         <b-field label-position="on-border" label="Role" expanded>
                                             <b-select v-model="fields.role" expanded>
                                                 <option value="ADMINISTRATOR">ADMINISTRATOR</option>
+                                                <option value="STAFF">STAFF</option>
                                                 <option value="STUDENT">STUDENT</option>
                                             </b-select>
                                         </b-field>
