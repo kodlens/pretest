@@ -61,17 +61,20 @@
                 </b-navbar-item>
             </b-navbar-dropdown>
 
+            <b-navbar-dropdown label="Admission">
+                <b-navbar-item href="/panel/admit-student">
+                    Admit Student
+                </b-navbar-item>
 
+                <b-navbar-item href="/panel/report-result">
+                    General Report
+                </b-navbar-item>
+                
+            </b-navbar-dropdown>
 
             <b-navbar-item href="/panel/user">
                 User
             </b-navbar-item>
-
-             <b-navbar-item href="/panel/report-result">
-                Report
-            </b-navbar-item>
-
-
 
             <b-navbar-item tag="div">
                 <div class="buttons">

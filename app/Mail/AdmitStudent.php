@@ -41,4 +41,5 @@ class AdmitStudent extends Mailable
             ->with('admission_code',$this->admission_code)
             ->with('programs',$this->programs);
     }
+
 }

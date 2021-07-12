@@ -2246,6 +2246,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: ['isAuth'],
   data: function data() {
@@ -2257,6 +2260,991 @@ __webpack_require__.r(__webpack_exports__);
         window.location = '/';
       });
     }
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Administrator/Admission/AdmitStudent.vue?vue&type=script&lang=js&":
+/*!*******************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Administrator/Admission/AdmitStudent.vue?vue&type=script&lang=js& ***!
+  \*******************************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var vue_json_excel__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue-json-excel */ "./node_modules/vue-json-excel/dist/vue-json-excel.esm.js");
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  props: {
+    propPrograms: {
+      type: String,
+      "default": ''
+    }
+  },
+  components: {
+    downloadexcel: vue_json_excel__WEBPACK_IMPORTED_MODULE_1__.default
+  },
+  data: function data() {
+    return {
+      data: [],
+      total: 0,
+      loading: false,
+      sortField: 'user_id',
+      sortOrder: 'desc',
+      page: 1,
+      perPage: 20,
+      defaultSortDirection: 'asc',
+      isFullPage: true,
+      isLoading: false,
+      errors: {},
+      json_fields: {
+        'USER ID': 'user_id',
+        'LASTNAME': 'lname',
+        'FIRSTNAME': 'fname',
+        'MIDDLENAME': 'mname',
+        'SEX': 'sex',
+        'EMAIL': 'email',
+        '1ST PROGRAM': 'first_program_choice',
+        '2ND PROGRAM': 'second_program_choice',
+        'PROVINCE': 'province',
+        'CITY': 'city',
+        'BARANGAY': 'barangay',
+        'ABSTRACTION': 'abstraction',
+        'LOGICAL REASONING': 'logical',
+        'ENGLISH PROFICIENCY': 'english',
+        'NUMERICAL REASONING': 'numerical',
+        'GENERAL KNWOLEDGE': 'general',
+        'TOTAL SCORE': 'total',
+        'CREATED AT': 'created_at'
+      },
+      report_data: [],
+      btnClass: {
+        'is-success': true,
+        'button': true,
+        'is-loading': false
+      },
+      search: {
+        lname: '',
+        fname: '',
+        first_program: ''
+      },
+      programs: [],
+      filteredPrograms: {},
+      isSelectOnly: false,
+      programTags: [],
+      isModalActive: false,
+      selectedData: {}
+    };
+  },
+  methods: {
+    loadAsyncData: function loadAsyncData() {
+      var _this = this;
+
+      var params = ["sort_by=".concat(this.sortField, ".").concat(this.sortOrder), "perpage=".concat(this.perPage), "lname=".concat(this.search.lname), "fname=".concat(this.search.fname), "first_program=".concat(this.search.first_program), "page=".concat(this.page)].join('&');
+      this.loading = true;
+      axios.get("/panel/ajax-studentlist-result?".concat(params)).then(function (_ref) {
+        var data = _ref.data;
+        _this.data = [];
+        var currentTotal = data.total;
+
+        if (data.total / _this.perPage > 1000) {
+          currentTotal = _this.perPage * 1000;
+        }
+
+        _this.total = currentTotal;
+        data.data.forEach(function (item) {
+          //item.release_date = item.release_date ? item.release_date.replace(/-/g, '/') : null
+          _this.data.push(item);
+        });
+        _this.loading = false;
+      })["catch"](function (error) {
+        _this.data = [];
+        _this.total = 0;
+        _this.loading = false;
+        throw error;
+      });
+    },
+
+    /*
+    * Handle page-change event
+    */
+    onPageChange: function onPageChange(page) {
+      this.page = page;
+      this.loadAsyncData();
+    },
+    onSort: function onSort(field, order) {
+      this.sortField = field;
+      this.sortOrder = order;
+      this.loadAsyncData();
+    },
+    setPerPage: function setPerPage() {
+      this.loadAsyncData();
+    },
+    loadDataForReport: function () {
+      var _loadDataForReport = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
+        var params, response;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                params = ["first_program=".concat(this.search.first_program)].join('&');
+                _context.next = 3;
+                return axios.get("/panel/report-excel-studentlist-result?".concat(params));
+
+              case 3:
+                response = _context.sent;
+                return _context.abrupt("return", response.data);
+
+              case 5:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee, this);
+      }));
+
+      function loadDataForReport() {
+        return _loadDataForReport.apply(this, arguments);
+      }
+
+      return loadDataForReport;
+    }(),
+    startDownload: function startDownload() {
+      this.btnClass['is-loading'] = true;
+    },
+    finishDownload: function finishDownload() {
+      this.btnClass['is-loading'] = false;
+    },
+    openModal: function openModal(dataRow) {
+      this.programTags = []; //init
+
+      this.errors = {};
+      this.isModalActive = true;
+      this.selectedData = dataRow;
+      this.programTags.push({
+        CCode: dataRow.first_program_choice
+      }); //if 1st program is same with 2nd program, then ignore the 2nd program
+      // if(dataRow.first_program_choice !== dataRow.second_program_choice){
+      //     this.programTags.push({
+      //         CCode: dataRow.first_program_choice,
+      //     });
+      //     this.programTags.push({
+      //         CCode: dataRow.second_program_choice,
+      //     });
+      // }else{
+      // }
+      // console.log(dataRow.first_program_choice);
+    },
+    getFilteredTags: function getFilteredTags(text) {
+      this.filteredPrograms = this.programs.filter(function (option) {
+        return option.CCode.toString().toLowerCase().indexOf(text.toLowerCase()) >= 0;
+      });
+    },
+    admit: function admit() {
+      var _this2 = this;
+
+      if (this.programTags.length < 1) {
+        //this.errors.programTag = 'No program selected. Please select atleast 1 program.';
+        alert('No program selected. Please select atleast 1 program.');
+        return;
+      }
+
+      this.isModalActive = false;
+      this.isLoading = true;
+      axios.post('/admit-student', {
+        fields: this.selectedData,
+        programs: this.programTags
+      }).then(function (res) {
+        //console.log(res.data);
+        _this2.isModalActive = false;
+        _this2.isLoading = false;
+
+        if (res.data.status === 'mailed') {
+          _this2.$buefy.dialog.alert({
+            title: 'SUCCESSFULLY EMAILED.',
+            message: 'Student was successfully emailed with their admission code.',
+            type: 'is-success',
+            onConfirm: function onConfirm() {
+              return _this2.loadAsyncData();
+            }
+          });
+        }
+      });
+    },
+    //initialize data
+    initData: function initData() {
+      this.programs = JSON.parse(this.propPrograms);
+      this.filteredPrograms = this.programs;
+      this.loadAsyncData();
+    }
+  },
+  mounted: function mounted() {
+    this.initData();
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Administrator/Admission/ReportResult.vue?vue&type=script&lang=js&":
+/*!*******************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Administrator/Admission/ReportResult.vue?vue&type=script&lang=js& ***!
+  \*******************************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var vue_json_excel__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue-json-excel */ "./node_modules/vue-json-excel/dist/vue-json-excel.esm.js");
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  props: {
+    propPrograms: {
+      type: String,
+      "default": ''
+    }
+  },
+  components: {
+    downloadexcel: vue_json_excel__WEBPACK_IMPORTED_MODULE_1__.default
+  },
+  data: function data() {
+    return {
+      data: [],
+      total: 0,
+      loading: false,
+      sortField: 'user_id',
+      sortOrder: 'desc',
+      page: 1,
+      perPage: 20,
+      defaultSortDirection: 'asc',
+      isFullPage: true,
+      isLoading: false,
+      errors: {},
+      json_fields: {
+        'USER ID': 'user_id',
+        'LASTNAME': 'lname',
+        'FIRSTNAME': 'fname',
+        'MIDDLENAME': 'mname',
+        'SEX': 'sex',
+        'EMAIL': 'email',
+        '1ST PROGRAM': 'first_program_choice',
+        '2ND PROGRAM': 'second_program_choice',
+        'PROVINCE': 'province',
+        'CITY': 'city',
+        'BARANGAY': 'barangay',
+        'ABSTRACTION': 'abstraction',
+        'LOGICAL REASONING': 'logical',
+        'ENGLISH PROFICIENCY': 'english',
+        'NUMERICAL REASONING': 'numerical',
+        'GENERAL KNWOLEDGE': 'general',
+        'TOTAL SCORE': 'total',
+        'CREATED AT': 'created_at'
+      },
+      report_data: [],
+      btnClass: {
+        'is-success': true,
+        'button': true,
+        'is-loading': false
+      },
+      search: {
+        lname: '',
+        fname: '',
+        first_program: ''
+      },
+      programs: [],
+      filteredPrograms: {},
+      isSelectOnly: false,
+      programTags: [],
+      isModalActive: false,
+      selectedData: {}
+    };
+  },
+  methods: {
+    loadAsyncData: function loadAsyncData() {
+      var _this = this;
+
+      var params = ["sort_by=".concat(this.sortField, ".").concat(this.sortOrder), "perpage=".concat(this.perPage), "lname=".concat(this.search.lname), "fname=".concat(this.search.fname), "first_program=".concat(this.search.first_program), "page=".concat(this.page)].join('&');
+      this.loading = true;
+      axios.get("/panel/ajax-studentlist-result?".concat(params)).then(function (_ref) {
+        var data = _ref.data;
+        _this.data = [];
+        var currentTotal = data.total;
+
+        if (data.total / _this.perPage > 1000) {
+          currentTotal = _this.perPage * 1000;
+        }
+
+        _this.total = currentTotal;
+        data.data.forEach(function (item) {
+          //item.release_date = item.release_date ? item.release_date.replace(/-/g, '/') : null
+          _this.data.push(item);
+        });
+        _this.loading = false;
+      })["catch"](function (error) {
+        _this.data = [];
+        _this.total = 0;
+        _this.loading = false;
+        throw error;
+      });
+    },
+
+    /*
+    * Handle page-change event
+    */
+    onPageChange: function onPageChange(page) {
+      this.page = page;
+      this.loadAsyncData();
+    },
+    onSort: function onSort(field, order) {
+      this.sortField = field;
+      this.sortOrder = order;
+      this.loadAsyncData();
+    },
+    setPerPage: function setPerPage() {
+      this.loadAsyncData();
+    },
+    loadDataForReport: function () {
+      var _loadDataForReport = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
+        var params, response;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                params = ["first_program=".concat(this.search.first_program)].join('&');
+                _context.next = 3;
+                return axios.get("/panel/report-excel-studentlist-result?".concat(params));
+
+              case 3:
+                response = _context.sent;
+                return _context.abrupt("return", response.data);
+
+              case 5:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee, this);
+      }));
+
+      function loadDataForReport() {
+        return _loadDataForReport.apply(this, arguments);
+      }
+
+      return loadDataForReport;
+    }(),
+    startDownload: function startDownload() {
+      this.btnClass['is-loading'] = true;
+    },
+    finishDownload: function finishDownload() {
+      this.btnClass['is-loading'] = false;
+    },
+    openModal: function openModal(dataRow) {
+      this.programTags = []; //init
+
+      this.errors = {};
+      this.isModalActive = true;
+      this.selectedData = dataRow; //if 1st program is same with 2nd program, then ignore the 2nd program
+
+      if (dataRow.first_program_choice !== dataRow.second_program_choice) {
+        this.programTags.push({
+          CCode: dataRow.first_program_choice
+        });
+        this.programTags.push({
+          CCode: dataRow.second_program_choice
+        });
+      } else {
+        this.programTags.push({
+          CCode: dataRow.first_program_choice
+        });
+      } // console.log(dataRow.first_program_choice);
+
+    },
+    getFilteredTags: function getFilteredTags(text) {
+      this.filteredPrograms = this.programs.filter(function (option) {
+        return option.CCode.toString().toLowerCase().indexOf(text.toLowerCase()) >= 0;
+      });
+    },
+    admit: function admit() {
+      var _this2 = this;
+
+      if (this.programTags.length < 1) {
+        //this.errors.programTag = 'No program selected. Please select atleast 1 program.';
+        alert('No program selected. Please select atleast 1 program.');
+        return;
+      }
+
+      this.isModalActive = false;
+      this.isLoading = true;
+      axios.post('/admit-student', {
+        fields: this.selectedData,
+        programs: this.programTags
+      }).then(function (res) {
+        //console.log(res.data);
+        _this2.isModalActive = false;
+        _this2.isLoading = false;
+
+        if (res.data.status === 'mailed') {
+          _this2.$buefy.dialog.alert({
+            title: 'SUCCESSFULLY EMAILED.',
+            message: 'Student was successfully emailed with there admission code.',
+            type: 'is-success',
+            onConfirm: function onConfirm() {
+              return _this2.loadAsyncData();
+            }
+          });
+        }
+      });
+    },
+    //initialize data
+    initData: function initData() {
+      this.programs = JSON.parse(this.propPrograms);
+      this.filteredPrograms = this.programs;
+      this.loadAsyncData();
+    }
+  },
+  mounted: function mounted() {
+    this.initData();
   }
 });
 
@@ -3284,499 +4272,6 @@ __webpack_require__.r(__webpack_exports__);
         console.log(res.data);
       });
     }
-  }
-});
-
-/***/ }),
-
-/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Administrator/Report/ReportResult.vue?vue&type=script&lang=js&":
-/*!****************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Administrator/Report/ReportResult.vue?vue&type=script&lang=js& ***!
-  \****************************************************************************************************************************************************************************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
-/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var vue_json_excel__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue-json-excel */ "./node_modules/vue-json-excel/dist/vue-json-excel.esm.js");
-
-
-function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
-
-function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
-
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  props: {
-    propPrograms: {
-      type: String,
-      "default": ''
-    }
-  },
-  components: {
-    downloadexcel: vue_json_excel__WEBPACK_IMPORTED_MODULE_1__.default
-  },
-  data: function data() {
-    return {
-      data: [],
-      total: 0,
-      loading: false,
-      sortField: 'user_id',
-      sortOrder: 'desc',
-      page: 1,
-      perPage: 20,
-      defaultSortDirection: 'asc',
-      isFullPage: true,
-      isLoading: false,
-      errors: {},
-      json_fields: {
-        'USER ID': 'user_id',
-        'LASTNAME': 'lname',
-        'FIRSTNAME': 'fname',
-        'MIDDLENAME': 'mname',
-        'SEX': 'sex',
-        'EMAIL': 'email',
-        '1ST PROGRAM': 'first_program_choice',
-        '2ND PROGRAM': 'second_program_choice',
-        'PROVINCE': 'province',
-        'CITY': 'city',
-        'BARANGAY': 'barangay',
-        'ABSTRACTION': 'abstraction',
-        'LOGICAL REASONING': 'logical',
-        'ENGLISH PROFICIENCY': 'english',
-        'NUMERICAL REASONING': 'numerical',
-        'GENERAL KNWOLEDGE': 'general',
-        'TOTAL SCORE': 'total',
-        'CREATED AT': 'created_at'
-      },
-      report_data: [],
-      btnClass: {
-        'is-success': true,
-        'button': true,
-        'is-loading': false
-      },
-      search: {
-        lname: '',
-        fname: '',
-        first_program: ''
-      },
-      programs: [],
-      filteredPrograms: {},
-      isSelectOnly: false,
-      programTags: [],
-      isModalActive: false,
-      selectedData: {}
-    };
-  },
-  methods: {
-    loadAsyncData: function loadAsyncData() {
-      var _this = this;
-
-      var params = ["sort_by=".concat(this.sortField, ".").concat(this.sortOrder), "perpage=".concat(this.perPage), "lname=".concat(this.search.lname), "fname=".concat(this.search.fname), "first_program=".concat(this.search.first_program), "page=".concat(this.page)].join('&');
-      this.loading = true;
-      axios.get("/panel/ajax-studentlist-result?".concat(params)).then(function (_ref) {
-        var data = _ref.data;
-        _this.data = [];
-        var currentTotal = data.total;
-
-        if (data.total / _this.perPage > 1000) {
-          currentTotal = _this.perPage * 1000;
-        }
-
-        _this.total = currentTotal;
-        data.data.forEach(function (item) {
-          //item.release_date = item.release_date ? item.release_date.replace(/-/g, '/') : null
-          _this.data.push(item);
-        });
-        _this.loading = false;
-      })["catch"](function (error) {
-        _this.data = [];
-        _this.total = 0;
-        _this.loading = false;
-        throw error;
-      });
-    },
-
-    /*
-    * Handle page-change event
-    */
-    onPageChange: function onPageChange(page) {
-      this.page = page;
-      this.loadAsyncData();
-    },
-    onSort: function onSort(field, order) {
-      this.sortField = field;
-      this.sortOrder = order;
-      this.loadAsyncData();
-    },
-    setPerPage: function setPerPage() {
-      this.loadAsyncData();
-    },
-    loadDataForReport: function () {
-      var _loadDataForReport = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
-        var params, response;
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
-          while (1) {
-            switch (_context.prev = _context.next) {
-              case 0:
-                params = ["first_program=".concat(this.search.first_program)].join('&');
-                _context.next = 3;
-                return axios.get("/panel/report-excel-studentlist-result?".concat(params));
-
-              case 3:
-                response = _context.sent;
-                return _context.abrupt("return", response.data);
-
-              case 5:
-              case "end":
-                return _context.stop();
-            }
-          }
-        }, _callee, this);
-      }));
-
-      function loadDataForReport() {
-        return _loadDataForReport.apply(this, arguments);
-      }
-
-      return loadDataForReport;
-    }(),
-    startDownload: function startDownload() {
-      this.btnClass['is-loading'] = true;
-    },
-    finishDownload: function finishDownload() {
-      this.btnClass['is-loading'] = false;
-    },
-    openModal: function openModal(dataRow) {
-      this.programTags = []; //init
-
-      this.errors = {};
-      this.isModalActive = true;
-      this.selectedData = dataRow; //if 1st program is same with 2nd program, then ignore the 2nd program
-
-      if (dataRow.first_program_choice !== dataRow.second_program_choice) {
-        this.programTags.push({
-          CCode: dataRow.first_program_choice
-        });
-        this.programTags.push({
-          CCode: dataRow.second_program_choice
-        });
-      } else {
-        this.programTags.push({
-          CCode: dataRow.first_program_choice
-        });
-      } // console.log(dataRow.first_program_choice);
-
-    },
-    getFilteredTags: function getFilteredTags(text) {
-      this.filteredPrograms = this.programs.filter(function (option) {
-        return option.CCode.toString().toLowerCase().indexOf(text.toLowerCase()) >= 0;
-      });
-    },
-    admit: function admit() {
-      var _this2 = this;
-
-      if (this.programTags.length < 1) {
-        //this.errors.programTag = 'No program selected. Please select atleast 1 program.';
-        alert('No program selected. Please select atleast 1 program.');
-        return;
-      }
-
-      this.isModalActive = false;
-      this.isLoading = true;
-      axios.post('/admit-student', {
-        fields: this.selectedData,
-        programs: this.programTags
-      }).then(function (res) {
-        //console.log(res.data);
-        _this2.isModalActive = false;
-        _this2.isLoading = false;
-
-        if (res.data.status === 'mailed') {
-          _this2.$buefy.dialog.alert({
-            title: 'SUCCESSFULLY EMAILED.',
-            message: 'Student was successfully emailed with there admission code.',
-            type: 'is-success',
-            onConfirm: function onConfirm() {
-              return _this2.loadAsyncData();
-            }
-          });
-        }
-      });
-    },
-    //initialize data
-    initData: function initData() {
-      this.programs = JSON.parse(this.propPrograms);
-      this.filteredPrograms = this.programs;
-      this.loadAsyncData();
-    }
-  },
-  mounted: function mounted() {
-    this.initData();
   }
 });
 
@@ -6212,6 +6707,21 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
@@ -6234,7 +6744,8 @@ __webpack_require__.r(__webpack_exports__);
       },
       search: {
         lname: '',
-        fname: ''
+        fname: '',
+        user_id: ''
       }
     };
   },
@@ -6242,7 +6753,7 @@ __webpack_require__.r(__webpack_exports__);
     loadAsyncData: function loadAsyncData() {
       var _this = this;
 
-      var params = ["sort_by=".concat(this.sortField, ".").concat(this.sortOrder), "perpage=".concat(this.perPage), "page=".concat(this.page), "lname=".concat(this.search.lname), "fname=".concat(this.search.fname)].join('&');
+      var params = ["sort_by=".concat(this.sortField, ".").concat(this.sortOrder), "perpage=".concat(this.perPage), "page=".concat(this.page), "lname=".concat(this.search.lname), "fname=".concat(this.search.fname), "user_id=".concat(this.search.user_id)].join('&');
       this.loading = true;
       axios.get("/axios-users?".concat(params)).then(function (_ref) {
         var data = _ref.data;
@@ -8509,7 +9020,8 @@ vue__WEBPACK_IMPORTED_MODULE_0__.default.component('user-page', __webpack_requir
 vue__WEBPACK_IMPORTED_MODULE_0__.default.component('user-page-create', __webpack_require__(/*! ./components/Administrator/User/UserPageCreate.vue */ "./resources/js/components/Administrator/User/UserPageCreate.vue").default);
 vue__WEBPACK_IMPORTED_MODULE_0__.default.component('user-page-edit', __webpack_require__(/*! ./components/Administrator/User/UserPageEdit.vue */ "./resources/js/components/Administrator/User/UserPageEdit.vue").default); //ADMIN REPORT
 
-vue__WEBPACK_IMPORTED_MODULE_0__.default.component('report-result', __webpack_require__(/*! ./components/Administrator/Report/ReportResult.vue */ "./resources/js/components/Administrator/Report/ReportResult.vue").default); //STUDENT AREA
+vue__WEBPACK_IMPORTED_MODULE_0__.default.component('admit-student', __webpack_require__(/*! ./components/Administrator/Admission/AdmitStudent.vue */ "./resources/js/components/Administrator/Admission/AdmitStudent.vue").default);
+vue__WEBPACK_IMPORTED_MODULE_0__.default.component('report-result', __webpack_require__(/*! ./components/Administrator/Admission/ReportResult.vue */ "./resources/js/components/Administrator/Admission/ReportResult.vue").default); //STUDENT AREA
 //-----------------------------//
 //verification email
 
@@ -28550,6 +29062,84 @@ component.options.__file = "resources/js/components/Administrator/AdminNavbar.vu
 
 /***/ }),
 
+/***/ "./resources/js/components/Administrator/Admission/AdmitStudent.vue":
+/*!**************************************************************************!*\
+  !*** ./resources/js/components/Administrator/Admission/AdmitStudent.vue ***!
+  \**************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _AdmitStudent_vue_vue_type_template_id_38fd7b19_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./AdmitStudent.vue?vue&type=template&id=38fd7b19&scoped=true& */ "./resources/js/components/Administrator/Admission/AdmitStudent.vue?vue&type=template&id=38fd7b19&scoped=true&");
+/* harmony import */ var _AdmitStudent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./AdmitStudent.vue?vue&type=script&lang=js& */ "./resources/js/components/Administrator/Admission/AdmitStudent.vue?vue&type=script&lang=js&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+;
+var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__.default)(
+  _AdmitStudent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__.default,
+  _AdmitStudent_vue_vue_type_template_id_38fd7b19_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render,
+  _AdmitStudent_vue_vue_type_template_id_38fd7b19_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
+  false,
+  null,
+  "38fd7b19",
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/Administrator/Admission/AdmitStudent.vue"
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/Administrator/Admission/ReportResult.vue":
+/*!**************************************************************************!*\
+  !*** ./resources/js/components/Administrator/Admission/ReportResult.vue ***!
+  \**************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _ReportResult_vue_vue_type_template_id_d120da38_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ReportResult.vue?vue&type=template&id=d120da38&scoped=true& */ "./resources/js/components/Administrator/Admission/ReportResult.vue?vue&type=template&id=d120da38&scoped=true&");
+/* harmony import */ var _ReportResult_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ReportResult.vue?vue&type=script&lang=js& */ "./resources/js/components/Administrator/Admission/ReportResult.vue?vue&type=script&lang=js&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+;
+var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__.default)(
+  _ReportResult_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__.default,
+  _ReportResult_vue_vue_type_template_id_d120da38_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render,
+  _ReportResult_vue_vue_type_template_id_d120da38_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
+  false,
+  null,
+  "d120da38",
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/Administrator/Admission/ReportResult.vue"
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
+
+/***/ }),
+
 /***/ "./resources/js/components/Administrator/PanelHome.vue":
 /*!*************************************************************!*\
   !*** ./resources/js/components/Administrator/PanelHome.vue ***!
@@ -28708,45 +29298,6 @@ var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__
 /* hot reload */
 if (false) { var api; }
 component.options.__file = "resources/js/components/Administrator/Question/PanelQuestionCreate.vue"
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
-
-/***/ }),
-
-/***/ "./resources/js/components/Administrator/Report/ReportResult.vue":
-/*!***********************************************************************!*\
-  !*** ./resources/js/components/Administrator/Report/ReportResult.vue ***!
-  \***********************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var _ReportResult_vue_vue_type_template_id_16daf962_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ReportResult.vue?vue&type=template&id=16daf962&scoped=true& */ "./resources/js/components/Administrator/Report/ReportResult.vue?vue&type=template&id=16daf962&scoped=true&");
-/* harmony import */ var _ReportResult_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ReportResult.vue?vue&type=script&lang=js& */ "./resources/js/components/Administrator/Report/ReportResult.vue?vue&type=script&lang=js&");
-/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
-
-
-
-
-
-/* normalize component */
-;
-var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__.default)(
-  _ReportResult_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__.default,
-  _ReportResult_vue_vue_type_template_id_16daf962_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render,
-  _ReportResult_vue_vue_type_template_id_16daf962_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
-  false,
-  null,
-  "16daf962",
-  null
-  
-)
-
-/* hot reload */
-if (false) { var api; }
-component.options.__file = "resources/js/components/Administrator/Report/ReportResult.vue"
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
 
 /***/ }),
@@ -29946,6 +30497,38 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/components/Administrator/Admission/AdmitStudent.vue?vue&type=script&lang=js&":
+/*!***************************************************************************************************!*\
+  !*** ./resources/js/components/Administrator/Admission/AdmitStudent.vue?vue&type=script&lang=js& ***!
+  \***************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_AdmitStudent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./AdmitStudent.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Administrator/Admission/AdmitStudent.vue?vue&type=script&lang=js&");
+ /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_AdmitStudent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__.default); 
+
+/***/ }),
+
+/***/ "./resources/js/components/Administrator/Admission/ReportResult.vue?vue&type=script&lang=js&":
+/*!***************************************************************************************************!*\
+  !*** ./resources/js/components/Administrator/Admission/ReportResult.vue?vue&type=script&lang=js& ***!
+  \***************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ReportResult_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./ReportResult.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Administrator/Admission/ReportResult.vue?vue&type=script&lang=js&");
+ /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ReportResult_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__.default); 
+
+/***/ }),
+
 /***/ "./resources/js/components/Administrator/PanelHome.vue?vue&type=script&lang=js&":
 /*!**************************************************************************************!*\
   !*** ./resources/js/components/Administrator/PanelHome.vue?vue&type=script&lang=js& ***!
@@ -30007,22 +30590,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_PanelQuestionCreate_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./PanelQuestionCreate.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Administrator/Question/PanelQuestionCreate.vue?vue&type=script&lang=js&");
  /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_PanelQuestionCreate_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__.default); 
-
-/***/ }),
-
-/***/ "./resources/js/components/Administrator/Report/ReportResult.vue?vue&type=script&lang=js&":
-/*!************************************************************************************************!*\
-  !*** ./resources/js/components/Administrator/Report/ReportResult.vue?vue&type=script&lang=js& ***!
-  \************************************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ReportResult_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./ReportResult.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Administrator/Report/ReportResult.vue?vue&type=script&lang=js&");
- /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ReportResult_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__.default); 
 
 /***/ }),
 
@@ -30524,6 +31091,40 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/components/Administrator/Admission/AdmitStudent.vue?vue&type=template&id=38fd7b19&scoped=true&":
+/*!*********************************************************************************************************************!*\
+  !*** ./resources/js/components/Administrator/Admission/AdmitStudent.vue?vue&type=template&id=38fd7b19&scoped=true& ***!
+  \*********************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AdmitStudent_vue_vue_type_template_id_38fd7b19_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render),
+/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AdmitStudent_vue_vue_type_template_id_38fd7b19_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
+/* harmony export */ });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AdmitStudent_vue_vue_type_template_id_38fd7b19_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./AdmitStudent.vue?vue&type=template&id=38fd7b19&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Administrator/Admission/AdmitStudent.vue?vue&type=template&id=38fd7b19&scoped=true&");
+
+
+/***/ }),
+
+/***/ "./resources/js/components/Administrator/Admission/ReportResult.vue?vue&type=template&id=d120da38&scoped=true&":
+/*!*********************************************************************************************************************!*\
+  !*** ./resources/js/components/Administrator/Admission/ReportResult.vue?vue&type=template&id=d120da38&scoped=true& ***!
+  \*********************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ReportResult_vue_vue_type_template_id_d120da38_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render),
+/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ReportResult_vue_vue_type_template_id_d120da38_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
+/* harmony export */ });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ReportResult_vue_vue_type_template_id_d120da38_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./ReportResult.vue?vue&type=template&id=d120da38&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Administrator/Admission/ReportResult.vue?vue&type=template&id=d120da38&scoped=true&");
+
+
+/***/ }),
+
 /***/ "./resources/js/components/Administrator/PanelHome.vue?vue&type=template&id=6831d9f4&scoped=true&":
 /*!********************************************************************************************************!*\
   !*** ./resources/js/components/Administrator/PanelHome.vue?vue&type=template&id=6831d9f4&scoped=true& ***!
@@ -30588,23 +31189,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_PanelQuestionCreate_vue_vue_type_template_id_5fe09dac_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
 /* harmony export */ });
 /* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_PanelQuestionCreate_vue_vue_type_template_id_5fe09dac_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./PanelQuestionCreate.vue?vue&type=template&id=5fe09dac&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Administrator/Question/PanelQuestionCreate.vue?vue&type=template&id=5fe09dac&scoped=true&");
-
-
-/***/ }),
-
-/***/ "./resources/js/components/Administrator/Report/ReportResult.vue?vue&type=template&id=16daf962&scoped=true&":
-/*!******************************************************************************************************************!*\
-  !*** ./resources/js/components/Administrator/Report/ReportResult.vue?vue&type=template&id=16daf962&scoped=true& ***!
-  \******************************************************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ReportResult_vue_vue_type_template_id_16daf962_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render),
-/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ReportResult_vue_vue_type_template_id_16daf962_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
-/* harmony export */ });
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ReportResult_vue_vue_type_template_id_16daf962_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./ReportResult.vue?vue&type=template&id=16daf962&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Administrator/Report/ReportResult.vue?vue&type=template&id=16daf962&scoped=true&");
 
 
 /***/ }),
@@ -32092,12 +32676,27 @@ var render = function() {
               1
             ),
             _vm._v(" "),
+            _c(
+              "b-navbar-dropdown",
+              { attrs: { label: "Admission" } },
+              [
+                _c(
+                  "b-navbar-item",
+                  { attrs: { href: "/panel/admit-student" } },
+                  [_vm._v("\n                Admit Student\n            ")]
+                ),
+                _vm._v(" "),
+                _c(
+                  "b-navbar-item",
+                  { attrs: { href: "/panel/report-result" } },
+                  [_vm._v("\n                General Report\n            ")]
+                )
+              ],
+              1
+            ),
+            _vm._v(" "),
             _c("b-navbar-item", { attrs: { href: "/panel/user" } }, [
               _vm._v("\n            User\n        ")
-            ]),
-            _vm._v(" "),
-            _c("b-navbar-item", { attrs: { href: "/panel/report-result" } }, [
-              _vm._v("\n            Report\n        ")
             ]),
             _vm._v(" "),
             _c("b-navbar-item", { attrs: { tag: "div" } }, [
@@ -32137,6 +32736,1788 @@ var render = function() {
   })
 }
 var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Administrator/Admission/AdmitStudent.vue?vue&type=template&id=38fd7b19&scoped=true&":
+/*!************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Administrator/Admission/AdmitStudent.vue?vue&type=template&id=38fd7b19&scoped=true& ***!
+  \************************************************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* binding */ render),
+/* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
+/* harmony export */ });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    [
+      _c("div", { staticClass: "section" }, [
+        _c("div", { staticClass: "table-title" }, [
+          _vm._v("LIST OF STUDENT AND RESULT")
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "level" }, [
+          _c("div", { staticClass: "level-left" }, [
+            _c(
+              "div",
+              { staticClass: "level-item" },
+              [
+                _c(
+                  "b-field",
+                  { attrs: { label: "SEARCH", "label-position": "on-border" } },
+                  [
+                    _c("b-input", {
+                      attrs: { type: "text", placeholder: "Search Lastname" },
+                      nativeOn: {
+                        keyup: function($event) {
+                          if (
+                            !$event.type.indexOf("key") &&
+                            _vm._k(
+                              $event.keyCode,
+                              "enter",
+                              13,
+                              $event.key,
+                              "Enter"
+                            )
+                          ) {
+                            return null
+                          }
+                          return _vm.loadAsyncData($event)
+                        }
+                      },
+                      model: {
+                        value: _vm.search.lname,
+                        callback: function($$v) {
+                          _vm.$set(_vm.search, "lname", $$v)
+                        },
+                        expression: "search.lname"
+                      }
+                    }),
+                    _vm._v(" "),
+                    _c("b-input", {
+                      attrs: { type: "text", placeholder: "Search Firstname" },
+                      nativeOn: {
+                        keyup: function($event) {
+                          if (
+                            !$event.type.indexOf("key") &&
+                            _vm._k(
+                              $event.keyCode,
+                              "enter",
+                              13,
+                              $event.key,
+                              "Enter"
+                            )
+                          ) {
+                            return null
+                          }
+                          return _vm.loadAsyncData($event)
+                        }
+                      },
+                      model: {
+                        value: _vm.search.fname,
+                        callback: function($$v) {
+                          _vm.$set(_vm.search, "fname", $$v)
+                        },
+                        expression: "search.fname"
+                      }
+                    })
+                  ],
+                  1
+                )
+              ],
+              1
+            )
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "level-right" }, [
+            _c(
+              "div",
+              { staticClass: "level-item" },
+              [
+                _c(
+                  "b-field",
+                  {
+                    attrs: {
+                      label: "1st Program",
+                      "label-position": "on-border"
+                    }
+                  },
+                  [
+                    _c(
+                      "b-select",
+                      {
+                        attrs: { placeholder: "SELECT 1ST PROGRAM" },
+                        on: { input: _vm.loadAsyncData },
+                        model: {
+                          value: _vm.search.first_program,
+                          callback: function($$v) {
+                            _vm.$set(_vm.search, "first_program", $$v)
+                          },
+                          expression: "search.first_program"
+                        }
+                      },
+                      [
+                        _c("option", { attrs: { value: "" } }, [_vm._v("ALL")]),
+                        _vm._v(" "),
+                        _vm._l(this.programs, function(item, index) {
+                          return _c(
+                            "option",
+                            { key: index, domProps: { value: item.CCode } },
+                            [_vm._v(_vm._s(item.CCode))]
+                          )
+                        })
+                      ],
+                      2
+                    )
+                  ],
+                  1
+                )
+              ],
+              1
+            )
+          ])
+        ]),
+        _vm._v(" "),
+        _vm._m(0)
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "section" }, [
+        _c(
+          "div",
+          {
+            staticStyle: {
+              display: "flex",
+              "justify-content": "flex-end",
+              "margin-bottom": "10px"
+            }
+          },
+          [
+            _c(
+              "b-button",
+              {
+                staticClass: "is-small is-success is-outlined",
+                staticStyle: { "margin-right": "auto" },
+                attrs: { "icon-pack": "fa", "icon-right": "refresh" },
+                on: { click: _vm.loadAsyncData }
+              },
+              [_vm._v("REFRESH")]
+            ),
+            _vm._v(" "),
+            _c(
+              "p",
+              {
+                staticStyle: { "font-weight": "bold", "margin-bottom": "10px" }
+              },
+              [_vm._v("TOTAL ROWS: " + _vm._s(_vm.total) + " ")]
+            )
+          ],
+          1
+        ),
+        _vm._v(" "),
+        _c(
+          "div",
+          { staticClass: "table-container" },
+          [
+            _c(
+              "b-table",
+              {
+                staticClass: "is-fullwidth",
+                attrs: {
+                  data: _vm.data,
+                  loading: _vm.loading,
+                  paginated: "",
+                  "backend-pagination": "",
+                  total: _vm.total,
+                  narrowed: "",
+                  "per-page": _vm.perPage,
+                  "detail-transition": "",
+                  "aria-next-label": "Next page",
+                  "aria-previous-label": "Previous page",
+                  "aria-page-label": "Page",
+                  "show-detail-icon": true,
+                  "aria-current-label": "Current page",
+                  "backend-sorting": "",
+                  "default-sort-direction": _vm.defaultSortDirection
+                },
+                on: { "page-change": _vm.onPageChange, sort: _vm.onSort }
+              },
+              [
+                _c("b-table-column", {
+                  attrs: { field: "user_id", label: "User ID" },
+                  scopedSlots: _vm._u([
+                    {
+                      key: "default",
+                      fn: function(props) {
+                        return [
+                          _vm._v(
+                            "\n                    " +
+                              _vm._s(props.row.user_id) +
+                              "\n                "
+                          )
+                        ]
+                      }
+                    }
+                  ])
+                }),
+                _vm._v(" "),
+                _c("b-table-column", {
+                  attrs: { field: "fullname", label: "Fullname" },
+                  scopedSlots: _vm._u([
+                    {
+                      key: "default",
+                      fn: function(props) {
+                        return [
+                          _vm._v(
+                            "\n                    " +
+                              _vm._s(props.row.lname) +
+                              ", " +
+                              _vm._s(props.row.fname) +
+                              " " +
+                              _vm._s(props.row.mname) +
+                              "\n                "
+                          )
+                        ]
+                      }
+                    }
+                  ])
+                }),
+                _vm._v(" "),
+                _c("b-table-column", {
+                  attrs: { field: "fromTo", label: "Schedule" },
+                  scopedSlots: _vm._u([
+                    {
+                      key: "default",
+                      fn: function(props) {
+                        return [
+                          _vm._v(
+                            "\n                    " +
+                              _vm._s(props.row.from) +
+                              " / " +
+                              _vm._s(props.row.to) +
+                              "\n                "
+                          )
+                        ]
+                      }
+                    }
+                  ])
+                }),
+                _vm._v(" "),
+                _c("b-table-column", {
+                  attrs: { field: "sex", label: "Sex", centered: "" },
+                  scopedSlots: _vm._u([
+                    {
+                      key: "default",
+                      fn: function(props) {
+                        return [
+                          _vm._v(
+                            "\n                    " +
+                              _vm._s(props.row.sex) +
+                              "\n                "
+                          )
+                        ]
+                      }
+                    }
+                  ])
+                }),
+                _vm._v(" "),
+                _c("b-table-column", {
+                  attrs: { field: "program", label: "1st Program" },
+                  scopedSlots: _vm._u([
+                    {
+                      key: "default",
+                      fn: function(props) {
+                        return [
+                          _vm._v(
+                            "\n                    " +
+                              _vm._s(props.row.first_program_choice) +
+                              "\n                "
+                          )
+                        ]
+                      }
+                    }
+                  ])
+                }),
+                _vm._v(" "),
+                _c("b-table-column", {
+                  attrs: { field: "program", label: "2nd Program" },
+                  scopedSlots: _vm._u([
+                    {
+                      key: "default",
+                      fn: function(props) {
+                        return [
+                          _vm._v(
+                            "\n                    " +
+                              _vm._s(props.row.second_program_choice) +
+                              "\n                "
+                          )
+                        ]
+                      }
+                    }
+                  ])
+                }),
+                _vm._v(" "),
+                _c("b-table-column", {
+                  attrs: {
+                    field: "abstraction",
+                    label: "ABSTRACTION",
+                    centered: "",
+                    numeric: ""
+                  },
+                  scopedSlots: _vm._u([
+                    {
+                      key: "default",
+                      fn: function(props) {
+                        return [
+                          props.row.abstraction < 1
+                            ? _c("div", [
+                                _c(
+                                  "span",
+                                  {
+                                    staticStyle: {
+                                      color: "red",
+                                      "font-weight": "bold"
+                                    }
+                                  },
+                                  [_vm._v(_vm._s(props.row.abstraction))]
+                                )
+                              ])
+                            : _c(
+                                "div",
+                                {
+                                  staticStyle: {
+                                    color: "green",
+                                    "font-weight": "bold"
+                                  }
+                                },
+                                [
+                                  _vm._v(
+                                    "\n                        " +
+                                      _vm._s(props.row.abstraction) +
+                                      "\n                    "
+                                  )
+                                ]
+                              )
+                        ]
+                      }
+                    }
+                  ])
+                }),
+                _vm._v(" "),
+                _c("b-table-column", {
+                  attrs: {
+                    field: "logical",
+                    label: "LOGICAL",
+                    centered: "",
+                    numeric: ""
+                  },
+                  scopedSlots: _vm._u([
+                    {
+                      key: "default",
+                      fn: function(props) {
+                        return [
+                          props.row.logical < 1
+                            ? _c("div", [
+                                _c(
+                                  "span",
+                                  {
+                                    staticStyle: {
+                                      color: "red",
+                                      "font-weight": "bold"
+                                    }
+                                  },
+                                  [_vm._v(_vm._s(props.row.logical))]
+                                )
+                              ])
+                            : _c(
+                                "div",
+                                {
+                                  staticStyle: {
+                                    color: "green",
+                                    "font-weight": "bold"
+                                  }
+                                },
+                                [
+                                  _vm._v(
+                                    "\n                        " +
+                                      _vm._s(props.row.logical) +
+                                      "\n                    "
+                                  )
+                                ]
+                              )
+                        ]
+                      }
+                    }
+                  ])
+                }),
+                _vm._v(" "),
+                _c("b-table-column", {
+                  attrs: {
+                    field: "english",
+                    label: "ENGLISH",
+                    centered: "",
+                    numeric: ""
+                  },
+                  scopedSlots: _vm._u([
+                    {
+                      key: "default",
+                      fn: function(props) {
+                        return [
+                          props.row.english < 1
+                            ? _c("div", [
+                                _c(
+                                  "span",
+                                  {
+                                    staticStyle: {
+                                      color: "red",
+                                      "font-weight": "bold"
+                                    }
+                                  },
+                                  [_vm._v(_vm._s(props.row.english))]
+                                )
+                              ])
+                            : _c(
+                                "div",
+                                {
+                                  staticStyle: {
+                                    color: "green",
+                                    "font-weight": "bold"
+                                  }
+                                },
+                                [
+                                  _vm._v(
+                                    "\n                        " +
+                                      _vm._s(props.row.english) +
+                                      "\n                    "
+                                  )
+                                ]
+                              )
+                        ]
+                      }
+                    }
+                  ])
+                }),
+                _vm._v(" "),
+                _c("b-table-column", {
+                  attrs: {
+                    field: "numerical",
+                    label: "NUMERICAL",
+                    centered: "",
+                    numeric: ""
+                  },
+                  scopedSlots: _vm._u([
+                    {
+                      key: "default",
+                      fn: function(props) {
+                        return [
+                          props.row.numerical < 1
+                            ? _c("div", [
+                                _c(
+                                  "span",
+                                  {
+                                    staticStyle: {
+                                      color: "red",
+                                      "font-weight": "bold"
+                                    }
+                                  },
+                                  [_vm._v(_vm._s(props.row.numerical))]
+                                )
+                              ])
+                            : _c(
+                                "div",
+                                {
+                                  staticStyle: {
+                                    color: "green",
+                                    "font-weight": "bold"
+                                  }
+                                },
+                                [
+                                  _vm._v(
+                                    "\n                        " +
+                                      _vm._s(props.row.numerical) +
+                                      "\n                    "
+                                  )
+                                ]
+                              )
+                        ]
+                      }
+                    }
+                  ])
+                }),
+                _vm._v(" "),
+                _c("b-table-column", {
+                  attrs: {
+                    field: "general",
+                    label: "GENERAL",
+                    centered: "",
+                    numeric: ""
+                  },
+                  scopedSlots: _vm._u([
+                    {
+                      key: "default",
+                      fn: function(props) {
+                        return [
+                          props.row.general < 1
+                            ? _c("div", [
+                                _c(
+                                  "span",
+                                  {
+                                    staticStyle: {
+                                      color: "red",
+                                      "font-weight": "bold"
+                                    }
+                                  },
+                                  [_vm._v(_vm._s(props.row.general))]
+                                )
+                              ])
+                            : _c(
+                                "div",
+                                {
+                                  staticStyle: {
+                                    color: "green",
+                                    "font-weight": "bold"
+                                  }
+                                },
+                                [
+                                  _vm._v(
+                                    "\n                        " +
+                                      _vm._s(props.row.general) +
+                                      "\n                    "
+                                  )
+                                ]
+                              )
+                        ]
+                      }
+                    }
+                  ])
+                }),
+                _vm._v(" "),
+                _c("b-table-column", {
+                  attrs: {
+                    field: "total",
+                    label: "TOTAL",
+                    centered: "",
+                    numeric: ""
+                  },
+                  scopedSlots: _vm._u([
+                    {
+                      key: "default",
+                      fn: function(props) {
+                        return [
+                          Number(props.row.total) <= 0
+                            ? _c("div", [
+                                _c(
+                                  "span",
+                                  {
+                                    staticStyle: {
+                                      color: "white",
+                                      "background-color": "red",
+                                      padding: "3px 10px",
+                                      "border-radius": "5px",
+                                      "font-weight": "bold"
+                                    }
+                                  },
+                                  [_vm._v(_vm._s(props.row.total))]
+                                )
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          Number(props.row.total) >= 1 &&
+                          Number(props.row.total) < 45
+                            ? _c("div", [
+                                _c(
+                                  "span",
+                                  {
+                                    staticStyle: {
+                                      color: "white",
+                                      "background-color": "orange",
+                                      padding: "3px 10px",
+                                      "border-radius": "5px",
+                                      "font-weight": "bold"
+                                    }
+                                  },
+                                  [_vm._v(_vm._s(props.row.total))]
+                                )
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          Number(props.row.total) >= 45
+                            ? _c("div", [
+                                _c(
+                                  "span",
+                                  {
+                                    staticStyle: {
+                                      color: "white",
+                                      "background-color": "green",
+                                      padding: "3px 10px",
+                                      "border-radius": "5px",
+                                      "font-weight": "bold"
+                                    }
+                                  },
+                                  [_vm._v(_vm._s(props.row.total))]
+                                )
+                              ])
+                            : _vm._e()
+                        ]
+                      }
+                    }
+                  ])
+                }),
+                _vm._v(" "),
+                _c("b-table-column", {
+                  attrs: { field: "", label: "Action" },
+                  scopedSlots: _vm._u([
+                    {
+                      key: "default",
+                      fn: function(props) {
+                        return [
+                          _c(
+                            "div",
+                            { staticClass: "buttons" },
+                            [
+                              props.row.is_submitted == 1
+                                ? _c(
+                                    "b-button",
+                                    {
+                                      staticClass:
+                                        "button is-small is-link mr-1",
+                                      attrs: {
+                                        outlined: "",
+                                        "icon-pack": "fa",
+                                        "icon-right": "arrow-circle-right"
+                                      },
+                                      on: {
+                                        click: function($event) {
+                                          return _vm.openModal(props.row)
+                                        }
+                                      }
+                                    },
+                                    [
+                                      _vm._v(
+                                        "\n                                READMIT\n                        "
+                                      )
+                                    ]
+                                  )
+                                : _c(
+                                    "b-button",
+                                    {
+                                      staticClass:
+                                        "button is-small is-success mr-1",
+                                      attrs: {
+                                        outlined: "",
+                                        "icon-pack": "fa",
+                                        "icon-right": "arrow-circle-right"
+                                      },
+                                      on: {
+                                        click: function($event) {
+                                          return _vm.openModal(props.row)
+                                        }
+                                      }
+                                    },
+                                    [
+                                      _vm._v(
+                                        "\n                                ADMIT\n                        "
+                                      )
+                                    ]
+                                  )
+                            ],
+                            1
+                          )
+                        ]
+                      }
+                    }
+                  ])
+                })
+              ],
+              1
+            )
+          ],
+          1
+        ),
+        _vm._v(" "),
+        _c(
+          "div",
+          { staticClass: "buttons" },
+          [
+            _c(
+              "downloadexcel",
+              {
+                class: _vm.btnClass,
+                attrs: {
+                  fetch: _vm.loadDataForReport,
+                  fields: _vm.json_fields,
+                  worksheet: "REPORT",
+                  "before-generate": _vm.startDownload,
+                  "before-finish": _vm.finishDownload,
+                  name: "student_result.xls"
+                }
+              },
+              [_vm._v("\n                Export to Excel\n            ")]
+            )
+          ],
+          1
+        )
+      ]),
+      _vm._v(" "),
+      _c(
+        "b-modal",
+        {
+          attrs: {
+            "has-modal-card": "",
+            "trap-focus": "",
+            "aria-role": "dialog",
+            "aria-modal": ""
+          },
+          model: {
+            value: this.isModalActive,
+            callback: function($$v) {
+              _vm.$set(this, "isModalActive", $$v)
+            },
+            expression: "this.isModalActive"
+          }
+        },
+        [
+          _c(
+            "div",
+            { staticClass: "modal-card", staticStyle: { height: "350px" } },
+            [
+              _c("header", { staticClass: "modal-card-head" }, [
+                _c("p", { staticClass: "modal-card-title" }, [
+                  _vm._v("PROGRAMS")
+                ]),
+                _vm._v(" "),
+                _c("button", {
+                  staticClass: "delete",
+                  attrs: { type: "button" },
+                  on: {
+                    click: function($event) {
+                      _vm.isModalActive = false
+                    }
+                  }
+                })
+              ]),
+              _vm._v(" "),
+              _c("section", { staticClass: "modal-card-body" }, [
+                _c(
+                  "div",
+                  [
+                    _c(
+                      "b-field",
+                      { attrs: { label: "Add program" } },
+                      [
+                        _c("b-taginput", {
+                          attrs: {
+                            data: _vm.filteredPrograms,
+                            autocomplete: "",
+                            field: "CCode",
+                            icon: "label",
+                            placeholder: "Type a program (eg. BSCS)"
+                          },
+                          on: { typing: _vm.getFilteredTags },
+                          scopedSlots: _vm._u([
+                            {
+                              key: "default",
+                              fn: function(props) {
+                                return [
+                                  _c("strong", [
+                                    _vm._v(_vm._s(props.option.CCode))
+                                  ]),
+                                  _vm._v(
+                                    ": " +
+                                      _vm._s(props.option.CDesc) +
+                                      "\n                            "
+                                  )
+                                ]
+                              }
+                            },
+                            {
+                              key: "empty",
+                              fn: function() {
+                                return [
+                                  _vm._v(
+                                    "\n                                There are no items\n                            "
+                                  )
+                                ]
+                              },
+                              proxy: true
+                            }
+                          ]),
+                          model: {
+                            value: _vm.programTags,
+                            callback: function($$v) {
+                              _vm.programTags = $$v
+                            },
+                            expression: "programTags"
+                          }
+                        })
+                      ],
+                      1
+                    )
+                  ],
+                  1
+                )
+              ]),
+              _vm._v(" "),
+              _c(
+                "footer",
+                { staticClass: "modal-card-foot" },
+                [
+                  _c("b-button", {
+                    attrs: { label: "Close" },
+                    on: {
+                      click: function($event) {
+                        _vm.isModalActive = false
+                      }
+                    }
+                  }),
+                  _vm._v(" "),
+                  _c("b-button", {
+                    staticClass: "is-success",
+                    attrs: {
+                      label: "ADMIT",
+                      "icon-pack": "fa",
+                      "icon-right": "arrow-circle-right"
+                    },
+                    on: { click: _vm.admit }
+                  })
+                ],
+                1
+              )
+            ]
+          )
+        ]
+      ),
+      _vm._v(" "),
+      _c("b-loading", {
+        attrs: { "is-full-page": _vm.isFullPage },
+        model: {
+          value: _vm.isLoading,
+          callback: function($$v) {
+            _vm.isLoading = $$v
+          },
+          expression: "isLoading"
+        }
+      })
+    ],
+    1
+  )
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "level" }, [
+      _c("div", { staticClass: "level-left" }, [
+        _c("div", { staticClass: "level-item" })
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "level-right" }, [
+        _c("div", { staticClass: "level-item" })
+      ])
+    ])
+  }
+]
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Administrator/Admission/ReportResult.vue?vue&type=template&id=d120da38&scoped=true&":
+/*!************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Administrator/Admission/ReportResult.vue?vue&type=template&id=d120da38&scoped=true& ***!
+  \************************************************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* binding */ render),
+/* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
+/* harmony export */ });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    [
+      _c("div", { staticClass: "section" }, [
+        _c("div", { staticClass: "table-title" }, [
+          _vm._v("LIST OF STUDENT AND RESULT")
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "level" }, [
+          _c("div", { staticClass: "level-left" }, [
+            _c(
+              "div",
+              { staticClass: "level-item" },
+              [
+                _c(
+                  "b-field",
+                  { attrs: { label: "SEARCH", "label-position": "on-border" } },
+                  [
+                    _c("b-input", {
+                      attrs: { type: "text", placeholder: "Search Lastname" },
+                      nativeOn: {
+                        keyup: function($event) {
+                          if (
+                            !$event.type.indexOf("key") &&
+                            _vm._k(
+                              $event.keyCode,
+                              "enter",
+                              13,
+                              $event.key,
+                              "Enter"
+                            )
+                          ) {
+                            return null
+                          }
+                          return _vm.loadAsyncData($event)
+                        }
+                      },
+                      model: {
+                        value: _vm.search.lname,
+                        callback: function($$v) {
+                          _vm.$set(_vm.search, "lname", $$v)
+                        },
+                        expression: "search.lname"
+                      }
+                    }),
+                    _vm._v(" "),
+                    _c("b-input", {
+                      attrs: { type: "text", placeholder: "Search Firstname" },
+                      nativeOn: {
+                        keyup: function($event) {
+                          if (
+                            !$event.type.indexOf("key") &&
+                            _vm._k(
+                              $event.keyCode,
+                              "enter",
+                              13,
+                              $event.key,
+                              "Enter"
+                            )
+                          ) {
+                            return null
+                          }
+                          return _vm.loadAsyncData($event)
+                        }
+                      },
+                      model: {
+                        value: _vm.search.fname,
+                        callback: function($$v) {
+                          _vm.$set(_vm.search, "fname", $$v)
+                        },
+                        expression: "search.fname"
+                      }
+                    })
+                  ],
+                  1
+                )
+              ],
+              1
+            )
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "level-right" }, [
+            _c(
+              "div",
+              { staticClass: "level-item" },
+              [
+                _c(
+                  "b-field",
+                  {
+                    attrs: {
+                      label: "1st Program",
+                      "label-position": "on-border"
+                    }
+                  },
+                  [
+                    _c(
+                      "b-select",
+                      {
+                        attrs: { placeholder: "SELECT 1ST PROGRAM" },
+                        on: { input: _vm.loadAsyncData },
+                        model: {
+                          value: _vm.search.first_program,
+                          callback: function($$v) {
+                            _vm.$set(_vm.search, "first_program", $$v)
+                          },
+                          expression: "search.first_program"
+                        }
+                      },
+                      [
+                        _c("option", { attrs: { value: "" } }, [_vm._v("ALL")]),
+                        _vm._v(" "),
+                        _vm._l(this.programs, function(item, index) {
+                          return _c(
+                            "option",
+                            { key: index, domProps: { value: item.CCode } },
+                            [_vm._v(_vm._s(item.CCode))]
+                          )
+                        })
+                      ],
+                      2
+                    )
+                  ],
+                  1
+                )
+              ],
+              1
+            )
+          ])
+        ]),
+        _vm._v(" "),
+        _vm._m(0)
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "section" }, [
+        _c(
+          "div",
+          {
+            staticStyle: {
+              display: "flex",
+              "justify-content": "flex-end",
+              "margin-bottom": "10px"
+            }
+          },
+          [
+            _c(
+              "b-button",
+              {
+                staticClass: "is-small is-success is-outlined",
+                staticStyle: { "margin-right": "auto" },
+                attrs: { "icon-pack": "fa", "icon-right": "refresh" },
+                on: { click: _vm.loadAsyncData }
+              },
+              [_vm._v("REFRESH")]
+            ),
+            _vm._v(" "),
+            _c(
+              "p",
+              {
+                staticStyle: { "font-weight": "bold", "margin-bottom": "10px" }
+              },
+              [_vm._v("TOTAL ROWS: " + _vm._s(_vm.total) + " ")]
+            )
+          ],
+          1
+        ),
+        _vm._v(" "),
+        _c(
+          "div",
+          { staticClass: "table-container" },
+          [
+            _c(
+              "b-table",
+              {
+                staticClass: "is-fullwidth",
+                attrs: {
+                  data: _vm.data,
+                  loading: _vm.loading,
+                  paginated: "",
+                  "backend-pagination": "",
+                  total: _vm.total,
+                  narrowed: "",
+                  "per-page": _vm.perPage,
+                  "detail-transition": "",
+                  "aria-next-label": "Next page",
+                  "aria-previous-label": "Previous page",
+                  "aria-page-label": "Page",
+                  "show-detail-icon": true,
+                  "aria-current-label": "Current page",
+                  "backend-sorting": "",
+                  "default-sort-direction": _vm.defaultSortDirection
+                },
+                on: { "page-change": _vm.onPageChange, sort: _vm.onSort }
+              },
+              [
+                _c("b-table-column", {
+                  attrs: { field: "user_id", label: "User ID" },
+                  scopedSlots: _vm._u([
+                    {
+                      key: "default",
+                      fn: function(props) {
+                        return [
+                          _vm._v(
+                            "\n                    " +
+                              _vm._s(props.row.user_id) +
+                              "\n                "
+                          )
+                        ]
+                      }
+                    }
+                  ])
+                }),
+                _vm._v(" "),
+                _c("b-table-column", {
+                  attrs: { field: "fullname", label: "Fullname" },
+                  scopedSlots: _vm._u([
+                    {
+                      key: "default",
+                      fn: function(props) {
+                        return [
+                          _vm._v(
+                            "\n                    " +
+                              _vm._s(props.row.lname) +
+                              ", " +
+                              _vm._s(props.row.fname) +
+                              " " +
+                              _vm._s(props.row.mname) +
+                              "\n                "
+                          )
+                        ]
+                      }
+                    }
+                  ])
+                }),
+                _vm._v(" "),
+                _c("b-table-column", {
+                  attrs: { field: "fromTo", label: "Schedule" },
+                  scopedSlots: _vm._u([
+                    {
+                      key: "default",
+                      fn: function(props) {
+                        return [
+                          _vm._v(
+                            "\n                    " +
+                              _vm._s(props.row.from) +
+                              " / " +
+                              _vm._s(props.row.to) +
+                              "\n                "
+                          )
+                        ]
+                      }
+                    }
+                  ])
+                }),
+                _vm._v(" "),
+                _c("b-table-column", {
+                  attrs: { field: "sex", label: "Sex", centered: "" },
+                  scopedSlots: _vm._u([
+                    {
+                      key: "default",
+                      fn: function(props) {
+                        return [
+                          _vm._v(
+                            "\n                    " +
+                              _vm._s(props.row.sex) +
+                              "\n                "
+                          )
+                        ]
+                      }
+                    }
+                  ])
+                }),
+                _vm._v(" "),
+                _c("b-table-column", {
+                  attrs: { field: "program", label: "1st Program" },
+                  scopedSlots: _vm._u([
+                    {
+                      key: "default",
+                      fn: function(props) {
+                        return [
+                          _vm._v(
+                            "\n                    " +
+                              _vm._s(props.row.first_program_choice) +
+                              "\n                "
+                          )
+                        ]
+                      }
+                    }
+                  ])
+                }),
+                _vm._v(" "),
+                _c("b-table-column", {
+                  attrs: { field: "program", label: "2nd Program" },
+                  scopedSlots: _vm._u([
+                    {
+                      key: "default",
+                      fn: function(props) {
+                        return [
+                          _vm._v(
+                            "\n                    " +
+                              _vm._s(props.row.second_program_choice) +
+                              "\n                "
+                          )
+                        ]
+                      }
+                    }
+                  ])
+                }),
+                _vm._v(" "),
+                _c("b-table-column", {
+                  attrs: {
+                    field: "abstraction",
+                    label: "ABSTRACTION",
+                    centered: "",
+                    numeric: ""
+                  },
+                  scopedSlots: _vm._u([
+                    {
+                      key: "default",
+                      fn: function(props) {
+                        return [
+                          props.row.abstraction < 1
+                            ? _c("div", [
+                                _c(
+                                  "span",
+                                  {
+                                    staticStyle: {
+                                      color: "red",
+                                      "font-weight": "bold"
+                                    }
+                                  },
+                                  [_vm._v(_vm._s(props.row.abstraction))]
+                                )
+                              ])
+                            : _c(
+                                "div",
+                                {
+                                  staticStyle: {
+                                    color: "green",
+                                    "font-weight": "bold"
+                                  }
+                                },
+                                [
+                                  _vm._v(
+                                    "\n                        " +
+                                      _vm._s(props.row.abstraction) +
+                                      "\n                    "
+                                  )
+                                ]
+                              )
+                        ]
+                      }
+                    }
+                  ])
+                }),
+                _vm._v(" "),
+                _c("b-table-column", {
+                  attrs: {
+                    field: "logical",
+                    label: "LOGICAL",
+                    centered: "",
+                    numeric: ""
+                  },
+                  scopedSlots: _vm._u([
+                    {
+                      key: "default",
+                      fn: function(props) {
+                        return [
+                          props.row.logical < 1
+                            ? _c("div", [
+                                _c(
+                                  "span",
+                                  {
+                                    staticStyle: {
+                                      color: "red",
+                                      "font-weight": "bold"
+                                    }
+                                  },
+                                  [_vm._v(_vm._s(props.row.logical))]
+                                )
+                              ])
+                            : _c(
+                                "div",
+                                {
+                                  staticStyle: {
+                                    color: "green",
+                                    "font-weight": "bold"
+                                  }
+                                },
+                                [
+                                  _vm._v(
+                                    "\n                        " +
+                                      _vm._s(props.row.logical) +
+                                      "\n                    "
+                                  )
+                                ]
+                              )
+                        ]
+                      }
+                    }
+                  ])
+                }),
+                _vm._v(" "),
+                _c("b-table-column", {
+                  attrs: {
+                    field: "english",
+                    label: "ENGLISH",
+                    centered: "",
+                    numeric: ""
+                  },
+                  scopedSlots: _vm._u([
+                    {
+                      key: "default",
+                      fn: function(props) {
+                        return [
+                          props.row.english < 1
+                            ? _c("div", [
+                                _c(
+                                  "span",
+                                  {
+                                    staticStyle: {
+                                      color: "red",
+                                      "font-weight": "bold"
+                                    }
+                                  },
+                                  [_vm._v(_vm._s(props.row.english))]
+                                )
+                              ])
+                            : _c(
+                                "div",
+                                {
+                                  staticStyle: {
+                                    color: "green",
+                                    "font-weight": "bold"
+                                  }
+                                },
+                                [
+                                  _vm._v(
+                                    "\n                        " +
+                                      _vm._s(props.row.english) +
+                                      "\n                    "
+                                  )
+                                ]
+                              )
+                        ]
+                      }
+                    }
+                  ])
+                }),
+                _vm._v(" "),
+                _c("b-table-column", {
+                  attrs: {
+                    field: "numerical",
+                    label: "NUMERICAL",
+                    centered: "",
+                    numeric: ""
+                  },
+                  scopedSlots: _vm._u([
+                    {
+                      key: "default",
+                      fn: function(props) {
+                        return [
+                          props.row.numerical < 1
+                            ? _c("div", [
+                                _c(
+                                  "span",
+                                  {
+                                    staticStyle: {
+                                      color: "red",
+                                      "font-weight": "bold"
+                                    }
+                                  },
+                                  [_vm._v(_vm._s(props.row.numerical))]
+                                )
+                              ])
+                            : _c(
+                                "div",
+                                {
+                                  staticStyle: {
+                                    color: "green",
+                                    "font-weight": "bold"
+                                  }
+                                },
+                                [
+                                  _vm._v(
+                                    "\n                        " +
+                                      _vm._s(props.row.numerical) +
+                                      "\n                    "
+                                  )
+                                ]
+                              )
+                        ]
+                      }
+                    }
+                  ])
+                }),
+                _vm._v(" "),
+                _c("b-table-column", {
+                  attrs: {
+                    field: "general",
+                    label: "GENERAL",
+                    centered: "",
+                    numeric: ""
+                  },
+                  scopedSlots: _vm._u([
+                    {
+                      key: "default",
+                      fn: function(props) {
+                        return [
+                          props.row.general < 1
+                            ? _c("div", [
+                                _c(
+                                  "span",
+                                  {
+                                    staticStyle: {
+                                      color: "red",
+                                      "font-weight": "bold"
+                                    }
+                                  },
+                                  [_vm._v(_vm._s(props.row.general))]
+                                )
+                              ])
+                            : _c(
+                                "div",
+                                {
+                                  staticStyle: {
+                                    color: "green",
+                                    "font-weight": "bold"
+                                  }
+                                },
+                                [
+                                  _vm._v(
+                                    "\n                        " +
+                                      _vm._s(props.row.general) +
+                                      "\n                    "
+                                  )
+                                ]
+                              )
+                        ]
+                      }
+                    }
+                  ])
+                }),
+                _vm._v(" "),
+                _c("b-table-column", {
+                  attrs: {
+                    field: "total",
+                    label: "TOTAL",
+                    centered: "",
+                    numeric: ""
+                  },
+                  scopedSlots: _vm._u([
+                    {
+                      key: "default",
+                      fn: function(props) {
+                        return [
+                          Number(props.row.total) <= 0
+                            ? _c("div", [
+                                _c(
+                                  "span",
+                                  {
+                                    staticStyle: {
+                                      color: "white",
+                                      "background-color": "red",
+                                      padding: "3px 10px",
+                                      "border-radius": "5px",
+                                      "font-weight": "bold"
+                                    }
+                                  },
+                                  [_vm._v(_vm._s(props.row.total))]
+                                )
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          Number(props.row.total) >= 1 &&
+                          Number(props.row.total) < 45
+                            ? _c("div", [
+                                _c(
+                                  "span",
+                                  {
+                                    staticStyle: {
+                                      color: "white",
+                                      "background-color": "orange",
+                                      padding: "3px 10px",
+                                      "border-radius": "5px",
+                                      "font-weight": "bold"
+                                    }
+                                  },
+                                  [_vm._v(_vm._s(props.row.total))]
+                                )
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          Number(props.row.total) >= 45
+                            ? _c("div", [
+                                _c(
+                                  "span",
+                                  {
+                                    staticStyle: {
+                                      color: "white",
+                                      "background-color": "green",
+                                      padding: "3px 10px",
+                                      "border-radius": "5px",
+                                      "font-weight": "bold"
+                                    }
+                                  },
+                                  [_vm._v(_vm._s(props.row.total))]
+                                )
+                              ])
+                            : _vm._e()
+                        ]
+                      }
+                    }
+                  ])
+                }),
+                _vm._v(" "),
+                _c("b-table-column", {
+                  attrs: { field: "", label: "Action" },
+                  scopedSlots: _vm._u([
+                    {
+                      key: "default",
+                      fn: function(props) {
+                        return [
+                          _c(
+                            "div",
+                            { staticClass: "buttons" },
+                            [
+                              props.row.is_submitted == 1
+                                ? _c(
+                                    "b-button",
+                                    {
+                                      staticClass:
+                                        "button is-small is-link mr-1",
+                                      attrs: {
+                                        outlined: "",
+                                        "icon-pack": "fa",
+                                        "icon-right": "arrow-circle-right"
+                                      },
+                                      on: {
+                                        click: function($event) {
+                                          return _vm.openModal(props.row)
+                                        }
+                                      }
+                                    },
+                                    [
+                                      _vm._v(
+                                        "\n                                READMIT\n                        "
+                                      )
+                                    ]
+                                  )
+                                : _c(
+                                    "b-button",
+                                    {
+                                      staticClass:
+                                        "button is-small is-success mr-1",
+                                      attrs: {
+                                        outlined: "",
+                                        "icon-pack": "fa",
+                                        "icon-right": "arrow-circle-right"
+                                      },
+                                      on: {
+                                        click: function($event) {
+                                          return _vm.openModal(props.row)
+                                        }
+                                      }
+                                    },
+                                    [
+                                      _vm._v(
+                                        "\n                                ADMIT\n                        "
+                                      )
+                                    ]
+                                  )
+                            ],
+                            1
+                          )
+                        ]
+                      }
+                    }
+                  ])
+                })
+              ],
+              1
+            )
+          ],
+          1
+        ),
+        _vm._v(" "),
+        _c(
+          "div",
+          { staticClass: "buttons" },
+          [
+            _c(
+              "downloadexcel",
+              {
+                class: _vm.btnClass,
+                attrs: {
+                  fetch: _vm.loadDataForReport,
+                  fields: _vm.json_fields,
+                  worksheet: "REPORT",
+                  "before-generate": _vm.startDownload,
+                  "before-finish": _vm.finishDownload,
+                  name: "student_result.xls"
+                }
+              },
+              [_vm._v("\n                Export to Excel\n            ")]
+            )
+          ],
+          1
+        )
+      ]),
+      _vm._v(" "),
+      _c(
+        "b-modal",
+        {
+          attrs: {
+            "has-modal-card": "",
+            "trap-focus": "",
+            "aria-role": "dialog",
+            "aria-modal": ""
+          },
+          model: {
+            value: this.isModalActive,
+            callback: function($$v) {
+              _vm.$set(this, "isModalActive", $$v)
+            },
+            expression: "this.isModalActive"
+          }
+        },
+        [
+          _c(
+            "div",
+            { staticClass: "modal-card", staticStyle: { height: "350px" } },
+            [
+              _c("header", { staticClass: "modal-card-head" }, [
+                _c("p", { staticClass: "modal-card-title" }, [
+                  _vm._v("PROGRAMS")
+                ]),
+                _vm._v(" "),
+                _c("button", {
+                  staticClass: "delete",
+                  attrs: { type: "button" },
+                  on: {
+                    click: function($event) {
+                      _vm.isModalActive = false
+                    }
+                  }
+                })
+              ]),
+              _vm._v(" "),
+              _c("section", { staticClass: "modal-card-body" }, [
+                _c(
+                  "div",
+                  [
+                    _c(
+                      "b-field",
+                      { attrs: { label: "Add program" } },
+                      [
+                        _c("b-taginput", {
+                          attrs: {
+                            data: _vm.filteredPrograms,
+                            autocomplete: "",
+                            field: "CCode",
+                            icon: "label",
+                            placeholder: "Type a program (eg. BSCS)"
+                          },
+                          on: { typing: _vm.getFilteredTags },
+                          scopedSlots: _vm._u([
+                            {
+                              key: "default",
+                              fn: function(props) {
+                                return [
+                                  _c("strong", [
+                                    _vm._v(_vm._s(props.option.CCode))
+                                  ]),
+                                  _vm._v(
+                                    ": " +
+                                      _vm._s(props.option.CDesc) +
+                                      "\n                            "
+                                  )
+                                ]
+                              }
+                            },
+                            {
+                              key: "empty",
+                              fn: function() {
+                                return [
+                                  _vm._v(
+                                    "\n                                There are no items\n                            "
+                                  )
+                                ]
+                              },
+                              proxy: true
+                            }
+                          ]),
+                          model: {
+                            value: _vm.programTags,
+                            callback: function($$v) {
+                              _vm.programTags = $$v
+                            },
+                            expression: "programTags"
+                          }
+                        })
+                      ],
+                      1
+                    )
+                  ],
+                  1
+                )
+              ]),
+              _vm._v(" "),
+              _c(
+                "footer",
+                { staticClass: "modal-card-foot" },
+                [
+                  _c("b-button", {
+                    attrs: { label: "Close" },
+                    on: {
+                      click: function($event) {
+                        _vm.isModalActive = false
+                      }
+                    }
+                  }),
+                  _vm._v(" "),
+                  _c("b-button", {
+                    staticClass: "is-success",
+                    attrs: {
+                      label: "ADMIT",
+                      "icon-pack": "fa",
+                      "icon-right": "arrow-circle-right"
+                    },
+                    on: { click: _vm.admit }
+                  })
+                ],
+                1
+              )
+            ]
+          )
+        ]
+      ),
+      _vm._v(" "),
+      _c("b-loading", {
+        attrs: { "is-full-page": _vm.isFullPage },
+        model: {
+          value: _vm.isLoading,
+          callback: function($$v) {
+            _vm.isLoading = $$v
+          },
+          expression: "isLoading"
+        }
+      })
+    ],
+    1
+  )
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "level" }, [
+      _c("div", { staticClass: "level-left" }, [
+        _c("div", { staticClass: "level-item" })
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "level-right" }, [
+        _c("div", { staticClass: "level-item" })
+      ])
+    ])
+  }
+]
 render._withStripped = true
 
 
@@ -34119,897 +36500,6 @@ var staticRenderFns = [
         _vm._v(
           "\n                             \n                            Save Questions\n                        "
         )
-      ])
-    ])
-  }
-]
-render._withStripped = true
-
-
-
-/***/ }),
-
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Administrator/Report/ReportResult.vue?vue&type=template&id=16daf962&scoped=true&":
-/*!*********************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Administrator/Report/ReportResult.vue?vue&type=template&id=16daf962&scoped=true& ***!
-  \*********************************************************************************************************************************************************************************************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "render": () => (/* binding */ render),
-/* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
-/* harmony export */ });
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    [
-      _c("div", { staticClass: "section" }, [
-        _c("div", { staticClass: "table-title" }, [
-          _vm._v("LIST OF STUDENT AND RESULT")
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "level" }, [
-          _c("div", { staticClass: "level-left" }, [
-            _c(
-              "div",
-              { staticClass: "level-item" },
-              [
-                _c(
-                  "b-field",
-                  { attrs: { label: "SEARCH", "label-position": "on-border" } },
-                  [
-                    _c("b-input", {
-                      attrs: { type: "text", placeholder: "Search Lastname" },
-                      nativeOn: {
-                        keyup: function($event) {
-                          if (
-                            !$event.type.indexOf("key") &&
-                            _vm._k(
-                              $event.keyCode,
-                              "enter",
-                              13,
-                              $event.key,
-                              "Enter"
-                            )
-                          ) {
-                            return null
-                          }
-                          return _vm.loadAsyncData($event)
-                        }
-                      },
-                      model: {
-                        value: _vm.search.lname,
-                        callback: function($$v) {
-                          _vm.$set(_vm.search, "lname", $$v)
-                        },
-                        expression: "search.lname"
-                      }
-                    }),
-                    _vm._v(" "),
-                    _c("b-input", {
-                      attrs: { type: "text", placeholder: "Search Firstname" },
-                      nativeOn: {
-                        keyup: function($event) {
-                          if (
-                            !$event.type.indexOf("key") &&
-                            _vm._k(
-                              $event.keyCode,
-                              "enter",
-                              13,
-                              $event.key,
-                              "Enter"
-                            )
-                          ) {
-                            return null
-                          }
-                          return _vm.loadAsyncData($event)
-                        }
-                      },
-                      model: {
-                        value: _vm.search.fname,
-                        callback: function($$v) {
-                          _vm.$set(_vm.search, "fname", $$v)
-                        },
-                        expression: "search.fname"
-                      }
-                    })
-                  ],
-                  1
-                )
-              ],
-              1
-            )
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "level-right" }, [
-            _c(
-              "div",
-              { staticClass: "level-item" },
-              [
-                _c(
-                  "b-field",
-                  {
-                    attrs: {
-                      label: "1st Program",
-                      "label-position": "on-border"
-                    }
-                  },
-                  [
-                    _c(
-                      "b-select",
-                      {
-                        attrs: { placeholder: "SELECT 1ST PROGRAM" },
-                        on: { input: _vm.loadAsyncData },
-                        model: {
-                          value: _vm.search.first_program,
-                          callback: function($$v) {
-                            _vm.$set(_vm.search, "first_program", $$v)
-                          },
-                          expression: "search.first_program"
-                        }
-                      },
-                      [
-                        _c("option", { attrs: { value: "" } }, [_vm._v("ALL")]),
-                        _vm._v(" "),
-                        _vm._l(this.programs, function(item, index) {
-                          return _c(
-                            "option",
-                            { key: index, domProps: { value: item.CCode } },
-                            [_vm._v(_vm._s(item.CCode))]
-                          )
-                        })
-                      ],
-                      2
-                    )
-                  ],
-                  1
-                )
-              ],
-              1
-            )
-          ])
-        ]),
-        _vm._v(" "),
-        _vm._m(0)
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "section" }, [
-        _c(
-          "div",
-          {
-            staticStyle: {
-              display: "flex",
-              "justify-content": "flex-end",
-              "margin-bottom": "10px"
-            }
-          },
-          [
-            _c(
-              "b-button",
-              {
-                staticClass: "is-small is-success is-outlined",
-                staticStyle: { "margin-right": "auto" },
-                attrs: { "icon-pack": "fa", "icon-right": "refresh" },
-                on: { click: _vm.loadAsyncData }
-              },
-              [_vm._v("REFRESH")]
-            ),
-            _vm._v(" "),
-            _c(
-              "p",
-              {
-                staticStyle: { "font-weight": "bold", "margin-bottom": "10px" }
-              },
-              [_vm._v("TOTAL ROWS: " + _vm._s(_vm.total) + " ")]
-            )
-          ],
-          1
-        ),
-        _vm._v(" "),
-        _c(
-          "div",
-          { staticClass: "table-container" },
-          [
-            _c(
-              "b-table",
-              {
-                staticClass: "is-fullwidth",
-                attrs: {
-                  data: _vm.data,
-                  loading: _vm.loading,
-                  paginated: "",
-                  "backend-pagination": "",
-                  total: _vm.total,
-                  narrowed: "",
-                  "per-page": _vm.perPage,
-                  "detail-transition": "",
-                  "aria-next-label": "Next page",
-                  "aria-previous-label": "Previous page",
-                  "aria-page-label": "Page",
-                  "show-detail-icon": true,
-                  "aria-current-label": "Current page",
-                  "backend-sorting": "",
-                  "default-sort-direction": _vm.defaultSortDirection
-                },
-                on: { "page-change": _vm.onPageChange, sort: _vm.onSort }
-              },
-              [
-                _c("b-table-column", {
-                  attrs: { field: "user_id", label: "User ID" },
-                  scopedSlots: _vm._u([
-                    {
-                      key: "default",
-                      fn: function(props) {
-                        return [
-                          _vm._v(
-                            "\n                    " +
-                              _vm._s(props.row.user_id) +
-                              "\n                "
-                          )
-                        ]
-                      }
-                    }
-                  ])
-                }),
-                _vm._v(" "),
-                _c("b-table-column", {
-                  attrs: { field: "fullname", label: "Fullname" },
-                  scopedSlots: _vm._u([
-                    {
-                      key: "default",
-                      fn: function(props) {
-                        return [
-                          _vm._v(
-                            "\n                    " +
-                              _vm._s(props.row.lname) +
-                              ", " +
-                              _vm._s(props.row.fname) +
-                              " " +
-                              _vm._s(props.row.mname) +
-                              "\n                "
-                          )
-                        ]
-                      }
-                    }
-                  ])
-                }),
-                _vm._v(" "),
-                _c("b-table-column", {
-                  attrs: { field: "fromTo", label: "Schedule" },
-                  scopedSlots: _vm._u([
-                    {
-                      key: "default",
-                      fn: function(props) {
-                        return [
-                          _vm._v(
-                            "\n                    " +
-                              _vm._s(props.row.from) +
-                              " / " +
-                              _vm._s(props.row.to) +
-                              "\n                "
-                          )
-                        ]
-                      }
-                    }
-                  ])
-                }),
-                _vm._v(" "),
-                _c("b-table-column", {
-                  attrs: { field: "sex", label: "Sex", centered: "" },
-                  scopedSlots: _vm._u([
-                    {
-                      key: "default",
-                      fn: function(props) {
-                        return [
-                          _vm._v(
-                            "\n                    " +
-                              _vm._s(props.row.sex) +
-                              "\n                "
-                          )
-                        ]
-                      }
-                    }
-                  ])
-                }),
-                _vm._v(" "),
-                _c("b-table-column", {
-                  attrs: { field: "program", label: "1st Program" },
-                  scopedSlots: _vm._u([
-                    {
-                      key: "default",
-                      fn: function(props) {
-                        return [
-                          _vm._v(
-                            "\n                    " +
-                              _vm._s(props.row.first_program_choice) +
-                              "\n                "
-                          )
-                        ]
-                      }
-                    }
-                  ])
-                }),
-                _vm._v(" "),
-                _c("b-table-column", {
-                  attrs: { field: "program", label: "2nd Program" },
-                  scopedSlots: _vm._u([
-                    {
-                      key: "default",
-                      fn: function(props) {
-                        return [
-                          _vm._v(
-                            "\n                    " +
-                              _vm._s(props.row.second_program_choice) +
-                              "\n                "
-                          )
-                        ]
-                      }
-                    }
-                  ])
-                }),
-                _vm._v(" "),
-                _c("b-table-column", {
-                  attrs: {
-                    field: "abstraction",
-                    label: "ABSTRACTION",
-                    centered: "",
-                    numeric: ""
-                  },
-                  scopedSlots: _vm._u([
-                    {
-                      key: "default",
-                      fn: function(props) {
-                        return [
-                          props.row.abstraction < 1
-                            ? _c("div", [
-                                _c(
-                                  "span",
-                                  {
-                                    staticStyle: {
-                                      color: "red",
-                                      "font-weight": "bold"
-                                    }
-                                  },
-                                  [_vm._v(_vm._s(props.row.abstraction))]
-                                )
-                              ])
-                            : _c(
-                                "div",
-                                {
-                                  staticStyle: {
-                                    color: "green",
-                                    "font-weight": "bold"
-                                  }
-                                },
-                                [
-                                  _vm._v(
-                                    "\n                        " +
-                                      _vm._s(props.row.abstraction) +
-                                      "\n                    "
-                                  )
-                                ]
-                              )
-                        ]
-                      }
-                    }
-                  ])
-                }),
-                _vm._v(" "),
-                _c("b-table-column", {
-                  attrs: {
-                    field: "logical",
-                    label: "LOGICAL",
-                    centered: "",
-                    numeric: ""
-                  },
-                  scopedSlots: _vm._u([
-                    {
-                      key: "default",
-                      fn: function(props) {
-                        return [
-                          props.row.logical < 1
-                            ? _c("div", [
-                                _c(
-                                  "span",
-                                  {
-                                    staticStyle: {
-                                      color: "red",
-                                      "font-weight": "bold"
-                                    }
-                                  },
-                                  [_vm._v(_vm._s(props.row.logical))]
-                                )
-                              ])
-                            : _c(
-                                "div",
-                                {
-                                  staticStyle: {
-                                    color: "green",
-                                    "font-weight": "bold"
-                                  }
-                                },
-                                [
-                                  _vm._v(
-                                    "\n                        " +
-                                      _vm._s(props.row.logical) +
-                                      "\n                    "
-                                  )
-                                ]
-                              )
-                        ]
-                      }
-                    }
-                  ])
-                }),
-                _vm._v(" "),
-                _c("b-table-column", {
-                  attrs: {
-                    field: "english",
-                    label: "ENGLISH",
-                    centered: "",
-                    numeric: ""
-                  },
-                  scopedSlots: _vm._u([
-                    {
-                      key: "default",
-                      fn: function(props) {
-                        return [
-                          props.row.english < 1
-                            ? _c("div", [
-                                _c(
-                                  "span",
-                                  {
-                                    staticStyle: {
-                                      color: "red",
-                                      "font-weight": "bold"
-                                    }
-                                  },
-                                  [_vm._v(_vm._s(props.row.english))]
-                                )
-                              ])
-                            : _c(
-                                "div",
-                                {
-                                  staticStyle: {
-                                    color: "green",
-                                    "font-weight": "bold"
-                                  }
-                                },
-                                [
-                                  _vm._v(
-                                    "\n                        " +
-                                      _vm._s(props.row.english) +
-                                      "\n                    "
-                                  )
-                                ]
-                              )
-                        ]
-                      }
-                    }
-                  ])
-                }),
-                _vm._v(" "),
-                _c("b-table-column", {
-                  attrs: {
-                    field: "numerical",
-                    label: "NUMERICAL",
-                    centered: "",
-                    numeric: ""
-                  },
-                  scopedSlots: _vm._u([
-                    {
-                      key: "default",
-                      fn: function(props) {
-                        return [
-                          props.row.numerical < 1
-                            ? _c("div", [
-                                _c(
-                                  "span",
-                                  {
-                                    staticStyle: {
-                                      color: "red",
-                                      "font-weight": "bold"
-                                    }
-                                  },
-                                  [_vm._v(_vm._s(props.row.numerical))]
-                                )
-                              ])
-                            : _c(
-                                "div",
-                                {
-                                  staticStyle: {
-                                    color: "green",
-                                    "font-weight": "bold"
-                                  }
-                                },
-                                [
-                                  _vm._v(
-                                    "\n                        " +
-                                      _vm._s(props.row.numerical) +
-                                      "\n                    "
-                                  )
-                                ]
-                              )
-                        ]
-                      }
-                    }
-                  ])
-                }),
-                _vm._v(" "),
-                _c("b-table-column", {
-                  attrs: {
-                    field: "general",
-                    label: "GENERAL",
-                    centered: "",
-                    numeric: ""
-                  },
-                  scopedSlots: _vm._u([
-                    {
-                      key: "default",
-                      fn: function(props) {
-                        return [
-                          props.row.general < 1
-                            ? _c("div", [
-                                _c(
-                                  "span",
-                                  {
-                                    staticStyle: {
-                                      color: "red",
-                                      "font-weight": "bold"
-                                    }
-                                  },
-                                  [_vm._v(_vm._s(props.row.general))]
-                                )
-                              ])
-                            : _c(
-                                "div",
-                                {
-                                  staticStyle: {
-                                    color: "green",
-                                    "font-weight": "bold"
-                                  }
-                                },
-                                [
-                                  _vm._v(
-                                    "\n                        " +
-                                      _vm._s(props.row.general) +
-                                      "\n                    "
-                                  )
-                                ]
-                              )
-                        ]
-                      }
-                    }
-                  ])
-                }),
-                _vm._v(" "),
-                _c("b-table-column", {
-                  attrs: {
-                    field: "total",
-                    label: "TOTAL",
-                    centered: "",
-                    numeric: ""
-                  },
-                  scopedSlots: _vm._u([
-                    {
-                      key: "default",
-                      fn: function(props) {
-                        return [
-                          Number(props.row.total) <= 0
-                            ? _c("div", [
-                                _c(
-                                  "span",
-                                  {
-                                    staticStyle: {
-                                      color: "white",
-                                      "background-color": "red",
-                                      padding: "3px 10px",
-                                      "border-radius": "5px",
-                                      "font-weight": "bold"
-                                    }
-                                  },
-                                  [_vm._v(_vm._s(props.row.total))]
-                                )
-                              ])
-                            : _vm._e(),
-                          _vm._v(" "),
-                          Number(props.row.total) >= 1 &&
-                          Number(props.row.total) < 45
-                            ? _c("div", [
-                                _c(
-                                  "span",
-                                  {
-                                    staticStyle: {
-                                      color: "white",
-                                      "background-color": "orange",
-                                      padding: "3px 10px",
-                                      "border-radius": "5px",
-                                      "font-weight": "bold"
-                                    }
-                                  },
-                                  [_vm._v(_vm._s(props.row.total))]
-                                )
-                              ])
-                            : _vm._e(),
-                          _vm._v(" "),
-                          Number(props.row.total) >= 45
-                            ? _c("div", [
-                                _c(
-                                  "span",
-                                  {
-                                    staticStyle: {
-                                      color: "white",
-                                      "background-color": "green",
-                                      padding: "3px 10px",
-                                      "border-radius": "5px",
-                                      "font-weight": "bold"
-                                    }
-                                  },
-                                  [_vm._v(_vm._s(props.row.total))]
-                                )
-                              ])
-                            : _vm._e()
-                        ]
-                      }
-                    }
-                  ])
-                }),
-                _vm._v(" "),
-                _c("b-table-column", {
-                  attrs: { field: "", label: "Action" },
-                  scopedSlots: _vm._u([
-                    {
-                      key: "default",
-                      fn: function(props) {
-                        return [
-                          _c(
-                            "div",
-                            { staticClass: "buttons" },
-                            [
-                              props.row.is_submitted == 1
-                                ? _c(
-                                    "b-button",
-                                    {
-                                      staticClass:
-                                        "button is-small is-link mr-1",
-                                      attrs: {
-                                        outlined: "",
-                                        "icon-pack": "fa",
-                                        "icon-right": "arrow-circle-right"
-                                      },
-                                      on: {
-                                        click: function($event) {
-                                          return _vm.openModal(props.row)
-                                        }
-                                      }
-                                    },
-                                    [
-                                      _vm._v(
-                                        "\n                                READMIT\n                        "
-                                      )
-                                    ]
-                                  )
-                                : _c(
-                                    "b-button",
-                                    {
-                                      staticClass:
-                                        "button is-small is-success mr-1",
-                                      attrs: {
-                                        outlined: "",
-                                        "icon-pack": "fa",
-                                        "icon-right": "arrow-circle-right"
-                                      },
-                                      on: {
-                                        click: function($event) {
-                                          return _vm.openModal(props.row)
-                                        }
-                                      }
-                                    },
-                                    [
-                                      _vm._v(
-                                        "\n                                ADMIT\n                        "
-                                      )
-                                    ]
-                                  )
-                            ],
-                            1
-                          )
-                        ]
-                      }
-                    }
-                  ])
-                })
-              ],
-              1
-            )
-          ],
-          1
-        ),
-        _vm._v(" "),
-        _c(
-          "div",
-          { staticClass: "buttons" },
-          [
-            _c(
-              "downloadexcel",
-              {
-                class: _vm.btnClass,
-                attrs: {
-                  fetch: _vm.loadDataForReport,
-                  fields: _vm.json_fields,
-                  worksheet: "REPORT",
-                  "before-generate": _vm.startDownload,
-                  "before-finish": _vm.finishDownload,
-                  name: "student_result.xls"
-                }
-              },
-              [_vm._v("\n                Export to Excel\n            ")]
-            )
-          ],
-          1
-        )
-      ]),
-      _vm._v(" "),
-      _c(
-        "b-modal",
-        {
-          attrs: {
-            "has-modal-card": "",
-            "trap-focus": "",
-            "aria-role": "dialog",
-            "aria-modal": ""
-          },
-          model: {
-            value: this.isModalActive,
-            callback: function($$v) {
-              _vm.$set(this, "isModalActive", $$v)
-            },
-            expression: "this.isModalActive"
-          }
-        },
-        [
-          _c(
-            "div",
-            { staticClass: "modal-card", staticStyle: { height: "350px" } },
-            [
-              _c("header", { staticClass: "modal-card-head" }, [
-                _c("p", { staticClass: "modal-card-title" }, [
-                  _vm._v("PROGRAMS")
-                ]),
-                _vm._v(" "),
-                _c("button", {
-                  staticClass: "delete",
-                  attrs: { type: "button" },
-                  on: {
-                    click: function($event) {
-                      _vm.isModalActive = false
-                    }
-                  }
-                })
-              ]),
-              _vm._v(" "),
-              _c("section", { staticClass: "modal-card-body" }, [
-                _c(
-                  "div",
-                  [
-                    _c(
-                      "b-field",
-                      { attrs: { label: "Add program" } },
-                      [
-                        _c("b-taginput", {
-                          attrs: {
-                            data: _vm.filteredPrograms,
-                            autocomplete: "",
-                            field: "CCode",
-                            icon: "label",
-                            placeholder: "Type a program (eg. BSCS)"
-                          },
-                          on: { typing: _vm.getFilteredTags },
-                          scopedSlots: _vm._u([
-                            {
-                              key: "default",
-                              fn: function(props) {
-                                return [
-                                  _c("strong", [
-                                    _vm._v(_vm._s(props.option.CCode))
-                                  ]),
-                                  _vm._v(
-                                    ": " +
-                                      _vm._s(props.option.CDesc) +
-                                      "\n                            "
-                                  )
-                                ]
-                              }
-                            },
-                            {
-                              key: "empty",
-                              fn: function() {
-                                return [
-                                  _vm._v(
-                                    "\n                                There are no items\n                            "
-                                  )
-                                ]
-                              },
-                              proxy: true
-                            }
-                          ]),
-                          model: {
-                            value: _vm.programTags,
-                            callback: function($$v) {
-                              _vm.programTags = $$v
-                            },
-                            expression: "programTags"
-                          }
-                        })
-                      ],
-                      1
-                    )
-                  ],
-                  1
-                )
-              ]),
-              _vm._v(" "),
-              _c(
-                "footer",
-                { staticClass: "modal-card-foot" },
-                [
-                  _c("b-button", {
-                    attrs: { label: "Close" },
-                    on: {
-                      click: function($event) {
-                        _vm.isModalActive = false
-                      }
-                    }
-                  }),
-                  _vm._v(" "),
-                  _c("b-button", {
-                    staticClass: "is-success",
-                    attrs: {
-                      label: "ADMIT",
-                      "icon-pack": "fa",
-                      "icon-right": "arrow-circle-right"
-                    },
-                    on: { click: _vm.admit }
-                  })
-                ],
-                1
-              )
-            ]
-          )
-        ]
-      ),
-      _vm._v(" "),
-      _c("b-loading", {
-        attrs: { "is-full-page": _vm.isFullPage },
-        model: {
-          value: _vm.isLoading,
-          callback: function($$v) {
-            _vm.isLoading = $$v
-          },
-          expression: "isLoading"
-        }
-      })
-    ],
-    1
-  )
-}
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "level" }, [
-      _c("div", { staticClass: "level-left" }, [
-        _c("div", { staticClass: "level-item" })
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "level-right" }, [
-        _c("div", { staticClass: "level-item" })
       ])
     ])
   }
@@ -38692,60 +40182,135 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
-    _c(
-      "div",
-      { staticClass: "section" },
-      [
-        _c("div", { staticClass: "table-title" }, [_vm._v("LIST OF USER")]),
+    _c("div", { staticClass: "section" }, [
+      _c("div", { staticClass: "table-title" }, [_vm._v("LIST OF USER")]),
+      _vm._v(" "),
+      _c("div", { staticClass: "level" }, [
+        _c("div", { staticClass: "level-left" }, [
+          _c(
+            "div",
+            { staticClass: "level-item" },
+            [
+              _c(
+                "b-field",
+                { attrs: { label: "PAGE", "label-position": "on-border" } },
+                [
+                  _c(
+                    "b-select",
+                    {
+                      on: { input: _vm.setPerPage },
+                      model: {
+                        value: _vm.perPage,
+                        callback: function($$v) {
+                          _vm.perPage = $$v
+                        },
+                        expression: "perPage"
+                      }
+                    },
+                    [
+                      _c("option", { attrs: { value: "5" } }, [
+                        _vm._v("5 per page")
+                      ]),
+                      _vm._v(" "),
+                      _c("option", { attrs: { value: "10" } }, [
+                        _vm._v("10 per page")
+                      ]),
+                      _vm._v(" "),
+                      _c("option", { attrs: { value: "15" } }, [
+                        _vm._v("15 per page")
+                      ]),
+                      _vm._v(" "),
+                      _c("option", { attrs: { value: "20" } }, [
+                        _vm._v("20 per page")
+                      ])
+                    ]
+                  )
+                ],
+                1
+              )
+            ],
+            1
+          )
+        ]),
         _vm._v(" "),
-        _c("div", { staticClass: "level" }, [
-          _c("div", { staticClass: "level-left" }, [
-            _c(
-              "div",
-              { staticClass: "level-item" },
-              [
-                _c(
-                  "b-field",
-                  { attrs: { label: "PAGE", "label-position": "on-border" } },
-                  [
-                    _c(
-                      "b-select",
-                      {
-                        on: { input: _vm.setPerPage },
-                        model: {
-                          value: _vm.perPage,
-                          callback: function($$v) {
-                            _vm.perPage = $$v
-                          },
-                          expression: "perPage"
+        _c("div", { staticClass: "level-right" }, [
+          _c(
+            "div",
+            { staticClass: "level-item" },
+            [
+              _c(
+                "b-field",
+                { attrs: { label: "SEARCH", "label-position": "on-border" } },
+                [
+                  _c("b-input", {
+                    attrs: { type: "input", placeholder: "Search Lastname..." },
+                    nativeOn: {
+                      keyup: function($event) {
+                        if (
+                          !$event.type.indexOf("key") &&
+                          _vm._k(
+                            $event.keyCode,
+                            "enter",
+                            13,
+                            $event.key,
+                            "Enter"
+                          )
+                        ) {
+                          return null
                         }
+                        return _vm.loadAsyncData($event)
+                      }
+                    },
+                    model: {
+                      value: _vm.search.lname,
+                      callback: function($$v) {
+                        _vm.$set(_vm.search, "lname", $$v)
                       },
-                      [
-                        _c("option", { attrs: { value: "5" } }, [
-                          _vm._v("5 per page")
-                        ]),
-                        _vm._v(" "),
-                        _c("option", { attrs: { value: "10" } }, [
-                          _vm._v("10 per page")
-                        ]),
-                        _vm._v(" "),
-                        _c("option", { attrs: { value: "15" } }, [
-                          _vm._v("15 per page")
-                        ]),
-                        _vm._v(" "),
-                        _c("option", { attrs: { value: "20" } }, [
-                          _vm._v("20 per page")
-                        ])
-                      ]
-                    )
-                  ],
-                  1
-                )
-              ],
-              1
-            )
-          ]),
-          _vm._v(" "),
+                      expression: "search.lname"
+                    }
+                  }),
+                  _vm._v(" "),
+                  _c("b-input", {
+                    attrs: {
+                      type: "input",
+                      placeholder: "Search Firstname..."
+                    },
+                    nativeOn: {
+                      keyup: function($event) {
+                        if (
+                          !$event.type.indexOf("key") &&
+                          _vm._k(
+                            $event.keyCode,
+                            "enter",
+                            13,
+                            $event.key,
+                            "Enter"
+                          )
+                        ) {
+                          return null
+                        }
+                        return _vm.loadAsyncData($event)
+                      }
+                    },
+                    model: {
+                      value: _vm.search.fname,
+                      callback: function($$v) {
+                        _vm.$set(_vm.search, "fname", $$v)
+                      },
+                      expression: "search.fname"
+                    }
+                  })
+                ],
+                1
+              )
+            ],
+            1
+          )
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "level" }, [
+        _c("div", { staticClass: "level-left" }, [
           _c("div", { staticClass: "level-right" }, [
             _c(
               "div",
@@ -38758,7 +40323,7 @@ var render = function() {
                     _c("b-input", {
                       attrs: {
                         type: "input",
-                        placeholder: "Search Lastname..."
+                        placeholder: "Search User ID..."
                       },
                       nativeOn: {
                         keyup: function($event) {
@@ -38778,42 +40343,11 @@ var render = function() {
                         }
                       },
                       model: {
-                        value: _vm.search.lname,
+                        value: _vm.search.user_id,
                         callback: function($$v) {
-                          _vm.$set(_vm.search, "lname", $$v)
+                          _vm.$set(_vm.search, "user_id", $$v)
                         },
-                        expression: "search.lname"
-                      }
-                    }),
-                    _vm._v(" "),
-                    _c("b-input", {
-                      attrs: {
-                        type: "input",
-                        placeholder: "Search Firstname..."
-                      },
-                      nativeOn: {
-                        keyup: function($event) {
-                          if (
-                            !$event.type.indexOf("key") &&
-                            _vm._k(
-                              $event.keyCode,
-                              "enter",
-                              13,
-                              $event.key,
-                              "Enter"
-                            )
-                          ) {
-                            return null
-                          }
-                          return _vm.loadAsyncData($event)
-                        }
-                      },
-                      model: {
-                        value: _vm.search.fname,
-                        callback: function($$v) {
-                          _vm.$set(_vm.search, "fname", $$v)
-                        },
-                        expression: "search.fname"
+                        expression: "search.user_id"
                       }
                     })
                   ],
@@ -38823,270 +40357,278 @@ var render = function() {
               1
             )
           ])
-        ]),
-        _vm._v(" "),
-        _c(
-          "div",
-          { staticStyle: { display: "flex", "justify-content": "flex-end" } },
-          [
-            _c(
-              "p",
-              {
-                staticStyle: { "font-weight": "bold", "margin-bottom": "10px" }
+        ])
+      ]),
+      _vm._v(" "),
+      _c(
+        "div",
+        { staticStyle: { display: "flex", "justify-content": "flex-end" } },
+        [
+          _c(
+            "p",
+            { staticStyle: { "font-weight": "bold", "margin-bottom": "10px" } },
+            [_vm._v("TOTAL ROWS: " + _vm._s(_vm.total) + " ")]
+          )
+        ]
+      ),
+      _vm._v(" "),
+      _c(
+        "div",
+        { staticClass: "table-container" },
+        [
+          _c(
+            "b-table",
+            {
+              attrs: {
+                data: _vm.data,
+                loading: _vm.loading,
+                paginated: "",
+                "backend-pagination": "",
+                total: _vm.total,
+                narrowed: "",
+                "per-page": _vm.perPage,
+                "aria-next-label": "Next page",
+                "aria-previous-label": "Previous page",
+                "aria-page-label": "Page",
+                "aria-current-label": "Current page",
+                "backend-sorting": "",
+                "default-sort-direction": _vm.defaultSortDirection
               },
-              [_vm._v("TOTAL ROWS: " + _vm._s(_vm.total) + " ")]
-            )
-          ]
-        ),
-        _vm._v(" "),
-        _c(
-          "b-table",
-          {
-            attrs: {
-              data: _vm.data,
-              loading: _vm.loading,
-              paginated: "",
-              "backend-pagination": "",
-              total: _vm.total,
-              narrowed: "",
-              "per-page": _vm.perPage,
-              "aria-next-label": "Next page",
-              "aria-previous-label": "Previous page",
-              "aria-page-label": "Page",
-              "aria-current-label": "Current page",
-              "backend-sorting": "",
-              "default-sort-direction": _vm.defaultSortDirection
+              on: { "page-change": _vm.onPageChange, sort: _vm.onSort }
             },
-            on: { "page-change": _vm.onPageChange, sort: _vm.onSort }
-          },
-          [
-            _c("b-table-column", {
-              attrs: { field: "user_id", label: "ID" },
-              scopedSlots: _vm._u([
-                {
-                  key: "default",
-                  fn: function(props) {
-                    return [
-                      _vm._v(
-                        "\n                " +
-                          _vm._s(props.row.user_id) +
-                          "\n            "
-                      )
-                    ]
+            [
+              _c("b-table-column", {
+                attrs: { field: "user_id", label: "ID" },
+                scopedSlots: _vm._u([
+                  {
+                    key: "default",
+                    fn: function(props) {
+                      return [
+                        _vm._v(
+                          "\n                    " +
+                            _vm._s(props.row.user_id) +
+                            "\n                "
+                        )
+                      ]
+                    }
                   }
-                }
-              ])
-            }),
-            _vm._v(" "),
-            _c("b-table-column", {
-              attrs: { field: "username", label: "Username" },
-              scopedSlots: _vm._u([
-                {
-                  key: "default",
-                  fn: function(props) {
-                    return [
-                      _vm._v(
-                        "\n                " +
-                          _vm._s(props.row.username) +
-                          "\n            "
-                      )
-                    ]
+                ])
+              }),
+              _vm._v(" "),
+              _c("b-table-column", {
+                attrs: { field: "username", label: "Username" },
+                scopedSlots: _vm._u([
+                  {
+                    key: "default",
+                    fn: function(props) {
+                      return [
+                        _vm._v(
+                          "\n                    " +
+                            _vm._s(props.row.username) +
+                            "\n                "
+                        )
+                      ]
+                    }
                   }
-                }
-              ])
-            }),
-            _vm._v(" "),
-            _c("b-table-column", {
-              attrs: { field: "lname", label: "Lastname" },
-              scopedSlots: _vm._u([
-                {
-                  key: "default",
-                  fn: function(props) {
-                    return [
-                      _vm._v(
-                        "\n                " +
-                          _vm._s(props.row.lname) +
-                          "\n            "
-                      )
-                    ]
+                ])
+              }),
+              _vm._v(" "),
+              _c("b-table-column", {
+                attrs: { field: "lname", label: "Lastname" },
+                scopedSlots: _vm._u([
+                  {
+                    key: "default",
+                    fn: function(props) {
+                      return [
+                        _vm._v(
+                          "\n                    " +
+                            _vm._s(props.row.lname) +
+                            "\n                "
+                        )
+                      ]
+                    }
                   }
-                }
-              ])
-            }),
-            _vm._v(" "),
-            _c("b-table-column", {
-              attrs: { field: "fname", label: "Firstname" },
-              scopedSlots: _vm._u([
-                {
-                  key: "default",
-                  fn: function(props) {
-                    return [
-                      _vm._v(
-                        "\n                " +
-                          _vm._s(props.row.fname) +
-                          "\n            "
-                      )
-                    ]
+                ])
+              }),
+              _vm._v(" "),
+              _c("b-table-column", {
+                attrs: { field: "fname", label: "Firstname" },
+                scopedSlots: _vm._u([
+                  {
+                    key: "default",
+                    fn: function(props) {
+                      return [
+                        _vm._v(
+                          "\n                    " +
+                            _vm._s(props.row.fname) +
+                            "\n                "
+                        )
+                      ]
+                    }
                   }
-                }
-              ])
-            }),
-            _vm._v(" "),
-            _c("b-table-column", {
-              attrs: { field: "mname", label: "Middlename" },
-              scopedSlots: _vm._u([
-                {
-                  key: "default",
-                  fn: function(props) {
-                    return [
-                      _vm._v(
-                        "\n                " +
-                          _vm._s(props.row.mname) +
-                          "\n            "
-                      )
-                    ]
+                ])
+              }),
+              _vm._v(" "),
+              _c("b-table-column", {
+                attrs: { field: "mname", label: "Middlename" },
+                scopedSlots: _vm._u([
+                  {
+                    key: "default",
+                    fn: function(props) {
+                      return [
+                        _vm._v(
+                          "\n                    " +
+                            _vm._s(props.row.mname) +
+                            "\n                "
+                        )
+                      ]
+                    }
                   }
-                }
-              ])
-            }),
-            _vm._v(" "),
-            _c("b-table-column", {
-              attrs: { field: "mname", label: "Email" },
-              scopedSlots: _vm._u([
-                {
-                  key: "default",
-                  fn: function(props) {
-                    return [
-                      _vm._v(
-                        "\n                " +
-                          _vm._s(props.row.email) +
-                          "\n            "
-                      )
-                    ]
+                ])
+              }),
+              _vm._v(" "),
+              _c("b-table-column", {
+                attrs: { field: "mname", label: "Email" },
+                scopedSlots: _vm._u([
+                  {
+                    key: "default",
+                    fn: function(props) {
+                      return [
+                        _vm._v(
+                          "\n                    " +
+                            _vm._s(props.row.email) +
+                            "\n                "
+                        )
+                      ]
+                    }
                   }
-                }
-              ])
-            }),
-            _vm._v(" "),
-            _c("b-table-column", {
-              attrs: { field: "email_verified_at", label: "Verified At" },
-              scopedSlots: _vm._u([
-                {
-                  key: "default",
-                  fn: function(props) {
-                    return [
-                      _vm._v(
-                        "\n                " +
-                          _vm._s(props.row.email_verified_at) +
-                          "\n            "
-                      )
-                    ]
+                ])
+              }),
+              _vm._v(" "),
+              _c("b-table-column", {
+                attrs: { field: "email_verified_at", label: "Verified At" },
+                scopedSlots: _vm._u([
+                  {
+                    key: "default",
+                    fn: function(props) {
+                      return [
+                        _vm._v(
+                          "\n                    " +
+                            _vm._s(props.row.email_verified_at) +
+                            "\n                "
+                        )
+                      ]
+                    }
                   }
-                }
-              ])
-            }),
-            _vm._v(" "),
-            _c("b-table-column", {
-              attrs: { field: "role", label: "Role" },
-              scopedSlots: _vm._u([
-                {
-                  key: "default",
-                  fn: function(props) {
-                    return [
-                      _vm._v(
-                        "\n                " +
-                          _vm._s(props.row.role) +
-                          "\n            "
-                      )
-                    ]
+                ])
+              }),
+              _vm._v(" "),
+              _c("b-table-column", {
+                attrs: { field: "role", label: "Role" },
+                scopedSlots: _vm._u([
+                  {
+                    key: "default",
+                    fn: function(props) {
+                      return [
+                        _vm._v(
+                          "\n                    " +
+                            _vm._s(props.row.role) +
+                            "\n                "
+                        )
+                      ]
+                    }
                   }
-                }
-              ])
-            }),
-            _vm._v(" "),
-            _c("b-table-column", {
-              attrs: { field: "", label: "Action" },
-              scopedSlots: _vm._u([
-                {
-                  key: "default",
-                  fn: function(props) {
-                    return [
-                      _c(
-                        "div",
-                        {
-                          staticClass: "buttons",
-                          staticStyle: { width: "120px" }
-                        },
-                        [
-                          _c("b-button", {
-                            staticClass:
-                              "button is-small is-success is-outlined mr-1",
-                            attrs: {
-                              tag: "a",
-                              "icon-right": "envelope-o",
-                              "icon-pack": "fa"
-                            },
-                            on: {
-                              click: function($event) {
-                                return _vm.verifyEmail(props.row)
+                ])
+              }),
+              _vm._v(" "),
+              _c("b-table-column", {
+                attrs: { field: "", label: "Action" },
+                scopedSlots: _vm._u([
+                  {
+                    key: "default",
+                    fn: function(props) {
+                      return [
+                        _c(
+                          "div",
+                          {
+                            staticClass: "buttons",
+                            staticStyle: { width: "120px" }
+                          },
+                          [
+                            _c("b-button", {
+                              staticClass:
+                                "button is-small is-success is-outlined mr-1",
+                              attrs: {
+                                tag: "a",
+                                "icon-right": "envelope-o",
+                                "icon-pack": "fa"
+                              },
+                              on: {
+                                click: function($event) {
+                                  return _vm.verifyEmail(props.row)
+                                }
                               }
-                            }
-                          }),
-                          _vm._v(" "),
-                          _c("b-button", {
-                            staticClass: "button is-small is-warning mr-1",
-                            attrs: {
-                              tag: "a",
-                              "icon-right": "pencil",
-                              "icon-pack": "fa",
-                              href: "/panel/user/" + props.row.user_id + "/edit"
-                            }
-                          }),
-                          _vm._v(" "),
-                          _c("b-button", {
-                            staticClass: "button is-small is-danger mr-1",
-                            attrs: { "icon-pack": "fa", "icon-right": "trash" },
-                            on: {
-                              click: function($event) {
-                                return _vm.confirmDelete(props.row.user_id)
+                            }),
+                            _vm._v(" "),
+                            _c("b-button", {
+                              staticClass: "button is-small is-warning mr-1",
+                              attrs: {
+                                tag: "a",
+                                "icon-right": "pencil",
+                                "icon-pack": "fa",
+                                href:
+                                  "/panel/user/" + props.row.user_id + "/edit"
                               }
-                            }
-                          })
-                        ],
-                        1
-                      )
-                    ]
+                            }),
+                            _vm._v(" "),
+                            _c("b-button", {
+                              staticClass: "button is-small is-danger mr-1",
+                              attrs: {
+                                "icon-pack": "fa",
+                                "icon-right": "trash"
+                              },
+                              on: {
+                                click: function($event) {
+                                  return _vm.confirmDelete(props.row.user_id)
+                                }
+                              }
+                            })
+                          ],
+                          1
+                        )
+                      ]
+                    }
                   }
-                }
-              ])
-            })
-          ],
-          1
-        ),
-        _vm._v(" "),
-        _c(
-          "div",
-          { staticClass: "buttons mt-3" },
-          [
-            _c(
-              "b-button",
-              {
-                staticClass: "is-primary",
-                attrs: {
-                  "icon-pack": "fa",
-                  "icon-left": "plus",
-                  tag: "a",
-                  href: "/panel/user/create"
-                }
-              },
-              [_vm._v("New User")]
-            )
-          ],
-          1
-        )
-      ],
-      1
-    )
+                ])
+              })
+            ],
+            1
+          )
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c(
+        "div",
+        { staticClass: "buttons mt-3" },
+        [
+          _c(
+            "b-button",
+            {
+              staticClass: "is-primary",
+              attrs: {
+                "icon-pack": "fa",
+                "icon-left": "plus",
+                tag: "a",
+                href: "/panel/user/create"
+              }
+            },
+            [_vm._v("New User")]
+          )
+        ],
+        1
+      )
+    ])
   ])
 }
 var staticRenderFns = []

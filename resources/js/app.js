@@ -111,7 +111,9 @@ Vue.component('user-page-edit', require('./components/Administrator/User/UserPag
 
 
 //ADMIN REPORT
-Vue.component('report-result', require('./components/Administrator/Report/ReportResult.vue').default);
+Vue.component('admit-student', require('./components/Administrator/Admission/AdmitStudent.vue').default);
+
+Vue.component('report-result', require('./components/Administrator/Admission/ReportResult.vue').default);
 
 
 
