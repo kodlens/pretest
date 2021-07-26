@@ -37,7 +37,7 @@ class ReportResultController extends Controller
         $sortkey = explode(".",$req->sort_by);
         $acad = AcadYear::where('active', 1)->first();
          $data = DB::table('users as a')
-            ->select('a.user_id', 'a.lname', 'a.fname', 'a.mname', 'a.sex', 'a.first_program_choice', 'a.second_program_choice',
+            ->select('a.user_id', 'a.lname', 'a.fname', 'a.mname', 'a.sex', 'a.status', 'a.first_program_choice', 'a.second_program_choice',
             'a.status', 'a.bdate', 'a.email', 'a.contact_no', 'a.learning_mode', 'a.barangay_id', 'a.street', 'a.is_submitted',
             DB::raw('coalesce((select sum(dd.score) from answer_sheets as aa
                 join answers as bb on aa.answer_sheet_id = bb.answer_sheet_id
@@ -85,7 +85,7 @@ class ReportResultController extends Controller
     public function reportExcel(Request $req){
         $acad = AcadYear::where('active', 1)->first();
         $data = DB::table('users as a')
-            ->select('a.user_id', 'a.lname', 'a.fname', 'a.mname', 'a.sex', 'a.first_program_choice', 'a.second_program_choice', 'a.email',
+            ->select('a.user_id', 'a.lname', 'a.fname', 'a.mname', 'a.sex', 'a.status', 'a.first_program_choice', 'a.second_program_choice', 'a.email',
                 'a.province', 'a.city', 'a.barangay', 'a.created_at',
                 DB::raw('coalesce((select sum(dd.score) from answer_sheets as aa
                 join answers as bb on aa.answer_sheet_id = bb.answer_sheet_id

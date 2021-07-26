@@ -297,6 +297,7 @@ export default {
                 'FIRSTNAME': 'fname',
                 'MIDDLENAME': 'mname',
                 'SEX': 'sex',
+                'STATUS': 'status',
                 'EMAIL': 'email',
                 '1ST PROGRAM': 'first_program_choice',
                 '2ND PROGRAM': 'second_program_choice',
