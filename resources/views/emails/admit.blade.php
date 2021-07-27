@@ -1,35 +1,49 @@
 @component('mail::message')
-# Hi {{ $student['lname'] }} {{ $student['fname'] }},
+Guidance and Admission Office<br>
+Gov. Alfonso D. Tan College<br>
+Maloro, Tangub City, Misamis Occidental<br>
 
-Congratulation,
+<br>
+Dear Mr./Ms. {{ $student['lname'] }} {{ $student['fname'] }},<br><br>
 
-Good day, you received this email because we believed you took the admission test from Gov. Alfonso D. Tan College.
-Here are the break down of your score:
-<ul>
-    <li>ABSTRACT - {{ $student['abstraction'] }}</li>
-    <li>LOGICAL REASONING - {{ $student['logical'] }}</li>
-    <li>ENGLISH PROFICIENCY - {{ $student['english'] }}</li>
-    <li>NUMERICAL - {{ $student['numerical'] }}</li>
-    <li>GENERAL - {{ $student['general'] }}</li>
-</ul>
+# CONGRATULATIONS
+<br>
+Thank you for your active participation in the GADTC Admission 2021-2022. 
+We would like to inform you that after carefully examining your scores, 
+your application has complied all necessary requirements of your chosen program. 
+<br><br>
 
-You are also qualified for these programs:
+We are pleased to offer you admission as a Freshman to the following program(s): 
 <ul>
     @foreach($programs as $prog)
         <li>{{ $prog['CCode'] }}</li>
     @endforeach
 </ul>
 
-Here is your admission code: <strong>{{ $admission_code }}</strong>.
+
+To be part of the dynamic community of GADTC,  enroll via our student portal and use 
+the admission code <strong>{{ $admission_code }}</strong> starting August 2, 2020 until August 13, 2020. 
+Please click the BUTTON below to accept this offer.
+
 
 
 @component('mail::button', ['url' => 'http://admission.gadtc.edu.ph/login'])
-Click here to proceed for admission
+CLICK HERE TO APPLY
 @endcomponent
-or you may visit http://admission.gadtc.edu.ph
+
+
+Please Note: 
+<br>
+Enrollment period for Freshmen is on August 2-13, 2021 only. 
+Failure to reply within those dates will mean forfeiture of your slot.	 
+
+Starting A.Y. 2021 - 2022. Governor Alfonso D. Tan College will adopt the 
+Flexible Learning (FL) (i.e modular and digital learning) for incoming freshmen.  
+
+We look forward to welcoming you to GADTC this coming school year. 
+
 
 <br><br>
 Thanks,<br>
-{{-- {{ config('app.name') }} --}}
-GADTC
+GADTC Guidance and Admission Office
 @endcomponent

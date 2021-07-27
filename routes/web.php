@@ -138,7 +138,7 @@ Route::get('/ajax/question-option', [App\Http\Controllers\Administrator\Question
 
 
 //ADMIT STUDENT
-Route::resource('/panel/admit-student', App\Http\Controllers\Administrator\AdmitStudentController::class);
+Route::resource('/panel/students-result', App\Http\Controllers\Administrator\StudentsResultController::class);
 
 
 
@@ -158,7 +158,10 @@ Route::resource('/panel/report-result', App\Http\Controllers\Administrator\Repor
 Route::get('/panel/ajax-studentlist-result', [App\Http\Controllers\Administrator\ReportResultController::class, 'index_data']);
 Route::get('/panel/report-excel-studentlist-result', [App\Http\Controllers\Administrator\ReportResultController::class, 'reportExcel']);
 //admit student under the report controller
-Route::post('/admit-student', [App\Http\Controllers\Administrator\ReportResultController::class, 'admitStudent']);
+
+//send email ACCEPT/REJECT
+Route::post('/send-accept-email', [App\Http\Controllers\Administrator\ReportResultController::class, 'sendAcceptEmail']);
+Route::post('/send-reject-email', [App\Http\Controllers\Administrator\ReportResultController::class, 'sendRejectEmail']);
 
 
 Route::get('/session-test', function(Request $req){

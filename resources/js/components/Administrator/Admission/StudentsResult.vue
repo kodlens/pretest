@@ -173,14 +173,14 @@
                                 icon-pack="fa" 
                                 icon-right="arrow-circle-right" 
                                 @click="openModal(props.row)">
-                                    READMIT
+                                    RESEND
                             </b-button>
 
                             <b-button v-else outlined class="button is-small is-success mr-1" 
                                 icon-pack="fa" 
                                 icon-right="arrow-circle-right" 
                                 @click="openModal(props.row)">
-                                    ADMIT
+                                    SEND
                             </b-button>
 
 
@@ -225,6 +225,7 @@
                                 autocomplete
                                 field="CCode"
                                 icon="label"
+                                icon-pack="fa"
                                 placeholder="Type a program (eg. BSCS)"
                                 @typing="getFilteredTags">
                                 <template v-slot="props">
@@ -235,6 +236,13 @@
                                 </template>
                             </b-taginput>
                         </b-field>
+
+                        <b-field label="Accept/Reject">
+                            <b-select v-model="emailOption" expanded>
+                                <option value="ACCEPT">ACCEPT</option>
+                                <option value="REJECT">REJECT</option>
+                            </b-select>
+                        </b-field>
                     </div>
                 </section>
 
@@ -243,9 +251,10 @@
                         label="Close"
                         @click="isModalActive=false"></b-button>
                     <b-button
-                        label="ADMIT" class="is-success"
+                        label="SEND EMAIL" class="is-success"
                         icon-pack="fa" icon-right="arrow-circle-right"
-                        @click="admit"></b-button>
+                        :disabled="validateAcceptReject"
+                        @click="sendEmail"></b-button>
                 </footer>
             </div>
         </b-modal>
@@ -290,6 +299,8 @@ export default {
             isLoading: false,
 
             errors: {},
+
+            emailOption: null,
 
             json_fields: {
                 'USER ID' : 'user_id',
@@ -438,7 +449,7 @@ export default {
             })
         },
 
-        admit: function(){
+        sendEmail: function(){
             if(this.programTags.length < 1){
                 //this.errors.programTag = 'No program selected. Please select atleast 1 program.';
                 alert('No program selected. Please select atleast 1 program.');
@@ -448,23 +459,49 @@ export default {
             this.isModalActive = false;
             this.isLoading = true;
 
-            axios.post('/admit-student', {
-                fields: this.selectedData,
-                programs: this.programTags
-            }).then(res=>{
-                //console.log(res.data);
-                
-                this.isModalActive = false;
-                this.isLoading = false;
-                if(res.data.status === 'mailed'){
-                    this.$buefy.dialog.alert({
-                        title: 'SUCCESSFULLY EMAILED.',
-                        message: 'Student was successfully emailed with their admission code.',
-                        type: 'is-success',
-                        onConfirm: ()=> this.loadAsyncData()
-                    })
-                }
-            })
+            if(this.emailOption === 'ACCEPT'){
+                //ACCEPT EMAIL
+                axios.post('/send-accept-email', {
+                    fields: this.selectedData,
+                    programs: this.programTags
+                }).then(res=>{
+                    //console.log(res.data);
+                    
+                    this.isModalActive = false;
+                    this.isLoading = false;
+                    if(res.data.status === 'mailed'){
+                        this.$buefy.dialog.alert({
+                            title: 'SUCCESSFULLY EMAILED.',
+                            message: 'Student was successfully emailed with their admission code.',
+                            type: 'is-success',
+                            onConfirm: ()=> this.loadAsyncData()
+                        })
+                    }
+                })
+                this.emailOption = '';
+            }
+
+
+            if(this.emailOption === 'REJECT'){
+                axios.post('/send-reject-email', {
+                    fields: this.selectedData,
+                    programs: this.programTags
+                }).then(res=>{
+                    //console.log(res.data);
+                    
+                    this.isModalActive = false;
+                    this.isLoading = false;
+                    if(res.data.status === 'mailed'){
+                        this.$buefy.dialog.alert({
+                            title: 'SUCCESSFULLY EMAILED.',
+                            message: 'Student was successfully emailed :(',
+                            type: 'is-warning',
+                            onConfirm: ()=> this.loadAsyncData()
+                        })
+                    }
+                })
+                this.emailOption = '';
+            }
 
         },
 
@@ -479,7 +516,19 @@ export default {
 
     mounted(){
         this.initData();
+    },
 
+    computed: {
+        
+        validateAcceptReject(){
+            if(this.emailOption){
+                return false;
+                //return false to enable button
+            }else{
+                return true;
+                //return true to disable button
+            }
+        }
     }
 
 

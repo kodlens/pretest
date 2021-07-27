@@ -62,8 +62,8 @@
             </b-navbar-dropdown>
 
             <b-navbar-dropdown label="Admission">
-                <b-navbar-item href="/panel/admit-student">
-                    Admit Student
+                <b-navbar-item href="/panel/students-result">
+                    Students Result
                 </b-navbar-item>
 
                 <b-navbar-item href="/panel/report-result">

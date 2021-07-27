@@ -13,7 +13,9 @@ use App\Models\Program;
 use App\Models\Gadtest;
 use App\Models\User;
 
-use App\Mail\AdmitStudent;
+use App\Mail\AcceptanceEmail;
+use App\Mail\RejectEmail;
+
 
 
 use Illuminate\Support\Facades\Hash;
@@ -123,7 +125,11 @@ class ReportResultController extends Controller
     }
 
 
-    public function admitStudent(Request $req){
+    public function sendAcceptEmail(Request $req){
+
+        $isAccept = $req->is_accept; //if reject email or not
+
+
         $n = time() . $req->user_id;
         $studentCode = substr(md5($n), -6);
 
@@ -168,12 +174,28 @@ class ReportResultController extends Controller
                 ],
             ]);
 
-             Mail::to($req->fields['email'])->send(new AdmitStudent($req->fields, $studentCode, $req->programs));
+            Mail::to($req->fields['email'])->send(new AcceptanceEmail($req->fields, $studentCode, $req->programs));
 
             User::where('user_id', $req->fields['user_id'])
                 ->update(['is_submitted' => 1]);
 
-           
+
+            return ['status' => 'mailed'];
+        } catch (Exception $e) {
+            return ['status' => 'failed'];
+        }
+    }
+
+
+
+
+    public function sendRejectEmail(Request $req){
+        try{
+            //Rejection Email
+            Mail::to($req->fields['email'])->send(new RejectEmail($req->fields));
+
+            User::where('user_id', $req->fields['user_id'])
+                ->update(['is_submitted' => 0]);
 
 
             return ['status' => 'mailed'];

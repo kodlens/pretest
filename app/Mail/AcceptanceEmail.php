@@ -7,7 +7,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 
-class AdmitStudent extends Mailable
+class AcceptanceEmail extends Mailable
 {
     use Queueable, SerializesModels;
 
@@ -36,7 +36,7 @@ class AdmitStudent extends Mailable
     public function build()
     {
         return $this->markdown('emails.admit')
-            ->subject('ADMISSION')
+            ->subject('GADTC ADMISSION')
             ->with('student',$this->student)
             ->with('admission_code',$this->admission_code)
             ->with('programs',$this->programs);

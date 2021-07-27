@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Mail;
 use App\Models\Program;
 
 
-class AdmitStudentController extends Controller
+class StudentsResultController extends Controller
 {
     //
     public function __construct(){
@@ -21,7 +21,7 @@ class AdmitStudentController extends Controller
 
     public function index(){
         $programs = Program::where('programStat', 1)->get();
-        return view('panel.admission.admit-student')
+        return view('panel.admission.students-result')
             ->with('programs', $programs);
     }
 
