@@ -188,7 +188,6 @@ class ReportResultController extends Controller
 
 
 
-
     public function sendRejectEmail(Request $req){
         try{
             //Rejection Email

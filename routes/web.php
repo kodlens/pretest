@@ -158,6 +158,9 @@ Route::resource('/panel/report-result', App\Http\Controllers\Administrator\Repor
 Route::get('/panel/ajax-studentlist-result', [App\Http\Controllers\Administrator\ReportResultController::class, 'index_data']);
 Route::get('/panel/report-excel-studentlist-result', [App\Http\Controllers\Administrator\ReportResultController::class, 'reportExcel']);
 //admit student under the report controller
+//
+Route::get('/dashboard-report', [App\Http\Controllers\Administrator\DashboardResultController::class, 'dashboardReport']);
+
 
 //send email ACCEPT/REJECT
 Route::post('/send-accept-email', [App\Http\Controllers\Administrator\ReportResultController::class, 'sendAcceptEmail']);
