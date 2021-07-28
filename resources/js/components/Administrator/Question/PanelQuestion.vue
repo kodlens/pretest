@@ -139,8 +139,8 @@
                                     </tr>
                                 </tbody>
                             </table>
-
                         </template>
+                        
                     </b-table>
                 </div><!--close column-->
             </div>

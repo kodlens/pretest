@@ -40,7 +40,7 @@ class ReportResultController extends Controller
         $acad = AcadYear::where('active', 1)->first();
          $data = DB::table('users as a')
             ->select('a.user_id', 'a.lname', 'a.fname', 'a.mname', 'a.sex', 'a.status', 'a.first_program_choice', 'a.second_program_choice',
-            'a.status', 'a.bdate', 'a.email', 'a.contact_no', 'a.learning_mode', 'a.barangay_id', 'a.street', 'a.is_submitted',
+            'a.status', 'a.bdate', 'a.email', 'a.contact_no', 'a.learning_mode', 'a.barangay_id', 'a.street', 'a.is_submitted', 'a.remark',
             DB::raw('coalesce((select sum(dd.score) from answer_sheets as aa
                 join answers as bb on aa.answer_sheet_id = bb.answer_sheet_id
                 join options as cc on bb.option_id = cc.option_id
@@ -177,7 +177,7 @@ class ReportResultController extends Controller
             Mail::to($req->fields['email'])->send(new AcceptanceEmail($req->fields, $studentCode, $req->programs));
 
             User::where('user_id', $req->fields['user_id'])
-                ->update(['is_submitted' => 1]);
+                ->update(['is_submitted' => 1, 'remark' => 'ACCEPT']);
 
 
             return ['status' => 'mailed'];
@@ -195,7 +195,7 @@ class ReportResultController extends Controller
             Mail::to($req->fields['email'])->send(new RejectEmail($req->fields));
 
             User::where('user_id', $req->fields['user_id'])
-                ->update(['is_submitted' => 0]);
+                ->update(['is_submitted' => 1, 'remark' => 'REJECT']);
 
 
             return ['status' => 'mailed'];
