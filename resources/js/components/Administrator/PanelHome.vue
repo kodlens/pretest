@@ -27,7 +27,7 @@
 
                    <div class="h-entity">
                         <div class="h-title">
-                            NO. TAKERS :
+                            NO. OF TAKERS :
                         </div>
                         <div class="h-count">
                             {{ this.reportData.no_takers }}
@@ -61,7 +61,7 @@ export default {
         }
     },
 
-    
+
     mounted() {
         this.getDashboardReport();
     }
