@@ -310,6 +310,7 @@ export default {
                 'FIRSTNAME': 'fname',
                 'MIDDLENAME': 'mname',
                 'SEX': 'sex',
+                'CONTACT NO': 'contact_no',
                 'STATUS': 'status',
                 'EMAIL': 'email',
                 '1ST PROGRAM': 'first_program_choice',
