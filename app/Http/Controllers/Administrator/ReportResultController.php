@@ -76,6 +76,7 @@ class ReportResultController extends Controller
             ->where('c.acad_year_id', $acad->acad_year_id)
             ->where('a.lname', 'like', $req->lname . '%')
             ->where('a.fname', 'like', $req->fname . '%')
+            ->where('a.is_submitted', 0)
             ->where('a.first_program_choice', 'like', $req->first_program . '%')
             ->orderBy('total', 'desc')
             ->paginate($req->perpage);
@@ -128,6 +129,7 @@ class ReportResultController extends Controller
 
 
     public function sendAcceptEmail(Request $req){
+        
 
         $isAccept = $req->is_accept; //if reject email or not
 
@@ -149,9 +151,6 @@ class ReportResultController extends Controller
         //return $req->fields;
 
         
-
-
-        
         try {
             //add check if lname, fname and mname exist in tblgadtest
             $studentExist = Gadtest::where('StudLName', $req->fields['lname'])
@@ -159,13 +158,15 @@ class ReportResultController extends Controller
                             ->where('StudMName', $req->fields['mname'])
                             ->exists();
 
-                            return $studentExist;
+            //                 return $studentExist;
 
             if($studentExist){
                 return response()->json([
-                    'error' => 'duplicate'
+                    'remark' => 'duplicate'
                 ], 422);
             }
+
+
             //update if email exist.. if not create new record
              Gadtest::updateOrCreate(
                  [
@@ -192,15 +193,22 @@ class ReportResultController extends Controller
                 ],
             ]);
 
-           // Mail::to($req->fields['email'])->send(new AcceptanceEmail($req->fields, $studentCode, $req->programs));
+            $when = now()->addSeconds(10);
+            Mail::to($req->fields['email'])
+                ->later($when, new AcceptanceEmail($req->fields, $studentCode, $req->programs));
+      
 
             User::where('user_id', $req->fields['user_id'])
                 ->update(['is_submitted' => 1, 'remark' => 'ACCEPT']);
 
 
-            return ['status' => 'mailed'];
+                return response()->json([
+                    'remark' => 'success'
+                ], 200);
         } catch (Exception $e) {
-            return ['status' => 'failed'];
+            return response()->json([
+                'remark' => 'error'
+            ], 500);
         }
     }
 
@@ -209,15 +217,21 @@ class ReportResultController extends Controller
     public function sendRejectEmail(Request $req){
         try{
             //Rejection Email
-            //Mail::to($req->fields['email'])->send(new RejectEmail($req->fields));
+            $when = now()->addSeconds(10);
+            Mail::to($req->fields['email'])
+                ->later($when, new RejectEmail($req->fields));
 
             User::where('user_id', $req->fields['user_id'])
                 ->update(['is_submitted' => 1, 'remark' => 'REJECT']);
 
 
-            return ['status' => 'mailed'];
+            return response()->json([
+                'remark' => 'success'
+            ], 200);
         } catch (Exception $e) {
-            return ['status' => 'failed'];
+            return response()->json([
+                'remark' => 'error'
+            ], 500);
         }
     }
 

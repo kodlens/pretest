@@ -465,17 +465,30 @@ export default {
                     fields: this.selectedData,
                     programs: this.programTags
                 }).then(res=>{
-                    //console.log(res.data);
-                    
+                 
                     this.isModalActive = false;
                     this.isLoading = false;
-                    if(res.data.status === 'mailed'){
+                    if(res.data.remark === 'success'){
                         this.$buefy.dialog.alert({
                             title: 'SUCCESSFULLY EMAILED.',
                             message: 'Student was successfully emailed with their admission code.',
                             type: 'is-success',
                             onConfirm: ()=> this.loadAsyncData()
                         })
+                    }
+                }).catch(err=>{
+                    this.isModalActive = false;
+                    this.isLoading = false;
+
+                    if(err.response.status === 422){
+                        
+                        if(err.response.data.remark === 'duplicate'){
+                            this.$buefy.dialog.alert({
+                                title: 'DUPLICATE.',
+                                message: 'Another with same student name already admitted to the admission.',
+                                type: 'is-danger',
+                            })
+                        }
                     }
                 })
                 this.emailOption = '';
