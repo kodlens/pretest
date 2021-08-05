@@ -80,9 +80,9 @@
                         {{ props.row.lname }}, {{ props.row.fname }} {{ props.row.mname }}
                     </b-table-column>
 
-                    <b-table-column field="fromTo" label="Schedule" v-slot="props">
+                    <!-- <b-table-column field="fromTo" label="Schedule" v-slot="props">
                         {{ props.row.from }} / {{ props.row.to }}
-                    </b-table-column>
+                    </b-table-column> -->
 
                     <b-table-column field="sex" label="Sex" centered v-slot="props">
                         {{ props.row.sex }}
@@ -173,7 +173,9 @@
                                 icon-pack="fa" 
                                 icon-right="arrow-circle-right" 
                                 @click="openModal(props.row)">
-                                    RESEND
+                                    <span style="color:red;" v-if="props.row.remark === 'REJECT'">REJECTED</span>
+                                    <span v-if="props.row.remark === 'ACCEPT'">ACCEPTED</span>
+                                    <span v-if="props.row.remark === ''">SEND</span>
                             </b-button>
 
                             <b-button v-else outlined class="button is-small is-success mr-1" 

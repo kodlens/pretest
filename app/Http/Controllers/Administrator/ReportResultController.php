@@ -76,7 +76,7 @@ class ReportResultController extends Controller
             ->where('c.acad_year_id', $acad->acad_year_id)
             ->where('a.lname', 'like', $req->lname . '%')
             ->where('a.fname', 'like', $req->fname . '%')
-            ->where('a.is_submitted', 0)
+            // ->where('a.is_submitted', 0)
             ->where('a.first_program_choice', 'like', $req->first_program . '%')
             ->orderBy('total', 'desc')
             ->paginate($req->perpage);
@@ -129,11 +129,7 @@ class ReportResultController extends Controller
 
 
     public function sendAcceptEmail(Request $req){
-        
-
         $isAccept = $req->is_accept; //if reject email or not
-
-
         $n = time() . $req->user_id;
         $studentCode = substr(md5($n), -6);
 
@@ -199,7 +195,11 @@ class ReportResultController extends Controller
       
 
             User::where('user_id', $req->fields['user_id'])
-                ->update(['is_submitted' => 1, 'remark' => 'ACCEPT']);
+                ->update(['is_submitted' => 1, 
+                            'remark' => 'ACCEPT',
+                            'admission_code' => $studentCode,
+                            'accepted_program' => $req->programs
+                        ]);
 
 
                 return response()->json([
@@ -222,8 +222,11 @@ class ReportResultController extends Controller
                 ->later($when, new RejectEmail($req->fields));
 
             User::where('user_id', $req->fields['user_id'])
-                ->update(['is_submitted' => 1, 'remark' => 'REJECT']);
-
+                ->update(['is_submitted' => 1, 
+                            'remark' => 'REJECT',
+                            'admission_code' => null,
+                            'accepted_program' => null
+                        ]);
 
             return response()->json([
                 'remark' => 'success'
