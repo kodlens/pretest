@@ -175,7 +175,7 @@ class ReportResultController extends Controller
                     'StudSex' => strtoupper($req->fields['sex']),
                     'StudClass' => $status,
                     'StudBDate' => $req->fields['bdate'],
-                    'StudCNum' => $req->fields['contact_no'],
+                    //'StudCNum' => $req->fields['contact_no'],
                     'StudCourse' => strtoupper($programs),
                     //'StudYear' => $status == 'NEW' ? '1' : '0',
                     'StudYear' => '1',

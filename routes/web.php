@@ -148,7 +148,7 @@ Route::resource('/panel/students-result', App\Http\Controllers\Administrator\Stu
 Route::resource('/panel/user', App\Http\Controllers\Administrator\UserController::class);
 Route::get('/axios-users', [App\Http\Controllers\Administrator\UserController::class, 'index_data']);
 Route::get('/fetch-students', [App\Http\Controllers\Administrator\UserController::class, 'allStudents']);
-Route::post('/verify-email-students/{userid}', [App\Http\Controllers\Administrator\UserController::class, 'verifyEmailStudents']);
+// Route::post('/verify-email-students/{userid}', [App\Http\Controllers\Administrator\UserController::class, 'verifyEmailStudents']);
 
 
 
