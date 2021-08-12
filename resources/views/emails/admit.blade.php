@@ -28,7 +28,7 @@ Please click the BUTTON below to accept this offer.
 
 
 @component('mail::button', ['url' => 'http://admission.gadtc.edu.ph/login'])
-CLICK HERE TO APPLY
+CLICK HERE TO ACCEPT
 @endcomponent
 
 

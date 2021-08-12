@@ -12,4 +12,6 @@ class ResultExamController extends Controller
         $this->middleware('auth');
     }
 
+    
+
 }
