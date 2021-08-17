@@ -84,6 +84,10 @@
                         {{ props.row.from }} / {{ props.row.to }}
                     </b-table-column> -->
 
+                    <b-table-column field="contact_no" label="Contact" centered v-slot="props">
+                        {{ props.row.contact_no }}
+                    </b-table-column>
+
                     <b-table-column field="sex" label="Sex" centered v-slot="props">
                         {{ props.row.sex }}
                     </b-table-column>
@@ -310,6 +314,7 @@ export default {
                 'FIRSTNAME': 'fname',
                 'MIDDLENAME': 'mname',
                 'SEX': 'sex',
+                'CONTACT NO': 'contact_no',
                 'STATUS': 'status',
                 'EMAIL': 'email',
                 '1ST PROGRAM': 'first_program_choice',
