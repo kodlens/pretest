@@ -7,6 +7,16 @@
                </div>
 
                <div class="h-box-body">
+
+                   <div class="h-entity">
+                        <div class="h-title">
+                            NEW STUDENTS :
+                        </div>
+                        <div class="h-count">
+                            {{ this.reportData.new_students }} &nbsp; <small><i>(multiple account)</i></small>
+                        </div>
+                   </div>
+
                    <div class="h-entity">
                         <div class="h-title">
                             ACCEPTED STUDENTS :
@@ -27,12 +37,30 @@
 
                    <div class="h-entity">
                         <div class="h-title">
+                            NO OF TRANSFEREES :
+                        </div>
+                        <div class="h-count">
+                            {{ this.reportData.no_transferees }}
+                        </div>
+                   </div>
+                   <div class="h-entity">
+                        <div class="h-title">
+                            NO OF RETURNEES :
+                        </div>
+                        <div class="h-count">
+                            {{ this.reportData.no_returnees }}
+                        </div>
+                   </div>
+
+                   <div class="h-entity">
+                        <div class="h-title">
                             NO. OF TAKERS :
                         </div>
                         <div class="h-count">
                             {{ this.reportData.no_takers }}
                         </div>
                    </div>
+
 
                </div>
            </div>
@@ -48,7 +76,10 @@ export default {
             reportData: {
                 accepted: 0,
                 rejected: 0,
-                no_takers: 0
+                no_takers: 0,
+                no_transferees: 0,
+                no_returnees: 0,
+                new_students: 0,
             },
         }
     },

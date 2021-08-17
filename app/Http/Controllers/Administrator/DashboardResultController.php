@@ -21,6 +21,13 @@ class DashboardResultController extends Controller
 
         $countAccepted = User::where('remark', 'ACCEPT')->count();
         $countRejected = User::where('remark', 'REJECT')->count();
+        $countReturnee = User::where('status', 'RETURNEE')->count();
+        $countTransferee = User::where('status', 'TRANSFEREE')->count();
+        $countNewStudent = User::where('status', 'NEW')->count();
+
+        
+
+
         $countTakers = DB::table('answer_sheets')
             ->from( function ($query) use ($ay){
                 $query->select('*')->from('answer_sheets')
@@ -32,8 +39,11 @@ class DashboardResultController extends Controller
             
         return [
             'accepted' => $countAccepted, 
+            'new_students' => $countNewStudent, 
             'rejected' => $countRejected,
-            'no_takers' => $countTakers
+            'no_takers' => $countTakers,
+            'no_returnees' => $countReturnee,
+            'no_transferees' => $countTransferee
         ];
     }
 }

@@ -24,9 +24,9 @@
                                 </b-notification>
 
                                 <b-notification v-if="isExist.trim() == 'exist'"
-                                                type="is-danger is-light"
-                                                aria-close-label="Close notification"
-                                                role="alert">
+                                    type="is-danger is-light"
+                                    aria-close-label="Close notification"
+                                    role="alert">
                                     You already have test records.
                                 </b-notification>
 
@@ -46,8 +46,7 @@
                                     </ul>
 
                                 </div>
-
-
+                                
                                 <div v-if="schedules" class="buttons is-centered mt-5">
                                     <b-button @click="proceedNext" class="button is-primary is-outlined">
                                         <b-icon pack="fa" icon="arrow-right"></b-icon> &nbsp;&nbsp;NEXT

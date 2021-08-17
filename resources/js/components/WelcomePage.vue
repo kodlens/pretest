@@ -1,29 +1,5 @@
 <template>
     <div>
-<!--        <b-navbar>-->
-<!--            <template #brand>-->
-<!--                <b-navbar-item>-->
-<!--                </b-navbar-item>-->
-<!--            </template>-->
-<!--            <template #start>-->
-
-<!--            </template>-->
-
-<!--            <template #end>-->
-<!--                <b-navbar-item tag="div">-->
-<!--                    <div class="buttons">-->
-<!--                        <a class="button is-primary" href="/student/login">-->
-<!--                            <strong>LOGIN</strong>-->
-<!--                        </a>-->
-<!--                        <a class="button is-light" href="/panel/login">-->
-<!--                            PANEL-->
-<!--                        </a>-->
-<!--                    </div>-->
-<!--                </b-navbar-item>-->
-<!--            </template>-->
-<!--        </b-navbar>-->
-
-
         <div class="hero is-fullheight-with-navbar">
             <div class="hero-body">
                 <div class="container">
