@@ -149,8 +149,6 @@ class QuestionController extends Controller
 
     public function update(Request $req, $id){
         
-        
-
         $validate = $req->validate([
             //'order_no' => ['required', 'numeric', Rule::unique('questions')->ignore($id, 'question_id')],
             'section' => ['required', 'numeric'],

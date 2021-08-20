@@ -149,18 +149,18 @@ class ReportResultController extends Controller
         
         try {
             //add check if lname, fname and mname exist in tblgadtest
-            $studentExist = Gadtest::where('StudLName', $req->fields['lname'])
-                            ->where('StudFName', $req->fields['fname'])
-                            ->where('StudMName', $req->fields['mname'])
-                            ->exists();
+            // $studentExist = Gadtest::where('StudLName', $req->fields['lname'])
+            //                 ->where('StudFName', $req->fields['fname'])
+            //                 ->where('StudMName', $req->fields['mname'])
+            //                 ->exists();
 
-            //                 return $studentExist;
+            // //                 return $studentExist;
 
-            if($studentExist){
-                return response()->json([
-                    'remark' => 'duplicate'
-                ], 422);
-            }
+            // if($studentExist){
+            //     return response()->json([
+            //         'remark' => 'duplicate'
+            //     ], 422);
+            // }
 
 
             //update if email exist.. if not create new record
